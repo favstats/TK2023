@@ -260,6 +260,7 @@ scraper <- possibly(scraper, otherwise = NULL, quiet = F)
 # da7 <- readRDS("data/election_dat7.rds")
 
 if(new_ds == latest_ds){
+  print(glue::glue("New DS: {new_ds}: Old DS: {old_ds}"))
   
   ### save seperately
   enddat <- all_dat %>% 
@@ -272,6 +273,10 @@ if(new_ds == latest_ds){
   if(nrow(enddat)==0){
     election_dat <- latest_elex
   } else {
+    
+    print(glue::glue("New DS: {new_ds}: Old DS: {old_ds} 2"))
+    
+    
     election_dat  <- enddat %>%
       mutate(total_spend_formatted = parse_number(as.character(total_spend_formatted))) %>%
       rename(page_id = internal_id) %>%
