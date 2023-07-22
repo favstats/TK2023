@@ -345,7 +345,7 @@ if(length(date_vector != 0)){
       
     })
   
-  saveRDS(combined_dat, file = paste0("data/combined_dat", tf,  ".rds"))
+  saveRDS(combined_dat, file= paste0("data/combined_dat", tf,  ".rds"))
   
   aggr <- combined_dat  %>%
     mutate(total_spend = readr::parse_number(total_spend_formatted)) %>%
