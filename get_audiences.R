@@ -13,7 +13,7 @@ library(tidyverse)
 library(lubridate)
 
 # tf <- Sys.getenv("TIMEFRAME")
-# # tf <- "7"
+# tf <- "7"
 # print(tf)
 
 jb <- get_targeting("7860876103", timeframe = glue::glue("LAST_90_DAYS"))
@@ -218,9 +218,10 @@ all_dat <- #read_csv("nl_advertisers.csv") %>%
     str_detect(party, "Alliantie") ~ "Alliantie",
     str_detect(party, "BBB") ~ "BBB",
     T ~ party
-  ))
+  )) %>% 
+  filter(page_name != "Wybren van Haga")
 
-
+# saveRDS(all_dat, "data/all_dat.rds")
 
 scraper <- function(.x, time = tf) {
   
@@ -260,7 +261,7 @@ scraper <- possibly(scraper, otherwise = NULL, quiet = F)
 # da7 <- readRDS("data/election_dat7.rds")
 
 if(new_ds == latest_ds){
-  print(glue::glue("New DS: {new_ds}: Old DS: {old_ds}"))
+  print(glue::glue("New DS: {new_ds}: Old DS: {latest_ds}"))
   
   ### save seperately
   enddat <- all_dat %>% 
@@ -268,17 +269,17 @@ if(new_ds == latest_ds){
     # slice(1:150) %>% 
     filter(!(page_id %in% latest_elex$page_id)) %>% 
     split(1:nrow(.)) %>%
-    map_dfr(scraper)
+    map_dfr(scraper) 
   
   if(nrow(enddat)==0){
     election_dat <- latest_elex
   } else {
     
-    print(glue::glue("New DS: {new_ds}: Old DS: {old_ds} 2"))
+    print(glue::glue("New DS: {new_ds}: Old DS: {latest_ds} 2"))
     
     
     election_dat  <- enddat %>%
-      mutate(total_spend_formatted = parse_number(as.character(total_spend_formatted))) %>%
+      mutate_at(vars(contains("total_spend_formatted")), ~parse_number(as.character(.x))) %>% 
       rename(page_id = internal_id) %>%
       left_join(all_dat) %>% 
       bind_rows(latest_elex)    
@@ -297,8 +298,9 @@ if(new_ds == latest_ds){
     # slice(1:50) %>% 
     split(1:nrow(.)) %>%
     map_dfr(scraper)  %>%
-    mutate(total_spend_formatted = parse_number(total_spend_formatted)) %>%
-    rename(page_id = internal_id)  
+    mutate_at(vars(contains("total_spend_formatted")), ~parse_number(as.character(.x))) %>% 
+    rename(page_id = internal_id)  %>%
+    left_join(all_dat) 
   
   dir.create(paste0("historic/",  as.character(new_ds)), recursive = T)
   current_date <- paste0("historic/",  as.character(new_ds), "/", tf)
@@ -318,6 +320,9 @@ minimum_date <- dir("historic", recursive = T) %>%
   str_remove("/.*") %>%
   as.Date() %>%
   min(na.rm = T)
+
+
+if("ds" %in% names(election_dat) ){
 
 latest_ds <- election_dat %>% arrange(ds) %>% slice(1) %>% pull(ds) %>% as.Date()
 
@@ -379,4 +384,6 @@ if(new_ds == latest_ds){
   
   write_lines("_", paste0("targeting/", tf, "/", "_"))
   
+}
+
 }
