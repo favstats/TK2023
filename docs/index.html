@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.189">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,7 +17,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
 </style>
@@ -55,10 +55,11 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
-<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
 <script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
 <script src="site_libs/proj4js-2.3.15/proj4.js"></script>
 <link href="site_libs/highcharts-9.3.1/css/motion.css" rel="stylesheet">
@@ -116,34 +117,39 @@ ul.task-list li input[type="checkbox"] {
     <span class="navbar-title">🇳🇱 2023 Dutch Election Dashboard</span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page">Spending</a>
+    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Spending</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./targeting.html">Targeting</a>
+    <a class="nav-link" href="./targeting.html" rel="" target="">
+ <span class="menu-text">Targeting</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html">About</a>
+    <a class="nav-link" href="./about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/favstats"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/favstats" rel="" target=""><i class="bi bi-github" role="img">
 </i> 
- </a>
+ <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/favstats"><i class="bi bi-twitter" role="img">
+    <a class="nav-link" href="https://twitter.com/favstats" rel="" target=""><i class="bi bi-twitter" role="img">
 </i> 
- </a>
+ <span class="menu-text"></span></a>
   </li>  
 </ul>
-              <div id="quarto-search" class="" title="Search"></div>
+            <div class="quarto-navbar-tools">
+</div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
@@ -166,6 +172,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title-meta">
 
     
+  
     
   </div>
   
@@ -237,38 +244,38 @@ function off() {
 </script>
 
 </div>
-<div class="cell">
-
-</div>
-<div class="cell">
-
-</div>
-<div class="cell">
-
-</div>
-<div class="cell">
-
-</div>
 <p>This section shows <em>total</em> and <em>daily spending</em> of political parties in the run-up to the 2023 Dutch parliamentary election for the latest available data.</p>
 <section id="total-spend" class="level2">
 <h2 class="anchored" data-anchor-id="total-spend">Total Spend</h2>
-<div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Jun 25th - Jul 24th 2023 (Last 30 days)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Jul 18th - Jul 24th 2023 (Last 7 days)</a></li></ul>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Jun 26th - Jul 25th 2023 (Last 30 days)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Jul 19th - Jul 25th 2023 (Last 7 days)</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p>In total, political parties spend €29,655 and ran 353 ads on Meta in this period.</p>
+<p>In total, political parties spend €28,462 and ran 344 ads on Meta in this period.</p>
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="ffffbkpalk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="liiykuisds" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-html {
-  font-family: Chivo, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+#liiykuisds table {
+  font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-:where(#ffffbkpalk) .gt_table {
+#liiykuisds thead, #liiykuisds tbody, #liiykuisds tfoot, #liiykuisds tr, #liiykuisds td, #liiykuisds th {
+  border-style: none;
+}
+
+#liiykuisds p {
+  margin: 0;
+  padding: 0;
+}
+
+#liiykuisds .gt_table {
   display: table;
   border-collapse: collapse;
+  line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
@@ -291,24 +298,12 @@ html {
   border-left-color: #D3D3D3;
 }
 
-:where(#ffffbkpalk) .gt_heading {
-  background-color: #FFFFFF;
-  text-align: left;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-:where(#ffffbkpalk) .gt_caption {
+#liiykuisds .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-:where(#ffffbkpalk) .gt_title {
+#liiykuisds .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -320,25 +315,37 @@ html {
   border-bottom-width: 0;
 }
 
-:where(#ffffbkpalk) .gt_subtitle {
+#liiykuisds .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
+  padding-top: 3px;
+  padding-bottom: 5px;
   padding-left: 5px;
   padding-right: 5px;
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
 
-:where(#ffffbkpalk) .gt_bottom_border {
+#liiykuisds .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#liiykuisds .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#ffffbkpalk) .gt_col_headings {
+#liiykuisds .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -353,7 +360,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-:where(#ffffbkpalk) .gt_col_heading {
+#liiykuisds .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -373,7 +380,7 @@ html {
   overflow-x: hidden;
 }
 
-:where(#ffffbkpalk) .gt_column_spanner_outer {
+#liiykuisds .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -385,15 +392,15 @@ html {
   padding-right: 4px;
 }
 
-:where(#ffffbkpalk) .gt_column_spanner_outer:first-child {
+#liiykuisds .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#ffffbkpalk) .gt_column_spanner_outer:last-child {
+#liiykuisds .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#ffffbkpalk) .gt_column_spanner {
+#liiykuisds .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -405,7 +412,11 @@ html {
   width: 100%;
 }
 
-:where(#ffffbkpalk) .gt_group_heading {
+#liiykuisds .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#liiykuisds .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -431,7 +442,7 @@ html {
   text-align: left;
 }
 
-:where(#ffffbkpalk) .gt_empty_group_heading {
+#liiykuisds .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -446,15 +457,15 @@ html {
   vertical-align: middle;
 }
 
-:where(#ffffbkpalk) .gt_from_md > :first-child {
+#liiykuisds .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#ffffbkpalk) .gt_from_md > :last-child {
+#liiykuisds .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#ffffbkpalk) .gt_row {
+#liiykuisds .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -473,7 +484,7 @@ html {
   overflow-x: hidden;
 }
 
-:where(#ffffbkpalk) .gt_stub {
+#liiykuisds .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -486,7 +497,7 @@ html {
   padding-right: 5px;
 }
 
-:where(#ffffbkpalk) .gt_stub_row_group {
+#liiykuisds .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -500,11 +511,15 @@ html {
   vertical-align: top;
 }
 
-:where(#ffffbkpalk) .gt_row_group_first td {
+#liiykuisds .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#ffffbkpalk) .gt_summary_row {
+#liiykuisds .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#liiykuisds .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -514,16 +529,16 @@ html {
   padding-right: 5px;
 }
 
-:where(#ffffbkpalk) .gt_first_summary_row {
+#liiykuisds .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#ffffbkpalk) .gt_first_summary_row.thick {
+#liiykuisds .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#ffffbkpalk) .gt_last_summary_row {
+#liiykuisds .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -533,7 +548,7 @@ html {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#ffffbkpalk) .gt_grand_summary_row {
+#liiykuisds .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -543,7 +558,7 @@ html {
   padding-right: 5px;
 }
 
-:where(#ffffbkpalk) .gt_first_grand_summary_row {
+#liiykuisds .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -553,11 +568,21 @@ html {
   border-top-color: #D3D3D3;
 }
 
-:where(#ffffbkpalk) .gt_striped {
+#liiykuisds .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#liiykuisds .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#ffffbkpalk) .gt_table_body {
+#liiykuisds .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -566,7 +591,7 @@ html {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#ffffbkpalk) .gt_footnotes {
+#liiykuisds .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -580,16 +605,16 @@ html {
   border-right-color: #D3D3D3;
 }
 
-:where(#ffffbkpalk) .gt_footnote {
+#liiykuisds .gt_footnote {
   margin: 0px;
   font-size: 90%;
-  padding-left: 4px;
-  padding-right: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
   padding-left: 5px;
   padding-right: 5px;
 }
 
-:where(#ffffbkpalk) .gt_sourcenotes {
+#liiykuisds .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -603,7 +628,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-:where(#ffffbkpalk) .gt_sourcenote {
+#liiykuisds .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -611,64 +636,63 @@ html {
   padding-right: 5px;
 }
 
-:where(#ffffbkpalk) .gt_left {
+#liiykuisds .gt_left {
   text-align: left;
 }
 
-:where(#ffffbkpalk) .gt_center {
+#liiykuisds .gt_center {
   text-align: center;
 }
 
-:where(#ffffbkpalk) .gt_right {
+#liiykuisds .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#ffffbkpalk) .gt_font_normal {
+#liiykuisds .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#ffffbkpalk) .gt_font_bold {
+#liiykuisds .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#ffffbkpalk) .gt_font_italic {
+#liiykuisds .gt_font_italic {
   font-style: italic;
 }
 
-:where(#ffffbkpalk) .gt_super {
+#liiykuisds .gt_super {
   font-size: 65%;
 }
 
-:where(#ffffbkpalk) .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
+#liiykuisds .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
+  position: initial;
 }
 
-:where(#ffffbkpalk) .gt_asterisk {
+#liiykuisds .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#ffffbkpalk) .gt_indent_1 {
+#liiykuisds .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#ffffbkpalk) .gt_indent_2 {
+#liiykuisds .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#ffffbkpalk) .gt_indent_3 {
+#liiykuisds .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#ffffbkpalk) .gt_indent_4 {
+#liiykuisds .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#ffffbkpalk) .gt_indent_5 {
+#liiykuisds .gt_indent_5 {
   text-indent: 25px;
 }
 
@@ -676,10 +700,10 @@ tbody tr:last-child {
   border-bottom: 2px solid #ffffff00;
 }
 </style>
-<table class="gt_table">
-  
-  <thead class="gt_col_headings">
-    <tr>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings">
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=""></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Number of Advertisers">Number of Advertisers</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Top Spenders">Top Spenders</th>
@@ -692,71 +716,71 @@ tbody tr:last-child {
 </div></th>
 <td headers="stub_1_1 Number of Advertisers" class="gt_row gt_center" style="border-left-width: 18.5px; border-left-style: solid; border-left-color: #ff0000;"><div class="gt_from_md"><p>7</p>
 </div></td>
-<td headers="stub_1_1 Top Spenders" class="gt_row gt_center"><div class="gt_from_md"><p><br>1. Partij van de Arbeid (PvdA) (€12,014)<br>2. PvdA Goes (€100)<br>3. PvdA Europa (€100)</p>
+<td headers="stub_1_1 Top Spenders" class="gt_row gt_center"><div class="gt_from_md"><p><br>1. Partij van de Arbeid (PvdA) (€11,771)<br>2. PvdA Goes (€100)<br>3. PvdA Europa (€100)</p>
 </div></td>
 <td headers="stub_1_1 Number of Ads" class="gt_row gt_center"><div class="gt_from_md"><p>165</p>
 </div></td>
-<td headers="stub_1_1 Total Spend" class="gt_row gt_center"><div class="gt_from_md"><p>€12,614</p>
+<td headers="stub_1_1 Total Spend" class="gt_row gt_center"><div class="gt_from_md"><p>€12,371</p>
 </div></td></tr>
     <tr><th id="stub_1_2" scope="row" class="gt_row gt_center gt_stub"><div class="gt_from_md"><p>SP</p>
 </div></th>
-<td headers="stub_1_2 Number of Advertisers" class="gt_row gt_center" style="border-left-width: 18.5px; border-left-style: solid; border-left-color: #bf0000;"><div class="gt_from_md"><p>5</p>
+<td headers="stub_1_2 Number of Advertisers" class="gt_row gt_center" style="border-left-width: 18.5px; border-left-style: solid; border-left-color: #bf0000;"><div class="gt_from_md"><p>4</p>
 </div></td>
-<td headers="stub_1_2 Top Spenders" class="gt_row gt_center"><div class="gt_from_md"><p><br>1. SP (€3,838)<br>2. SP Jongeren (€1,352)<br>3. Lilian Marijnissen (€687)</p>
+<td headers="stub_1_2 Top Spenders" class="gt_row gt_center"><div class="gt_from_md"><p><br>1. SP (€3,797)<br>2. SP Jongeren (€1,360)<br>3. SP Veenendaal (€100)</p>
 </div></td>
-<td headers="stub_1_2 Number of Ads" class="gt_row gt_center"><div class="gt_from_md"><p>96</p>
+<td headers="stub_1_2 Number of Ads" class="gt_row gt_center"><div class="gt_from_md"><p>88</p>
 </div></td>
-<td headers="stub_1_2 Total Spend" class="gt_row gt_center"><div class="gt_from_md"><p>€6,077</p>
+<td headers="stub_1_2 Total Spend" class="gt_row gt_center"><div class="gt_from_md"><p>€5,357</p>
 </div></td></tr>
     <tr><th id="stub_1_3" scope="row" class="gt_row gt_center gt_stub"><div class="gt_from_md"><p>VVD</p>
 </div></th>
 <td headers="stub_1_3 Number of Advertisers" class="gt_row gt_center" style="border-left-width: 18.5px; border-left-style: solid; border-left-color: #0a2cca;"><div class="gt_from_md"><p>13</p>
 </div></td>
-<td headers="stub_1_3 Top Spenders" class="gt_row gt_center"><div class="gt_from_md"><p><br>1. VVD (€2,181)<br>2. VVD Europa (€197)<br>3. Dordtse VVD (€100)</p>
+<td headers="stub_1_3 Top Spenders" class="gt_row gt_center"><div class="gt_from_md"><p><br>1. VVD (€2,097)<br>2. VVD Europa (€179)<br>3. Dordtse VVD (€100)</p>
 </div></td>
 <td headers="stub_1_3 Number of Ads" class="gt_row gt_center"><div class="gt_from_md"><p>36</p>
 </div></td>
-<td headers="stub_1_3 Total Spend" class="gt_row gt_center"><div class="gt_from_md"><p>€3,478</p>
+<td headers="stub_1_3 Total Spend" class="gt_row gt_center"><div class="gt_from_md"><p>€3,376</p>
 </div></td></tr>
     <tr><th id="stub_1_4" scope="row" class="gt_row gt_center gt_stub"><div class="gt_from_md"><p>FvD</p>
 </div></th>
 <td headers="stub_1_4 Number of Advertisers" class="gt_row gt_center" style="border-left-width: 18.5px; border-left-style: solid; border-left-color: #6f2421;"><div class="gt_from_md"><p>1</p>
 </div></td>
-<td headers="stub_1_4 Top Spenders" class="gt_row gt_center"><div class="gt_from_md"><p><br>1. Forum voor Democratie -FVD (€2,632)</p>
+<td headers="stub_1_4 Top Spenders" class="gt_row gt_center"><div class="gt_from_md"><p><br>1. Forum voor Democratie -FVD (€2,660)</p>
 </div></td>
-<td headers="stub_1_4 Number of Ads" class="gt_row gt_center"><div class="gt_from_md"><p>9</p>
+<td headers="stub_1_4 Number of Ads" class="gt_row gt_center"><div class="gt_from_md"><p>11</p>
 </div></td>
-<td headers="stub_1_4 Total Spend" class="gt_row gt_center"><div class="gt_from_md"><p>€2,632</p>
+<td headers="stub_1_4 Total Spend" class="gt_row gt_center"><div class="gt_from_md"><p>€2,660</p>
 </div></td></tr>
     <tr><th id="stub_1_5" scope="row" class="gt_row gt_center gt_stub"><div class="gt_from_md"><p>ChristenUnie</p>
 </div></th>
 <td headers="stub_1_5 Number of Advertisers" class="gt_row gt_center" style="border-left-width: 18.5px; border-left-style: solid; border-left-color: #02a6e9;"><div class="gt_from_md"><p>1</p>
 </div></td>
-<td headers="stub_1_5 Top Spenders" class="gt_row gt_center"><div class="gt_from_md"><p><br>1. ChristenUnie (€1,579)</p>
+<td headers="stub_1_5 Top Spenders" class="gt_row gt_center"><div class="gt_from_md"><p><br>1. ChristenUnie (€1,591)</p>
 </div></td>
-<td headers="stub_1_5 Number of Ads" class="gt_row gt_center"><div class="gt_from_md"><p>6</p>
+<td headers="stub_1_5 Number of Ads" class="gt_row gt_center"><div class="gt_from_md"><p>4</p>
 </div></td>
-<td headers="stub_1_5 Total Spend" class="gt_row gt_center"><div class="gt_from_md"><p>€1,679</p>
+<td headers="stub_1_5 Total Spend" class="gt_row gt_center"><div class="gt_from_md"><p>€1,691</p>
 </div></td></tr>
     <tr><th id="stub_1_6" scope="row" class="gt_row gt_center gt_stub"><div class="gt_from_md"><p>CDA</p>
 </div></th>
 <td headers="stub_1_6 Number of Advertisers" class="gt_row gt_center" style="border-left-width: 18.5px; border-left-style: solid; border-left-color: #008067;"><div class="gt_from_md"><p>5</p>
 </div></td>
-<td headers="stub_1_6 Top Spenders" class="gt_row gt_center"><div class="gt_from_md"><p><br>1. CDA (€1,039)<br>2. CDA Kampen (€100)<br>3. CDA Apeldoorn (€100)</p>
+<td headers="stub_1_6 Top Spenders" class="gt_row gt_center"><div class="gt_from_md"><p><br>1. CDA (€1,070)<br>2. CDA Kampen (€100)<br>3. CDA Apeldoorn (€100)</p>
 </div></td>
 <td headers="stub_1_6 Number of Ads" class="gt_row gt_center"><div class="gt_from_md"><p>26</p>
 </div></td>
-<td headers="stub_1_6 Total Spend" class="gt_row gt_center"><div class="gt_from_md"><p>€1,439</p>
+<td headers="stub_1_6 Total Spend" class="gt_row gt_center"><div class="gt_from_md"><p>€1,470</p>
 </div></td></tr>
     <tr><th id="stub_1_7" scope="row" class="gt_row gt_center gt_stub"><div class="gt_from_md"><p>GroenLinks</p>
 </div></th>
 <td headers="stub_1_7 Number of Advertisers" class="gt_row gt_center" style="border-left-width: 18.5px; border-left-style: solid; border-left-color: #80c31c;"><div class="gt_from_md"><p>2</p>
 </div></td>
-<td headers="stub_1_7 Top Spenders" class="gt_row gt_center"><div class="gt_from_md"><p><br>1. GroenLinks (€446)<br>2. GroenLinks Parkstad (€153)</p>
+<td headers="stub_1_7 Top Spenders" class="gt_row gt_center"><div class="gt_from_md"><p><br>1. GroenLinks (€371)<br>2. GroenLinks Parkstad (€153)</p>
 </div></td>
 <td headers="stub_1_7 Number of Ads" class="gt_row gt_center"><div class="gt_from_md"><p>7</p>
 </div></td>
-<td headers="stub_1_7 Total Spend" class="gt_row gt_center"><div class="gt_from_md"><p>€599</p>
+<td headers="stub_1_7 Total Spend" class="gt_row gt_center"><div class="gt_from_md"><p>€524</p>
 </div></td></tr>
     <tr><th id="stub_1_8" scope="row" class="gt_row gt_center gt_stub"><div class="gt_from_md"><p>Volt Nederland</p>
 </div></th>
@@ -772,11 +796,11 @@ tbody tr:last-child {
 </div></th>
 <td headers="stub_1_9 Number of Advertisers" class="gt_row gt_center" style="border-left-width: 18.5px; border-left-style: solid; border-left-color: #242b57;"><div class="gt_from_md"><p>2</p>
 </div></td>
-<td headers="stub_1_9 Top Spenders" class="gt_row gt_center"><div class="gt_from_md"><p><br>1. Ja21 (€333)<br>2. JA21 Noord-Holland (€104)</p>
+<td headers="stub_1_9 Top Spenders" class="gt_row gt_center"><div class="gt_from_md"><p><br>1. Ja21 (€309)<br>2. JA21 Noord-Holland (€104)</p>
 </div></td>
-<td headers="stub_1_9 Number of Ads" class="gt_row gt_center"><div class="gt_from_md"><p>5</p>
+<td headers="stub_1_9 Number of Ads" class="gt_row gt_center"><div class="gt_from_md"><p>4</p>
 </div></td>
-<td headers="stub_1_9 Total Spend" class="gt_row gt_center"><div class="gt_from_md"><p>€437</p>
+<td headers="stub_1_9 Total Spend" class="gt_row gt_center"><div class="gt_from_md"><p>€413</p>
 </div></td></tr>
     <tr><th id="stub_1_10" scope="row" class="gt_row gt_center gt_stub"><div class="gt_from_md"><p>D66</p>
 </div></th>
@@ -788,25 +812,15 @@ tbody tr:last-child {
 </div></td>
 <td headers="stub_1_10 Total Spend" class="gt_row gt_center"><div class="gt_from_md"><p>€100</p>
 </div></td></tr>
-    <tr><th id="stub_1_11" scope="row" class="gt_row gt_center gt_stub"><div class="gt_from_md"><p>PvdD</p>
+    <tr><th id="stub_1_11" scope="row" class="gt_row gt_center gt_stub"><div class="gt_from_md"><p>SGP</p>
 </div></th>
-<td headers="stub_1_11 Number of Advertisers" class="gt_row gt_center" style="border-left-width: 18.5px; border-left-style: solid; border-left-color: #006b28;"><div class="gt_from_md"><p>1</p>
+<td headers="stub_1_11 Number of Advertisers" class="gt_row gt_center" style="border-left-width: 18.5px; border-left-style: solid; border-left-color: #ea5b0b;"><div class="gt_from_md"><p>1</p>
 </div></td>
-<td headers="stub_1_11 Top Spenders" class="gt_row gt_center"><div class="gt_from_md"><p><br>1. Partij voor de Dieren Gemeente Groningen (€100)</p>
+<td headers="stub_1_11 Top Spenders" class="gt_row gt_center"><div class="gt_from_md"><p><br>1. SGP Zeeland (€100)</p>
 </div></td>
 <td headers="stub_1_11 Number of Ads" class="gt_row gt_center"><div class="gt_from_md"><p>2</p>
 </div></td>
 <td headers="stub_1_11 Total Spend" class="gt_row gt_center"><div class="gt_from_md"><p>€100</p>
-</div></td></tr>
-    <tr><th id="stub_1_12" scope="row" class="gt_row gt_center gt_stub"><div class="gt_from_md"><p>SGP</p>
-</div></th>
-<td headers="stub_1_12 Number of Advertisers" class="gt_row gt_center" style="border-left-width: 18.5px; border-left-style: solid; border-left-color: #ea5b0b;"><div class="gt_from_md"><p>1</p>
-</div></td>
-<td headers="stub_1_12 Top Spenders" class="gt_row gt_center"><div class="gt_from_md"><p><br>1. SGP Zeeland (€100)</p>
-</div></td>
-<td headers="stub_1_12 Number of Ads" class="gt_row gt_center"><div class="gt_from_md"><p>2</p>
-</div></td>
-<td headers="stub_1_12 Total Spend" class="gt_row gt_center"><div class="gt_from_md"><p>€100</p>
 </div></td></tr>
   </tbody>
   
@@ -821,15 +835,27 @@ tbody tr:last-child {
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="oaydsbtywr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="xshomnkzki" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-html {
-  font-family: Chivo, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+#xshomnkzki table {
+  font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-:where(#oaydsbtywr) .gt_table {
+#xshomnkzki thead, #xshomnkzki tbody, #xshomnkzki tfoot, #xshomnkzki tr, #xshomnkzki td, #xshomnkzki th {
+  border-style: none;
+}
+
+#xshomnkzki p {
+  margin: 0;
+  padding: 0;
+}
+
+#xshomnkzki .gt_table {
   display: table;
   border-collapse: collapse;
+  line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
@@ -852,24 +878,12 @@ html {
   border-left-color: #D3D3D3;
 }
 
-:where(#oaydsbtywr) .gt_heading {
-  background-color: #FFFFFF;
-  text-align: left;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-:where(#oaydsbtywr) .gt_caption {
+#xshomnkzki .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-:where(#oaydsbtywr) .gt_title {
+#xshomnkzki .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -881,25 +895,37 @@ html {
   border-bottom-width: 0;
 }
 
-:where(#oaydsbtywr) .gt_subtitle {
+#xshomnkzki .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
+  padding-top: 3px;
+  padding-bottom: 5px;
   padding-left: 5px;
   padding-right: 5px;
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
 
-:where(#oaydsbtywr) .gt_bottom_border {
+#xshomnkzki .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xshomnkzki .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#oaydsbtywr) .gt_col_headings {
+#xshomnkzki .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -914,7 +940,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-:where(#oaydsbtywr) .gt_col_heading {
+#xshomnkzki .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -934,7 +960,7 @@ html {
   overflow-x: hidden;
 }
 
-:where(#oaydsbtywr) .gt_column_spanner_outer {
+#xshomnkzki .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -946,15 +972,15 @@ html {
   padding-right: 4px;
 }
 
-:where(#oaydsbtywr) .gt_column_spanner_outer:first-child {
+#xshomnkzki .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#oaydsbtywr) .gt_column_spanner_outer:last-child {
+#xshomnkzki .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#oaydsbtywr) .gt_column_spanner {
+#xshomnkzki .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -966,7 +992,11 @@ html {
   width: 100%;
 }
 
-:where(#oaydsbtywr) .gt_group_heading {
+#xshomnkzki .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#xshomnkzki .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -992,7 +1022,7 @@ html {
   text-align: left;
 }
 
-:where(#oaydsbtywr) .gt_empty_group_heading {
+#xshomnkzki .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1007,15 +1037,15 @@ html {
   vertical-align: middle;
 }
 
-:where(#oaydsbtywr) .gt_from_md > :first-child {
+#xshomnkzki .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#oaydsbtywr) .gt_from_md > :last-child {
+#xshomnkzki .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#oaydsbtywr) .gt_row {
+#xshomnkzki .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -1034,7 +1064,7 @@ html {
   overflow-x: hidden;
 }
 
-:where(#oaydsbtywr) .gt_stub {
+#xshomnkzki .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1047,7 +1077,7 @@ html {
   padding-right: 5px;
 }
 
-:where(#oaydsbtywr) .gt_stub_row_group {
+#xshomnkzki .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1061,11 +1091,15 @@ html {
   vertical-align: top;
 }
 
-:where(#oaydsbtywr) .gt_row_group_first td {
+#xshomnkzki .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#oaydsbtywr) .gt_summary_row {
+#xshomnkzki .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#xshomnkzki .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1075,16 +1109,16 @@ html {
   padding-right: 5px;
 }
 
-:where(#oaydsbtywr) .gt_first_summary_row {
+#xshomnkzki .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#oaydsbtywr) .gt_first_summary_row.thick {
+#xshomnkzki .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#oaydsbtywr) .gt_last_summary_row {
+#xshomnkzki .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1094,7 +1128,7 @@ html {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#oaydsbtywr) .gt_grand_summary_row {
+#xshomnkzki .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1104,7 +1138,7 @@ html {
   padding-right: 5px;
 }
 
-:where(#oaydsbtywr) .gt_first_grand_summary_row {
+#xshomnkzki .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1114,11 +1148,21 @@ html {
   border-top-color: #D3D3D3;
 }
 
-:where(#oaydsbtywr) .gt_striped {
+#xshomnkzki .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xshomnkzki .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#oaydsbtywr) .gt_table_body {
+#xshomnkzki .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1127,7 +1171,7 @@ html {
   border-bottom-color: #D3D3D3;
 }
 
-:where(#oaydsbtywr) .gt_footnotes {
+#xshomnkzki .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1141,16 +1185,16 @@ html {
   border-right-color: #D3D3D3;
 }
 
-:where(#oaydsbtywr) .gt_footnote {
+#xshomnkzki .gt_footnote {
   margin: 0px;
   font-size: 90%;
-  padding-left: 4px;
-  padding-right: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
   padding-left: 5px;
   padding-right: 5px;
 }
 
-:where(#oaydsbtywr) .gt_sourcenotes {
+#xshomnkzki .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1164,7 +1208,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-:where(#oaydsbtywr) .gt_sourcenote {
+#xshomnkzki .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1172,64 +1216,63 @@ html {
   padding-right: 5px;
 }
 
-:where(#oaydsbtywr) .gt_left {
+#xshomnkzki .gt_left {
   text-align: left;
 }
 
-:where(#oaydsbtywr) .gt_center {
+#xshomnkzki .gt_center {
   text-align: center;
 }
 
-:where(#oaydsbtywr) .gt_right {
+#xshomnkzki .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#oaydsbtywr) .gt_font_normal {
+#xshomnkzki .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#oaydsbtywr) .gt_font_bold {
+#xshomnkzki .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#oaydsbtywr) .gt_font_italic {
+#xshomnkzki .gt_font_italic {
   font-style: italic;
 }
 
-:where(#oaydsbtywr) .gt_super {
+#xshomnkzki .gt_super {
   font-size: 65%;
 }
 
-:where(#oaydsbtywr) .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
+#xshomnkzki .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
+  position: initial;
 }
 
-:where(#oaydsbtywr) .gt_asterisk {
+#xshomnkzki .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#oaydsbtywr) .gt_indent_1 {
+#xshomnkzki .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#oaydsbtywr) .gt_indent_2 {
+#xshomnkzki .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#oaydsbtywr) .gt_indent_3 {
+#xshomnkzki .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#oaydsbtywr) .gt_indent_4 {
+#xshomnkzki .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#oaydsbtywr) .gt_indent_5 {
+#xshomnkzki .gt_indent_5 {
   text-indent: 25px;
 }
 
@@ -1237,10 +1280,10 @@ tbody tr:last-child {
   border-bottom: 2px solid #ffffff00;
 }
 </style>
-<table class="gt_table">
-  
-  <thead class="gt_col_headings">
-    <tr>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings">
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=""></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Number of Advertisers">Number of Advertisers</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Top Spenders">Top Spenders</th>
@@ -1355,8 +1398,8 @@ tbody tr:last-child {
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="htmlwidget-e1bf16e6a563f60c6170" style="width:100%;height:480px;" class="highchart html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e1bf16e6a563f60c6170">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":null},"yAxis":{"title":{"text":"Daily Spend"},"type":"linear"},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":true},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}},"area":{"stacking":"normal","lineWidth":1,"marker":{"enabled":false}}},"series":[{"name":"ChristenUnie","data":[{"date_produced":"2023-06-14","party":"ChristenUnie","spend":50,"total_spend":50,"colors":"#02a6e9","Daily Spend":50,"Date":"2023-06-14","x":1686700800000,"y":50,"fill":"#02a6e9"},{"date_produced":"2023-06-15","party":"ChristenUnie","spend":50,"total_spend":50,"colors":"#02a6e9","Daily Spend":50,"Date":"2023-06-15","x":1686787200000,"y":50,"fill":"#02a6e9"}],"type":"area"}],"xAxis":{"type":"datetime","title":{"text":"Date"},"categories":null},"colors":["#02a6e9"],"tooltip":{"shared":true,"positioner":"function (labelWidth, labelHeight, point) {\n        return { x: 200, y: this.chart.plotTop };\n    }"}},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":["hc_opts.tooltip.positioner"],"jsHooks":[]}</script>
+<div class="highchart html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-de0e1a74f57ea75a531b" style="width:100%;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-de0e1a74f57ea75a531b">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":null},"yAxis":{"title":{"text":"Daily Spend"},"type":"linear"},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":true},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}},"area":{"stacking":"normal","lineWidth":1,"marker":{"enabled":false}}},"series":[{"name":"ChristenUnie","data":[{"date_produced":"2023-06-14","party":"ChristenUnie","spend":50,"total_spend":50,"colors":"#02a6e9","Daily Spend":50,"Date":"2023-06-14","x":1686700800000,"y":50,"fill":"#02a6e9"},{"date_produced":"2023-06-15","party":"ChristenUnie","spend":50,"total_spend":50,"colors":"#02a6e9","Daily Spend":50,"Date":"2023-06-15","x":1686787200000,"y":50,"fill":"#02a6e9"}],"type":"area"}],"xAxis":{"type":"datetime","title":{"text":"Date"},"categories":null},"colors":["#02a6e9"],"tooltip":{"shared":true,"positioner":"function (labelWidth, labelHeight, point) {\n        return { x: 200, y: this.chart.plotTop };\n    }"}},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":["hc_opts.tooltip.positioner"],"jsHooks":[]}</script>
 </div>
 </div>
 
@@ -1391,9 +1434,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1405,7 +1462,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -1441,24 +1515,128 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script>
