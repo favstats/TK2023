@@ -364,21 +364,17 @@ eval(parse(text = paste0("gt(the_table7, rowname_col = 'party_col') %>% fmt_mark
 
 ```{r, out.width="100%"}
 
-more_data <- dir("../data/reports", full.names = T) %>%
-  
-    map_dfr(~{#print(.x)
-        yo <- read.csv(.x) %>% mutate(path = .x)
-        return(yo)
-            }) %>%
-    mutate(date_produced = str_remove_all(path, "../data/reports/FacebookAdLibraryReport_|_ME_yesterday_advertiser\\.csv")) %>%
-    mutate(date_produced = lubridate::ymd(date_produced)) %>%
+more_data <- readr::read_rds("https://github.com/favstats/meta_reports/raw/main/data/daily.rds")  %>%
+    mutate(date_produced = lubridate::ymd(date)) %>%
   drop_na(date_produced) %>% 
     janitor::clean_names()%>% #rename(advertiser_id = page_id) %>%
     mutate(spend = readr::parse_number(amount_spent_eur)) %>%
     mutate(spend = ifelse(spend == 100, 50, spend)) %>%
     # distinct(page_id, .keep_all = T) %>%
     filter(str_detect(page_name, "Global Space Conference on Climate Change|de Alliantie|PvdA - GroenLinks", negate = T)) %>%
-    mutate(page_id = as.character(page_id))
+    mutate(page_id = as.character(page_id)) %>% 
+  filter(cntry == "NL") %>% 
+  filter(date_produced >= lubridate::as_date("2023-07-07"))
 
 
 # me_advertisers <- read_csv("../data/wtm-advertisers-gr-2023-05-20T08_49_00.571Z.csv")
