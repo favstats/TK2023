@@ -173,11 +173,11 @@ the_currency <- election_dat30 %>%
   slice(1) %>% 
   pull(main_currency)
 
-if(the_currency == "EUR"){
+#if(the_currency == "EUR"){
   currency_symbol <- "€"
-} else {
-  currency_symbol <- "CURRENCY"
-}
+#} else {
+  #currency_symbol <- "CURRENCY"
+#}
 
 ```
 
