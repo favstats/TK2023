@@ -364,7 +364,7 @@ eval(parse(text = paste0("gt(the_table7, rowname_col = 'party_col') %>% fmt_mark
 
 ```{r, out.width="100%"}
 
-more_data <- readr::read_rds("https://github.com/favstats/meta_reports/raw/main/data/daily.rds")  %>%
+more_data <- readr::read_rds("https://github.com/favstats/meta_reports2/raw/main/daily/NL.rds")  %>%
     mutate(date_produced = lubridate::ymd(date)) %>%
   drop_na(date_produced) %>% 
     janitor::clean_names()%>% #rename(advertiser_id = page_id) %>%
