@@ -362,17 +362,17 @@ eval(parse(text = paste0("gt(the_table7, rowname_col = 'party_col') %>% fmt_mark
 
 
 ```{r, out.width="100%"}
-more_data <- readr::read_rds("https://github.com/favstats/meta_reports2/raw/main/daily/NL.rds")  %>%
+more_data <- readr::read_rds("https://github.com/favstats/meta_reports2/raw/main/lifelong/NL.rds")  %>%
     mutate(date_produced = lubridate::ymd(date)) %>%
   drop_na(date_produced) %>% 
     janitor::clean_names()%>% #rename(advertiser_id = page_id) %>%
     mutate(spend = readr::parse_number(amount_spent_eur)) %>%
-    mutate(spend = ifelse(spend == 100, 50, spend)) %>%
+    # mutate(spend = ifelse(spend == 100, 50, spend)) %>%
     # distinct(page_id, .keep_all = T) %>%
     filter(str_detect(page_name, "Global Space Conference on Climate Change|de Alliantie|PvdA - GroenLinks", negate = T)) %>%
     mutate(page_id = as.character(page_id)) %>% 
   filter(cntry == "NL") %>% 
-  filter(date_produced >= lubridate::as_date("2023-07-07"))
+  filter(date_produced >= lubridate::as_date("2023-08-01"))
 
 
 # me_advertisers <- read_csv("../data/wtm-advertisers-gr-2023-05-20T08_49_00.571Z.csv")
@@ -405,6 +405,18 @@ color_order <- hc_data %>%
   arrange(party) %>%
   pull(colors)
 
+# more_data %>% 
+  # mutate(date_produced = lubridate::ymd(date)) %>%
+  # drop_na(date_produced) %>% 
+  # janitor::clean_names() %>% 
+  # distinct(cntry, date_produced, .keep_all = T) %>% 
+  # count(date_produced) %>%
+  # ggplot(aes(date_produced, n)) +
+  # geom_col() +
+  # theme_minimal() +
+  # labs(y = "How many Countries", x = "For each date")
+
+
 ```
 
 ::: {.panel-tabset}
@@ -412,53 +424,16 @@ color_order <- hc_data %>%
 
 ### Cumulative
 
-```{r, out.width="100%"}
-
-# Compute global minimum and maximum date
-tmin_date <- min(hc_data$date_produced, na.rm = TRUE)
-tmax_date <- max(hc_data$date_produced, na.rm = TRUE)
-hc_data %>%
-  group_by(party, colors) %>% 
-  arrange(date_produced) %>% 
-  mutate(Date = date_produced) %>%
-  complete(Date = seq.Date(min(tmin_date), max(tmax_date), by="day")) %>%  # Create rows for missing dates
-  mutate(spend = ifelse(is.na(spend), 0, spend)) %>% 
-  mutate(spend2 = cumsum(spend)) %>% 
-  fill(spend, .direction = "down") %>%
-  mutate(`Daily Spend (cumulative)` = spend2) %>%
-  # mutate(spend)
-  hchart("area", hcaes(x = Date, y = `Daily Spend (cumulative)`, group = party, fill = colors)) %>%
-  hc_plotOptions(    area = list(
-      stacking = "normal",
-      lineWidth = 1,
-      marker = list(enabled = FALSE)
-    )) %>%
-  # hc_legend(share = TRUE)%>%
-  hc_colors(color_order)%>%
-  hc_tooltip(
-    shared = TRUE,
-    positioner = JS("function (labelWidth, labelHeight, point) {
-        return { x: 200, y: this.chart.plotTop };
-    }")
-  ) 
-# hc_colors(levels(hc_data$party))
-# hc_colors(color_dat$colors[as.character(unique(hc_data$party))])
-
-# color_dat$colors[levels(hc_data$party)]
-
-# more_data %>% 
-#   count(date_produced)
-```
-
-
-### Daily
 
 ```{r, out.width="100%"}
 
 
 hc_data %>%
   mutate(Date = date_produced) %>%
-  mutate(`Daily Spend` = spend) %>%
+  group_by(party) %>%  # Assuming you have a 'party' column
+  arrange(Date) %>% 
+  mutate(`Daily Spend` = spend - first(spend)) %>%
+  ungroup() %>%
   # mutate(spend)
   hchart("area", hcaes(x = Date, y = `Daily Spend`, group = party, fill = colors)) %>%
   hc_plotOptions(    area = list(
@@ -473,7 +448,42 @@ hc_data %>%
     positioner = JS("function (labelWidth, labelHeight, point) {
         return { x: 200, y: this.chart.plotTop };
     }")
-  ) %>%
+  )
+
+
+
+```
+
+
+
+### Daily
+
+
+
+```{r, out.width="100%"}
+
+# Compute global minimum and maximum date
+hc_data %>%
+  mutate(Date = date_produced) %>%
+  group_by(party) %>%  # Assuming you have a 'party' column
+  arrange(Date) %>%  # Ensure the data is in the correct order
+  mutate(`Daily Spend (cumulative)` = spend - lag(spend, default = first(spend))) %>%
+  ungroup()  %>%
+  # mutate(spend)
+  hchart("area", hcaes(x = Date, y = `Daily Spend (cumulative)`, group = party, fill = colors)) %>%
+  hc_plotOptions(    area = list(
+      stacking = "normal",
+      lineWidth = 1,
+      marker = list(enabled = FALSE)
+    )) %>%
+  # hc_legend(share = TRUE)%>%
+  hc_colors(color_order)%>%
+  hc_tooltip(
+    shared = TRUE,
+    positioner = JS("function (labelWidth, labelHeight, point) {
+        return { x: 200, y: this.chart.plotTop };
+    }")
+  )  %>%
    hc_chart(events = list(load = JS("function() {
    var chart = this;
    chart.series[0].setVisible(false)
@@ -482,11 +492,14 @@ hc_data %>%
    chart.series[3].setVisible(false)
    chart.series[4].setVisible(false)
    }"))) 
+# hc_colors(levels(hc_data$party))
+# hc_colors(color_dat$colors[as.character(unique(hc_data$party))])
 
+# color_dat$colors[levels(hc_data$party)]
 
-
+# more_data %>% 
+#   count(date_produced)
 ```
-
 
 ::: 
 
