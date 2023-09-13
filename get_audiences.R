@@ -13,7 +13,7 @@ library(tidyverse)
 library(lubridate)
 
 # tf <- Sys.getenv("TIMEFRAME")c
-tf <- "7"
+# tf <- "30"
 # print(tf)
 
 jb <- get_targeting("7860876103", timeframe = glue::glue("LAST_90_DAYS"))
@@ -369,11 +369,11 @@ if("ds" %in% names(election_dat) ){
       saveRDS(combined_dat, file= paste0("data/combined_dat", tf,  ".rds"))
       
       aggr <- combined_dat  %>%
-        mutate(total_spend_formatted = ifelse(!is.character(total_spend_formatted), total_spend_formatted, as.character(total_spend_formatted))) %>% 
-        mutate(total_spend = readr::parse_number(total_spend_formatted)) %>%
+        # mutate(total_spend_formatted = ifelse(!is.character(total_spend_formatted), as.character(total_spend_formatted), total_spend_formatted, )) %>% 
+        mutate(total_spend = readr::parse_number(as.character(total_spend_formatted))) %>%
         mutate(total_spend = ifelse(total_spend == 50, 50, total_spend)) %>%
         mutate(total_spend = total_spend * total_spend_pct) %>%
-        group_by(internal_id, value, type, location_type, detailed_type, custom_audience_type, is_exclusion) %>%
+        group_by(page_id, value, type, location_type, detailed_type, custom_audience_type, is_exclusion) %>%
         summarize(total_spend = sum(total_spend),
                   num_ads = sum(num_ads),
                   num_obfuscated = sum(num_obfuscated)) %>%
