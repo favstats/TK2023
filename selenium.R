@@ -1,7 +1,10 @@
 
 # https://adstransparency.google.com/advertiser/AR09355418985304162305?political&region=NL&preset-date=Last%207%20days
 # install.packages("pacman")
-pacman::p_load(tidyverse, RSelenium)
+pacman::p_load(tidyverse, RSelenium, binman, wdman)
+
+wdman::gecko()
+wdman::selenium()
 
 dir.create("data/ggl", recursive = T)
 

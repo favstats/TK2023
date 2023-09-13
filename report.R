@@ -25,7 +25,8 @@ pacman::p_load(
   glue,
   rvest,
   cli,
-  digest
+  digest,
+  readr
 )
 
 
