@@ -1,5 +1,4 @@
 ---
-title: "2023 Dutch parliamentary election"
 format:
   html:
     theme: lumen
@@ -13,8 +12,45 @@ format:
 
 
 
+
+```{r setup, include=FALSE}
+# sets$election_title <- "2023 Dutch parliamentary election"
+# the_country$election_title <- "Netherlands"
+
+sets <- jsonlite::fromJSON("../settings.json")
+
+## Global options
+knitr::opts_chunk$set(
+    cache = F, 
+    echo = F, 
+    warning = F, 
+    message = F, 
+    cache.lazy = FALSE
+)
+
+
+# pacman::p_load(tidyverse, highcharter)
+library(tidyverse)
+library(highcharter)
+library(gt)
+
+
+
+options(scipen = 999)
+# print(getwd())
+# here::here("")
+# prCint(getwd())
+
+```
+
+---
+title: "`r sets$election_title`"
+---
+
+
 ```{r echo=FALSE, results='asis'}
-shiny::HTML('
+
+shiny::HTML(glue::glue('
 <style>
 #overlay {
   position: fixed;
@@ -50,8 +86,8 @@ shiny::HTML('
 <div id="overlay" onclick="off()">
   <div id="text">
     <img src="wtm_logo_2020.png" alt="Logo" style="width:150px;height:150px;">
-    <h2>Welcome to the 2023 Dutch Election Dashboard</h2>
-    <p>This dashboard aggregates data from the <a href="https://www.facebook.com/ads/library/" target="_blank">Meta Ad Library</a> to show how citizens are targeted during the 2023 Dutch parliamentary election.</p>
+    <h2>Welcome to the >>>sets$welcome<<<</h2>
+    <p>This dashboard aggregates data from the <a href="https://www.facebook.com/ads/library/" target="_blank">Meta Ad Library</a> to show how citizens are targeted during the >>>sets$election_title<<<.</p>
     <p>If you want to know more about Who Targets Me and our work on ad transparency, visit us on <a href="https://www.whotargets.me/" target="_blank">whotargets.me</a>!</p>
   </div>
 </div>
@@ -71,40 +107,10 @@ function off() {
   document.getElementById("overlay").style.display = "none";
 }
 </script>
-')
+', .open = ">>>", .close = "<<<"))
 
 
 
-
-```
-
-
-```{r setup, include=FALSE}
-election_title <- "2023 Dutch parliamentary election"
-the_country <- "Netherlands"
-
-
-## Global options
-knitr::opts_chunk$set(
-    cache = F, 
-    echo = F, 
-    warning = F, 
-    message = F, 
-    cache.lazy = FALSE
-)
-
-
-# pacman::p_load(tidyverse, highcharter)
-library(tidyverse)
-library(highcharter)
-library(gt)
-
-
-
-options(scipen = 999)
-# print(getwd())
-here::here("")
-# prCint(getwd())
 
 ```
 
@@ -144,20 +150,12 @@ all_dat <- readRDS("../data/all_dat.rds")
 
 election_dat30 <- readRDS("../data/election_dat30.rds") %>%
     # left_join(all_dat) %>% 
-  rename(internal_id = page_id) %>% 
-  filter(party != "And") %>% 
-  mutate(party = ifelse(party == "V", "Volt Nederland", party)) %>%  
-  filter(is.na(no_data)) %>% 
-  filter(internal_id != "208371683037269")
+  rename(internal_id = page_id) 
 
 
 election_dat7 <- readRDS("../data/election_dat7.rds") %>% 
       # left_join(all_dat) %>% 
-  rename(internal_id = page_id) %>% 
-  filter(party != "And") %>% 
-  mutate(party = ifelse(party == "V", "Volt Nederland", party)) %>%  
-  filter(is.na(no_data)) %>% 
-  filter(internal_id != "208371683037269")
+  rename(internal_id = page_id) 
 
 
 fin <- (as.Date(election_dat30$ds[1])-lubridate::days(1))
@@ -248,7 +246,7 @@ add_ribbons2 <- function(x, adv, col) {
 ```
 
 
-This section shows *total* and *daily spending* of political parties in the run-up to the `r election_title` for the latest available data.
+This section shows *total* and *daily spending* of political parties in the run-up to the `r sets$election_title` for the latest available data.
 
 ## Total Spend
 

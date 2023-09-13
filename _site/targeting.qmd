@@ -9,8 +9,7 @@ format:
 
 all_dat <- readRDS("../data/all_dat.rds")
 
-election_title <- "2023 Dutch parliamentary election"
-the_country <- "Netherlands"
+sets <- jsonlite::fromJSON("../settings.json")
 
 
 ## Global options
@@ -111,7 +110,7 @@ if(the_currency == "EUR"){
 
 ```
 
-This section shows spening per *targeting criteria* used by political parties to reach citizens in the run-up to the `r election_title` for the latest available data.
+This section shows spening per *targeting criteria* used by political parties to reach citizens in the run-up to the `r sets$election_title` for the latest available data.
 
 
 
@@ -1856,7 +1855,6 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 ```
 
-:::
 
 ### `r last7days_string` (Last 7 days)
 
@@ -1955,3 +1953,7 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 
 ```
+
+
+
+:::

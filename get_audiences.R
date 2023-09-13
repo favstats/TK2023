@@ -12,6 +12,12 @@ library(httr)
 library(tidyverse)
 library(lubridate)
 
+sets <- jsonlite::fromJSON("settings.json")
+
+title_txt <- read_lines("_site/_quarto.yml")
+title_txt[which(str_detect(title_txt, "title"))] <-  glue::glue('  title: "{sets$dashboard}"')
+write_lines(title_txt, "_site/_quarto.yml")
+
 # tf <- Sys.getenv("TIMEFRAME")c
 # tf <- "30"
 # print(tf)
@@ -198,7 +204,9 @@ all_dat <- #read_csv("nl_advertisers.csv") %>%
   filter(!remove_em) %>%
   # filter(n >= 2) %>%
   # filter(n >= 2 & str_ends(page_id, "0", negate = T)) %>%
-  select(-n)  %>%
+  select(-n)  
+
+all_dat <- all_dat %>% 
   mutate(party = case_when(
     str_detect(party, "VVD") ~ "VVD",
     str_detect(party, "\\bCDA\\b") ~ "CDA",
@@ -219,14 +227,17 @@ all_dat <- #read_csv("nl_advertisers.csv") %>%
     str_detect(party, "Ja21|JA21") ~ "Ja21",
     str_detect(party, "Alliantie") ~ "Alliantie",
     str_detect(party, "BBB") ~ "BBB",
-    party == "V" ~ "Volt",
+    party == "V" ~ "Volt Nederland",
     T ~ party
   )) %>% 
   filter(page_name != "Wybren van Haga") %>% 
   bind_rows(tibble(page_id = c("103936679460429", "115141108346129", "1816979431914302"),
             page_name = c("Nieuw Sociaal Contract", "Nieuw Sociaal Contract", "Pieter Omtzigt"),
             party = c("NSC", "NSC", "NSC"))) %>% 
-  distinct(page_id, .keep_all = T)
+  distinct(page_id, .keep_all = T) %>% 
+  filter(party != "And") %>% 
+  mutate(party = ifelse(party %in% c("V", "Volt"), "Volt Nederland", party))  %>% 
+  filter(internal_id != "208371683037269")
 
 saveRDS(all_dat, "data/all_dat.rds")
 
