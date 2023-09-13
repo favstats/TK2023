@@ -13,7 +13,7 @@ library(tidyverse)
 library(lubridate)
 
 # tf <- Sys.getenv("TIMEFRAME")c
-tf <- "30"
+# tf <- "30"
 # print(tf)
 
 jb <- get_targeting("7860876103", timeframe = glue::glue("LAST_90_DAYS"))
