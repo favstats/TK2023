@@ -150,17 +150,24 @@ all_dat <- readRDS("../data/all_dat.rds")
 
 election_dat30 <- readRDS("../data/election_dat30.rds") %>%
     # left_join(all_dat) %>% 
-  rename(internal_id = page_id) 
+  rename(internal_id = page_id)  %>% 
+  filter(is.na(no_data))
 
 
 election_dat7 <- readRDS("../data/election_dat7.rds") %>% 
       # left_join(all_dat) %>% 
-  rename(internal_id = page_id) 
+  rename(internal_id = page_id) %>% 
+  filter(is.na(no_data))
 
 
 fin <- (as.Date(election_dat30$ds[1])-lubridate::days(1))
 begin7 <- fin-lubridate::days(6)
 begin30 <- fin-lubridate::days(29)
+
+tibble(fin,
+       begin7,
+       begin30) %>% 
+  write_csv("../data/dates.csv")
 
 
 last7days_string <- paste0(create_date(begin7), " - ", paste(create_date(fin), lubridate::year(fin)))
@@ -175,11 +182,11 @@ the_currency <- election_dat30 %>%
   slice(1) %>% 
   pull(main_currency)
 
-#if(the_currency == "EUR"){
+if(the_currency == "EUR"){
   currency_symbol <- "€"
-#} else {
-  #currency_symbol <- "CURRENCY"
-#}
+} else {
+  currency_symbol <- "CURRENCY"
+}
 
   # election_dat7 %>% count(page_name, party)
 ```

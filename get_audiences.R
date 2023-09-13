@@ -237,7 +237,7 @@ all_dat <- all_dat %>%
   distinct(page_id, .keep_all = T) %>% 
   filter(party != "And") %>% 
   mutate(party = ifelse(party %in% c("V", "Volt"), "Volt Nederland", party))  %>% 
-  filter(internal_id != "208371683037269")
+  filter(page_id != "208371683037269")
 
 saveRDS(all_dat, "data/all_dat.rds")
 

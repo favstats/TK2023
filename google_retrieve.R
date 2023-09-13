@@ -1,6 +1,39 @@
 
 all_ads <- vroom::vroom("C:/Users/fabio/Downloads/google-political-ads-transparency-bundle (1)/google-political-ads-creative-stats.csv")
 
+
+ggl_spend <- gglstats   %>%
+  mutate(Date_Range_Start = lubridate::ymd(Date_Range_Start)) %>%
+  filter(Date_Range_Start >= as.Date("2021-02-01")) %>% 
+  filter(str_detect(Regions, "NL")) %>% 
+  distinct(Advertiser_ID, Advertiser_Name, .keep_all = T) %>%
+  mutate(party1 = case_when(
+    str_detect(Advertiser_Name, "VVD|Volkspartij voor Vrijheid en Democratie|Stichting Liberaal Dordrecht") ~ "VVD",
+    str_detect(Advertiser_Name, "\\bCDA\\b|Christen Democratisch") ~ "CDA",
+    str_detect(Advertiser_Name, "PvdA|Jonge Socialisten|Partij van de Arbeid") ~ "PvdA",
+    str_detect(Advertiser_Name, "\\bD66\\b|Jonge Democraten|Democraten 66") ~ "D66",
+    str_detect(Advertiser_Name, "GroenLinks|\\bGL\\b") ~ "GroenLinks",
+    str_detect(Advertiser_Name, "ChristenUnie|\\bCU\\b") ~ "ChristenUnie",
+    str_detect(Advertiser_Name, "\\bSP\\b|Socialistische Partij") ~ "SP",
+    str_detect(Advertiser_Name, "FvD|FVD|Forum voor Democratie") ~ "FvD",
+    str_detect(Advertiser_Name, "50.lus|50PLUS|VLG") ~ "50PLUS",
+    str_detect(Advertiser_Name, "\\bSGP\\b|Staatkundig Gereformeerde Partij") ~ "SGP",
+    str_detect(Advertiser_Name, "PvdD|Partij voor de Dieren") ~ "PvdD",
+    str_detect(Advertiser_Name, "PVV|Partij Voor de Vrijheid") ~ "PVV",
+    str_detect(Advertiser_Name, "DENK") ~ "DENK",
+    str_detect(Advertiser_Name, "Volt|VOLT") ~ "Volt Nederland",
+    str_detect(Advertiser_Name, "BIJ1|BiJ") ~ "BIJ1",
+    str_detect(Advertiser_Name, "BVNL|Belang Van Nederland|Engel Huibert van Dalen") ~ "BVNL",
+    str_detect(Advertiser_Name, "Ja21|JA21|Conservatieve Liberalen") ~ "JA21",
+    str_detect(Advertiser_Name, "Alliantie") ~ "Alliantie",
+    str_detect(Advertiser_Name, "BBB|Marc-Michel Strijker") ~ "BBB",
+    T ~ NA_character_
+  )) %>%
+  filter(!(str_detect(Advertiser_Name, "Gleichheitspartei|Nieuw-Vlaamse|SP Digital LLC|MURRAY|REVOLT|Angelenos Against Higher Property Taxes|ITALIA|Volt Deutschland"))) %>%
+  drop_na(party1) 
+
+
+
 all_ads %>% 
   mutate(Date_Range_Start = lubridate::as_date(Date_Range_Start))  %>%
   filter(Date_Range_Start >= as.Date("2023-04-20")) %>% 

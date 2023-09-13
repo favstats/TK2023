@@ -94,6 +94,16 @@ search_fields=c("ad_creation_time",
                 "ad_creative_link_caption",
                 "ad_creative_link_description",
                 "ad_creative_link_title",
+                "age_country_gender_reach_breakdown",
+                "beneficiary_payers",
+                "bylines",
+                "delivery_by_region",
+                "estimated_audience_size",
+                "eu_total_reach",
+                "languages",
+                "target_ages",
+                "target_gender",
+                "target_locations",
                 "currency",
                 "ad_creative_body", 
                 "page_id",
@@ -108,7 +118,7 @@ search_fields=c("ad_creation_time",
                 "region_distribution") %>% 
   stringr::str_c(., collapse=", ")
 
-min_date <- "2023-05-26"
+min_date <- "2023-08-01"
 
 #get the data from the first 'page' of data the api provides
 page_one_response <- GET(my_link,
@@ -133,30 +143,31 @@ page <- 1
 
 #iterate over all pages until there is no further page
 while(length(next_link)>0) {
+  try({
+    print(page)
+    
+    next_response <- GET(next_link)
+    next_content<- content(next_response)
+    
+    y <- tibble(data=next_content$data)
+    df_next <- y %>% 
+      unnest_wider(data) 
+    
+    df_imp <- bind_rows(df_imp, df_next)  
+    
+    next_link <- next_content$paging$`next`
+    
+    page <- page + 1    
+  })
   # while(T) {
-  
-  print(page)
-  
-  next_response <- GET(next_link)
-  next_content<- content(next_response)
-  
-  y <- tibble(data=next_content$data)
-  df_next <- y %>% 
-    unnest_wider(data) 
-  
-  df_imp <- bind_rows(df_imp, df_next)  
-  
-  next_link <- next_content$paging$`next`
-  
-  page <- page + 1
-  
+
 }
 
 # dutch_parties <- c("VVD", "D66", "FvD", "SP", "GroenLinks", "Volt Nederland", "PvdA", "CDA", "PvdD", "ChristenUnie", "SGP", "DENK", "50PLUS")
 
 cat("\n\nFB Data: Read in old data\n\n")  
 
-fb_dat <- readRDS("data/fb_dat.rds")
+# fb_dat <- readRDS("data/fb_dat.rds")
 
 
 # fb_dat <- fb_dat %>% 
