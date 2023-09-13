@@ -8,6 +8,8 @@ wdman::selenium()
 
 dir.create("data/ggl", recursive = T)
 
+source("utils.R")
+
 download.file(url = "https://storage.googleapis.com/political-csv/google-political-ads-transparency-bundle.zip", destfile = "data/ggl/ggl.zip", method = "curl")
 
 unzip("data/ggl/ggl.zip", exdir = "data/ggl")
