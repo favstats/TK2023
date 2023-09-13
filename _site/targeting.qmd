@@ -110,7 +110,7 @@ if(the_currency == "EUR"){
 
 ```
 
-This section shows spening per *targeting criteria* used by political parties to reach citizens in the run-up to the `r sets$election_title` for the latest available data.
+This section shows spending per *targeting criteria* used by political parties to reach citizens in the run-up to the `r sets$election_title` for the latest available data. It only includes targeting on Meta platforms (Facebook and Instagram), which offers the most detailed targeting options to political advertisers.
 
 
 

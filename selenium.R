@@ -156,8 +156,8 @@ daily_spending_old <- readRDS("data/ggl_daily_spending.rds")
     map_dfr_progress(~{retrieve_spend_daily(.x$advertiser_id, .x$timelines)})
   
   
-saveRDS(daily_spending %>% bind_rows(missings), file = "data/ggl_daily_spending.rds")
-
+  saveRDS(daily_spending %>% bind_rows(missings) %>% bind_rows(daily_spending_old) %>% distinct(), file = "data/ggl_daily_spending.rds")
+  
 
 dates <- read_csv("data/dates.csv")
 
