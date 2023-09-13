@@ -5,8 +5,10 @@ pacman::p_load(tidyverse, janitor, highcharter, httr, furrr, lubridate, tidytext
 
 setwd(here::here())
 
-color_dat <- tibble(colors = c("#5493ce", "#1b5cc7", "#01783d", "#ef3f24", "#ee808f"),
-                    party = c("EL", "ND", "PASOK", "MeRA25", "SYRIZA"))
+color_dat <- tibble(
+  colors = c("#00b13d", "#80c31c", "#0a2cca", "#008067", "#bf0000", "#ff0000", "#6f2421", "#02a6e9", "#92107d", "#04d3d4", "#242b57", "#66cdaa", "#242b57", "#006b28", "#012758", "#ea5b0b", "#582c83", "#698c0c", "#fdfd00", "#8da6d6"),
+  party = c("D66", "GroenLinks", "VVD", "CDA", "SP", "PvdA", "FvD", "ChristenUnie", "50PLUS", "Alliantie", "BVNL", "DENK", "Ja21", "PvdD", "PVV", "SGP", "Volt Nederland", "BBB", "BIJ1", "NSC"))
+
 
 if(!dir.exists("data")) dir.create("data")
 
@@ -17,17 +19,11 @@ get_mid <- function(spend_upper_bound, spend_lower_bound) {
 
 
 
-wtm_data <- read_csv("data/wtm-advertisers-gr-2023-06-11T21_31_07.105Z.csv") %>% #names
-  select(advertiser_id = advertisers_platforms.advertiser_platform_ref,
-         advertiser_name = name, party = entities.short_name)  %>%
-  mutate(advertiser_id = as.character(advertiser_id))  %>% 
-  mutate(party = case_when(
-    str_detect(party, "ΠΑΣΟΚ")  ~ "PASOK",
-    str_detect(party, "ΝΔ")  ~ "ND",
-    str_detect(party, "Συνασπισμός Ριζοσπαστικής Αριστεράς")  ~ "SYRIZA",
-    str_detect(party, "ΕΛ")  ~ "EL",
-    str_detect(party, "25")  ~ "MeRA25",
-    T ~ party  ))
+
+wtm_data <- readRDS("data/all_dat.rds") %>% #names
+  select(advertiser_id = page_id,
+         advertiser_name = page_name)  %>%
+  mutate(advertiser_id = as.character(advertiser_id))  
   # mutate(party = case_when(
   #   str_detect(advertiser_id, "638633769597292") ~ "ASh",
   #   T ~ party 
@@ -123,7 +119,7 @@ page_one_response <- GET(my_link,
                                       search_terms="''",
                                       ad_delivery_date_min = min_date,
                                       fields=search_fields,
-                                      ad_reached_countries="GR"))
+                                      ad_reached_countries="NL"))
 page_one_content<- content(page_one_response)
 
 x <- tibble(data=page_one_content$data)

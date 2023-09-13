@@ -114,8 +114,8 @@ here::here("")
 
 # source("../party_utils.R")
 color_dat <- tibble(
-  colors = c("#00b13d", "#80c31c", "#0a2cca", "#008067", "#bf0000", "#ff0000", "#6f2421", "#02a6e9", "#92107d", "#04d3d4", "#242b57", "#66cdaa", "#242b57", "#006b28", "#012758", "#ea5b0b", "#582c83", "#698c0c"),
-  party = c("D66", "GroenLinks", "VVD", "CDA", "SP", "PvdA", "FvD", "ChristenUnie", "50PLUS", "Alliantie", "BVNL", "DENK", "Ja21", "PvdD", "PVV", "SGP", "Volt Nederland", "BBB"))
+  colors = c("#00b13d", "#80c31c", "#0a2cca", "#008067", "#bf0000", "#ff0000", "#6f2421", "#02a6e9", "#92107d", "#04d3d4", "#242b57", "#66cdaa", "#242b57", "#006b28", "#012758", "#ea5b0b", "#582c83", "#698c0c", "#fdfd00", "#8da6d6"),
+  party = c("D66", "GroenLinks", "VVD", "CDA", "SP", "PvdA", "FvD", "ChristenUnie", "50PLUS", "Alliantie", "BVNL", "DENK", "Ja21", "PvdD", "PVV", "SGP", "Volt Nederland", "BBB", "BIJ1", "NSC"))
 
 
 
@@ -146,14 +146,16 @@ election_dat30 <- readRDS("../data/election_dat30.rds") %>%
     # left_join(all_dat) %>% 
   rename(internal_id = page_id) %>% 
   filter(party != "And") %>% 
-  filter(is.na(no_data)) 
+  filter(is.na(no_data)) %>% 
+  filter(internal_id != "208371683037269")
 
 
 election_dat7 <- readRDS("../data/election_dat7.rds") %>% 
       # left_join(all_dat) %>% 
   rename(internal_id = page_id) %>% 
   filter(party != "And") %>% 
-  filter(is.na(no_data))
+  filter(is.na(no_data)) %>% 
+  filter(internal_id != "208371683037269")
 
 
 fin <- (as.Date(election_dat30$ds[1])-lubridate::days(1))
@@ -179,6 +181,7 @@ the_currency <- election_dat30 %>%
   #currency_symbol <- "CURRENCY"
 #}
 
+  # election_dat7 %>% count(page_name, party)
 ```
 
 
@@ -351,6 +354,9 @@ add_ribbons_code <- the_table7 %>%
 
 eval(parse(text = paste0("gt(the_table7, rowname_col = 'party_col') %>% fmt_markdown(columns = everything()) %>% cols_align(align = \"center\") %>% gtExtras::gt_theme_538() %>% ", add_ribbons_code)))
 
+# debugonce(get_table_dat)
+
+# election_dat7 %>% View
 ```
 
 ::: 

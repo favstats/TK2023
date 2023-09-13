@@ -13,7 +13,7 @@ library(tidyverse)
 library(lubridate)
 
 # tf <- Sys.getenv("TIMEFRAME")c
-# tf <- "30"
+tf <- "7"
 # print(tf)
 
 jb <- get_targeting("7860876103", timeframe = glue::glue("LAST_90_DAYS"))
@@ -52,8 +52,8 @@ more_data <- dir("data/reports", full.names = T) %>%
     str_detect(page_name, "\\bCDA\\b") ~ "CDA",
     str_detect(page_name, "PvdA|Jonge Socialisten") ~ "PvdA",
     str_detect(page_name, "D66|Jonge Democraten") ~ "D66",
-    str_detect(page_name, "GroenLinks|GL") ~ "GroenLinks",
-    str_detect(page_name, "ChristenUnie|CU") ~ "ChristenUnie",
+    str_detect(page_name, "GroenLinks") ~ "GroenLinks",
+    str_detect(page_name, "ChristenUnie") ~ "ChristenUnie",
     str_detect(page_name, "\\bSP\\b") ~ "SP",
     str_detect(page_name, "FvD|FVD|Forum voor Democratie") ~ "FvD",
     str_detect(page_name, "50Plus|50PLUS") ~ "50PLUS",
@@ -61,11 +61,11 @@ more_data <- dir("data/reports", full.names = T) %>%
     str_detect(page_name, "PvdD|Partij voor de Dieren") ~ "PvdD",
     str_detect(page_name, "PVV") ~ "PVV",
     str_detect(page_name, "DENK") ~ "DENK",
-    str_detect(page_name, "Volt|VOLT") ~ "Volt Nederland",
-    str_detect(page_name, "BIJ1|BiJ") ~ "BIJ1",
+    str_detect(page_name, "\\bVolt\\b|\\bVOLT\\b") ~ "Volt Nederland",
+    str_detect(page_name, "BIJ1") ~ "BIJ1",
     str_detect(page_name, "BVNL") ~ "BVNL",
     str_detect(page_name, "Ja21") ~ "JA21",
-    str_detect(page_name, "Alliantie") ~ "Alliantie",
+    # str_detect(page_name, "Alliantie") ~ "Alliantie",
     str_detect(page_name, "BBB") ~ "BBB",
     T ~ NA_character_
   )) %>%
@@ -74,8 +74,8 @@ more_data <- dir("data/reports", full.names = T) %>%
     str_detect(disclaimer, "\\bCDA\\b") ~ "CDA",
     str_detect(disclaimer, "PvdA|Jonge Socialisten") ~ "PvdA",
     str_detect(disclaimer, "D66|Jonge Democraten") ~ "D66",
-    str_detect(disclaimer, "GroenLinks|GL") ~ "GroenLinks",
-    str_detect(disclaimer, "ChristenUnie|CU") ~ "ChristenUnie",
+    str_detect(disclaimer, "GroenLinks") ~ "GroenLinks",
+    str_detect(disclaimer, "ChristenUnie") ~ "ChristenUnie",
     str_detect(disclaimer, "\\bSP\\b") ~ "SP",
     str_detect(disclaimer, "FvD|FVD|Forum voor Democratie") ~ "FvD",
     str_detect(disclaimer, "50Plus|50PLUS") ~ "50PLUS",
@@ -83,10 +83,11 @@ more_data <- dir("data/reports", full.names = T) %>%
     str_detect(disclaimer, "PvdD|Partij voor de Dieren") ~ "PvdD",
     str_detect(disclaimer, "PVV") ~ "PVV",
     str_detect(disclaimer, "DENK") ~ "DENK",
-    str_detect(disclaimer, "Volt|VOLT") ~ "Volt Nederland",
-    str_detect(disclaimer, "BIJ1|BiJ") ~ "BIJ1",
+    str_detect(disclaimer, "\\bVolt\\b|\\bVOLT\\b") ~ "Volt Nederland",
+    str_detect(disclaimer, "BIJ1") ~ "BIJ1",
     str_detect(disclaimer, "BVNL") ~ "BVNL",
     str_detect(disclaimer, "Ja21") ~ "JA21",
+    # str_detect(disclaimer, "Alliantie") ~ "Alliantie",
     str_detect(disclaimer, "BBB") ~ "BBB",
     T ~ NA_character_
   )) %>%
@@ -139,8 +140,8 @@ rep <- read_csv("data/FacebookAdLibraryReport_2023-07-15_NL_last_90_days_adverti
     str_detect(page_name, "\\bCDA\\b") ~ "CDA",
     str_detect(page_name, "PvdA|Jonge Socialisten") ~ "PvdA",
     str_detect(page_name, "D66|Jonge Democraten") ~ "D66",
-    str_detect(page_name, "GroenLinks|GL") ~ "GroenLinks",
-    str_detect(page_name, "ChristenUnie|CU") ~ "ChristenUnie",
+    str_detect(page_name, "GroenLinks") ~ "GroenLinks",
+    str_detect(page_name, "ChristenUnie") ~ "ChristenUnie",
     str_detect(page_name, "\\bSP\\b") ~ "SP",
     str_detect(page_name, "FvD|FVD|Forum voor Democratie") ~ "FvD",
     str_detect(page_name, "50Plus|50PLUS") ~ "50PLUS",
@@ -149,10 +150,10 @@ rep <- read_csv("data/FacebookAdLibraryReport_2023-07-15_NL_last_90_days_adverti
     str_detect(page_name, "PVV") ~ "PVV",
     str_detect(page_name, "DENK") ~ "DENK",
     str_detect(page_name, "Volt|VOLT") ~ "Volt Nederland",
-    str_detect(page_name, "BIJ1|BiJ") ~ "BIJ1",
+    str_detect(page_name, "BIJ1") ~ "BIJ1",
     str_detect(page_name, "BVNL") ~ "BVNL",
-    str_detect(page_name, "Ja21") ~ "Ja21",
-    str_detect(page_name, "Alliantie") ~ "Alliantie",
+    str_detect(page_name, "Ja21") ~ "JA21",
+    # str_detect(page_name, "Alliantie") ~ "Alliantie",
     str_detect(page_name, "BBB") ~ "BBB",
     T ~ NA_character_
   )) %>%
@@ -161,8 +162,8 @@ rep <- read_csv("data/FacebookAdLibraryReport_2023-07-15_NL_last_90_days_adverti
     str_detect(disclaimer, "\\bCDA\\b") ~ "CDA",
     str_detect(disclaimer, "PvdA|Jonge Socialisten") ~ "PvdA",
     str_detect(disclaimer, "D66|Jonge Democraten") ~ "D66",
-    str_detect(disclaimer, "GroenLinks|GL") ~ "GroenLinks",
-    str_detect(disclaimer, "ChristenUnie|CU") ~ "ChristenUnie",
+    str_detect(disclaimer, "GroenLinks") ~ "GroenLinks",
+    str_detect(disclaimer, "ChristenUnie") ~ "ChristenUnie",
     str_detect(disclaimer, "\\bSP\\b") ~ "SP",
     str_detect(disclaimer, "FvD|FVD|Forum voor Democratie") ~ "FvD",
     str_detect(disclaimer, "50Plus|50PLUS") ~ "50PLUS",
@@ -171,9 +172,10 @@ rep <- read_csv("data/FacebookAdLibraryReport_2023-07-15_NL_last_90_days_adverti
     str_detect(disclaimer, "PVV") ~ "PVV",
     str_detect(disclaimer, "DENK") ~ "DENK",
     str_detect(disclaimer, "Volt|VOLT") ~ "Volt Nederland",
-    str_detect(disclaimer, "BIJ1|BiJ") ~ "BIJ1",
+    str_detect(disclaimer, "BIJ1") ~ "BIJ1",
     str_detect(disclaimer, "BVNL") ~ "BVNL",
-    str_detect(disclaimer, "Ja21") ~ "Ja21",
+    str_detect(disclaimer, "Ja21") ~ "JA21",
+    # str_detect(disclaimer, "Alliantie") ~ "Alliantie",
     str_detect(disclaimer, "BBB") ~ "BBB",
     T ~ NA_character_
   )) %>%
@@ -217,11 +219,16 @@ all_dat <- #read_csv("nl_advertisers.csv") %>%
     str_detect(party, "Ja21|JA21") ~ "Ja21",
     str_detect(party, "Alliantie") ~ "Alliantie",
     str_detect(party, "BBB") ~ "BBB",
+    party == "V" ~ "Volt",
     T ~ party
   )) %>% 
-  filter(page_name != "Wybren van Haga")
+  filter(page_name != "Wybren van Haga") %>% 
+  bind_rows(tibble(page_id = c("103936679460429", "115141108346129", "1816979431914302"),
+            page_name = c("Nieuw Sociaal Contract", "Nieuw Sociaal Contract", "Pieter Omtzigt"),
+            party = c("NSC", "NSC", "NSC"))) %>% 
+  distinct(page_id, .keep_all = T)
 
-# saveRDS(all_dat, "data/all_dat.rds")
+saveRDS(all_dat, "data/all_dat.rds")
 
 scraper <- function(.x, time = tf) {
   
@@ -269,7 +276,7 @@ if(new_ds == latest_ds){
     # slice(1:150) %>% 
     filter(!(page_id %in% latest_elex$page_id)) %>% 
     split(1:nrow(.)) %>%
-    map_dfr(scraper) 
+    map_dfr_progress(scraper) 
   
   if(nrow(enddat)==0){
     election_dat <- latest_elex
@@ -295,9 +302,9 @@ if(new_ds == latest_ds){
   ### save seperately
   election_dat <- all_dat %>% 
     arrange(page_id) %>%
-    # slice(1:50) %>% 
+    # slice(1:50) %>%
     split(1:nrow(.)) %>%
-    map_dfr(scraper)  %>%
+    map_dfr_progress(scraper)  %>%
     mutate_at(vars(contains("total_spend_formatted")), ~parse_number(as.character(.x))) %>% 
     rename(page_id = internal_id)  %>%
     left_join(all_dat) 
@@ -362,6 +369,7 @@ if("ds" %in% names(election_dat) ){
       saveRDS(combined_dat, file= paste0("data/combined_dat", tf,  ".rds"))
       
       aggr <- combined_dat  %>%
+        mutate(total_spend_formatted = ifelse(!is.character(total_spend_formatted), total_spend_formatted, as.character(total_spend_formatted))) %>% 
         mutate(total_spend = readr::parse_number(total_spend_formatted)) %>%
         mutate(total_spend = ifelse(total_spend == 50, 50, total_spend)) %>%
         mutate(total_spend = total_spend * total_spend_pct) %>%
@@ -394,4 +402,4 @@ if("ds" %in% names(election_dat) ){
 
 }
 
-
+# source("start.R")
