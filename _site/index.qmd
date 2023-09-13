@@ -14,8 +14,6 @@ format:
 
 
 ```{r setup, include=FALSE}
-# sets$election_title <- "2023 Dutch parliamentary election"
-# the_country$election_title <- "Netherlands"
 
 sets <- jsonlite::fromJSON("../settings.json")
 
@@ -43,9 +41,6 @@ options(scipen = 999)
 
 ```
 
----
-title: "`r sets$election_title`"
----
 
 
 ```{r echo=FALSE, results='asis'}
@@ -151,13 +146,15 @@ all_dat <- readRDS("../data/all_dat.rds")
 election_dat30 <- readRDS("../data/election_dat30.rds") %>%
     # left_join(all_dat) %>% 
   rename(internal_id = page_id)  %>% 
-  filter(is.na(no_data))
+  filter(is.na(no_data)) %>% 
+  filter(party != "And")
 
 
 election_dat7 <- readRDS("../data/election_dat7.rds") %>% 
       # left_join(all_dat) %>% 
   rename(internal_id = page_id) %>% 
-  filter(is.na(no_data))
+  filter(is.na(no_data)) %>% 
+  filter(party != "And")
 
 
 fin <- (as.Date(election_dat30$ds[1])-lubridate::days(1))
@@ -255,11 +252,22 @@ add_ribbons2 <- function(x, adv, col) {
 
 This section shows *total* and *daily spending* of political parties in the run-up to the `r sets$election_title` for the latest available data.
 
-## Total Spend
+# Topline Statistics
+
+
+
+
+
+
 
 
 ::: {.panel-tabset}
 
+
+## <img src="img/meta.svg" height="24px"> Meta
+
+
+::: {.panel-tabset}
 
 ### `r last30days_string` (Last 30 days)
 
@@ -348,12 +356,12 @@ In total, political parties spend `r paste0(currency_symbol,scales::comma_format
 
 ```{r}
 
-the_table7 <- get_table_dat(election_dat7, party) %>% 
-  arrange(desc(parse_number(`Total Spend`))) 
+the_table7 <- get_table_dat(election_dat7, party) %>%
+  arrange(desc(parse_number(`Total Spend`)))
 
 
 add_ribbons_code <- the_table7 %>%
-  left_join(color_dat %>% mutate(party_col = party)) %>% 
+  left_join(color_dat %>% mutate(party_col = party)) %>%
   mutate(ribbons_code = sprintf("add_ribbons(\"%s\", \"%s\")", party_col, colors)) %>%
   pull(ribbons_code) %>%
   # paste(collapse = "\n") %>%
@@ -361,9 +369,6 @@ add_ribbons_code <- the_table7 %>%
 
 eval(parse(text = paste0("gt(the_table7, rowname_col = 'party_col') %>% fmt_markdown(columns = everything()) %>% cols_align(align = \"center\") %>% gtExtras::gt_theme_538() %>% ", add_ribbons_code)))
 
-# debugonce(get_table_dat)
-
-# election_dat7 %>% View
 ```
 
 ::: 
@@ -371,7 +376,210 @@ eval(parse(text = paste0("gt(the_table7, rowname_col = 'party_col') %>% fmt_mark
 
 
 
-## Spending
+
+
+## ![](img/g.svg) Google
+
+
+
+
+```{r, fig.width=12, fig.height=8, dpi=300}
+ggl_daily <- readRDS("../data/ggl_daily_spending.rds")
+ggl_spend <- readRDS("../data/ggl_spend.rds")
+
+
+
+# plotly::ggplotly(ht)
+ 
+ 
+  # ggl_daily %>%
+  #   rename(Advertiser_ID = advertiser_id) %>%
+  #   left_join(ggl_spend %>% distinct(Advertiser_ID, party1)) %>% 
+  #   janitor::clean_names()  %>% 
+  #   rename(party = party1) %>% 
+  #   mutate(date_produced = lubridate::ymd(date)) %>%
+  #   mutate(spend = readr::parse_number(str_remove(eur_amount, "\\."))) %>%  
+  #   group_by(date_produced, party) %>% 
+  #   summarize(spend  = sum(spend)) %>% 
+  #   ungroup() %>% 
+  #  mutate(party = ifelse(party == "JA21", "Ja21", party)) %>% 
+  #   group_by(party) %>% 
+  #   summarize(spend = sum(spend))
+```
+
+
+```{r}
+ggl_all <- readRDS("../data/ggl_all.rds")
+ggl_all7 <- readRDS("../data/ggl_all7.rds")
+
+sum30_ggl <- ggl_all %>% 
+    mutate(total_spend_formatted = parse_number(`Total Spend`)) %>% 
+    # distinct(internal_id, .keep_all = T) %>% 
+    summarize(total_spend_formatted = sum(total_spend_formatted),
+              total_num_ads = sum(as.numeric(`Number of Ads`)))
+
+sum7_ggl <- ggl_all7 %>% 
+    mutate(total_spend_formatted = parse_number(`Total Spend`)) %>% 
+    # distinct(internal_id, .keep_all = T) %>% 
+    summarize(total_spend_formatted = sum(total_spend_formatted),
+              total_num_ads = sum(as.numeric(`Number of Ads`)))
+
+```
+
+
+::: {.panel-tabset}
+
+
+
+### `r last30days_string` (Last 30 days)
+
+
+In total, political parties spend €`r scales::comma_format()(sum30_ggl$total_spend_formatted)` and ran `r sum30_ggl$total_num_ads` ad copies on Google in this timeframe.
+
+```{r}
+
+ 
+
+
+add_ribbons_code <- ggl_all %>% 
+  left_join(color_dat %>% mutate(party_col = party)) %>% 
+  mutate(ribbons_code = sprintf("add_ribbons2(\"%s\", \"%s\")", party_col, colors)) %>%
+  pull(ribbons_code) %>%
+  # paste(collapse = "\n") %>%
+  paste(collapse = "%>%")  # Add pipe after each ribbon
+
+eval(parse(text = paste0("gt(ggl_all, rowname_col = 'party_col') %>% fmt_markdown(columns = everything()) %>% cols_align(align = \"center\") %>% gtExtras::gt_theme_538() %>% ", add_ribbons_code)))
+
+# debugonce(get_table_dat)
+
+```
+
+### `r last7days_string` (Last 7 days)
+
+In total, political parties spend €`r scales::comma_format()(sum7_ggl$total_spend_formatted)` and ran `r sum7_ggl$total_num_ads` ad copies on Google in this timeframe.
+
+
+```{r}
+
+
+add_ribbons_code <- ggl_all7 %>% 
+  left_join(color_dat %>% mutate(party_col = party)) %>% 
+  mutate(ribbons_code = sprintf("add_ribbons2(\"%s\", \"%s\")", party_col, colors)) %>%
+  pull(ribbons_code) %>%
+  # paste(collapse = "\n") %>%
+  paste(collapse = "%>%")  # Add pipe after each ribbon
+
+eval(parse(text = paste0("gt(ggl_all7, rowname_col = 'party_col') %>% fmt_markdown(columns = everything()) %>% cols_align(align = \"center\") %>% gtExtras::gt_theme_538() %>% ", add_ribbons_code)))
+
+```
+
+
+::: 
+
+## `r fontawesome::fa("bolt", fill = "lightblue")` Combined
+
+
+
+```{r, fig.width=12, fig.height=8, dpi=300}
+ggl_daily <- readRDS("../data/ggl_daily_spending.rds")
+ggl_spend <- readRDS("../data/ggl_spend.rds")
+
+
+
+# plotly::ggplotly(ht)
+ 
+ 
+  # ggl_daily %>%
+  #   rename(Advertiser_ID = advertiser_id) %>%
+  #   left_join(ggl_spend %>% distinct(Advertiser_ID, party1)) %>% 
+  #   janitor::clean_names()  %>% 
+  #   rename(party = party1) %>% 
+  #   mutate(date_produced = lubridate::ymd(date)) %>%
+  #   mutate(spend = readr::parse_number(str_remove(eur_amount, "\\."))) %>%  
+  #   group_by(date_produced, party) %>% 
+  #   summarize(spend  = sum(spend)) %>% 
+  #   ungroup() %>% 
+  #  mutate(party = ifelse(party == "JA21", "Ja21", party)) %>% 
+  #   group_by(party) %>% 
+  #   summarize(spend = sum(spend))
+```
+
+
+
+```{r}
+ggl_all <- readRDS("../data/ggl_all.rds")
+ggl_all7 <- readRDS("../data/ggl_all7.rds")
+
+sum30_ggl <- ggl_all %>% 
+    mutate(total_spend_formatted = parse_number(`Total Spend`)) %>% 
+    # distinct(internal_id, .keep_all = T) %>% 
+    summarize(total_spend_formatted = sum(total_spend_formatted),
+              total_num_ads = sum(as.numeric(`Number of Ads`)))
+
+sum7_ggl <- ggl_all7 %>% 
+    mutate(total_spend_formatted = parse_number(`Total Spend`)) %>% 
+    # distinct(internal_id, .keep_all = T) %>% 
+    summarize(total_spend_formatted = sum(total_spend_formatted),
+              total_num_ads = sum(as.numeric(`Number of Ads`)))
+
+```
+
+
+::: {.panel-tabset}
+
+
+
+### `r last30days_string` (Last 30 days)
+
+
+In total, political parties spend €`r scales::comma_format()(sum30_ggl$total_spend_formatted)` and ran `r sum30_ggl$total_num_ads` ad copies on Google in this timeframe.
+
+```{r}
+
+ 
+
+
+add_ribbons_code <- ggl_all %>% 
+  left_join(color_dat %>% mutate(party_col = party)) %>% 
+  mutate(ribbons_code = sprintf("add_ribbons2(\"%s\", \"%s\")", party_col, colors)) %>%
+  pull(ribbons_code) %>%
+  # paste(collapse = "\n") %>%
+  paste(collapse = "%>%")  # Add pipe after each ribbon
+
+eval(parse(text = paste0("gt(ggl_all, rowname_col = 'party_col') %>% fmt_markdown(columns = everything()) %>% cols_align(align = \"center\") %>% gtExtras::gt_theme_538() %>% ", add_ribbons_code)))
+
+# debugonce(get_table_dat)
+
+```
+
+### `r last7days_string` (Last 7 days)
+
+In total, political parties spend €`r scales::comma_format()(sum7_ggl$total_spend_formatted)` and ran `r sum7_ggl$total_num_ads` ad copies on Google in this timeframe.
+
+
+```{r}
+
+
+add_ribbons_code <- ggl_all7 %>% 
+  left_join(color_dat %>% mutate(party_col = party)) %>% 
+  mutate(ribbons_code = sprintf("add_ribbons2(\"%s\", \"%s\")", party_col, colors)) %>%
+  pull(ribbons_code) %>%
+  # paste(collapse = "\n") %>%
+  paste(collapse = "%>%")  # Add pipe after each ribbon
+
+eval(parse(text = paste0("gt(ggl_all7, rowname_col = 'party_col') %>% fmt_markdown(columns = everything()) %>% cols_align(align = \"center\") %>% gtExtras::gt_theme_538() %>% ", add_ribbons_code)))
+
+```
+
+
+
+::: 
+
+::: 
+
+
+
+# Spending
 
 
 ```{r, out.width="100%"}
@@ -515,4 +723,68 @@ hc_data %>%
 ```
 
 ::: 
+
+
+
+
+
+### Daily Spend
+
+```{r, out.width="100%"}
+
+
+
+hc_data <-  ggl_daily %>%
+    rename(Advertiser_ID = advertiser_id) %>%
+    left_join(ggl_spend %>% distinct(Advertiser_ID, party1)) %>% 
+    janitor::clean_names()  %>% 
+    rename(party = party1) %>% 
+    mutate(date_produced = lubridate::ymd(date)) %>%
+    mutate(spend = readr::parse_number(str_remove(eur_amount, "\\."))) %>%  
+    group_by(date_produced, party) %>% 
+    summarize(spend  = sum(spend)) %>% 
+    ungroup() %>% 
+   mutate(party = ifelse(party == "JA21", "Ja21", party))  %>%
+  group_by(party) %>%
+  mutate(total_spend = max(spend)) %>%
+  ungroup()  %>%
+  left_join(color_dat, by = "party") %>%
+  mutate(party = as.factor(party)) %>% 
+  mutate(party = fct_reorder(party, total_spend))
+
+# saveRDS(hc_data, "data/hc_data.rds")
+
+color_order <- hc_data %>% 
+  distinct(party, .keep_all = T) %>% 
+  arrange(party) %>% 
+  pull(colors)
+
+
+hc_data %>%
+  mutate(`Daily Spend` = spend) %>% 
+  mutate(Date = date_produced) %>% 
+  hchart("area", hcaes(x = Date, y = `Daily Spend`, group = party, fill = colors)) %>%
+  hc_plotOptions(    area = list(
+      stacking = "normal",
+      lineWidth = 1,
+      marker = list(enabled = FALSE)
+    )) %>%
+  # hc_legend(share = TRUE)%>%
+  hc_colors(color_order)%>%
+  # hc_chart(events = list(load = JS("function() {
+  # var chart = this;
+  # chart.series[0].setVisible(false)
+  # chart.series[1].setVisible(false)
+  # chart.series[2].setVisible(false)
+  # chart.series[3].setVisible(false)
+  # chart.series[4].setVisible(false)
+  # chart.series[5].setVisible(false)
+  # }"))) %>%
+  hc_tooltip(
+    shared = TRUE,
+    positioner = JS("function (labelWidth, labelHeight, point) {
+        return { x: 200, y: this.chart.plotTop };
+    }")
+  ) 
+```
 
