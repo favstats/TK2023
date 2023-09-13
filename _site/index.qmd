@@ -146,6 +146,7 @@ election_dat30 <- readRDS("../data/election_dat30.rds") %>%
     # left_join(all_dat) %>% 
   rename(internal_id = page_id) %>% 
   filter(party != "And") %>% 
+  mutate(party = ifelse(party == "V", "Volt Nederland", party)) %>%  
   filter(is.na(no_data)) %>% 
   filter(internal_id != "208371683037269")
 
@@ -154,6 +155,7 @@ election_dat7 <- readRDS("../data/election_dat7.rds") %>%
       # left_join(all_dat) %>% 
   rename(internal_id = page_id) %>% 
   filter(party != "And") %>% 
+  mutate(party = ifelse(party == "V", "Volt Nederland", party)) %>%  
   filter(is.na(no_data)) %>% 
   filter(internal_id != "208371683037269")
 
@@ -368,16 +370,16 @@ eval(parse(text = paste0("gt(the_table7, rowname_col = 'party_col') %>% fmt_mark
 
 
 ```{r, out.width="100%"}
-more_data <- readr::read_rds("https://github.com/favstats/meta_reports2/raw/main/lifelong/NL.rds")  %>%
+more_data <- readr::read_rds("../lifelong/NL.rds")  %>%
     mutate(date_produced = lubridate::ymd(date)) %>%
   drop_na(date_produced) %>% 
     janitor::clean_names()%>% #rename(advertiser_id = page_id) %>%
-    mutate(spend = readr::parse_number(amount_spent_eur)) %>%
+    mutate(spend = readr::parse_number(as.character(amount_spent_eur))) %>%
     # mutate(spend = ifelse(spend == 100, 50, spend)) %>%
     # distinct(page_id, .keep_all = T) %>%
     filter(str_detect(page_name, "Global Space Conference on Climate Change|de Alliantie|PvdA - GroenLinks", negate = T)) %>%
     mutate(page_id = as.character(page_id)) %>% 
-  filter(cntry == "NL") %>% 
+  # filter(cntry == "NL") %>% 
   filter(date_produced >= lubridate::as_date("2023-08-01"))
 
 
@@ -473,10 +475,10 @@ hc_data %>%
   mutate(Date = date_produced) %>%
   group_by(party) %>%  # Assuming you have a 'party' column
   arrange(Date) %>%  # Ensure the data is in the correct order
-  mutate(`Daily Spend (cumulative)` = spend - lag(spend, default = first(spend))) %>%
+  mutate(`Daily Spend` = spend - lag(spend, default = first(spend))) %>%
   ungroup()  %>%
   # mutate(spend)
-  hchart("area", hcaes(x = Date, y = `Daily Spend (cumulative)`, group = party, fill = colors)) %>%
+  hchart("area", hcaes(x = Date, y = `Daily Spend`, group = party, fill = colors)) %>%
   hc_plotOptions(    area = list(
       stacking = "normal",
       lineWidth = 1,

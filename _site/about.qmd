@@ -65,7 +65,7 @@ card <- div(
         class = "card-body",
         p(
           class = "card-text", 
-          "Fabio Votta is a Ph.D. candidate in Political Communication at the University of Amsterdam who studies (online) political microtargeting and its usage around the world."
+          "Fabio Votta is a Postdoc at the University of Amsterdam who studies (online) political microtargeting and its usage around the world."
         )
       )
     )
