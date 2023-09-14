@@ -17,6 +17,8 @@ unzip("data/ggl/ggl.zip", exdir = "data/ggl")
 # google_political_ads_advertiser_stats %>% 
 #   filter(str_detect(Regions, "NL")) %>% View()
 
+# wdman::gecko()
+
 Sys.sleep(10)
 
 gglstats <- vroom::vroom("data/ggl/google-political-ads-creative-stats.csv")
@@ -55,12 +57,12 @@ saveRDS(ggl_spend, "data/ggl_spend.rds")
 
 # gglstats %>% 
 #   filter(str_detect(Regions, "NL")) %>% View()
-
+# binman::list_versions("firefox")
 # port <- netstat::free_port()
 podf <- sample(4000L:5000L,1)
 rD <- rsDriver(browser = "firefox"
                     ,chromever=NULL
-                ,check = F
+                ,check = T
                 ,port = podf
                 ,verbose = T
 )
