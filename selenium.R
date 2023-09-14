@@ -335,7 +335,9 @@ unlink("data/ggl", recursive = T, force = T)
 
 
 
-# ggl_sel_sp <- readRDS("data/ggl_sel_sp.rds")
+ggl_sel_sp <- readRDS("data/ggl_sel_sp.rds")
+ggl_sel_sp7<- readRDS("data/ggl_sel_sp7.rds")
+
 try({
   
   
