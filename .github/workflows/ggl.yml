@@ -1,4 +1,4 @@
-name: "30 Timeframe"
+name: "Google Reports"
 on:
   schedule:
     - cron: '0 5,6,18,19 * * *'
@@ -8,7 +8,7 @@ on:
 
 jobs:
   update-data:
-    name: Update Dashboard
+    name: Google Reports
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -48,4 +48,4 @@ jobs:
       - name: "Commit"
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Script Routine Thirty
+          commit_message: Script Routine Google Reports
