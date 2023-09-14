@@ -8,6 +8,7 @@ options(python_init = TRUE)
 
 # install.packages("pacman")
 pacman::p_load(
+  tibble,
   reticulate,
   vroom,
   progress,
