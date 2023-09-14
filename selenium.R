@@ -90,6 +90,7 @@ saveRDS(ggl_spend, "data/ggl_spend.rds")
 
 # ggl_spend <- readRDS("data/ggl_spend.rds")
 
+
 print("Launch the browser")
 
 browser_df <- browser_launch(
@@ -118,7 +119,7 @@ retrieve_spend_daily <- function(id, the_date, cntry = "NL") {
   page_df %>%
     goto(url)
   
-  Sys.sleep(1)
+  Sys.sleep(3)
   
   
   
@@ -128,7 +129,7 @@ retrieve_spend_daily <- function(id, the_date, cntry = "NL") {
   
   page_df <- page_df %>% get_by_label("Insights")
   
-  click(page_df)
+  page_df %>% press("Enter") %>% click()
   
   root <- root3
   
@@ -166,22 +167,22 @@ retrieve_spend_daily <- function(id, the_date, cntry = "NL") {
   
 }
 
-
-retrieve_spend_daily <- possibly(retrieve_spend_daily, otherwise = NULL, quiet = F)
+# debugonce(retrieve_spend_daily)
+# retrieve_spend_daily <- possibly(retrieve_spend_daily, otherwise = NULL, quiet = F)
 
 # daily_spending <- readRDS("data/daily_spending.rds")
 # Apr 17, 2023 - May 16, 2023
 # 13 February 2023
-timelines <- seq.Date(as.Date("2023-08-24"), lubridate::today()-lubridate::days(1), by = "day")
+timelines <- seq.Date(as.Date("2023-08-01"), lubridate::today()-lubridate::days(1), by = "day")
 
-
-daily_spending_old <- readRDS("data/ggl_daily_spending.rds")
+# 
+# daily_spending_old <- readRDS("data/ggl_daily_spending.rds")
 
 
 daily_spending <- expand_grid(unique(ggl_spend$Advertiser_ID), timelines) %>%
   set_names(c("advertiser_id", "timelines")) %>%
-  anti_join(daily_spending_old %>% select(advertiser_id, timelines = date)) %>% 
-  # slice(4:8) %>%
+  anti_join(daily_spending_old %>% select(advertiser_id, timelines = date)) %>%
+  # slice(1) %>%
   split(1:nrow(.)) %>%
   map_dfr_progress(~{retrieve_spend_daily(.x$advertiser_id, .x$timelines)})
 
@@ -201,6 +202,8 @@ retrieve_spend_custom <- function(id, from, to, cntry = "NL") {
   
   # id <- "AR18091944865565769729"
   url <- glue::glue("https://adstransparency.google.com/advertiser/{id}?political&region={cntry}&start-date={from}&end-date={to}")
+  remDr$navigate(url)
+  
   
   page_df %>%
     goto(url)
@@ -215,7 +218,7 @@ retrieve_spend_custom <- function(id, from, to, cntry = "NL") {
   
   page_df <- page_df %>% get_by_label("Insights")
   
-  click(page_df)
+  page_df %>% press("Enter") %>% click()
   
   root <- root3
   
