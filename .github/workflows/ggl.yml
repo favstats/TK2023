@@ -1,29 +1,20 @@
 name: "Google Reports"
 on:
   schedule:
-    - cron: '0 5,6,18,19 * * *'
+    - cron: '0 3,4,15,16 * * *'
   push:
     branches:
       - main
-
+      
 jobs:
-  update-data:
-    name: Google Reports
-    runs-on: ubuntu-latest
+  update-google-reports:
+    name: Update Google Reports
+    runs-on: ubuntu-20.04
     permissions:
       contents: write
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-    services:
-      selenium:
-        image: selenium/standalone-firefox:latest
-        ports:
-          - 4444:4444
-        volumes:
-          - /dev/shm:/dev/shm
     steps:
-      - uses: browser-actions/setup-firefox@latest 
-      - run: firefox --version
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
         with:
@@ -39,14 +30,38 @@ jobs:
           libharfbuzz-dev \
           libfribidi-dev
       - run: echo "🍏 This job's status is ${{ job.status }}."
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'  # Choose the appropriate Node.js version
+
+      - name: Install dependencies
+        run: npm ci
+      - name: Install playwright browsers
+        run: npx playwright install --with-deps
+      - name: "Check Playwright CLI"
+        run: npx playwright --version
+
       - name: "Install Packages"
         run: |
-          install.packages('tidyverse')
           install.packages('pacman')
+          install.packages('remotes')
+          install.packages('dplyr')
+          install.packages('tibble')
+          install.packages('xml2')
+          install.packages('rvest')
+          install.packages('reticulate')
+          install.packages('purrr')
+          pacman::p_load(reticulate, fs, progress, tidyr, countrycode, dplyr, stringr, lubridate, purrr, glue, rvest, cli, digest)
+          remotes::install_github("benjaminguinaudeau/playwrightr", force = T)
         shell: Rscript {0}
-      - name: "Script - Google"
+      - name: Pull Latest Changes
+        run: git pull origin main
+      - name: "Script - Google Run"
         run: Rscript 'selenium.R'
+
+
       - name: "Commit"
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Script Routine Google Reports
+          commit_message: Retrieve Google Reports
