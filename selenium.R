@@ -101,6 +101,7 @@ browser_df <- browser_launch(
   user_data_dir = "out"
 )
 
+
 print("headlesss")
 # Create a new page
 
