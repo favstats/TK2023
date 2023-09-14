@@ -57,11 +57,11 @@ saveRDS(ggl_spend, "data/ggl_spend.rds")
 #   filter(str_detect(Regions, "NL")) %>% View()
 
 # port <- netstat::free_port()
-podf <- sample(4000L:5000L,1)
+#podf <- sample(4000L:5000L,1)
 rD <- rsDriver(browser = "firefox"
                     ,chromever=NULL
                 ,check = F
-                ,port = podf
+                ,port = 4444L
                 ,verbose = T
 )
 
