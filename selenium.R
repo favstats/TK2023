@@ -55,15 +55,18 @@ ggl_spend <- gglstats   %>%
 
 saveRDS(ggl_spend, "data/ggl_spend.rds")
 
+# print(binman::list_versions("gecko"))
+verr <- binman::list_versions("chromedriver") %>% .[[1]] %>% tail(1)
+
 # gglstats %>% 
 #   filter(str_detect(Regions, "NL")) %>% View()
 # binman::list_versions("firefox")
 # port <- netstat::free_port()
-podf <- sample(4000L:5000L,1)
+# podf <- sample(4000L:5000L,1)
 rD <- rsDriver(browser = "firefox"
                     ,chromever=NULL
                 ,check = T
-                ,port = podf
+                ,port = 4444L
                 ,verbose = T
 )
 
