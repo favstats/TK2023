@@ -16,13 +16,7 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: browser-actions/setup-firefox@latest 
-      - run: firefox --version - 
-      - uses: quarto-dev/quarto-actions/setup@v2
-      - name: Add Quarto to PATH
-        run: |
-          echo "export PATH=$PATH:$HOME/.local/bin" >> $GITHUB_ENV
-      - run: |
-          quarto --version
+      - run: firefox --version
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
         with:
