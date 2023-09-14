@@ -17,6 +17,7 @@ pacman::p_load(
   stringr,
   lubridate,
   purrr,
+  scales,
   glue,
   rvest,
   cli,
@@ -201,7 +202,7 @@ dates <- read_csv("data/dates.csv")
 retrieve_spend_custom <- function(id, from, to, cntry = "NL") {
   
   # id <- "AR18091944865565769729"
-  url <- glue::glue("https://adstransparency.google.com/advertiser/{id}?political&region={cntry}&start-date={from}&end-date={to}")
+  url <- glue::glue("https://adstransparency.google.com/advertiser/{id}?political&region={cntry}&start-date={from}&end-date={to}&hl=en")
   # remDr$navigate(url)
   
   
