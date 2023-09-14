@@ -1,7 +1,7 @@
 
 # https://adstransparency.google.com/advertiser/AR09355418985304162305?political&region=NL&preset-date=Last%207%20days
 # install.packages("pacman")
-pacman::p_load(tidyverse, RSelenium, binman, wdman)
+pacman::p_load(tidyverse, RSelenium, binman, wdman, httr, curl)
 
 wdman::gecko()
 wdman::selenium()
@@ -57,11 +57,11 @@ saveRDS(ggl_spend, "data/ggl_spend.rds")
 #   filter(str_detect(Regions, "NL")) %>% View()
 
 # port <- netstat::free_port()
-#podf <- sample(4000L:5000L,1)
+podf <- sample(4000L:5000L,1)
 rD <- rsDriver(browser = "firefox"
                     ,chromever=NULL
                 ,check = F
-                ,port = 4444L
+                ,port = podf
                 ,verbose = T
 )
 

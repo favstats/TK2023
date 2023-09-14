@@ -1,7 +1,7 @@
 name: "30 Timeframe"
 on:
   schedule:
-    - cron: '0 23,0,11,12 * * *'
+    - cron: '0 5,6,18,19 * * *'
   push:
     branches:
       - main
@@ -15,6 +15,8 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
+      - uses: browser-actions/setup-firefox@latest 
+      - run: firefox --version - 
       - uses: quarto-dev/quarto-actions/setup@v2
       - name: Add Quarto to PATH
         run: |
@@ -38,28 +40,11 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - name: "Install Packages"
         run: |
-          install.packages('httr')
-          install.packages('remotes')
-          remotes::install_github('hadley/emo')
-          install.packages('shiny')
-          install.packages('scales')
-          install.packages('treemap')
-          install.packages('htmltools')
-          install.packages('here')
-          install.packages('jsonlite')
-          install.packages('janitor')
-          install.packages('quarto')
           install.packages('tidyverse')
-          install.packages('highcharter')
-          install.packages('lubridate')
-          install.packages('gt')
-          install.packages('gtExtras')
           install.packages('pacman')
         shell: Rscript {0}
-      - name: "Script - Run"
-        run: Rscript 'get_audiences.R' 30
-      - name: "Script - Update Dashboard"
-        run: Rscript 'start.R'
+      - name: "Script - Google"
+        run: Rscript 'selenium.R'
       - name: "Commit"
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
