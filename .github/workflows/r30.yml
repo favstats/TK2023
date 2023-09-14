@@ -14,6 +14,13 @@ jobs:
       contents: write
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    services:
+      selenium:
+        image: selenium/standalone-firefox:latest
+        ports:
+          - 4444:4444
+        volumes:
+          - /dev/shm:/dev/shm
     steps:
       - uses: quarto-dev/quarto-actions/setup@v2
       - name: Add Quarto to PATH
