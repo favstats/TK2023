@@ -476,3 +476,7 @@ try({
   
   
 })
+
+
+unlink("node_modules", recursive = T, force = T)
+unlink("out", recursive = T, force = T)
