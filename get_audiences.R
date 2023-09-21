@@ -231,14 +231,15 @@ all_dat <- all_dat %>%
     party == "V" ~ "Volt Nederland",
     T ~ party
   )) %>% 
-  filter(page_name != "Wybren van Haga") %>% 
+  # filter(page_name != "Wybren van Haga") %>% 
   bind_rows(tibble(page_id = c("103936679460429", "115141108346129", "1816979431914302"),
             page_name = c("Nieuw Sociaal Contract", "Nieuw Sociaal Contract", "Pieter Omtzigt"),
             party = c("NSC", "NSC", "NSC"))) %>% 
   distinct(page_id, .keep_all = T) %>% 
   filter(party != "And") %>% 
   mutate(party = ifelse(party %in% c("V", "Volt"), "Volt Nederland", party))  %>% 
-  filter(page_id != "208371683037269")
+  filter(page_id != "208371683037269") %>%
+  mutate(party = ifelse(page_id == "969158383214898", "BVNL", party))
 
 saveRDS(all_dat, "data/all_dat.rds")
 
