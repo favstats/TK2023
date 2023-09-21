@@ -1,6 +1,0 @@
-contile.services.mozilla.com	1	19621	1726845343957,1,0
-aus5.mozilla.org	0	19620	1726723402834,1,0
-location.services.mozilla.com	1	19621	1726723372899,1,1
-spocs.getpocket.com	1	19621	1758381344157,1,0
-scone-pa.clients6.google.com^partitionKey=%28https%2Cgoogle.com%29	1	19621	1706073777867,1,1
-www.facebook.com^partitionKey=%28https%2Cfacebook.com%29	0	19621	1710861345090,1,0
