@@ -94,6 +94,8 @@ saveRDS(ggl_spend, "data/ggl_spend.rds")
 
 # ggl_spend <- readRDS("data/ggl_spend.rds")
 
+# readr::read_rds("https://github.com/favstats/TK2023/raw/main/data/ggl_spend.rds")
+
 
 print("Launch the browser")
 

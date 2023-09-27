@@ -416,3 +416,9 @@ if("ds" %in% names(election_dat) ){
 }
 
 # source("start.R")
+
+
+
+unlink("node_modules", recursive = T, force = T)
+unlink("out", recursive = T, force = T)
+

@@ -337,3 +337,4 @@ da7  <- dir("provincies/7", full.names = T) %>%
 
 saveRDS(da30, "data/election_dat30.rds")
 saveRDS(da7, "data/election_dat7.rds")
+
