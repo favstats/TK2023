@@ -1566,8 +1566,9 @@ educ_targeting <- election_dat30 %>%
      # mutate(coalition = fct_relevel(coalition, c("Coalizione di centro-sinistra",
                                   # "Terzo Polo",
                                   # "Coalizione di centro-destra"))) %>% 
+    group_by(party) %>%
+    arrange(desc(perc)) %>%
     mutate(value = fct_reorder(value, perc))
-
 
 
 
@@ -1641,6 +1642,8 @@ educ_targeting <- election_dat7 %>%
      # mutate(coalition = fct_relevel(coalition, c("Coalizione di centro-sinistra",
                                   # "Terzo Polo",
                                   # "Coalizione di centro-destra"))) %>% 
+    group_by(party) %>%
+    arrange(desc(perc)) %>%
     mutate(value = fct_reorder(value, perc))
 
 
