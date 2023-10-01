@@ -441,7 +441,23 @@ Here, we show the *top targeted audiences* for each party for the "detailed" tar
 
 
 
+
+
 ```{r}
+
+byparty30 <- election_dat30 %>% 
+  distinct(internal_id, party, .keep_all = T) %>% 
+  group_by(party) %>% 
+  summarize(total_spenderino = sum(total_spend_formatted)) %>% 
+  ungroup() %>% 
+  select(party, total_spenderino)
+
+byparty7 <- election_dat7 %>% 
+  distinct(internal_id, party, .keep_all = T) %>% 
+  group_by(party) %>% 
+  summarize(total_spenderino = sum(total_spend_formatted)) %>% 
+  ungroup() %>% 
+  select(party, total_spenderino)
 
 interest_targeting30 <-  election_dat30 %>% 
     mutate(total_spend = total_spend_formatted) %>% 
@@ -470,8 +486,9 @@ contested_dat30 <- interest_targeting30 %>%
   filter(total_spend >= 1) %>%
   # add_count(value) %>% 
   # filter(n >= 5) %>% 
+  left_join(byparty30) %>% 
   group_by(party) %>% 
-  mutate(total_spenderino = sum(total_spend)) %>% 
+  # mutate(total_spenderino = sum(total_spend)) %>% 
   mutate(perc = total_spend/total_spenderino) %>%
   mutate(value = str_remove_all(value, "INTERESTS: |DEMOGRAPHICS: |BEHAVIORS: ")) #%>%
   # mutate(value = str_replace_all(value, " \\s*\\([^\\)]+\\)", ""))
@@ -504,14 +521,15 @@ contested_dat7 <- interest_targeting7 %>%
   # filter(total_spend >= 40000) %>% 
   filter(total_spend >= 1) %>%
   # add_count(value) %>% 
-  # filter(n >= 5) %>% 
+  left_join(byparty7) %>% 
   group_by(party) %>% 
-  mutate(total_spenderino = sum(total_spend)) %>% 
+  # mutate(total_spenderino = sum(total_spend)) %>% 
   mutate(perc = total_spend/total_spenderino) %>%
   mutate(value = str_remove_all(value, "INTERESTS: |DEMOGRAPHICS: |BEHAVIORS: ")) #%>%
   # mutate(value = str_replace_all(value, " \\s*\\([^\\)]+\\)", ""))
 
 ```
+
 
 
 
