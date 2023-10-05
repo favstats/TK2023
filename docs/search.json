@@ -116,7 +116,7 @@
     "href": "targeting.html#top-contested-audiences",
     "title": "Targeting",
     "section": "Top Contested Audiences",
-    "text": "Top Contested Audiences\nHere, we show the top most contested audiences, i.e. where all parties have spent considerable amounts of money competing to reach voters with the same interests.\n\nAug 28th - Sep 26th 2023 (Last 30 days)Sep 20th - Sep 26th 2023 (Last 7 days)\n\n\n\n\nNo data (yet).\n\n\n\n\n\n\nNo data (yet)."
+    "text": "Top Contested Audiences\nHere, we show the top most contested audiences, i.e. where all parties have spent considerable amounts of money competing to reach voters with the same interests.\n\nAug 28th - Sep 26th 2023 (Last 30 days)Sep 20th - Sep 26th 2023 (Last 7 days)"
   },
   {
     "objectID": "targeting.html#geographical-targeting",
@@ -208,5 +208,12 @@
     "title": "2023 Dutch parliamentary election",
     "section": " Google",
     "text": "Google\n\nCumulativeDaily"
+  },
+  {
+    "objectID": "targeting.html#top-excluded-detailed-audiences",
+    "href": "targeting.html#top-excluded-detailed-audiences",
+    "title": "Targeting",
+    "section": "Top Excluded (Detailed) Audiences",
+    "text": "Top Excluded (Detailed) Audiences\nHere, we show the top excluded audiences for each party for the “detailed” targeting that Meta offers (ranked by amount of Euro spend). Most (but not all) of these audiences are “interest” audiences, i.e. the parties excluded people interested in “Books” or “Politics”.\n\nAug 28th - Sep 26th 2023 (Last 30 days)Sep 20th - Sep 26th 2023 (Last 7 days)"
   }
 ]
