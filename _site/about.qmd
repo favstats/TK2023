@@ -140,7 +140,7 @@ A list of election dashboards:
 + `r emo::ji("slovakia")` [2023 Slovak parliamentary election](https://favstats.github.io/slovakia2023/) (30 September 2023)
 + `r emo::ji("germany")` [2023 Bavarian state election](https://favstats.github.io/LTW2023/bavaria) (8 October 2023)
 + `r emo::ji("germany")` [2023 Hessian state election](https://favstats.github.io/LTW2023/hessen) (8 October 2023)
-+ 🇳🇿[2023 New Zealand general election](https://favstats.github.io/NZ2023/) (14 October 2023)
++ 🇳🇿 [2023 New Zealand general election](https://favstats.github.io/NZ2023/) (14 October 2023)
 + `r emo::ji("poland")` [2023 Polish parliamentary election](https://favstats.github.io/poland2023/) (15 October 2023)
 + `r emo::ji("us")` [US Presidential Primaries](https://favstats.github.io/USprimaries2024/) (2023-2024)
 

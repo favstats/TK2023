@@ -544,8 +544,10 @@ generate_plots <- function(data, exclusion = F) {
   
   if(exclusion){
     wooord <- "on ads excluding"
+    wooord2 <- "excluding"
   } else {
     wooord <- "on ads including"
+    wooord2 <- "targeting"
   }
   
   gg <- data %>%
@@ -566,7 +568,7 @@ generate_plots <- function(data, exclusion = F) {
              color = the_color) %>%
         hc_plotOptions(bar = list(horizontal = TRUE, stacking = "normal")) %>%
         hc_yAxis(
-          title = list(text = "% Party Budget spent on targeting method"),
+          title = list(text = paste0("% Party Budget spent on ", wooord2, " audience")),
           max = max(.x$perc)#,
           # min = 0
         ) %>%
