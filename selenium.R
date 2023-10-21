@@ -175,7 +175,7 @@ retrieve_spend_daily <- function(id, the_date, cntry = "NL") {
 }
 
 # debugonce(retrieve_spend_daily)
-# retrieve_spend_daily <- possibly(retrieve_spend_daily, otherwise = NULL, quiet = F)
+retrieve_spend_daily <- possibly(retrieve_spend_daily, otherwise = NULL, quiet = F)
 
 # daily_spending <- readRDS("data/daily_spending.rds")
 # Apr 17, 2023 - May 16, 2023
