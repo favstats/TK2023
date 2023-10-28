@@ -27,70 +27,92 @@ pacman::p_load(
 )
 
 
-conda_install(packages = "xvfbwrapper", pip = T)
 
-print("installed xvfbwrapper")
-conda_install(packages = "playwright", pip = T)
-
-print("installed playwright")
 
 
 # conda_install(packages = "fcntl", pip = T)
-pw_init(use_xvfb = T)
-print("pw initted")
-# Launch the browser
-system("playwright install")
+if(Sys.info()[["sysname"]]=="Windows"){
+  # xxxx <- F
+  pw_init(use_xvfb = F)
+  
+  ggl_spend <- readRDS("data/ggl_spend.rds")
+  
+  
+} else{
+  # xxxx <- T
+  
+  
+  conda_install(packages = "xvfbwrapper", pip = T)
+  
+  print("installed xvfbwrapper")
+  conda_install(packages = "playwright", pip = T)
+  
+  print("installed playwright")
+  
+  pw_init(use_xvfb = T)
+  
+  print("pw initted")
+  # Launch the browser
+  system("playwright install")
+  
+  
+  dir.create("data/ggl", recursive = T)
+  
+  
+  download.file(url = "https://storage.googleapis.com/political-csv/google-political-ads-transparency-bundle.zip", destfile = "data/ggl/ggl.zip", method = "curl")
+  
+  unzip("data/ggl/ggl.zip", exdir = "data/ggl")
+  
+  # google_political_ads_advertiser_stats %>%
+  #   filter(str_detect(Regions, "NL")) %>% View()
+  
+  # wdman::gecko()
+  
+  Sys.sleep(10)
+  
+  gglstats <- vroom::vroom("data/ggl/google-political-ads-creative-stats.csv")
+  
+  ggl_spend <- gglstats   %>%
+    mutate(Date_Range_Start = lubridate::ymd(Date_Range_Start)) %>%
+    filter(Date_Range_Start >= as.Date("2023-08-01")) %>%
+    filter(str_detect(Regions, "NL")) %>%
+    distinct(Advertiser_ID, Advertiser_Name, .keep_all = T) %>%
+    mutate(party1 = case_when(
+      str_detect(Advertiser_Name, "VVD|Volkspartij voor Vrijheid en Democratie|Stichting Liberaal Dordrecht") ~ "VVD",
+      str_detect(Advertiser_Name, "\\bCDA\\b|Christen Democratisch") ~ "CDA",
+      str_detect(Advertiser_Name, "PvdA|Jonge Socialisten|Partij van de Arbeid") ~ "GroenLinks-PvdA",
+      str_detect(Advertiser_Name, "\\bD66\\b|Jonge Democraten|Democraten 66") ~ "D66",
+      str_detect(Advertiser_Name, "GroenLinks|\\bGL\\b") ~ "GroenLinks-PvdA",
+      str_detect(Advertiser_Name, "ChristenUnie|\\bCU\\b") ~ "ChristenUnie",
+      str_detect(Advertiser_Name, "\\bSP\\b|Socialistische Partij") ~ "SP",
+      str_detect(Advertiser_Name, "FvD|FVD|Forum voor Democratie") ~ "FvD",
+      str_detect(Advertiser_Name, "50.lus|50PLUS|VLG") ~ "50PLUS",
+      str_detect(Advertiser_Name, "\\bSGP\\b|Staatkundig Gereformeerde Partij") ~ "SGP",
+      str_detect(Advertiser_Name, "PvdD|Partij voor de Dieren") ~ "PvdD",
+      str_detect(Advertiser_Name, "PVV|Partij .oor de Vrijheid") ~ "PVV",
+      str_detect(Advertiser_Name, "DENK") ~ "DENK",
+      str_detect(Advertiser_Name, "Volt Nederland") ~ "Volt Nederland",
+      str_detect(Advertiser_Name, "BIJ1|BiJ") ~ "BIJ1",
+      str_detect(Advertiser_Name, "BVNL|Belang Van Nederland|Engel Huibert van Dalen") ~ "BVNL",
+      str_detect(Advertiser_Name, "Ja21|JA21|Conservatieve Liberalen") ~ "JA21",
+      # str_detect(Advertiser_Name, "Alliantie") ~ "Alliantie",
+      str_detect(Advertiser_Name, "BBB|Marc-Michel Strijker") ~ "BBB",
+      T ~ NA_character_
+    )) %>%
+    filter(!(str_detect(Advertiser_Name, "Gleichheitspartei|Nieuw-Vlaamse|SP Digital LLC|MURRAY|REVOLT|Angelenos Against Higher Property Taxes|ITALIA|Volt Deutschland"))) %>%
+    drop_na(party1) %>% 
+    bind_rows(readRDS("data/ggl_spend.rds")) %>% 
+    mutate(party1 = ifelse(party1 %in% c("GroenLinks", "PvdA"), "GroenLinks-PvdA", party1)) %>% 
+    distinct(Advertiser_ID, .keep_all = T)
+  
+  saveRDS(ggl_spend, "data/ggl_spend.rds")
+  
+  
+}
 
 
-dir.create("data/ggl", recursive = T)
 
 
-download.file(url = "https://storage.googleapis.com/political-csv/google-political-ads-transparency-bundle.zip", destfile = "data/ggl/ggl.zip", method = "curl")
-
-unzip("data/ggl/ggl.zip", exdir = "data/ggl")
-
-# google_political_ads_advertiser_stats %>%
-#   filter(str_detect(Regions, "NL")) %>% View()
-
-# wdman::gecko()
-
-Sys.sleep(10)
-
-gglstats <- vroom::vroom("data/ggl/google-political-ads-creative-stats.csv")
-
-ggl_spend <- gglstats   %>%
-  mutate(Date_Range_Start = lubridate::ymd(Date_Range_Start)) %>%
-  filter(Date_Range_Start >= as.Date("2023-08-01")) %>%
-  filter(str_detect(Regions, "NL")) %>%
-  distinct(Advertiser_ID, Advertiser_Name, .keep_all = T) %>%
-  mutate(party1 = case_when(
-    str_detect(Advertiser_Name, "VVD|Volkspartij voor Vrijheid en Democratie|Stichting Liberaal Dordrecht") ~ "VVD",
-    str_detect(Advertiser_Name, "\\bCDA\\b|Christen Democratisch") ~ "CDA",
-    str_detect(Advertiser_Name, "PvdA|Jonge Socialisten|Partij van de Arbeid") ~ "PvdA",
-    str_detect(Advertiser_Name, "\\bD66\\b|Jonge Democraten|Democraten 66") ~ "D66",
-    str_detect(Advertiser_Name, "GroenLinks|\\bGL\\b") ~ "GroenLinks",
-    str_detect(Advertiser_Name, "ChristenUnie|\\bCU\\b") ~ "ChristenUnie",
-    str_detect(Advertiser_Name, "\\bSP\\b|Socialistische Partij") ~ "SP",
-    str_detect(Advertiser_Name, "FvD|FVD|Forum voor Democratie") ~ "FvD",
-    str_detect(Advertiser_Name, "50.lus|50PLUS|VLG") ~ "50PLUS",
-    str_detect(Advertiser_Name, "\\bSGP\\b|Staatkundig Gereformeerde Partij") ~ "SGP",
-    str_detect(Advertiser_Name, "PvdD|Partij voor de Dieren") ~ "PvdD",
-    str_detect(Advertiser_Name, "PVV|Partij .oor de Vrijheid") ~ "PVV",
-    str_detect(Advertiser_Name, "DENK") ~ "DENK",
-    str_detect(Advertiser_Name, "Volt|VOLT") ~ "Volt Nederland",
-    str_detect(Advertiser_Name, "BIJ1|BiJ") ~ "BIJ1",
-    str_detect(Advertiser_Name, "BVNL|Belang Van Nederland|Engel Huibert van Dalen") ~ "BVNL",
-    str_detect(Advertiser_Name, "Ja21|JA21|Conservatieve Liberalen") ~ "JA21",
-    str_detect(Advertiser_Name, "Alliantie") ~ "Alliantie",
-    str_detect(Advertiser_Name, "BBB|Marc-Michel Strijker") ~ "BBB",
-    T ~ NA_character_
-  )) %>%
-  filter(!(str_detect(Advertiser_Name, "Gleichheitspartei|Nieuw-Vlaamse|SP Digital LLC|MURRAY|REVOLT|Angelenos Against Higher Property Taxes|ITALIA|Volt Deutschland"))) %>%
-  drop_na(party1) %>% 
-  bind_rows(readRDS("data/ggl_spend.rds")) %>% 
-  distinct(Advertiser_ID, .keep_all = T)
-
-saveRDS(ggl_spend, "data/ggl_spend.rds")
 
 # ggl_spend <- readRDS("data/ggl_spend.rds")
 
@@ -114,9 +136,19 @@ print("headlesss")
 page_df <- browser_df %>%
   glimpse
 
-# remDr <- rD$client
-# urlss
-page_df <- browser_df
+
+print("sooo")
+pw_restart <- function() {
+  reticulate::py_run_string("p.stop()")
+  pw_init(use_xvfb = T)
+  reticulate::py_run_string("p = sync_playwright().start()")
+}
+
+
+print("sooo22")
+
+
+
 
 retrieve_spend_daily <- function(id, the_date, cntry = "NL") {
   
@@ -153,13 +185,18 @@ retrieve_spend_daily <- function(id, the_date, cntry = "NL") {
     html_elements(xpath = paste0(root, ending_eur)) %>%
     html_text()
   
-  if(length(eur_amount)==0) root <- root5
-  
-  eur_amount <- pp %>%
-    html_elements(xpath = paste0(root, ending_eur)) %>%
-    html_text()
-  
-  
+  if(length(eur_amount)==0){
+    
+    message("empty")
+    root <- root5
+    
+    eur_amount <- pp %>%
+      html_elements(xpath = paste0(root, ending_eur)) %>%
+      html_text()
+    
+    
+  } 
+  # })
   num_ads <- pp %>%
     html_elements(xpath = paste0(root, ending_ads)) %>%
     html_text()
@@ -169,6 +206,8 @@ retrieve_spend_daily <- function(id, the_date, cntry = "NL") {
   fin <- tibble(advertiser_id = id, eur_amount, num_ads, date = the_date)
   
   print(fin)
+  
+  saveRDS(fin %>% bind_rows(readRDS("data/ggl_daily_spending.rds")) %>% distinct(), file = "data/ggl_daily_spending.rds")
   
   return(fin)
   
@@ -180,7 +219,7 @@ retrieve_spend_daily <- possibly(retrieve_spend_daily, otherwise = NULL, quiet =
 # daily_spending <- readRDS("data/daily_spending.rds")
 # Apr 17, 2023 - May 16, 2023
 # 13 February 2023
-timelines <- seq.Date(as.Date("2023-08-01"), lubridate::today()-lubridate::days(1), by = "day")
+timelines <- seq.Date(as.Date("2023-10-01"), lubridate::today()-lubridate::days(1), by = "day")
 
 # 
 daily_spending_old <- readRDS("data/ggl_daily_spending.rds")
@@ -207,73 +246,93 @@ dates <- read_csv("data/dates.csv")
 
 retrieve_spend_custom <- function(id, from, to, cntry = "NL") {
   
-  # id <- "AR18091944865565769729"
-  url <- glue::glue("https://adstransparency.google.com/advertiser/{id}?political&region={cntry}&start-date={from}&end-date={to}&hl=en")
-  # remDr$navigate(url)
+  fin <- tibble()
   
-  
-  page_df %>%
-    goto(url)
-  
-  Sys.sleep(1)
-  
-  
-  
-  root3 <- "/html/body/div[3]"
-  root5 <- "/html/body/div[5]"
-  ending <- "/root/advertiser-page/political-tabs/div/material-tab-strip/div/tab-button[2]/material-ripple"
-  
-  page_df <- page_df %>% get_by_label("Insights")
-  
-  page_df %>% press("Enter") %>% click()
-  
-  root <- root3
-  
-  Sys.sleep(3)
-  
-  pp <- page_df %>% playwrightr::get_content()
-  
-  ending_eur <- "/root/advertiser-page/insights-grid/div/div/overview/widget/div[3]/div[1]/div"
-  ending_ads <- "/root/advertiser-page/insights-grid/div/div/overview/widget/div[3]/div[3]/div"
-  
-  print("retrieve numbers")
-  # try({
-  eur_amount <- pp %>%
-    html_elements(xpath = paste0(root, ending_eur)) %>%
-    html_text()
-  
-  if(length(eur_amount)==0) root <- root5
-  
-  num_ads <- pp %>%
-    html_elements(xpath = paste0(root, ending_ads)) %>%
-    html_text()
-  
-  # })
-  
-  
-  ending_type <- "/root/advertiser-page/insights-grid/div/div/ad-formats/widget/div[4]"
-  
-  
-  type_spend <<- pp %>%
-    html_elements(xpath = paste0(root, ending_type)) %>%
-    html_children() %>%
-    html_text() %>%
-    tibble(raww = .) %>%
-    mutate(type = str_to_lower(str_extract(raww, "Video|Text|Image"))) %>%
-    mutate(raww = str_remove_all(raww, "Video|Text|Image") %>% str_remove_all("%|\\(.*\\)") %>% as.numeric) %>%
-    pivot_wider(names_from = type, values_from = raww)
-  
-  
-  fin <- tibble(advertiser_id = id, eur_amount, num_ads, from, to)
-  
-  if(nrow(type_spend)!=0){
-    fin <- fin %>%
-      bind_cols(type_spend)
+  while(nrow(fin)==0){
+    
+    # id <- "AR14716708051084115969"
+    # cntry<- "NL"
+    # from <- dates$begin30
+    # to <- dates$fin
+    url <- glue::glue("https://adstransparency.google.com/advertiser/{id}?political&region={cntry}&start-date={from}&end-date={to}&hl=en")
+    # remDr$navigate(url)
+    
+    
+    page_df %>%
+      goto(url)
+    
+    Sys.sleep(3)
+    
+    
+    
+    root3 <- "/html/body/div[3]"
+    root5 <- "/html/body/div[5]"
+    ending <- "/root/advertiser-page/political-tabs/div/material-tab-strip/div/tab-button[2]/material-ripple"
+    
+    page_df <- page_df %>% get_by_label("Insights")
+    
+    page_df %>% press("Enter") %>% click()
+    
+    root <- root3
+    
+    Sys.sleep(3)
+    
+    pp <- page_df %>% playwrightr::get_content()
+    
+    ending_eur <- "/root/advertiser-page/insights-grid/div/div/overview/widget/div[3]/div[1]/div"
+    ending_ads <- "/root/advertiser-page/insights-grid/div/div/overview/widget/div[3]/div[3]/div"
+    
+    print("retrieve numbers")
+    # try({
+    eur_amount <- pp %>%
+      html_elements(xpath = paste0(root, ending_eur)) %>%
+      html_text()
+    
+    if(length(eur_amount)==0){
+      
+      message("empty")
+      root <- root5
+      
+      eur_amount <- pp %>%
+        html_elements(xpath = paste0(root, ending_eur)) %>%
+        html_text()
+      
+
+    } 
+    # })
+    num_ads <- pp %>%
+      html_elements(xpath = paste0(root, ending_ads)) %>%
+      html_text()
+    
+    ending_type <- "/root/advertiser-page/insights-grid/div/div/ad-formats/widget/div[4]"
+    
+    
+    type_spend <<- pp %>%
+      html_elements(xpath = paste0(root, ending_type)) %>%
+      html_children() %>%
+      html_text() %>%
+      tibble(raww = .) %>%
+      mutate(type = str_to_lower(str_extract(raww, "Video|Text|Image"))) %>%
+      mutate(raww = str_remove_all(raww, "Video|Text|Image") %>% str_remove_all("%|\\(.*\\)") %>% as.numeric) %>%
+      pivot_wider(names_from = type, values_from = raww)
+    
+    
+    fin <- tibble(advertiser_id = id, eur_amount, num_ads, from, to)
+    
+    if(nrow(type_spend)!=0){
+      fin <- fin %>%
+        bind_cols(type_spend)
+    }
+    
+    
+    
+    print(fin)
+    
   }
   
+
   
   
-  print(fin)
   
   return(fin %>% mutate_all(as.character))
   
@@ -286,22 +345,19 @@ ggl_sel_sp_old <- readRDS("data/ggl_sel_sp.rds")
 if(!any(dates$begin30 == ggl_sel_sp_old$from)){
   
   ggl_sel_sp <- unique(ggl_spend$Advertiser_ID) %>%
-    # .[22] %>%
+    # .[1:3] %>%
     map_dfr_progress(~{retrieve_spend_custom(.x, dates$begin30, dates$fin)})
   
-  
+  # retrieve_spend_custom(unique(ggl_spend$Advertiser_ID)[1], dates$begin30, dates$fin)
   
   misssss <- ggl_sel_sp$advertiser_id %>% setdiff(unique(ggl_spend$Advertiser_ID), .)
   # filter(!(advertiser_id %in% unique(ggl_spend$Advertiser_ID)))
   
-  # ggl_sel_sp <- ggl_sel_sp %>%
-  # bind_rows(fvd) %>%
-  # distinct(advertiser_id, .keep_all = T)
-  
-  # fvd <- retrieve_spend("AR03397262231409262593")
   fvd <- misssss %>%
     # .[22] %>%
     map_dfr_progress(~{retrieve_spend_custom(.x, dates$begin30, dates$fin)})
+  
+  
   
   ggl_sel_sp <- ggl_sel_sp %>%
     bind_rows(fvd) %>%

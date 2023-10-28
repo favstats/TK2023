@@ -50,7 +50,14 @@ print("installed playwright")
 
 
 # conda_install(packages = "fcntl", pip = T)
-pw_init(use_xvfb = T)
+if(Sys.info()[["sysname"]]=="Windows"){
+  xxxx <- F
+} else{
+  xxxx <- T
+}
+
+pw_init(use_xvfb = xxxx)
+
 print("pw initted")
 # Launch the browser
 system("playwright install")
@@ -127,7 +134,7 @@ page_df <- browser_df %>%
 print("sooo")
 pw_restart <- function() {
   reticulate::py_run_string("p.stop()")
-  pw_init(use_xvfb = T)
+  pw_init(use_xvfb = xxxx)
   reticulate::py_run_string("p = sync_playwright().start()")
 }
 
@@ -265,7 +272,7 @@ dt %>%
   arrange(desc(day), country) %>%
   filter(day >= lubridate::ymd("2023-08-01")) %>% 
   # slice(1:7) %>%
-  split(1:nrow(.)) %>% #bashR::simule_map(1)
+  split(1:nrow(.)) %>%# bashR::simule_map(1)
   walk_progress( ~ {
     file_name <-
       glue::glue("report/{.x$country}/{as.character(.x$day)}.zip")
@@ -334,6 +341,8 @@ dir(paste0("report/",cntry_str), full.names = T, recursive = T) %>%
   walk_progress( ~ {
     unzip(.x, exdir = "extracted")
   })
+
+# unzip(dir(paste0("report/",cntry_str), full.names = T, recursive = T), exdir = "extracted")
 
 print("NL UNZIPPED")
 
@@ -407,8 +416,13 @@ the_dat <- tobeextracted %>%
 
 old_dat <- readRDS(paste0("lifelong/",cntry_str, ".rds"))
 
+try({
+  the_dat <- the_dat %>% 
+    mutate(amount_spent_eur = readr::parse_number(as.character(amount_spent_eur)))
+})
+
+
 the_dat <- the_dat %>% 
-  mutate(amount_spent_eur = readr::parse_number(as.character(amount_spent_eur))) %>% 
   bind_rows(old_dat) %>% distinct() %>% 
   filter(amount_spent_eur != 100) %>% 
   add_count(page_id, page_name, disclaimer) %>%

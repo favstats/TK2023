@@ -44,8 +44,8 @@ options(scipen = 999)
 
 # source("../party_utils.R")
 color_dat <- tibble(
-  colors = c("#00b13d", "#80c31c", "#0a2cca", "#008067", "#bf0000", "#ff0000", "#6f2421", "#02a6e9", "#92107d", "#04d3d4", "#242b57", "#66cdaa", "#242b57", "#006b28", "#012758", "#ea5b0b", "#582c83", "#698c0c", "#fdfd00", "#8da6d6"),
-  party = c("D66", "GroenLinks", "VVD", "CDA", "SP", "PvdA", "FvD", "ChristenUnie", "50PLUS", "Alliantie", "BVNL", "DENK", "Ja21", "PvdD", "PVV", "SGP", "Volt Nederland", "BBB", "BIJ1", "NSC"))
+  colors = c("#00b13d", "#80c31c", "#0a2cca", "#008067", "#bf0000", "#ff0000", "#6f2421", "#02a6e9", "#92107d", "#04d3d4", "#242b57", "#66cdaa", "#242b57", "#006b28", "#012758", "#ea5b0b", "#582c83", "#698c0c", "#fdfd00", "#8da6d6", "#dc1f26"),
+  party = c("D66", "GroenLinks", "VVD", "CDA", "SP", "PvdA", "FvD", "ChristenUnie", "50PLUS", "Alliantie", "BVNL", "DENK", "Ja21", "PvdD", "PVV", "SGP", "Volt Nederland", "BBB", "BIJ1", "NSC", "GroenLinks-PvdA"))
 
 
 most_left_party <- "VVD"
@@ -76,14 +76,16 @@ election_dat30 <- readRDS("../data/election_dat30.rds") %>%
       # left_join(all_dat) %>% 
     rename(internal_id = page_id) %>% 
   filter(party != "And")  %>% 
-  filter(is.na(no_data))
+  filter(is.na(no_data)) %>% 
+  mutate(party = ifelse(party %in% c("GroenLinks", "PvdA"), "GroenLinks-PvdA", party))
 
 
 election_dat7 <- readRDS("../data/election_dat7.rds") %>%
       # left_join(all_dat) %>% 
     rename(internal_id = page_id) %>% 
   filter(party != "And")  %>% 
-  filter(is.na(no_data))
+  filter(is.na(no_data)) %>% 
+  mutate(party = ifelse(party %in% c("GroenLinks", "PvdA"), "GroenLinks-PvdA", party))
 
 # saveRDS(election_dat30, "../data/election_dat30.rds")
 # saveRDS(election_dat7, "../data/election_dat7.rds")
@@ -1735,7 +1737,7 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 :::
 
-## Education Targeting
+## Education Levels Targeting
 
 The graphs below show targeting by education levels and how much percentage of party budgets were spent on them.
 
@@ -1962,9 +1964,9 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 :::
 
-## Job Targeting
+## Work or Educational Institution Targeting
 
-The graphs below show targeting by job (sectors) and how much percentage of party budgets were spent on them.
+The graphs below show targeting by job (sectors) or school/univeristy and how much percentage of party budgets were spent on them.
 
 
 > Note: targeting criteria can overlap so the percentages do not sum up to 100%.
@@ -2219,3 +2221,26 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 
 :::
+
+
+
+
+<!-- ## Detailed Data -->
+
+<!-- Explore the data yourself: -->
+
+
+<!-- ### `r last30days_string` (Last 30 days) -->
+
+<!-- ```{r, fig.width= 11, fig.height=8, dpi = 300} -->
+
+<!-- election_dat30 %>%  -->
+<!--   mutate(spend_perc = round(total_spend_pct*100,2)) %>%  -->
+<!--   select(page_id = internal_id, page_name, party, targeting = value, is_exclusion, num_ads, spend_total = total_spend_formatted, spend_perc, location_type, detailed_type, custom_audience_type) %>%  -->
+<!--   DT::datatable() -->
+
+
+
+
+<!-- ``` -->
+

@@ -26,7 +26,7 @@ if(Sys.info()[["sysname"]]=="Windows"){
 jb <- get_targeting("7860876103", timeframe = glue::glue("LAST_90_DAYS"))
 
 new_ds <- jb %>% arrange(ds) %>% slice(1) %>% pull(ds)
-# new_ds <- "2023-08-11"
+# new_ds <- "2023-01-01"
 
 latest_elex <- readRDS(paste0("data/election_dat", tf, ".rds"))
 
@@ -194,12 +194,28 @@ rep <- read_csv("data/FacebookAdLibraryReport_2023-07-15_NL_last_90_days_adverti
 
 # 338750440106782
 
+groenams <- read_csv("data/TK2023 Labelling - labelling.csv", col_types = "c") %>% 
+  mutate(party = ifelse(party %in% c("V", "Volt"), "Volt Nederland", party))  %>% 
+  filter(page_id != "208371683037269") %>% 
+  filter(page_id != "137011549489828") %>%
+  filter(page_id != "150293698981357") %>%
+  mutate(party = ifelse(page_id == "969158383214898", "BVNL", party)) %>% 
+  select(page_id, page_name, party)  %>% 
+  filter(!is.na(party)) %>% 
+  filter(party != "UPP")
+
+# groenams %>%
+#   count(party, sort = T) %>% View()
+  # filter(!is.na(party)) 
+  
+
 all_dat <- #read_csv("nl_advertisers.csv") %>%
   # mutate(page_id = as.character(page_id)) %>%
   bind_rows(internal_page_ids) %>%
   bind_rows(wtm_data) %>%
   bind_rows(rep) %>%
   bind_rows(more_data %>% mutate(source = "new")) %>%
+  bind_rows(groenams) %>%
   distinct(page_id, .keep_all = T) %>%
   add_count(page_name, sort  =T) %>%
   mutate(remove_em = n >= 2 & str_ends(page_id, "0")) %>%
@@ -232,17 +248,26 @@ all_dat <- all_dat %>%
     party == "V" ~ "Volt Nederland",
     T ~ party
   )) %>% 
+  # mutate(party = ifelse(party %in% c("GroenLinks", "PvdA"), "GroenLinks-PvdA")) %>% 
   # filter(page_name != "Wybren van Haga") %>% 
-  bind_rows(tibble(page_id = c("103936679460429", "115141108346129", "1816979431914302"),
-            page_name = c("Nieuw Sociaal Contract", "Nieuw Sociaal Contract", "Pieter Omtzigt"),
-            party = c("NSC", "NSC", "NSC"))) %>% 
+  bind_rows(tibble(page_id = c("103936679460429", "115141108346129", "1816979431914302", "137011549489828"),
+            page_name = c("Nieuw Sociaal Contract", "Nieuw Sociaal Contract", "Pieter Omtzigt", "GroenLinks-PvdA"),
+            party = c("NSC", "NSC", "NSC", "GroenLinks-PvdA"))) %>% 
   distinct(page_id, .keep_all = T) %>% 
   filter(party != "And") %>% 
   mutate(party = ifelse(party %in% c("V", "Volt"), "Volt Nederland", party))  %>% 
-  filter(page_id != "208371683037269") %>%
-  mutate(party = ifelse(page_id == "969158383214898", "BVNL", party))
+  filter(page_id != "208371683037269") %>% 
+  # filter(page_id != "137011549489828") %>%
+  filter(page_id != "150293698981357") %>%
+  mutate(party = ifelse(page_id == "969158383214898", "BVNL", party)) %>% 
+  mutate(party = ifelse(party %in% c("GroenLinks", "PvdA"), "GroenLinks-PvdA", party))
+
+
+# all_dat %>% filter(str_detect(page_name, "GroenLinks-PvdA"))
 
 saveRDS(all_dat, "data/all_dat.rds")
+
+write_lines(nrow(all_dat), file = "n_advertisers.txt")
 
 scraper <- function(.x, time = tf) {
   
