@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 https:scontent-iad3-1.xx.fbcdn.net:443:.:^partitionKey=%28https%2Cfacebook.com%29:3	0	19659	https:scontent-iad3-1.xx.fbcdn.net:443:scontent-iad3-1.xx.fbcdn.net:443::n:1698666155:h3:y:1698549416:n:^partitionKey=%28https%2Cfacebook.com%29:|n:y:
 https:scontent-sjc3-1.xx.fbcdn.net:443:.:^partitionKey=%28https%2Cfacebook.com%29:3	0	19659	https:scontent-sjc3-1.xx.fbcdn.net:443:scontent-sjc3-1.xx.fbcdn.net:443::n:1698661387:h3:y:1698574982:n:^partitionKey=%28https%2Cfacebook.com%29:|n:y:
 https:www.google-analytics.com:443:.:^partitionKey=%28https%2Cgoogle.com%29:3	0	19659	https:www.google-analytics.com:443:www.google-analytics.com:443::n:1701152453:h3:y:1698556877:n:^partitionKey=%28https%2Cgoogle.com%29:|n:y:
@@ -8,6 +9,37 @@ https:www.facebook.com:443:.:^partitionKey=%28https%2Cfacebook.com%29:3	0	19659	
 https:scontent-iad3-1.xx.fbcdn.net:443:.:^partitionKey=%28https%2Cfbcdn.net%29:3	0	19659	https:scontent-iad3-1.xx.fbcdn.net:443:scontent-iad3-1.xx.fbcdn.net:443::n:1698666158:h3:y:1698553160:n:^partitionKey=%28https%2Cfbcdn.net%29:|n:y:
 https:scontent-iad3-2.xx.fbcdn.net:443:.:^partitionKey=%28https%2Cfbcdn.net%29:3	0	19659	https:scontent-iad3-2.xx.fbcdn.net:443:scontent-iad3-2.xx.fbcdn.net:443::n:1698679149:h3:y:1698549416:n:^partitionKey=%28https%2Cfbcdn.net%29:|n:y:
 https:www.youtube.com:443:.:^partitionKey=%28https%2Cgoogle.com%29:3	0	19659	https:www.youtube.com:443:www.youtube.com:443::n:1701187018:h3:y:1698556877:n:^partitionKey=%28https%2Cgoogle.com%29:|n:y:
+=======
+https:apis.google.com:443:.:^partitionKey=%28https%2Cgoogle.com%29:3	0	19659	https:apis.google.com:443:apis.google.com:443::n:1701187681:h3:y:1698556877:n:^partitionKey=%28https%2Cgoogle.com%29:|n:y:
+https:jnn-pa.googleapis.com:443:.:^partitionKey=%28https%2Cgoogle.com%29:3	0	19659	https:jnn-pa.googleapis.com:443:jnn-pa.googleapis.com:443::n:1701187686:h3:y:1698595677:n:^partitionKey=%28https%2Cgoogle.com%29:|n:y:
+https:www.youtube.com:443:.:^partitionKey=%28https%2Cgoogle.com%29:3	0	19659	https:www.youtube.com:443:www.youtube.com:443::n:1701187685:h3:y:1698556877:n:^partitionKey=%28https%2Cgoogle.com%29:|n:y:
+https:scontent-sjc3-1.xx.fbcdn.net:443:.:^partitionKey=%28https%2Cfacebook.com%29:3	0	19659	https:scontent-sjc3-1.xx.fbcdn.net:443:scontent-sjc3-1.xx.fbcdn.net:443::n:1698661387:h3:y:1698574982:n:^partitionKey=%28https%2Cfacebook.com%29:|n:y:
+>>>>>>> 07176531ebfd8bba9aadc34751e23a16e6f47943
 https:scontent-iad3-2.xx.fbcdn.net:443:.:^partitionKey=%28https%2Cfacebook.com%29:3	0	19659	https:scontent-iad3-2.xx.fbcdn.net:443:scontent-iad3-2.xx.fbcdn.net:443::n:1698679146:h3:y:1698592737:n:^partitionKey=%28https%2Cfacebook.com%29:|n:y:
+https:maps.gstatic.com:443:.:^partitionKey=%28https%2Cgoogle.com%29:3	0	19659	https:maps.gstatic.com:443:maps.gstatic.com:443::n:1701187688:h3:y:1698595677:n:^partitionKey=%28https%2Cgoogle.com%29:|n:y:
+https:scone-pa.clients6.google.com:443:.:^partitionKey=%28https%2Cgoogle.com%29:3	0	19659	https:scone-pa.clients6.google.com:443:scone-pa.clients6.google.com:443::n:1701187748:h3:y:1698556877:n:^partitionKey=%28https%2Cgoogle.com%29:|n:y:
+https:static.doubleclick.net:443:.:^partitionKey=%28https%2Cgoogle.com%29:3	0	19659	https:static.doubleclick.net:443:static.doubleclick.net:443::n:1701187684:h3:y:1698595677:n:^partitionKey=%28https%2Cgoogle.com%29:|n:y:
+https:static.xx.fbcdn.net:443:.:^partitionKey=%28https%2Cfacebook.com%29:3	0	19659	https:static.xx.fbcdn.net:443:static.xx.fbcdn.net:443::n:1698682716:h3:y:1698549416:n:^partitionKey=%28https%2Cfacebook.com%29:|n:y:
+https:scontent.xx.fbcdn.net:443:.:^partitionKey=%28https%2Cfacebook.com%29:3	0	19659	https:scontent.xx.fbcdn.net:443:scontent.xx.fbcdn.net:443::n:1698682716:h3:y:1698549416:n:^partitionKey=%28https%2Cfacebook.com%29:|n:y:
+https:i.ytimg.com:443:.:^partitionKey=%28https%2Cgoogle.com%29:3	0	19659	https:i.ytimg.com:443:i.ytimg.com:443::n:1701187749:h3:y:1698556877:n:^partitionKey=%28https%2Cgoogle.com%29:|n:y:
+https:googleads.g.doubleclick.net:443:.:^partitionKey=%28https%2Cgoogle.com%29:3	0	19659	https:googleads.g.doubleclick.net:443:googleads.g.doubleclick.net:443::n:1701187686:h3:y:1698595677:n:^partitionKey=%28https%2Cgoogle.com%29:|n:y:
+https:www.google-analytics.com:443:.:^partitionKey=%28https%2Cgoogle.com%29:3	0	19659	https:www.google-analytics.com:443:www.google-analytics.com:443::n:1701187754:h3:y:1698556877:n:^partitionKey=%28https%2Cgoogle.com%29:|n:y:
+https:scontent-iad3-1.xx.fbcdn.net:443:.:^partitionKey=%28https%2Cfacebook.com%29:3	0	19659	https:scontent-iad3-1.xx.fbcdn.net:443:scontent-iad3-1.xx.fbcdn.net:443::n:1698682716:h3:y:1698549416:n:^partitionKey=%28https%2Cfacebook.com%29:|n:y:
+https:www.gstatic.com:443:.:^partitionKey=%28https%2Cgoogle.com%29:3	0	19659	https:www.gstatic.com:443:www.gstatic.com:443::n:1701187681:h3:y:1698595677:n:^partitionKey=%28https%2Cgoogle.com%29:|n:y:
+https:tpc.googlesyndication.com:443:.:^partitionKey=%28https%2Cgoogle.com%29:3	0	19659	https:tpc.googlesyndication.com:443:tpc.googlesyndication.com:443::n:1701187749:h3:y:1698556877:n:^partitionKey=%28https%2Cgoogle.com%29:|n:y:
+https:www.facebook.com:443:.:^partitionKey=%28https%2Cfacebook.com%29:3	0	19659	https:www.facebook.com:443:www.facebook.com:443::n:1698682738:h3:y:1698579751:n:^partitionKey=%28https%2Cfacebook.com%29:|n:y:
+https:fonts.googleapis.com:443:.:^partitionKey=%28https%2Cgoogle.com%29:3	0	19659	https:fonts.googleapis.com:443:fonts.googleapis.com:443::n:1701187688:h3:y:1698556877:n:^partitionKey=%28https%2Cgoogle.com%29:|n:y:
+https:scontent-iad3-2.xx.fbcdn.net:443:.:^partitionKey=%28https%2Cfbcdn.net%29:3	0	19659	https:scontent-iad3-2.xx.fbcdn.net:443:scontent-iad3-2.xx.fbcdn.net:443::n:1698682719:h3:y:1698549416:n:^partitionKey=%28https%2Cfbcdn.net%29:|n:y:
+https:www.google.com:443:.:^partitionKey=%28https%2Cgoogle.com%29:3	0	19659	https:www.google.com:443:www.google.com:443::n:1701187684:h3:y:1698556877:n:^partitionKey=%28https%2Cgoogle.com%29:|n:y:
+https:fonts.gstatic.com:443:.:^partitionKey=%28https%2Cgoogle.com%29:3	0	19659	https:fonts.gstatic.com:443:fonts.gstatic.com:443::n:1701187687:h3:y:1698556877:n:^partitionKey=%28https%2Cgoogle.com%29:|n:y:
 https:scontent-sjc3-1.xx.fbcdn.net:443:.:^partitionKey=%28https%2Cfbcdn.net%29:3	0	19659	https:scontent-sjc3-1.xx.fbcdn.net:443:scontent-sjc3-1.xx.fbcdn.net:443::n:1698661390:h3:y:1698574982:n:^partitionKey=%28https%2Cfbcdn.net%29:|n:y:
+<<<<<<< HEAD
 https:jnn-pa.googleapis.com:443:.:^partitionKey=%28https%2Cgoogle.com%29:3	0	19659	https:jnn-pa.googleapis.com:443:jnn-pa.googleapis.com:443::n:1698595052:h3:n:1698595005:n:^partitionKey=%28https%2Cgoogle.com%29:|n:y:
+=======
+https:displayads-formats.googleusercontent.com:443:.:^partitionKey=%28https%2Cgoogle.com%29:3	0	19659	https:displayads-formats.googleusercontent.com:443:displayads-formats.googleusercontent.com:443::n:1701187749:h3:y:1698556877:n:^partitionKey=%28https%2Cgoogle.com%29:|n:y:
+https:www.googletagmanager.com:443:.:^partitionKey=%28https%2Cgoogle.com%29:3	0	19659	https:www.googletagmanager.com:443:www.googletagmanager.com:443::n:1701187680:h3:y:1698556877:n:^partitionKey=%28https%2Cgoogle.com%29:|n:y:
+https:scontent-iad3-1.xx.fbcdn.net:443:.:^partitionKey=%28https%2Cfbcdn.net%29:3	0	19659	https:scontent-iad3-1.xx.fbcdn.net:443:scontent-iad3-1.xx.fbcdn.net:443::n:1698666158:h3:y:1698553160:n:^partitionKey=%28https%2Cfbcdn.net%29:|n:y:
+https:maps.googleapis.com:443:.:^partitionKey=%28https%2Cgoogle.com%29:3	0	19659	https:maps.googleapis.com:443:maps.googleapis.com:443::n:1701187752:h3:y:1698595677:n:^partitionKey=%28https%2Cgoogle.com%29:|n:y:
+https:adstransparency.google.com:443:.:^partitionKey=%28https%2Cgoogle.com%29:3	0	19659	https:adstransparency.google.com:443:adstransparency.google.com:443::n:1701187753:h3:y:1698556877:n:^partitionKey=%28https%2Cgoogle.com%29:|n:y:
+https:yt3.ggpht.com:443:.:^partitionKey=%28https%2Cgoogle.com%29:3	0	19659	https:yt3.ggpht.com:443:yt3.ggpht.com:443::n:1701187684:h3:y:1698556877:n:^partitionKey=%28https%2Cgoogle.com%29:|n:y:
+>>>>>>> 07176531ebfd8bba9aadc34751e23a16e6f47943
