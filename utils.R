@@ -8,7 +8,7 @@ calc_targeting <- function(only_tags, exclude = NULL) {
         arrange(desc(total_spend)) %>%
         summarize(total_spend = sum(total_spend))
     
-    if(!is.null){
+    if(!is.null(exclude)){
       if(exclude){
         only_tags <- only_tags %>% filter(is_exclusion)
       } else if(!exclude){

@@ -1317,7 +1317,7 @@ On Meta, political parties can also **exclude** certain geographical units. The 
 
 #### Postal Codes
 
-The graphs below shows *postal code targeting* that parties engaged in on Meta platforms.
+The graphs below shows *postal code exclusion* that parties engaged in on Meta platforms.
 
 
 ```{r}
@@ -1997,7 +1997,7 @@ charts <- lang_targeting %>%
       ) %>%
       hc_add_theme(hc_theme_google()) %>%
       highcharter::hc_tooltip(
-        pointFormat = paste0("<b>{point.value}</b><br>% of Total Budget Spent: {point.y:.1f}%<br>Spend a total of ", currency_symbol, "{point.spend_perlab} on this gender"),
+        pointFormat = paste0("<b>{point.value}</b><br>% of Total Budget Spent: {point.y:.1f}%<br>Spend a total of ", currency_symbol, "{point.spend_perlab} on this language"),
         headerFormat = ""
       ) %>%
       hc_title(text = unique(.x$party), align = "left", style = list(fontWeight = "bold")) %>% 
@@ -2082,7 +2082,7 @@ charts <- lang_targeting %>%
       ) %>%
       hc_add_theme(hc_theme_google()) %>%
       highcharter::hc_tooltip(
-        pointFormat = paste0("<b>{point.value}</b><br>% of Total Budget Spent: {point.y:.1f}%<br>Spend a total of ", currency_symbol, "{point.spend_perlab} on this gender"),
+        pointFormat = paste0("<b>{point.value}</b><br>% of Total Budget Spent: {point.y:.1f}%<br>Spend a total of ", currency_symbol, "{point.spend_perlab} on this language"),
         headerFormat = ""
       ) %>%
       hc_title(text = unique(.x$party), align = "left", style = list(fontWeight = "bold")) %>% 
