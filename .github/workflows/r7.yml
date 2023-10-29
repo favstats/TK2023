@@ -54,6 +54,7 @@ jobs:
           install.packages('lubridate')
           install.packages('gt')
           install.packages('gtExtras')
+          install.packages('pacman')
         shell: Rscript {0}
       - name: "Script - Run"
         run: Rscript 'get_audiences.R' 7

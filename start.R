@@ -1,5 +1,5 @@
-library(tidyverse)
 
+pacman::p_load(knitr, tidyverse, rmarkdown)
 
 # rstudioapi::jobRunScript("retrieve_targeting_data.R")
 # rstudioapi::jobRunScript("fbadlibrary.R")
@@ -7,6 +7,8 @@ library(tidyverse)
 # Sys.sleep(60*7)
 
 dir("_site", full.names = T) %>% keep(~str_detect(.x, "qmd")) %>% walk(quarto::quarto_render)
+
+rmarkdown::render("Readme.Rmd", output_file = "Readme.md")
 
 
 # election_dat30 <- readRDS("data/election_dat30.rds") %>%

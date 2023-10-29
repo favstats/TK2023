@@ -1,0 +1,65 @@
+---
+output: github_document
+---
+
+# Dutch Electio Dashboard
+
+```{r, echo=F}
+library(tidyverse)
+days30 <- readRDS("data/election_dat30.rds")
+days7 <- readRDS("data/election_dat7.rds")
+
+more_data <- readr::read_rds("lifelong/NL.rds")  %>%
+    mutate(date_produced = lubridate::ymd(date)) %>%
+  drop_na(date_produced) %>% 
+    janitor::clean_names()%>% #rename(advertiser_id = page_id) %>%
+    mutate(spend = readr::parse_number(as.character(amount_spent_eur))) %>%
+    # mutate(spend = ifelse(spend == 100, 50, spend)) %>%
+    # distinct(page_id, .keep_all = T) %>%
+    filter(str_detect(page_name, "Global Space Conference on Climate Change|de Alliantie|PvdA - GroenLinks", negate = T)) %>%
+    mutate(page_id = as.character(page_id)) %>% 
+  # filter(cntry == "NL") %>% 
+  filter(date_produced >= lubridate::as_date("2023-08-01"))
+
+latest_report <- more_data %>% 
+  arrange(desc(date_produced)) %>% slice(1) %>% pull(date) %>% lubridate::ymd()
+
+
+ggl_daily <- readRDS("data/ggl_daily_spending.rds")
+ggl_sel_sp <- readRDS("data/ggl_sel_sp.rds")
+ggl_sel_sp7<- readRDS("data/ggl_sel_sp7.rds")
+```
+
+## Meta
+
+```{r}
+
+meta <- tibble("30 Days Window" = na.omit(days30$ds)[1],
+       "7 Days Window" = na.omit(days7$ds)[1]) %>% 
+  t() %>% 
+  as.data.frame() %>% 
+  rownames_to_column() %>% 
+  set_names(c("Data", "Latest")) %>% 
+  mutate(Latest = lubridate::ymd(Latest)-1) %>% 
+  bind_rows(tibble(Data = "Report", Latest = latest_report))
+
+meta %>% knitr::kable()
+
+```
+
+## Google
+
+```{r}
+ggl_day <- ggl_daily %>% arrange(desc(date)) %>% slice(1) %>% pull(date)
+
+ggl <- tibble("30 Days Window" = ggl_sel_sp$to[1],
+       "7 Days Window" = ggl_sel_sp7$to[1]) %>% 
+  t() %>% 
+  as.data.frame() %>% 
+  rownames_to_column() %>% 
+  set_names(c("Data", "Latest")) %>% 
+  mutate(Latest = lubridate::ymd(Latest)-1) %>% 
+  bind_rows(tibble(Data = "Report", Latest = ggl_day))
+
+ggl %>% knitr::kable()
+```
