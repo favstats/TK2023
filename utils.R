@@ -1,4 +1,4 @@
-calc_targeting <- function(only_tags) {
+calc_targeting <- function(only_tags, exclude = NULL) {
 
     total_sppppeen <- only_tags %>%
         distinct(internal_id, .keep_all = T)  %>%
@@ -7,7 +7,16 @@ calc_targeting <- function(only_tags) {
         select(internal_id, total_spend) %>%
         arrange(desc(total_spend)) %>%
         summarize(total_spend = sum(total_spend))
+    
+    if(!is.null){
+      if(exclude){
+        only_tags <- only_tags %>% filter(is_exclusion)
+      } else if(!exclude){
+        only_tags <- only_tags %>% filter(!is_exclusion)      
+      }
+    }
 
+    
     howmuchisinterest <- only_tags %>%
         filter(type == "detailed") %>%
         group_by(internal_id) %>%
