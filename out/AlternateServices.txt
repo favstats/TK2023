@@ -1,0 +1,5 @@
+https:scontent-sjc3-1.xx.fbcdn.net:443:.:^partitionKey=%28https%2Cfacebook.com%29:3	0	19660	https:scontent-sjc3-1.xx.fbcdn.net:443:scontent-sjc3-1.xx.fbcdn.net:443::n:1698738609:h3:y:1698652206:n:^partitionKey=%28https%2Cfacebook.com%29:|n:y:
+https:static.xx.fbcdn.net:443:.:^partitionKey=%28https%2Cfacebook.com%29:3	0	19660	https:static.xx.fbcdn.net:443:static.xx.fbcdn.net:443::n:1698738610:h3:y:1698652206:n:^partitionKey=%28https%2Cfacebook.com%29:|n:y:
+https:scontent.xx.fbcdn.net:443:.:^partitionKey=%28https%2Cfacebook.com%29:3	0	19660	https:scontent.xx.fbcdn.net:443:scontent.xx.fbcdn.net:443::n:1698738610:h3:y:1698652206:n:^partitionKey=%28https%2Cfacebook.com%29:|n:y:
+https:scontent-sjc3-1.xx.fbcdn.net:443:.:^partitionKey=%28https%2Cfbcdn.net%29:3	0	19660	https:scontent-sjc3-1.xx.fbcdn.net:443:scontent-sjc3-1.xx.fbcdn.net:443::n:1698738612:h3:y:1698652206:n:^partitionKey=%28https%2Cfbcdn.net%29:|n:y:
+https:www.facebook.com:443:.:^partitionKey=%28https%2Cfacebook.com%29:3	0	19660	https:www.facebook.com:443:www.facebook.com:443::n:1698738615:h3:y:1698652206:n:^partitionKey=%28https%2Cfacebook.com%29:|n:y:
