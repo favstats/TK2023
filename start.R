@@ -1,5 +1,5 @@
 
-pacman::p_load(knitr, tidyverse, rmarkdown, openxlsx)
+pacman::p_load(knitr, tidyverse, rmarkdown, openxlsx, sf)
 
 # rstudioapi::jobRunScript("retrieve_targeting_data.R")
 # rstudioapi::jobRunScript("fbadlibrary.R")
