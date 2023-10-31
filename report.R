@@ -413,7 +413,7 @@ the_dat <- tobeextracted %>%
     return(thedata)
   })
 
-
+cntry_str <- "NL"
 old_dat <- readRDS(paste0("lifelong/",cntry_str, ".rds"))
 
 try({

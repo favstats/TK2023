@@ -5,6 +5,10 @@ pacman::p_load(knitr, tidyverse, rmarkdown, openxlsx, sf)
 # rstudioapi::jobRunScript("fbadlibrary.R")
 
 # Sys.sleep(60*7)
+all_dat <- readRDS("data/all_dat.rds")
+
+write_lines(nrow(all_dat), file = "n_advertisers.txt")
+
 
 dir("_site", full.names = T) %>% keep(~str_detect(.x, "qmd")) %>% walk(quarto::quarto_render)
 

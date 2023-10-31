@@ -29,6 +29,7 @@ library(tidyverse)
 library(highcharter)
 library(gt)
 
+pacman::p_load(knitr, tidyverse, rmarkdown, openxlsx, sf)
 
 
 options(scipen = 999)

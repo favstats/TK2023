@@ -267,7 +267,6 @@ all_dat <- all_dat %>%
 
 saveRDS(all_dat, "data/all_dat.rds")
 
-write_lines(nrow(all_dat), file = "n_advertisers.txt")
 
 scraper <- function(.x, time = tf) {
   

@@ -1,15 +1,15 @@
-nllll <- readRDS("data/NL (1).rds")
-nllll2 <- readRDS("data/NL.rds")
+# nllll <- readRDS("data/NL (1).rds")
+# nllll2 <- readRDS("data/NL.rds")
 
-
+# setwd("C:/Users/fabio/Dropbox/postdoc/bs/TK2023")
 elex2021reps <- readRDS("data/elex2021reps.rds")
 
 dat2021 <- elex2021reps  %>%
   janitor::clean_names() %>% 
   mutate(page_id = as.character(page_id)) %>% 
   left_join(election_dat30 %>%
-              distinct(internal_id, party) %>% 
-              select(page_id = internal_id, party)) %>% 
+              distinct(page_id, party) %>% 
+              select(page_id, party)) %>% 
   drop_na(party) %>% 
   mutate(amount_spent_eur = readr::parse_number(amount_spent_eur)) %>% 
   mutate(Date = lubridate::ymd(date))  %>% 
@@ -42,8 +42,8 @@ more_data <- readr::read_rds("lifelong/NL.rds")  %>%
 hc_data_cum_raw <-  more_data %>%
   # mutate(advertiser_id = as.character(advertiser_id)) %>%
   left_join(election_dat30 %>%
-              distinct(internal_id, party) %>% 
-              select(page_id = internal_id, party)) %>%
+              distinct(page_id, party) %>% 
+              select(page_id, party)) %>% 
   drop_na(party) %>%
   group_by(date_produced) %>%
   summarize(spend  = sum(spend)) %>%
@@ -100,6 +100,6 @@ the_dat %>%
   scale_x_reverse() +
   theme_minimal() +
   scale_y_continuous(labels = scales::number_format()) +
-  labs(y = "Cumulative Spent\n", x = "Days Until Election Day")  +
+  labs(y = "Cumulative Spent/n", x = "Days Until Election Day")  +
   scale_color_grey() +
   theme(legend.position = "top")
