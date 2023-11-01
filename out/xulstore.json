@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-{"chrome://browser/content/browser.xhtml":{"main-window":{"width":"1291","height":"812","screenX":"4","screenY":"4","sizemode":"normal"},"sidebar-box":{"sidebarcommand":"","style":""},"sidebar-title":{"value":""}}}
-=======
 {"chrome://browser/content/browser.xhtml":{"main-window":{"sizemode":"maximized"},"sidebar-box":{"sidebarcommand":"","style":""},"sidebar-title":{"value":""}}}
->>>>>>> 5e8e71b1434b4b34f6fb546c0a5e2874d5569e34
