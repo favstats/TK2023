@@ -7,3 +7,5 @@ data/ignore/
 provincies/
 data/ggl/
 
+docs/*
+!/docs/.keep
