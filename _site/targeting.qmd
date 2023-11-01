@@ -1338,7 +1338,7 @@ The graphs below shows *postal code exclusion* that parties engaged in on Meta p
 
 ```{r}
 
-cbs<- openxlsx::read.xlsx("../data/cbs_pc4_2020_v2.xlsx")
+# cbs<- openxlsx::read.xlsx("../data/cbs_pc4_2020_v2.xlsx")
 
 
 all_zip <- election_dat30 %>% 
@@ -1363,7 +1363,7 @@ all_zip <- election_dat30 %>%
     left_join(cbs %>% 
     janitor::clean_names())
 
-geo <- sf::st_read("../data/ignore/georef-netherlands-postcode-pc4.geojson", quiet = T)
+# geo <- sf::st_read("../data/ignore/georef-netherlands-postcode-pc4.geojson", quiet = T)
 
 parties_with_zips <- all_zip %>% 
   count(party) %>% 
