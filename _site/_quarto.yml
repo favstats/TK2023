@@ -10,6 +10,8 @@ website:
     logo: https://www.groene.nl/512.png
     left:
       - href: index.qmd
+        text: Blog
+      - href: spending.qmd
         text: Spending
       - targeting.qmd
       - href: about.qmd
