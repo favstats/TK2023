@@ -1041,7 +1041,22 @@ all_zip <- election_dat30 %>%
     left_join(cbs %>% 
     janitor::clean_names())
 
+
+if(Sys.info()[["sysname"]]=="Windows"){
+  # xxxx <- F
 geo <- sf::st_read("../data/ignore/georef-netherlands-postcode-pc4.geojson", quiet = T)
+
+  
+} else{
+  
+  download.file("https://www.dropbox.com/scl/fi/f2zin6b3k95jxkprah3j0/georef-netherlands-postcode-pc4.geojson?rlkey=m3cbtoqbvg89wfkyb80cmu3co&dl=1", "../data/res.geojson")
+
+geo <- sf::st_read("../data/res.geojson", quiet = T)
+
+unlink("../data/res.geojson")
+}
+
+
 
 parties_with_zips <- all_zip %>% 
   count(party) %>% 
