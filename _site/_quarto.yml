@@ -3,8 +3,11 @@ project:
   output-dir: ../docs
 
 website:
-  title: "🇳🇱 2023 Dutch Election Dashboard"
+  title: "Verkiezingen 2023"
+  favicon: https://www.groene.nl/favicon.ico
+  search: false
   navbar:
+    logo: https://www.groene.nl/512.png
     left:
       - href: index.qmd
         text: Spending
@@ -13,11 +16,17 @@ website:
         text: About
     right:
       - icon: github
-        href: https://github.com/favstats
-      - icon: twitter
-        href: https://twitter.com/favstats
-    
+        href: https://github.com/groene/TK2023
+
 format:
   html:
-    theme: litera
-    
+    theme:
+      - cosmo
+      - custom.scss
+    mainfont: acumin-pro-semi-condensed, helvetica, arial, sans-serif
+    fontsize: 1.2em
+    include-in-header:
+      - text: |
+          <link rel="stylesheet" href="https://cloud.typenetwork.com/projects/881/fontface.css/" media="all">
+          <link rel="stylesheet" href="https://use.typekit.net/kdh6fyk.css" media="all">
+      - file: analytics.html

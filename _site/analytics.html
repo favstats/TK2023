@@ -1,0 +1,20 @@
+<script>
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({originalLocation: document.location.protocol + '//' + document.location.hostname + document.location.pathname + document.location.search});
+
+  (function(w,d,s,l,i){
+    w[l]=w[l]||[];w[l].push({"gtm.start":new Date().getTime(),event:"gtm.js"});
+    var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!="dataLayer"?"&l="+l:"";
+    j.async=true;j.src="https://metrics.groene.nl/gtm.js?id="+i+dl;
+    f.parentNode.insertBefore(j,f);
+  })(window,document,"script","dataLayer","GTM-NSQ2QJN");
+
+  document.addEventListener("turbo:load", function(event) {
+    window.dataLayer.push({
+      "event": "virtualPageview",
+      "pageUrl": event.detail.url,
+      "pagePath": location.href.replace(location.origin, ""),
+      "pageTitle": document.title,
+    });
+  });
+</script>

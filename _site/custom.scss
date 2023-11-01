@@ -1,0 +1,22 @@
+/*-- scss:defaults --*/
+$body-color: #000;
+$navbar-bg: #fff;
+$navbar-hl: #ed1c24;
+$link-color: #ed1c24;
+$link-hover-color: #000;
+$nav-tabs-link-active-color: #000;
+
+/*-- scss:rules --*/
+table {
+  font-family: acumin-pro-semi-condensed, helvetica, arial, sans-serif !important;
+}
+
+.navbar {
+  border-bottom: 1px solid #ccc;
+}
+
+.navbar-logo {
+  max-height: 50px;
+  height: 50px;
+  border-radius: 100%;
+}
