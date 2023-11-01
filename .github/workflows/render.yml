@@ -20,10 +20,6 @@ jobs:
           echo "export PATH=$PATH:$HOME/.local/bin" >> $GITHUB_ENV
       - run: |
           quarto --version
-      - name: Setup R
-        uses: r-lib/actions/setup-r@v2
-        with:
-          r-version: 'release'
       - name: Setup - Checkout repo
         uses: actions/checkout@v3
       - name: Apt-get needed things
@@ -36,26 +32,36 @@ jobs:
           libfribidi-dev \
           libudunits2-dev \
           libgdal-dev
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: 'release'
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          cache-version: 1
+          needs: |
+            any::tidyverse
+            any::httr
+            any::remotes
+            any::shiny
+            any::scales
+            any::treemap
+            any::here
+            any::jsonlite
+            any::janitor
+            any::quarto
+            any::highcharter
+            any::lubridate
+            any::lubridate
+            any::gt
+            any::gtExtras
+            any::pacman
+            any;;openxlsx
+            any;;sf
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - name: "Install Packages"
         run: |
-          install.packages('httr')
-          install.packages('remotes')
           remotes::install_github('hadley/emo')
-          install.packages('shiny')
-          install.packages('scales')
-          install.packages('treemap')
-          install.packages('htmltools')
-          install.packages('here')
-          install.packages('jsonlite')
-          install.packages('janitor')
-          install.packages('quarto')
-          install.packages('tidyverse')
-          install.packages('highcharter')
-          install.packages('lubridate')
-          install.packages('gt')
-          install.packages('gtExtras')
-          install.packages('pacman')
         shell: Rscript {0}
       - name: "Script - Update Dashboard"
         run: Rscript 'start.R'
