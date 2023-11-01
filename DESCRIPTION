@@ -8,7 +8,7 @@ Description: Dutch 2021 Election dashboard
 URL: https://github.com/groene/TK2023.R
 BugReports: https://github.com/groene/TK2023.R/issues
 Imports:
-		tidyverse
+		tidyverse,
 		httr,
 		remotes,
 		shiny,
