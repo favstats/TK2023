@@ -8,15 +8,23 @@ Description: Dutch 2021 Election dashboard
 URL: https://github.com/groene/TK2023.R
 BugReports: https://github.com/groene/TK2023.R/issues
 Imports:
-    igraph,
-    gplots,
-    nnet,
-    data.table,
-    Matrix
+		tidyverse
+		httr,
+		remotes,
+		shiny,
+		scales,
+		treemap,
+		here,
+		jsonlite,
+		janitor,
+		quarto,
+		highcharter,
+		lubridate,
+		gt,
+		gtExtras,
+		pacman,
+		openxlsx,
+		sf
 Depends:
     R (>= 3.0.0)
-License: MIT + file LICENSE
-VignetteBuilder: knitr
-Suggests:
-    knitr
 RoxygenNote: 5.0.1

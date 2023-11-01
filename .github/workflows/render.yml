@@ -52,12 +52,11 @@ jobs:
             any::quarto
             any::highcharter
             any::lubridate
-            any::lubridate
             any::gt
             any::gtExtras
             any::pacman
-            any;;openxlsx
-            any;;sf
+            any::openxlsx
+            any::sf
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - name: "Install Packages"
         run: |
