@@ -32,7 +32,7 @@ ggl_sel_sp7<- readRDS("data/ggl_sel_sp7.rds")
 
 ## Meta
 
-```{r}
+```{r, echo=F}
 
 meta <- tibble("30 Days Window" = na.omit(days30$ds)[1],
        "7 Days Window" = na.omit(days7$ds)[1]) %>% 
@@ -49,7 +49,7 @@ meta %>% knitr::kable()
 
 ## Google
 
-```{r}
+```{r, echo=F}
 ggl_day <- ggl_daily %>% arrange(desc(date)) %>% slice(1) %>% pull(date)
 
 ggl <- tibble("30 Days Window" = ggl_sel_sp$to[1],

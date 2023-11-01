@@ -20,7 +20,7 @@ write_lines(title_txt, "_site/_quarto.yml")
 
 if(Sys.info()[["sysname"]]=="Windows"){
   ### CHANGE ME WHEN LOCAL!
-  tf <- "30"
+  tf <- "7"
 }
 
 jb <- get_targeting("7860876103", timeframe = glue::glue("LAST_90_DAYS"))

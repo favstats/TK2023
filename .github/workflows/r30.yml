@@ -35,7 +35,8 @@ jobs:
           libxml2-dev \
           libharfbuzz-dev \
           libfribidi-dev \
-          libudunits2-dev
+          libudunits2-dev \
+          libgdal-dev
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - name: "Install Packages"
         run: |

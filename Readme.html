@@ -603,6 +603,16 @@ padding-top: 0px;
 
 <h1 id="dutch-electio-dashboard">Dutch Electio Dashboard</h1>
 <h2 id="meta">Meta</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>meta <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="st">&quot;30 Days Window&quot;</span> <span class="ot">=</span> <span class="fu">na.omit</span>(days30<span class="sc">$</span>ds)[<span class="dv">1</span>],</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>       <span class="st">&quot;7 Days Window&quot;</span> <span class="ot">=</span> <span class="fu">na.omit</span>(days7<span class="sc">$</span>ds)[<span class="dv">1</span>]) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="fu">t</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="fu">set_names</span>(<span class="fu">c</span>(<span class="st">&quot;Data&quot;</span>, <span class="st">&quot;Latest&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Latest =</span> lubridate<span class="sc">::</span><span class="fu">ymd</span>(Latest)<span class="sc">-</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  <span class="fu">bind_rows</span>(<span class="fu">tibble</span>(<span class="at">Data =</span> <span class="st">&quot;Report&quot;</span>, <span class="at">Latest =</span> latest_report))</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>meta <span class="sc">%&gt;%</span> knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -613,38 +623,50 @@ padding-top: 0px;
 <tbody>
 <tr class="odd">
 <td align="left">30 Days Window</td>
-<td align="left">2023-10-25</td>
+<td align="left">2023-10-28</td>
 </tr>
 <tr class="even">
 <td align="left">7 Days Window</td>
-<td align="left">2023-10-25</td>
-</tr>
-<tr class="odd">
-<td align="left">Report</td>
-<td align="left">2023-10-25</td>
-</tr>
-</tbody>
-</table>
-<h2 id="google">Google</h2>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Data</th>
-<th align="left">Latest</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">30 Days Window</td>
-<td align="left">2023-10-24</td>
-</tr>
-<tr class="even">
-<td align="left">7 Days Window</td>
-<td align="left">2023-10-24</td>
+<td align="left">2023-10-28</td>
 </tr>
 <tr class="odd">
 <td align="left">Report</td>
 <td align="left">2023-10-28</td>
+</tr>
+</tbody>
+</table>
+<h2 id="google">Google</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>ggl_day <span class="ot">&lt;-</span> ggl_daily <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(date)) <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(date)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>ggl <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="st">&quot;30 Days Window&quot;</span> <span class="ot">=</span> ggl_sel_sp<span class="sc">$</span>to[<span class="dv">1</span>],</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>       <span class="st">&quot;7 Days Window&quot;</span> <span class="ot">=</span> ggl_sel_sp7<span class="sc">$</span>to[<span class="dv">1</span>]) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>  <span class="fu">t</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>  <span class="fu">set_names</span>(<span class="fu">c</span>(<span class="st">&quot;Data&quot;</span>, <span class="st">&quot;Latest&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Latest =</span> lubridate<span class="sc">::</span><span class="fu">ymd</span>(Latest)<span class="sc">-</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>  <span class="fu">bind_rows</span>(<span class="fu">tibble</span>(<span class="at">Data =</span> <span class="st">&quot;Report&quot;</span>, <span class="at">Latest =</span> ggl_day))</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>ggl <span class="sc">%&gt;%</span> knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Data</th>
+<th align="left">Latest</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">30 Days Window</td>
+<td align="left">2023-10-24</td>
+</tr>
+<tr class="even">
+<td align="left">7 Days Window</td>
+<td align="left">2023-10-24</td>
+</tr>
+<tr class="odd">
+<td align="left">Report</td>
+<td align="left">2023-10-30</td>
 </tr>
 </tbody>
 </table>

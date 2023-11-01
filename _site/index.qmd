@@ -639,15 +639,21 @@ Daily spending estimates might not be entirely accurate as reporting granularity
 
 ### Cumulative
 
+```{r}
+add_them <-  readRDS("../data/add_them.rds")
+```
+
+
 ```{r, out.width="100%"}
-more_data <- readr::read_rds("../lifelong/NL.rds")  %>%
+more_data <- #the_daaaat %>% 
+  readr::read_rds("../lifelong/NL.rds")  %>%
     mutate(date_produced = lubridate::ymd(date)) %>%
   drop_na(date_produced) %>% 
     janitor::clean_names()%>% #rename(advertiser_id = page_id) %>%
     mutate(spend = readr::parse_number(as.character(amount_spent_eur))) %>%
     # mutate(spend = ifelse(spend == 100, 50, spend)) %>%
     # distinct(page_id, .keep_all = T) %>%
-    filter(str_detect(page_name, "Global Space Conference on Climate Change|de Alliantie|PvdA - GroenLinks", negate = T)) %>%
+    filter(str_detect(page_name, "Global Space Conference on Climate Change|de Alliantie", negate = T)) %>%
     mutate(page_id = as.character(page_id)) %>% 
   # filter(cntry == "NL") %>% 
   filter(date_produced >= lubridate::as_date("2023-08-01"))
@@ -669,6 +675,9 @@ hc_data_cum_raw <-  more_data %>%
   # select(date_produced, starts_with("cumulative")) %>%
   # rename_with(~str_remove(., "cumulative_"), starts_with("cumulative")) %>%
   # pivot_longer(-date_produced, names_to = "party", values_to = "spend")  %>%
+  ##### THIS NEEDS TO CHANGE FOR OTHER COUNTRIES
+  bind_rows(add_them) %>% 
+  ##### THIS NEEDS TO CHANGE FOR OTHER COUNTRIES
   group_by(party) %>%
   mutate(total_spend = max(spend)) %>%
   ungroup()  %>%
@@ -694,7 +703,24 @@ color_order <- hc_data_cum_raw %>%
   # theme_minimal() +
   # labs(y = "How many Countries", x = "For each date")
 
+# the_dat %>% 
+#   filter(page_name == "CDA")
 
+# more_data %>% 
+#   filter(page_name == "VVD") %>% #View()
+#   arrange(date_produced) %>% 
+#   filter(date_produced %in% as.Date(c("2023-10-13", "2023-10-14", "2023-10-15", "2023-10-16", "2023-10-17", "2023-10-18")))
+#   
+# the_daaaat %>% 
+#   filter(page_name == "VVD") %>% #View()
+#   arrange(date) %>% 
+#   filter(date %in% c("2023-10-13", "2023-10-14", "2023-10-15", "2023-10-16", "2023-10-17", "2023-10-18"))
+# 
+# 
+# hc_data_cum_raw  %>%
+#   filter(party == "VVD") %>% #View()
+#   arrange(date_produced) %>%
+#   filter(date_produced %in% as.Date(c("2023-10-13", "2023-10-14", "2023-10-15", "2023-10-16", "2023-10-17", "2023-10-18", "2023-10-19")))
 ```
 
 ```{r}
@@ -712,6 +738,16 @@ hc_data_cumfb <- hc_data_cum_raw %>%
   arrange(Date) %>% 
   mutate(`Daily Spend` = spend - first(spend)) %>%
   ungroup() 
+
+# hc_data_cum_raw %>% 
+#   filter(party == "VVD") %>% #View()
+#   arrange(date_produced)
+
+# hc_data_cum_raw %>% 
+#   filter(date_produced >= as.Date("2023-10-23")) %>% 
+#   arrange(date_produced) %>% 
+#   filter(party == "CDA")
+  
 
 hc_data_cumfb %>% 
   # mutate(spend)

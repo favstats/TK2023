@@ -421,9 +421,13 @@ try({
     mutate(amount_spent_eur = readr::parse_number(as.character(amount_spent_eur)))
 })
 
+# wtm_advertisers <- read_csv("data/nl_advertisers_13_20_Oct_2023 (1).csv") #%>% View()
 
-the_dat <- the_dat %>% 
-  bind_rows(old_dat) %>% distinct() %>% 
+the_daaaat <-
+  the_dat %>% 
+  bind_rows(old_dat) %>%  distinct()
+  # bind_rows(old_dat %>% 
+  #             filter(!(date %in% c("2023-10-25", "2023-10-26", "2023-10-27", "2023-10-28")))) %>% distinct() %>% 
   filter(amount_spent_eur != 100) %>% 
   add_count(page_id, page_name, disclaimer) %>%
   arrange(desc(amount_spent_eur)) %>% 
@@ -431,9 +435,121 @@ the_dat <- the_dat %>%
   arrange(desc(n)) %>% 
   summarize(amount_spent_eur = sum(amount_spent_eur),
             disclaimer = disclaimer[1]) %>% 
-  ungroup()
+  ungroup() %>%
+  arrange(desc(amount_spent_eur)) %>% 
+  distinct(page_id, date, .keep_all = T)
+    # filter(date=="2023-10-25")
+# 
+# the14 <- the_daaaat %>%
+# filter(date=="2023-10-15") %>%
+# left_join(election_dat30 %>%
+#             distinct(internal_id, party) %>%
+#             select(page_id = internal_id, party)) %>%
+# group_by(party, date) %>%
+# summarize(amount_spent_eur = sum(amount_spent_eur)) %>%
+# ungroup() %>%
+# drop_na()
+# 
+# add_them <- wtm_advertisers  %>%
+#   mutate(page_id = as.character(advertiser_id)) %>%
+#   filter(date_produced %in% as.Date(c("2023-10-16", "2023-10-17", "2023-10-18")))  %>%
+#   # mutate(spend = ifelse(spend<100, 100, spend))  %>%
+#   left_join(election_dat30 %>%
+#               distinct(internal_id, party) %>%
+#               select(page_id = internal_id, party)) %>%
+#   group_by(party, date_produced) %>%
+#   summarize(spend = sum(spend)) %>%
+#   ungroup() %>%
+#   left_join(the14 %>% select(party, tillthen = amount_spent_eur)) %>%
+#   mutate(amount_spent_eur = ifelse(date_produced==as.Date("2023-10-16"), spend+tillthen, spend)) %>%
+#   mutate(amount_spent_eur = ifelse(is.na(amount_spent_eur), spend, amount_spent_eur)) %>%
+#   group_by(party) %>%
+#   arrange(date_produced) %>%
+#   mutate(amount_spent_eur = cumsum(amount_spent_eur)) %>%
+#   ungroup() %>%
+#   filter(party != "SGP") %>% 
+#   bind_rows(
+#     the14 %>%
+#       # mutate(spend = 0) %>%
+#       select(-date) %>%
+#       expand_grid(date_produced = as.Date(c("2023-10-16", "2023-10-17", "2023-10-18")))
+#   ) %>%
+#   distinct(party, date_produced, .keep_all = T)  %>% 
+#   mutate(spend = amount_spent_eur) %>% 
+#   select(-tillthen, -amount_spent_eur) %>% drop_na()
+# 
+#   # filter(page_id == "115027651906533") %>% View()
+#   # left_join(the_daaaat %>% distinct(page_id, .keep_all = T) %>% select(page_id, page_name))
+# #   # arrange()
+#   # count(page_id, sort = T)
+# #
+# saveRDS(add_them, file = "data/add_them.rds")
+# the_daaaat  %>%
+#   # left_join(election_dat30 %>%
+#   #             distinct(internal_id, party) %>% 
+#   #             select(page_id = internal_id, party)) %>% 
+#   # group_by(party, date) %>% 
+#   # summarize(amount_spent_eur = sum(amount_spent_eur)) %>% 
+#   filter(date=="2023-10-15") %>% 
+#   filter(page_name == "VVD")
+# 
+# add_them %>%
+#   # left_join(election_dat30 %>%
+#   #             distinct(internal_id, party) %>% 
+#   #             select(page_id = internal_id, party)) %>% 
+#   # group_by(party, date_produced) %>% 
+#   # summarize(amount_spent_eur = sum(amount_spent_eur)) %>% 
+#   filter(page_name == "VVD")
+# 
+# the_daaaat  %>%
+#   left_join(election_dat30 %>%
+#               distinct(internal_id, party) %>% 
+#               select(page_id = internal_id, party)) %>% 
+#   group_by(party, date) %>% 
+#   summarize(amount_spent_eur = sum(amount_spent_eur)) %>% 
+#   filter(date=="2023-10-15") %>% 
+#   filter(party == "VVD")
+# 
+# hc_data_cum_raw %>%
+#   # left_join(election_dat30 %>%
+#   #             distinct(internal_id, party) %>%
+#   #             select(page_id = internal_id, party)) %>%
+#   # group_by(party, date_produced) %>%
+#   # summarize(amount_spent_eur = sum(amount_spent_eur)) %>%
+#   filter(party == "PvdD")
 
-saveRDS(the_dat, paste0("lifelong/",cntry_str, ".rds"))
+# old_dat %>% 
+#   filter(str_detect(page_name, "VVD")) %>%View()
+#   # count(date, sort  =T)
+#     filter(date=="2023-10-13")
+# 
+# add_them %>%
+#   filter(page_name == "VVD")
+# 
+# the_daaaat <- the_daaaat %>%
+  # bind_rows(add_them %>%  mutate(date = as.character(date_produced)) %>% select(-spend, -tillthen, -date_produced))
+
+# the_daaaat %>% 
+#       filter(date=="2023-10-13")%>% 
+#   filter(page_name == "VVD")
+  
+# add_them %>%
+#   mutate(date = as.character(date_produced)) %>% select(-spend, -tillthen, -date_produced) %>% 
+#   filter(page_name == "VVD")
+
+# the_daaaat %>% 
+#   filter(date %in% c("2023-10-13", "2023-10-14", "2023-10-15", "2023-10-16", "2023-10-17",
+#                      "2023-10-18", "2023-10-19")) %>% count(date)
+
+# the_dat %>% 
+#   filter(date %in% c("2023-10-24", "2023-10-25", "2023-10-26", "2023-10-27", "2023-10-28")) %>% 
+#   filter(page_name == "VVD")
+# 
+# old_dat %>% filter(date!="2023-10-25"|date!="2023-10-26"|date!="2023-10-27"|date!="2023-10-28") %>% 
+#   filter(!(date %in% c("2023-10-24", "2023-10-25", "2023-10-26", "2023-10-27", "2023-10-28"))) %>% 
+#   filter(page_name == "VVD")
+
+saveRDS(the_daaaat, paste0("lifelong/",cntry_str, ".rds"))
 
 # the_dat %>% 
 #   # filter(page_id == "1000182456818319")
