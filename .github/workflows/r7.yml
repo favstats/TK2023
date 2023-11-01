@@ -2,9 +2,6 @@ name: "7 Timeframe"
 on:
   schedule:
     - cron: '0 1,2,13,14 * * *'
-  push:
-    branches:
-      - main
 
 jobs:
   update-data:

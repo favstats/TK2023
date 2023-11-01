@@ -2,9 +2,6 @@ name: "Get Lifelong Reports"
 on:
   schedule:
     - cron: '0 3,4,15,16 * * *'
-  push:
-    branches:
-      - main
       
 jobs:
   update-lifelong-reports:
