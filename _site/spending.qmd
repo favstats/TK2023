@@ -23,6 +23,12 @@ options(scipen = 999)
 # print(getwd())
 # here::here("")
 # prCint(getwd())
+hcoptslang <- getOption("highcharter.lang")
+
+hcoptslang$shortMonths <- c("Jan", "Feb", "Mrt", "Apr", "Mei", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec")
+
+options(highcharter.lang = hcoptslang)
+
 
 ```
 
