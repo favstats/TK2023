@@ -12,4 +12,4 @@ write_lines(nrow(all_dat), file = "n_advertisers.txt")
 
 dir("_site", full.names = T) %>% keep(~str_detect(.x, "qmd")) %>% walk(quarto::quarto_render)
 
-knitr::knit("Readme.Rmd")
+knitr::knit("README.Rmd")
