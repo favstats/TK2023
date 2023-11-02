@@ -3,7 +3,7 @@ project:
   output-dir: ../docs
 
 website:
-  title: "🇳🇱 2023 Dutch Election Dashboard"
+  title: "Verkiezingen 2023"
   favicon: https://www.groene.nl/favicon.ico
   search: false
   navbar:
