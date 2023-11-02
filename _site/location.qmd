@@ -1,0 +1,649 @@
+---
+title: "Location"
+format:
+  html:
+    toc: true
+    toc-location: right
+---
+
+```{r setup, include=FALSE}
+
+all_dat <- readRDS("../data/all_dat.rds")
+
+sets <- jsonlite::fromJSON("../settings.json")
+
+
+## Global options
+knitr::opts_chunk$set(
+    cache = F,
+    echo = F,
+    warning = F,
+    message = F,
+    cache.lazy = FALSE
+)
+
+
+# pacman::p_load(tidyverse, highcharter)
+library(tidyverse)
+library(highcharter)
+library(gt)
+
+pacman::p_load(knitr, tidyverse, rmarkdown, openxlsx, sf, shiny)
+
+
+options(scipen = 999)
+
+
+# wtm_data %>% count(party,sort = T)
+
+
+# source("../party_utils.R")
+color_dat <- tibble(
+  colors = c("#00b13d", "#80c31c", "#0a2cca", "#008067", "#bf0000", "#ff0000", "#6f2421", "#02a6e9", "#92107d", "#04d3d4", "#242b57", "#66cdaa", "#242b57", "#006b28", "#012758", "#ea5b0b", "#582c83", "#698c0c", "#fdfd00", "#8da6d6", "#dc1f26"),
+  party = c("D66", "GroenLinks", "VVD", "CDA", "SP", "PvdA", "FvD", "ChristenUnie", "50PLUS", "Alliantie", "BVNL", "DENK", "Ja21", "PvdD", "PVV", "SGP", "Volt Nederland", "BBB", "BIJ1", "NSC", "GroenLinks-PvdA"))
+
+
+most_left_party <- "VVD"
+
+
+scale_fill_parties <- function(...){
+    ggplot2:::manual_scale(
+        'fill',
+        values = setNames(color_dat$colors, color_dat$party),
+        ...
+    )
+}
+scale_color_parties <- function(...){
+    ggplot2:::manual_scale(
+        'color',
+        values = setNames(color_dat$colors, color_dat$party),
+        ...
+    )
+}
+source("../utils.R")
+# source("../party_utils.R")
+```
+
+
+
+```{r}
+election_dat30 <- readRDS("../data/election_dat30.rds") %>%
+      # left_join(all_dat) %>%
+    rename(internal_id = page_id) %>%
+  filter(party != "And")  %>%
+  filter(is.na(no_data)) %>%
+  mutate(party = ifelse(party %in% c("GroenLinks", "PvdA"), "GroenLinks-PvdA", party))
+
+
+election_dat7 <- readRDS("../data/election_dat7.rds") %>%
+      # left_join(all_dat) %>%
+    rename(internal_id = page_id) %>%
+  filter(party != "And")  %>%
+  filter(is.na(no_data)) %>%
+  mutate(party = ifelse(party %in% c("GroenLinks", "PvdA"), "GroenLinks-PvdA", party))
+
+# saveRDS(election_dat30, "../data/election_dat30.rds")
+# saveRDS(election_dat7, "../data/election_dat7.rds")
+
+fin <- (as.Date(election_dat30$ds[1])-lubridate::days(1))
+begin7 <- fin-lubridate::days(6)
+begin30 <- fin-lubridate::days(29)
+
+
+last7days_string <- paste0(create_date(begin7), " - ", paste(create_date(fin), lubridate::year(fin)))
+last30days_string <- paste0(create_date(begin30), " - ", paste(create_date(fin), lubridate::year(fin)))
+
+
+
+the_currency <- election_dat30 %>%
+  count(main_currency, sort = T) %>%
+  slice(1) %>%
+  pull(main_currency)
+
+if(the_currency == "EUR"){
+  currency_symbol <- "€"
+} else {
+  currency_symbol <- "CURRENCY"
+}
+
+
+```
+
+
+## Geographical Targeting
+
+The graphs below show various kinds of *location targeting* that parties engaged in on Meta platforms. The bigger the area the more money was spend by the party on targeting this location.
+
+
+::: {.panel-tabset}
+
+
+### `r last30days_string` (Last 30 days)
+
+
+::: {.panel-tabset}
+
+#### Postal Codes
+
+The graphs below shows *postal code targeting* that parties engaged in on Meta platforms.
+
+
+```{r}
+
+cbs<- openxlsx::read.xlsx("../data/cbs_pc4_2020_v2.xlsx")
+
+
+all_zip <- election_dat30 %>%
+    filter(type == "location") %>%
+    filter(location_type == "zips") %>%
+    mutate(total_spend_formatted = total_spend_pct*total_spend_formatted) %>%
+    filter(!is_exclusion) %>%
+  group_by(internal_id, total_spend_pct, party) %>%
+  mutate(n_together = n()) %>%
+    # select(page_id, value, num_ads, total_spend_formatted, n_together)
+  mutate(total_spend_formatted_old = total_spend_formatted) %>%
+  mutate(total_spend_formatted = total_spend_formatted/n_together) %>%
+  select(party, internal_id, value, n_together, total_spend_formatted, total_spend_formatted_old) %>%
+  ungroup() %>%
+  arrange(value) %>%
+    group_by(value, party) %>%
+    summarize(total_spend = sum(total_spend_formatted),
+              total_spend_old = sum(total_spend_formatted_old)) %>%
+    ungroup() %>%
+    # filter(party == "VVD")  %>%
+    dplyr::mutate(pc4 = str_remove_all(value, ", Netherlands") %>% as.numeric) %>%
+    left_join(cbs %>%
+    janitor::clean_names())
+
+
+# if(Sys.info()[["sysname"]]=="Windows"){
+#   # xxxx <- F
+# geo <- sf::st_read("../data/ignore/georef-netherlands-postcode-pc4.geojson", quiet = T)
+# 
+# 
+# } else{
+
+  download.file("https://www.dropbox.com/scl/fi/f2zin6b3k95jxkprah3j0/georef-netherlands-postcode-pc4.geojson?rlkey=m3cbtoqbvg89wfkyb80cmu3co&dl=1", "../data/res.geojson")
+
+geo <- sf::st_read("../data/res.geojson", quiet = T)
+
+unlink("../data/res.geojson")
+# }
+
+
+
+parties_with_zips <- all_zip %>%
+  count(party) %>%
+  pull(party)
+
+vvd_dat <- geo %>%
+    left_join(all_zip %>%
+  filter(party == "VVD") %>%
+    dplyr::mutate(pc4_code = str_remove_all(value, ", Netherlands")))#%>%
+
+
+```
+
+::: {.panel-tabset}
+
+##### VVD
+
+
+
+```{r}
+vvd_dat  %>%
+    ggplot()  +
+    theme_void() +
+    scale_fill_gradient2(low = "lightgrey", high = color_dat %>% filter(party=="VVD") %>% .$colors,
+            na.value = "lightgrey")   +
+      # geom_sf(color = "black") +
+    # geom_sf(aes(fill = log(total_spend)+2),
+    #         colour = "white", size = 0.9) +
+    geom_sf(aes(fill = total_spend_old),
+            colour = NA, size = 0.1) +
+    # geom_sf(data = prov, color = "black", fill = NA)  +
+  # geom_sf_label(data = prov, aes(label = name)) +
+    theme(legend.position = "bottom") +
+    guides(fill = guide_colourbar(title = "Spend (€)", barwidth = 10, barheight = 0.5))
+
+```
+
+##### CDA
+
+
+
+```{r}
+
+cda_dat <- geo %>%
+    left_join(all_zip %>%
+  filter(party == "CDA") %>%
+    dplyr::mutate(pc4_code = str_remove_all(value, ", Netherlands")))#%>%
+
+cda_dat %>%
+  arrange(desc(total_spend)) %>%
+    ggplot()  +
+    theme_void() +
+    scale_fill_gradient2(low = "lightgrey", high = color_dat %>% filter(party=="CDA") %>% .$colors,
+            na.value = "lightgrey")   +
+      # geom_sf(color = "black") +
+    # geom_sf(aes(fill = log(total_spend)+2),
+    #         colour = "white", size = 0.9) +
+    geom_sf(aes(fill = total_spend_old),
+            colour = NA, size = 0.1) +
+    # geom_sf(data = prov, color = "black", fill = NA)  +
+  # geom_sf_label(data = prov, aes(label = name)) +
+    theme(legend.position = "bottom") +
+    guides(fill = guide_colourbar(title = "Spend (€)", barwidth = 10, barheight = 0.5))
+
+```
+
+##### GroenLinks-PvdA
+
+
+
+```{r}
+
+gl_dat <- geo %>%
+    left_join(all_zip %>%
+  filter(party == "GroenLinks-PvdA") %>%
+    dplyr::mutate(pc4_code = str_remove_all(value, ", Netherlands")))#%>%
+
+gl_dat %>%
+  arrange(desc(total_spend)) %>%
+    ggplot()  +
+    theme_void() +
+    scale_fill_gradient2(low = "lightgrey", high = color_dat %>% filter(party=="GroenLinks-PvdA") %>% .$colors,
+            na.value = "lightgrey")   +
+      # geom_sf(color = "black") +
+    # geom_sf(aes(fill = log(total_spend)+2),
+    #         colour = "white", size = 0.9) +
+    geom_sf(aes(fill = total_spend_old),
+            colour = NA, size = 0.1) +
+    # geom_sf(data = prov, color = "black", fill = NA)  +
+  # geom_sf_label(data = prov, aes(label = name)) +
+    theme(legend.position = "bottom") +
+    guides(fill = guide_colourbar(title = "Spend (€)", barwidth = 10, barheight = 0.5))
+
+```
+
+
+:::
+
+#### Provinces
+
+```{r,fig.width=10, fig.height=8, echo = F}
+library(treemap)
+region_dat <- election_dat30 %>%
+  filter(type == "location") %>%
+  filter(location_type == "regions") %>%
+  filter(!is_exclusion)  %>%
+  mutate(likely_together = paste0(total_spend_pct,num_ads) %>% as.factor() %>% as.numeric()) %>%
+  group_by(internal_id) %>%
+  add_count(likely_together, name = "n_clusters") %>%
+  ungroup() %>%
+  mutate(total_spend_formatted = total_spend_formatted*total_spend_pct) %>%
+  mutate(total_spend_formatted = total_spend_formatted/n_clusters) %>%
+  group_by(party, value) %>%
+  summarise(total_spend_formatted = sum(total_spend_formatted),
+            num_ads = sum(num_ads)) %>%
+  ungroup() %>%
+  rename(region = value) %>%
+  mutate(region = str_remove_all(region, ", Netherlands"))
+
+the_colors <- region_dat %>%
+  group_by(party) %>%
+  summarize(total_spend_formatted = sum(total_spend_formatted)) %>%
+  ungroup() %>%
+  mutate(party = fct_relevel(party)) %>%
+  left_join(color_dat) %>%
+  arrange(party) %>%
+  drop_na(colors) %>%
+  pull(colors)
+
+if(nrow(region_dat)!=0) {
+  # Static version
+  tm <- treemap(
+    region_dat,
+    index = c("party", "region"),
+    vSize = "total_spend_formatted",
+    vColor = "party",
+    type = "index",
+    title = "", draw = T,
+    align.labels = list(c("right", "bottom"),
+                        c("center", "center")),
+    fontsize.labels = c(21, 10),
+    # size of labels. Give the size per level of aggregation: size for group, size for subgroup, sub-subgroups...
+
+    fontcolor.labels = c("white", "white"),
+    # Color of labels
+    palette = the_colors
+  )
+
+
+} else {
+  shiny::HTML("No data (yet).")
+}
+#
+# library(d3treeR)
+#
+# # make it interactive ("rootname" becomes the title of the plot):
+# inter <- d3tree2( tm,  rootname = "Targeting " )
+# inter
+# # read_csv("../data/PoliticalAds.csv") %>%
+# #   filter(CountryCode == "turkey")
+# #   count(CountryCode, sort = T)
+#
+# # ggsave("img/tregion.pdf",width=10, height=8, dpi = 900)
+#
+# library(highcharter)
+#
+# library(highcharter)
+# library(dplyr)
+
+# Convert data to hierarchical structure
+# hierarchical_data <- data_to_hierarchical(region_dat, c("party", "region"), "total_spend_formatted", color = the_colors)
+#
+# # Create treemap
+# hchart(hierarchical_data, type = "treemap", allowDrillToNode = TRUE,
+#       color = the_colors) %>%
+#   hc_title(text = "") %>%
+#   # hc_colorAxis(minColor = "#FFFFFF", maxColor = highchart_palette()[[2]]) %>%
+#   hc_tooltip(
+#     pointFormat = '<b>{point.name}:</b> {point.value}<br/>',
+#     followPointer = TRUE
+#   ) %>%
+#   hc_plotOptions(
+#     treemap = list(
+#       layoutAlgorithm = 'squarified',
+#       dataLabels = list(
+#         enabled = TRUE,
+#         align = 'left',
+#         verticalAlign = 'top',
+#         style = list(fontSize = '15px')
+#       )
+#     )
+#   )
+
+```
+
+<!-- ![](img/tregion.pdf) -->
+
+#### Cities
+
+```{r,fig.width=10, fig.height=8}
+library(treemap)
+region_dat <- election_dat30 %>%
+  filter(type == "location") %>%
+  filter(location_type == "CITY") %>%
+  filter(!is_exclusion)  %>%
+  mutate(likely_together = paste0(total_spend_pct,num_ads) %>% as.factor() %>% as.numeric()) %>%
+  group_by(internal_id) %>%
+  add_count(likely_together, name = "n_clusters") %>%
+  ungroup() %>%
+  mutate(total_spend_formatted = total_spend_formatted*total_spend_pct) %>%
+  mutate(total_spend_formatted = total_spend_formatted/n_clusters) %>%
+  group_by(party, value) %>%
+  summarise(total_spend_formatted = sum(total_spend_formatted),
+            num_ads = sum(num_ads)) %>%
+  ungroup() %>%
+  rename(region = value) %>%
+  mutate(region = str_remove_all(region, ", Netherlands"))
+
+the_colors <- region_dat %>%
+  group_by(party) %>%
+  summarize(total_spend_formatted = sum(total_spend_formatted)) %>%
+  ungroup() %>%
+  mutate(party = fct_relevel(party)) %>%
+  left_join(color_dat) %>%
+  arrange(party) %>%
+  drop_na(colors) %>%
+  pull(colors)
+
+if(nrow(region_dat)!=0) {
+  ## Static version
+  tm <- treemap(
+    region_dat,
+    index = c("party", "region"),
+    vSize = "total_spend_formatted",
+    vColor = "party",
+    type = "index",
+    title = "",
+    align.labels = list(c("right", "bottom"),
+                        c("center", "center")),
+    fontsize.labels = c(21, 10),
+    # size of labels. Give the size per level of aggregation: size for group, size for subgroup, sub-subgroups...
+
+    fontcolor.labels = c("white", "white"),
+    # Color of labels
+    palette = the_colors
+  )
+} else {
+  shiny::HTML("No data (yet).")
+}
+
+
+
+```
+
+
+:::
+
+:::
+
+## Geographical Exclusion
+
+On Meta, political parties can also **exclude** certain geographical units. The graphs below show which locations were excluded from seeing political advertisements and how much money the parties spend on these ads. The bigger the area the more money was spend on ads excluding this location.
+
+
+::: {.panel-tabset}
+
+
+### `r last30days_string` (Last 30 days)
+
+
+::: {.panel-tabset}
+
+
+
+#### Postal Codes
+
+The graphs below shows *postal code exclusion* that parties engaged in on Meta platforms.
+
+
+```{r}
+
+# cbs<- openxlsx::read.xlsx("../data/cbs_pc4_2020_v2.xlsx")
+
+
+all_zip <- election_dat30 %>%
+    filter(type == "location") %>%
+    filter(location_type == "zips") %>%
+    mutate(total_spend_formatted = total_spend_pct*total_spend_formatted) %>%
+    filter(is_exclusion) %>%
+  group_by(internal_id, total_spend_pct, party) %>%
+  mutate(n_together = n()) %>%
+    # select(page_id, value, num_ads, total_spend_formatted, n_together)
+  mutate(total_spend_formatted_old = total_spend_formatted) %>%
+  mutate(total_spend_formatted = total_spend_formatted/n_together) %>%
+  select(party, internal_id, value, n_together, total_spend_formatted, total_spend_formatted_old) %>%
+  ungroup() %>%
+  arrange(value) %>%
+    group_by(value, party) %>%
+    summarize(total_spend = sum(total_spend_formatted),
+              total_spend_old = sum(total_spend_formatted_old)) %>%
+    ungroup() %>%
+    # filter(party == "VVD")  %>%
+    dplyr::mutate(pc4 = str_remove_all(value, ", Netherlands") %>% as.numeric) %>%
+    left_join(cbs %>%
+    janitor::clean_names())
+
+# geo <- sf::st_read("../data/ignore/georef-netherlands-postcode-pc4.geojson", quiet = T)
+
+parties_with_zips <- all_zip %>%
+  count(party) %>%
+  pull(party)
+
+cda_dat <- geo %>%
+    left_join(all_zip %>%
+  filter(party == "CDA") %>%
+    dplyr::mutate(pc4_code = str_remove_all(value, ", Netherlands")))#%>%
+
+
+```
+
+
+::: {.panel-tabset}
+
+##### CDA
+
+
+
+```{r}
+
+cda_dat <- geo %>%
+    left_join(all_zip %>%
+  filter(party == "CDA") %>%
+    dplyr::mutate(pc4_code = str_remove_all(value, ", Netherlands")))#%>%
+
+cda_dat %>%
+  arrange(desc(total_spend)) %>%
+    ggplot()  +
+    theme_void() +
+    scale_fill_gradient2(low = "lightgrey", high = color_dat %>% filter(party=="CDA") %>% .$colors,
+            na.value = "lightgrey")   +
+      # geom_sf(color = "black") +
+    # geom_sf(aes(fill = log(total_spend)+2),
+    #         colour = "white", size = 0.9) +
+    geom_sf(aes(fill = total_spend_old),
+            colour = NA, size = 0.1) +
+    # geom_sf(data = prov, color = "black", fill = NA)  +
+  # geom_sf_label(data = prov, aes(label = name)) +
+    theme(legend.position = "bottom") +
+    guides(fill = guide_colourbar(title = "Spend (€)", barwidth = 10, barheight = 0.5))
+
+```
+
+:::
+
+
+#### Provinces
+
+```{r,fig.width=10, fig.height=8, echo = F}
+library(treemap)
+region_dat <- election_dat30 %>%
+  filter(type == "location") %>%
+  filter(location_type == "regions") %>%
+  filter(is_exclusion)  %>%
+  mutate(likely_together = paste0(total_spend_pct,num_ads) %>% as.factor() %>% as.numeric()) %>%
+  group_by(internal_id) %>%
+  add_count(likely_together, name = "n_clusters") %>%
+  ungroup() %>%
+  mutate(total_spend_formatted = total_spend_formatted*total_spend_pct) %>%
+  mutate(total_spend_formatted = total_spend_formatted/n_clusters) %>%
+  group_by(party, value) %>%
+  summarise(total_spend_formatted = sum(total_spend_formatted),
+            num_ads = sum(num_ads)) %>%
+  ungroup() %>%
+  rename(region = value) %>%
+  mutate(region = str_remove_all(region, ", Netherlands"))
+
+the_colors <- region_dat %>%
+  group_by(party) %>%
+  summarize(total_spend_formatted = sum(total_spend_formatted)) %>%
+  ungroup() %>%
+  mutate(party = fct_relevel(party)) %>%
+  left_join(color_dat) %>%
+  arrange(party) %>%
+  drop_na(colors) %>%
+  pull(colors)
+
+if(nrow(region_dat)!=0) {
+  # Static version
+  tm <- treemap(
+    region_dat,
+    index = c("party", "region"),
+    vSize = "total_spend_formatted",
+    vColor = "party",
+    type = "index",
+    title = "", draw = T,
+    align.labels = list(c("right", "bottom"),
+                        c("center", "center")),
+    fontsize.labels = c(21, 10),
+    # size of labels. Give the size per level of aggregation: size for group, size for subgroup, sub-subgroups...
+
+    fontcolor.labels = c("white", "white"),
+    # Color of labels
+    palette = the_colors
+  )
+
+
+} else {
+  shiny::HTML("No data (yet).")
+}
+#
+
+```
+
+<!-- ![](img/tregion.pdf) -->
+
+#### Cities
+
+```{r,fig.width=10, fig.height=8}
+library(treemap)
+region_dat <- election_dat30 %>%
+  filter(type == "location") %>%
+  filter(location_type == "CITY") %>%
+  filter(is_exclusion)  %>%
+  mutate(likely_together = paste0(total_spend_pct,num_ads) %>% as.factor() %>% as.numeric()) %>%
+  group_by(internal_id) %>%
+  add_count(likely_together, name = "n_clusters") %>%
+  ungroup() %>%
+  mutate(total_spend_formatted = total_spend_formatted*total_spend_pct) %>%
+  mutate(total_spend_formatted = total_spend_formatted/n_clusters) %>%
+  group_by(party, value) %>%
+  summarise(total_spend_formatted = sum(total_spend_formatted),
+            num_ads = sum(num_ads)) %>%
+  ungroup() %>%
+  rename(region = value) %>%
+  mutate(region = str_remove_all(region, ", Netherlands"))
+
+the_colors <- region_dat %>%
+  group_by(party) %>%
+  summarize(total_spend_formatted = sum(total_spend_formatted)) %>%
+  ungroup() %>%
+  mutate(party = fct_relevel(party)) %>%
+  left_join(color_dat) %>%
+  arrange(party) %>%
+  drop_na(colors) %>%
+  pull(colors)
+
+if(nrow(region_dat)!=0) {
+  ## Static version
+  tm <- treemap(
+    region_dat,
+    index = c("party", "region"),
+    vSize = "total_spend_formatted",
+    vColor = "party",
+    type = "index",
+    title = "",
+    align.labels = list(c("right", "bottom"),
+                        c("center", "center")),
+    fontsize.labels = c(21, 10),
+    # size of labels. Give the size per level of aggregation: size for group, size for subgroup, sub-subgroups...
+
+    fontcolor.labels = c("white", "white"),
+    # Color of labels
+    palette = the_colors
+  )
+} else {
+  shiny::HTML("No data (yet).")
+}
+
+
+
+```
+
+
+:::
+
+:::

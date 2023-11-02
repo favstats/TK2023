@@ -1,24 +1,25 @@
-name: "Get Lifelong Reports"
+name: "Render"
 on:
-  schedule:
-    - cron: '0 3,4,15,16 * * *'
   push:
     branches:
       - main
       
+
 jobs:
-  update-lifelong-reports:
-    name: Update Lifelong Reports
-    runs-on: ubuntu-20.04
+  render-dashboard:
+    name: Update Dashboard
+    runs-on: ubuntu-latest
     permissions:
       contents: write
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Setup R
-        uses: r-lib/actions/setup-r@v2
-        with:
-          r-version: 'release'
+      - uses: quarto-dev/quarto-actions/setup@v2
+      - name: Add Quarto to PATH
+        run: |
+          echo "export PATH=$PATH:$HOME/.local/bin" >> $GITHUB_ENV
+      - run: |
+          quarto --version
       - name: Setup - Checkout repo
         uses: actions/checkout@v3
       - name: Apt-get needed things
@@ -28,40 +29,42 @@ jobs:
           libcurl4-openssl-dev \
           libxml2-dev \
           libharfbuzz-dev \
-          libfribidi-dev
-      - run: echo "🍏 This job's status is ${{ job.status }}."
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
+          libfribidi-dev \
+          libudunits2-dev \
+          libgdal-dev
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
         with:
-          node-version: '16.x'  # Choose the appropriate Node.js version
-
-      - name: Install dependencies
-        run: npm ci
-      - name: Install playwright browsers
-        run: npx playwright install --with-deps
-      - name: "Check Playwright CLI"
-        run: npx playwright --version
-
+          r-version: 'release'
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          cache-version: 1
+          needs: |
+            any::tidyverse
+            any::httr
+            any::remotes
+            any::shiny
+            any::scales
+            any::treemap
+            any::here
+            any::jsonlite
+            any::janitor
+            any::quarto
+            any::highcharter
+            any::lubridate
+            any::gt
+            any::gtExtras
+            any::pacman
+            any::openxlsx
+            any::sf
+      - run: echo "🍏 This job's status is ${{ job.status }}."
       - name: "Install Packages"
         run: |
-          install.packages('pacman')
-          install.packages('remotes')
-          install.packages('dplyr')
-          install.packages('tibble')
-          install.packages('xml2')
-          install.packages('rvest')
-          install.packages('reticulate')
-          install.packages('purrr')
-          pacman::p_load(reticulate, fs, progress, tidyr, countrycode, dplyr, stringr, lubridate, purrr, glue, rvest, cli, digest)
-          remotes::install_github("benjaminguinaudeau/playwrightr", force = T)
+          remotes::install_github('hadley/emo')
         shell: Rscript {0}
-      - name: Pull Latest Changes
-        run: git pull origin main
-      - name: "Script - Lifelong Run"
-        run: Rscript 'report.R'
-
-
+      - name: "Script - Update Dashboard"
+        run: Rscript 'start.R'
       - name: "Commit"
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Retrieve Lifelong Reports
+          commit_message: Render Dashboard
