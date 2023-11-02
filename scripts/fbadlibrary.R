@@ -118,13 +118,14 @@ search_fields=c("ad_creation_time",
                 "region_distribution") %>% 
   stringr::str_c(., collapse=", ")
 
-min_date <- "2023-08-01"
+min_date <- "2023-11-01"
 
 #get the data from the first 'page' of data the api provides
 page_one_response <- GET(my_link,
                          path = "/ads_archive",
                          query = list(access_token = token,
                                       limit=100,
+                                      ad_type="POLITICAL_AND_ISSUE_ADS",
                                       ad_active_status="ALL",
                                       search_terms="''",
                                       ad_delivery_date_min = min_date,
@@ -163,6 +164,8 @@ while(length(next_link)>0) {
 
 }
 
+# df_imp2 <- df_imp
+# saveRDS(df_imp2, "data/df_imp2.rds")
 # dutch_parties <- c("VVD", "D66", "FvD", "SP", "GroenLinks", "Volt Nederland", "PvdA", "CDA", "PvdD", "ChristenUnie", "SGP", "DENK", "50PLUS")
 
 cat("\n\nFB Data: Read in old data\n\n")  
