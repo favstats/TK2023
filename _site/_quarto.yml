@@ -13,7 +13,7 @@ website:
         text: Blog
       - href: spending.qmd
         text: Spending
-      - targeting.qmd
+      - sidebar:targeting
       - href: about.qmd
         text: About
     right:
@@ -21,6 +21,17 @@ website:
         text: groene.nl
       - icon: github
         href: https://github.com/groene/TK2023
+  sidebar:
+    - id: ""
+    - id: targeting
+      title: "Targeting"
+      style: "docked"
+      collapse-level: 2
+      contents:
+        - targeting.qmd
+        - detailed.qmd
+        - location.qmd
+        - demographics.qmd
 
 format:
   html:
