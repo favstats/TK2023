@@ -5,6 +5,7 @@ $navbar-hl: #ed1c24;
 $link-color: #ed1c24;
 $link-hover-color: #000;
 $nav-tabs-link-active-color: #000;
+$nav-link-font-size: 1rem;
 
 /*-- scss:rules --*/
 table {
@@ -31,4 +32,12 @@ h1 {
 
 h2 {
   font-size: 1.4rem;
+}
+
+div.sidebar-item-container .active {
+  color: #ed1c24;
+}
+
+div.sidebar-item-container .sidebar-link:hover {
+  color: #ed1c24;
 }
