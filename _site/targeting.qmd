@@ -1,9 +1,9 @@
 ---
-title: "Targeting"
+title: "Spending per Targeting Criteria"
 format:
   html:
     toc: true
-    toc-location: left
+    toc-location: right
 ---
 
 ```{r setup, include=FALSE}
@@ -119,7 +119,7 @@ This section shows spending per *targeting criteria* used by political parties t
 
 
 
-## Spending per Targeting Criteria
+<!-- ## Spending per Targeting Criteria -->
 
 How much did campaigns spend on different targeting methods? The graphs below show spending *overall* across all parties and *by party*.
 

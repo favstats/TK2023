@@ -112,7 +112,7 @@ if(the_currency == "EUR"){
 
 ## Geographical Targeting
 
-The graphs below show various kinds of *location targeting* that parties engaged in on Meta platforms. The bigger the area the more money was spend by the party on targeting this location.
+The graphs below show various kinds of *location targeting* that parties engaged in on Meta platforms. 
 
 
 ::: {.panel-tabset}
@@ -271,6 +271,8 @@ gl_dat %>%
 
 #### Provinces
 
+> The bigger the area the more money was spend by the party on targeting this location.
+
 ```{r,fig.width=10, fig.height=8, echo = F}
 library(treemap)
 region_dat <- election_dat30 %>%
@@ -370,6 +372,8 @@ if(nrow(region_dat)!=0) {
 
 #### Cities
 
+> The bigger the area the more money was spend by the party on targeting this location.
+
 ```{r,fig.width=10, fig.height=8}
 library(treemap)
 region_dat <- election_dat30 %>%
@@ -432,7 +436,7 @@ if(nrow(region_dat)!=0) {
 
 ## Geographical Exclusion
 
-On Meta, political parties can also **exclude** certain geographical units. The graphs below show which locations were excluded from seeing political advertisements and how much money the parties spend on these ads. The bigger the area the more money was spend on ads excluding this location.
+On Meta, political parties can also **exclude** certain geographical units. The graphs below show which locations were excluded from seeing political advertisements and how much money the parties spend on these ads. 
 
 
 ::: {.panel-tabset}
@@ -528,6 +532,8 @@ cda_dat %>%
 
 #### Provinces
 
+> The bigger the area the more money was spend on ads excluding this location.
+
 ```{r,fig.width=10, fig.height=8, echo = F}
 library(treemap)
 region_dat <- election_dat30 %>%
@@ -587,6 +593,8 @@ if(nrow(region_dat)!=0) {
 <!-- ![](img/tregion.pdf) -->
 
 #### Cities
+
+> The bigger the area the more money was spend on ads excluding this location.
 
 ```{r,fig.width=10, fig.height=8}
 library(treemap)
