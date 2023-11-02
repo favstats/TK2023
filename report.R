@@ -421,11 +421,10 @@ try({
     mutate(amount_spent_eur = readr::parse_number(as.character(amount_spent_eur)))
 })
 
-# wtm_advertisers <- read_csv("data/nl_advertisers_13_20_Oct_2023 (1).csv") #%>% View()
 
 the_daaaat <-
   the_dat %>% 
-  bind_rows(old_dat) %>%  distinct()
+  bind_rows(old_dat) %>%  distinct() %>% 
   # bind_rows(old_dat %>% 
   #             filter(!(date %in% c("2023-10-25", "2023-10-26", "2023-10-27", "2023-10-28")))) %>% distinct() %>% 
   filter(amount_spent_eur != 100) %>% 
@@ -439,6 +438,9 @@ the_daaaat <-
   arrange(desc(amount_spent_eur)) %>% 
   distinct(page_id, date, .keep_all = T)
     # filter(date=="2023-10-25")
+# 
+
+# wtm_advertisers <- read_csv("data/nl_advertisers_13_20_Oct_2023 (1).csv") #%>% View()
 # 
 # the14 <- the_daaaat %>%
 # filter(date=="2023-10-15") %>%
@@ -467,15 +469,15 @@ the_daaaat <-
 #   arrange(date_produced) %>%
 #   mutate(amount_spent_eur = cumsum(amount_spent_eur)) %>%
 #   ungroup() %>%
-#   filter(party != "SGP") %>% 
+#   filter(party != "SGP") %>%
 #   bind_rows(
 #     the14 %>%
 #       # mutate(spend = 0) %>%
 #       select(-date) %>%
 #       expand_grid(date_produced = as.Date(c("2023-10-16", "2023-10-17", "2023-10-18")))
 #   ) %>%
-#   distinct(party, date_produced, .keep_all = T)  %>% 
-#   mutate(spend = amount_spent_eur) %>% 
+#   distinct(party, date_produced, .keep_all = T)  %>%
+#   mutate(spend = amount_spent_eur) %>%
 #   select(-tillthen, -amount_spent_eur) %>% drop_na()
 # 
 #   # filter(page_id == "115027651906533") %>% View()

@@ -604,6 +604,7 @@ hc_data_cum_raw <-  more_data %>%
   mutate(party = as.factor(party)) %>%
   mutate(party = fct_reorder(party, total_spend))
 
+
 # saveRDS(hc_data, "../data/hc_data.rds")
 
 color_order <- hc_data_cum_raw %>%
