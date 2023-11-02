@@ -1,3 +1,7 @@
+---
+title: Spending
+---
+
 ```{r setup, include=FALSE}
 
 sets <- jsonlite::fromJSON("../settings.json")
@@ -193,11 +197,9 @@ add_ribbons3 <- function(x, adv, col) {
 ```
 
 
-# `r sets$election_title`
-
 This section shows *total* and *daily spending* of political parties in the run-up to the `r sets$election_title` for the latest available data.
 
-# Topline Statistics
+## Topline Statistics
 
 ::: {.panel-tabset}
 
@@ -547,7 +549,7 @@ eval(parse(text = paste0("gt(all_spending7, rowname_col = 'party_col') %>% fmt_m
 
 
 
-# Spending over Time
+## Spending over Time
 
 Daily spending estimates might not be entirely accurate as reporting granularity differs (e.g. on Google minimum amounts of 50 Euro are displayed). For total estimates refer to the spending in the section above.
 
