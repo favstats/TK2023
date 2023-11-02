@@ -17,6 +17,8 @@ website:
       - href: about.qmd
         text: About
     right:
+      - href: https://www.groene.nl/
+        text: groene.nl
       - icon: github
         href: https://github.com/groene/TK2023
 
