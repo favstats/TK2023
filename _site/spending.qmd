@@ -327,6 +327,8 @@ get_table_dat <- function(x, var) {
 the_table30 <- get_table_dat(election_dat30, party) %>%
   arrange(desc(parse_number(`Total Spend`)))
 
+the_table30 %>% 
+  slice(1) %>% pull(`Top Spenders`)
 
 add_ribbons_code <- the_table30 %>%
   left_join(color_dat %>% mutate(party_col = party)) %>%
