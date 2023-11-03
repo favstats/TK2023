@@ -2,7 +2,7 @@
 output: github_document
 ---
 
-# Dutch Electio Dashboard
+# Dutch Election Dashboard
 
 
 
