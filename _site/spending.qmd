@@ -217,57 +217,111 @@ In total, political parties spend `r paste0(currency_symbol, scales::comma_forma
 
 ```{r}
 
+# paste('<a href="',myurl,'">',mytext,'</a>')
+
 get_table_dat <- function(x, var) {
 
-
-x %>%
+  x %>%
     filter(main_currency == the_currency) %>%
-        distinct(internal_id, .keep_all = T) %>%
-    group_by({{ var }}) %>%
+    distinct(internal_id, .keep_all = T) %>%
+    group_by({
+      {
+        var
+      }
+    }) %>%
     summarize(total_num_ads = n()) %>%
     drop_na() %>%
     mutate(total_num_ads = scales::comma(total_num_ads)) %>%
-    pivot_wider(names_from = {{ var }}, values_from = total_num_ads) %>%
+    pivot_wider(names_from = {
+      {
+        var
+      }
+    }, values_from = total_num_ads) %>%
     mutate(`party_col` = "Number of Advertisers") %>%
-    bind_rows(x %>%
-    filter(main_currency == the_currency) %>%
+    bind_rows(
+      x %>%
+        filter(main_currency == the_currency) %>%
         distinct(internal_id, .keep_all = T) %>%
-        group_by({{ var }}) %>%
+        group_by({
+          {
+            var
+          }
+        }) %>%
         arrange(desc(total_spend_formatted)) %>%
         slice(1:3) %>%
         mutate(total_spend_formatted = scales::comma(total_spend_formatted)) %>%
         mutate(n_words = str_count(page_name, " ")) %>%
-        mutate(lab = paste0(page_name, " (",currency_symbol, total_spend_formatted, ")")) %>%
-        select({{ var }}, lab) %>%
+        mutate(
+          lab = paste0(
+            '<a href="https://www.facebook.com/ads/library/?ad_type=political_and_issue_ads&country=NL&view_all_page_id=',
+            internal_id,
+            '" target="_blank" title="See ads for yourself" style="color: black; text-decoration: none">',
+            page_name,
+            '</a> (',
+            currency_symbol,
+            total_spend_formatted,
+            ')'
+          )
+        ) %>%
+        select({
+          {
+            var
+          }
+        }, lab) %>%
         drop_na() %>%
         summarize(lab = paste0("<br>", 1:n(), ". ", lab, collapse = "")) %>%
-        pivot_wider(names_from = {{ var }}, values_from = lab) %>%
-        mutate(`party_col` = "Top Spenders"))  %>%
+        pivot_wider(names_from = {
+          {
+            var
+          }
+        }, values_from = lab) %>%
+        mutate(`party_col` = "Top Spenders")
+    )  %>%
     bind_rows(
-        x %>%
-            distinct(internal_id, .keep_all = T) %>%
-            group_by({{ var }}) %>%
-            summarize(total_num_ads = sum(total_num_ads)) %>%
-            drop_na() %>%
-            mutate(total_num_ads = scales::comma(total_num_ads)) %>%
-            pivot_wider(names_from = {{ var }}, values_from = total_num_ads) %>%
-            mutate(`party_col` = "Number of Ads")) %>%
+      x %>%
+        distinct(internal_id, .keep_all = T) %>%
+        group_by({
+          {
+            var
+          }
+        }) %>%
+        summarize(total_num_ads = sum(total_num_ads)) %>%
+        drop_na() %>%
+        mutate(total_num_ads = scales::comma(total_num_ads)) %>%
+        pivot_wider(names_from = {
+          {
+            var
+          }
+        }, values_from = total_num_ads) %>%
+        mutate(`party_col` = "Number of Ads")
+    ) %>%
     bind_rows(
-        x %>%
-            distinct(internal_id, .keep_all = T) %>%
-            group_by({{ var }}) %>%
-            summarize(total_spend_formatted = sum(total_spend_formatted)) %>%
-            mutate(total_spend_formatted = scales::comma(total_spend_formatted)) %>%
-        mutate(total_spend_formatted = paste0(currency_symbol, total_spend_formatted)) %>%
-            drop_na() %>%
-            pivot_wider(names_from = {{ var }}, values_from = total_spend_formatted) %>%
-            mutate(`party_col` = "Total Spend") ) %>%
+      x %>%
+        distinct(internal_id, .keep_all = T) %>%
+        group_by({
+          {
+            var
+          }
+        }) %>%
+        summarize(total_spend_formatted = sum(total_spend_formatted)) %>%
+        mutate(total_spend_formatted = scales::comma(total_spend_formatted)) %>%
+        mutate(
+          total_spend_formatted = paste0(currency_symbol, total_spend_formatted)
+        ) %>%
+        drop_na() %>%
+        pivot_wider(names_from = {
+          {
+            var
+          }
+        }, values_from = total_spend_formatted) %>%
+        mutate(`party_col` = "Total Spend")
+    ) %>%
     t() %>%
     as.data.frame() %>%
     rownames_to_column("party_col") %>%
-    set_names(.[nrow(.),] %>% as.character()) %>%
-    slice(1:(n()-1))
-
+    set_names(.[nrow(.), ] %>% as.character()) %>%
+    slice(1:(n() - 1))
+  
 }
 
 the_table30 <- get_table_dat(election_dat30, party) %>%
@@ -283,6 +337,8 @@ add_ribbons_code <- the_table30 %>%
 
 eval(parse(text = paste0("gt(the_table30, rowname_col = 'party_col') %>% fmt_markdown(columns = everything()) %>% cols_align(align = \"center\") %>% gtExtras::gt_theme_538() %>% ", add_ribbons_code)))
 
+
+# election_dat30$internal_id
 ```
 
 

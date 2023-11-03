@@ -489,7 +489,7 @@ try({
       ggl_spend %>% distinct(Advertiser_ID, party1, .keep_all = T) %>% select(Advertiser_ID, party1, Advertiser_Name)
     ) %>%
     mutate(Spend_EUR = readr::parse_number(str_remove(eur_amount, "\\.")))   %>%
-    group_by(Advertiser_Name, party1) %>%
+    group_by(Advertiser_Name, Advertiser_ID, party1) %>%
     summarize(Spend_EUR = sum(Spend_EUR)) %>%
     ungroup() %>%
     group_by(party1) %>%
@@ -498,7 +498,19 @@ try({
     mutate(Spend_EUR = scales::comma(Spend_EUR)) %>%
     mutate(n_words = str_count(Advertiser_Name, " ")) %>%
     # mutate(lab = paste0(word(str_remove(page_name, "-"), 1,ifelse(n_words>=2, 3, 2), sep=" "), "<br>(€", total_spend_formatted, ")")) %>%
-    mutate(lab = paste0(Advertiser_Name, " (€", Spend_EUR, ")")) %>%
+    # mutate(lab = paste0(Advertiser_Name, " (€", Spend_EUR, ")")) %>%
+    mutate(
+      lab = paste0(
+        '<a href="https://adstransparency.google.com/advertiser/',
+        Advertiser_ID,
+        '?region=NL&topic=political" target="_blank" title="See ads for yourself" style="color: black; text-decoration: none">',
+        Advertiser_Name,
+        '</a> (€',
+        # currency_symbol,
+        Spend_EUR,
+        ')'
+      )
+    ) %>%
     select(party1, lab) %>%
     drop_na() %>%
     summarize(lab = paste0("<br>", 1:n(), ". ", lab, collapse = "")) %>%
@@ -560,7 +572,7 @@ try({
       ggl_spend %>% distinct(Advertiser_ID, party1, .keep_all = T) %>% select(Advertiser_ID, party1, Advertiser_Name)
     ) %>%
     mutate(Spend_EUR = readr::parse_number(str_remove(eur_amount, "\\.")))   %>%
-    group_by(Advertiser_Name, party1) %>%
+    group_by(Advertiser_Name, Advertiser_ID, party1) %>%
     summarize(Spend_EUR = sum(Spend_EUR)) %>%
     ungroup() %>%
     group_by(party1) %>%
@@ -569,7 +581,19 @@ try({
     mutate(Spend_EUR = scales::comma(Spend_EUR)) %>%
     mutate(n_words = str_count(Advertiser_Name, " ")) %>%
     # mutate(lab = paste0(word(str_remove(page_name, "-"), 1,ifelse(n_words>=2, 3, 2), sep=" "), "<br>(€", total_spend_formatted, ")")) %>%
-    mutate(lab = paste0(Advertiser_Name, " (€", Spend_EUR, ")")) %>%
+    # mutate(lab = paste0(Advertiser_Name, " (€", Spend_EUR, ")")) %>%
+    mutate(
+      lab = paste0(
+        '<a href="https://adstransparency.google.com/advertiser/',
+        Advertiser_ID,
+        '?region=NL&topic=political" target="_blank" title="See ads for yourself" style="color: black; text-decoration: none">',
+        Advertiser_Name,
+        '</a> (€',
+        # currency_symbol,
+        Spend_EUR,
+        ')'
+      )
+    ) %>%
     select(party1, lab) %>%
     drop_na() %>%
     summarize(lab = paste0("<br>", 1:n(), ". ", lab, collapse = "")) %>%
