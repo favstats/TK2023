@@ -1,5 +1,9 @@
 ---
-title: Spending
+title: Uitgaven
+format:
+  html:
+    toc: true
+    toc-location: right
 ---
 
 ```{r setup, include=FALSE}
@@ -205,9 +209,12 @@ add_ribbons3 <- function(x, adv, col) {
 ```
 
 
-This section shows *total* and *daily spending* of political parties in the run-up to the `r sets$election_title` for the latest available data.
+<!-- This section shows *total* and *daily spending* of political parties in the run-up to the `r sets$election_title` for the latest available data. -->
 
-## Topline Statistics
+Dit gedeelte laat de *volledige* en *dagelijkse* uitgaven zien van politieke partijen in de aanloop naar de Tweede Kamerverkiezingen volgens de nieuwste data. 
+
+
+<!-- ## Topline Statistics -->
 
 ::: {.panel-tabset}
 
@@ -220,7 +227,10 @@ This section shows *total* and *daily spending* of political parties in the run-
 ### `r last30days_string` (Last 30 days)
 
 
-In total, political parties spend `r paste0(currency_symbol, scales::comma_format()(sum30$total_spend_formatted))` and ran `r sum30$total_num_ads` ads on Meta in this period.
+<!-- In total, political parties spend `r paste0(currency_symbol, scales::comma_format()(sum30$total_spend_formatted))` and ran `r sum30$total_num_ads` ads on Meta in this period. -->
+
+In totaal gaven politieke partijen  `r paste0(currency_symbol, scales::comma_format()(sum30$total_spend_formatted))` euro uit en toonden ze `r sum30$total_num_ads` advertenties op Meta gedurende deze periode. 
+
 
 
 ```{r}
@@ -364,7 +374,7 @@ eval(parse(text = paste0("gt(the_table30, rowname_col = 'party_col') %>% fmt_mar
 
 ### `r last7days_string` (Last 7 days)
 
-In total, political parties spend `r paste0(currency_symbol,scales::comma_format()(sum7$total_spend_formatted))` and ran `r sum7$total_num_ads` ads on Meta in this period.
+In totaal gaven politieke partijen  `r paste0(currency_symbol, scales::comma_format()(sum7$total_spend_formatted))` euro uit en toonden ze `r sum30$total_num_ads` advertenties op Meta gedurende deze periode. 
 
 
 
@@ -451,7 +461,7 @@ sum7_ggl <- ggl_all7 %>%
 ### `r last30days_string` (Last 30 days)
 
 
-In total, political parties spent €`r scales::comma_format()(sum30_ggl$total_spend_formatted)` and ran `r sum30_ggl$total_num_ads` ad copies on Google in this timeframe.
+In totaal gaven politieke partijen  `r paste0(currency_symbol, scales::comma_format()(sum30_ggl$total_spend_formatted))` euro uit en toonden ze `r sum30$total_num_ads` advertenties op Google gedurende deze periode. 
 
 ```{r}
 
@@ -474,7 +484,7 @@ eval(parse(text = paste0("gt(ggl_all, rowname_col = 'party_col') %>% fmt_markdow
 
 ### `r last7days_string` (Last 7 days)
 
-In total, political parties spent €`r scales::comma_format()(sum7_ggl$total_spend_formatted)` and ran `r sum7_ggl$total_num_ads` ad copies on Google in this timeframe.
+In totaal gaven politieke partijen  `r paste0(currency_symbol, scales::comma_format()(sum7_ggl$total_spend_formatted))` euro uit en toonden ze `r sum30$total_num_ads` advertenties op Google gedurende deze periode. 
 
 
 ```{r}
@@ -583,6 +593,9 @@ eval(parse(text = paste0("gt(all_spending, rowname_col = 'party_col') %>% fmt_ma
 
 In total, political parties spent €`r scales::comma_format()(sum7_comb$total_spend_formatted)` and ran `r sum7_comb$total_num_ads` ads on digital platforms in this timeframe.
 
+<!-- In totaal gaven politieke partijen  `r paste0(currency_symbol, scales::comma_format()(sum7_ggl$total_spend_formatted))` euro uit en toonden ze `r sum30$total_num_ads` advertenties op Google gedurende deze periode.  -->
+
+
 
 ```{r}
 
@@ -624,9 +637,9 @@ eval(parse(text = paste0("gt(all_spending7, rowname_col = 'party_col') %>% fmt_m
 
 
 
-## Spending over Time
+## Uitgaven door de tijd heen
 
-Daily spending estimates might not be entirely accurate as reporting granularity differs (e.g. on Google minimum amounts of 50 Euro are displayed). For total estimates refer to the spending in the section above.
+Het is mogelijk dat de dagelijkse geschatte uitgaven niet volledig accuraat zijn omdat Google nauwelijks data opslaat van uitgaven onder de €50 euro. Voor een totale schatting van de uitgaven kijk dan naar de grafieken hierboven. 
 
 
 ::: {.panel-tabset}

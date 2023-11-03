@@ -12,7 +12,7 @@ website:
       - href: index.qmd
         text: Blog
       - href: spending.qmd
-        text: Spending
+        text: Uitgaven
       - sidebar:targeting
       - href: about.qmd
         text: Achtergrond
@@ -24,7 +24,7 @@ website:
   sidebar:
     - id: ""
     - id: targeting
-      title: "Targeting"
+      title: "Focuspunten"
       style: "docked"
       collapse-level: 2
       contents:

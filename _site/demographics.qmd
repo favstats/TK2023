@@ -1,5 +1,5 @@
 ---
-title: "Demographics"
+title: "Demografie"
 format:
   html:
     toc: true
@@ -107,13 +107,17 @@ if(the_currency == "EUR"){
 
 ```
 
-## Age Targeting
+## Leeftijdsfocusgroepen
 
-The graphs below show targeting by age groups and how much percentage of party budgets were spent on them.
+<!-- The graphs below show targeting by age groups and how much percentage of party budgets were spent on them. -->
 
-> Note: targeting criteria can overlap so the percentages do not sum up to 100%.
+Onderstaande grafieken laten zien hoe partijen verschillende leeftijdsgroepen als focusgroep gebruiken en hoeveel procent van het budget daaraan is uitgeven. 
+
+
+> Opmerking: Verschillende doelgroepen kunnen overlappen waardoor het niet uitkomt op 100%. 
 
 ::: panel-tabset
+
 ### `r last30days_string` (Last 30 days)
 
 ```{r, fig.width= 10, fig.height=7, dpi = 300}
@@ -344,13 +348,16 @@ tags$div(class = "container", do.call(tags$div, rows))
 ```
 :::
 
-## Gender Targeting
+## Genderfocusgroepen
 
-The graphs below show targeting by gender and how much percentage of party budgets were spent on them.
+Onderstaande grafieken laten zien hoe partijen gender als focusgroep gebruiken en welk percentage van het budget daaraan is uitgegeven. 
 
-> Note: targeting criteria can overlap so the percentages do not sum up to 100%.
+<!-- The graphs below show targeting by gender and how much percentage of party budgets were spent on them. -->
+
+> Opmerking: Verschillende doelgroepen kunnen overlappen waardoor het niet uitkomt op 100%. 
 
 ::: panel-tabset
+
 ### `r last30days_string` (Last 30 days)
 
 ```{r, fig.width= 8, fig.height=5, dpi = 300}
@@ -523,11 +530,14 @@ tags$div(class = "container", do.call(tags$div, rows))
 ```
 :::
 
-## Language Targeting
+## Taalfocusgroepen
 
-The graphs below show targeting by language and how much percentage of party budgets were spent on them.
+<!-- The graphs below show targeting by language and how much percentage of party budgets were spent on them. -->
 
-> Note: targeting criteria can overlap so the percentages do not sum up to 100%.
+Onderstaande grafieken laten zien hoe partijen verschillende talen als focusgroep gebruiken en welk perentage van het budget daaraan is uitgegeven. 
+
+
+> Opmerking: Verschillende doelgroepen kunnen overlappen waardoor het niet uitkomt op 100%. 
 
 ::: panel-tabset
 ### `r last30days_string` (Last 30 days)
@@ -699,11 +709,14 @@ tags$div(class = "container", do.call(tags$div, rows))
 ```
 :::
 
-## Work or Educational Institution Targeting
+## Focusgroep op basis van baansector en onderwijsinstelling
 
-The graphs below show targeting by job (sectors) or school/university and how much percentage of party budgets were spent on them. Check the next section for education *levels* targeting.
+<!-- The graphs below show targeting by job (sectors) or school/university and how much percentage of party budgets were spent on them. Check the next section for education *levels* targeting. -->
 
-> Note: targeting criteria can overlap so the percentages do not sum up to 100%.
+Onderstaande grafieken laten zien hoe partijen verschillende baansectoren en soorten onderwijs gebruiken als focusgroep en hoeveel procent van het budget daaraan is uitgegeven. De volgende grafiek gaat over onderwijsniveau.  
+
+
+> Opmerking: Verschillende doelgroepen kunnen overlappen waardoor het niet uitkomt op 100%. 
 
 ::: panel-tabset
 ### `r last30days_string` (Last 30 days)
@@ -947,9 +960,13 @@ tags$div(class = "container", do.call(tags$div, rows))
 ```
 :::
 
-## Education Levels Targeting
+## Focusgroep op basis van onderwijsniveau
 
-The graphs below show targeting by education levels and how much percentage of party budgets were spent on them.
+<!-- The graphs below show targeting by education levels and how much percentage of party budgets were spent on them. -->
+
+Onderstaande grafieken laten zien hoe partijen verschillende onderwijsniveaus als focusgroep gebruiken en hoeveel procent van het budget daaraan is uitgegeven.
+
+
 
 ::: panel-tabset
 ### `r last30days_string` (Last 30 days)
@@ -1166,11 +1183,14 @@ tags$div(class = "container", do.call(tags$div, rows))
 ```
 :::
 
-## Relationship Status Targeting
+## Relatiestatusfocusgroep 
 
-The graphs below show targeting by relationship status and how much percentage of party budgets were spent on them.
+<!-- The graphs below show targeting by relationship status and how much percentage of party budgets were spent on them. -->
 
-> Note: targeting criteria can overlap so the percentages do not sum up to 100%.
+Onderstaande grafieken laten zien hoe partijen relatiestatussen als focusgroep gebruiken en hoeveel procent van het budget daaraan is uitgegeven. 
+
+
+> Opmerking: Verschillende doelgroepen kunnen overlappen waardoor het niet uitkomt op 100%. 
 
 ::: panel-tabset
 ### `r last30days_string` (Last 30 days)

@@ -1,5 +1,5 @@
 ---
-title: "Location"
+title: "Locatie"
 format:
   html:
     toc: true
@@ -110,9 +110,13 @@ if(the_currency == "EUR"){
 ```
 
 
-## Geographical Targeting
+## Geografische focusgroepen
 
-The graphs below show various kinds of *location targeting* that parties engaged in on Meta platforms. 
+<!-- The graphs below show various kinds of *location targeting* that parties engaged in on Meta platforms.  -->
+
+Onderstaande grafieken laten zien op welke gebieden in Nederland verschillende partijen focussen met Meta’s onlineadvertenties. 
+
+
 
 
 ::: {.panel-tabset}
@@ -125,7 +129,9 @@ The graphs below show various kinds of *location targeting* that parties engaged
 
 #### Postal Codes
 
-The graphs below shows *postal code targeting* that parties engaged in on Meta platforms.
+<!-- The graphs below shows *postal code targeting* that parties engaged in on Meta platforms. -->
+
+Onderstaande grafiek laat zien op welke postcodes politieke partijen hun advertenties op de platforms van Meta richten. 
 
 
 ```{r}
@@ -236,7 +242,7 @@ for (partyz in parties_with_zips) {
 
 #### Provinces
 
-> The bigger the area the more money was spend by the party on targeting this location.
+> Hoe groter het vlak, hoe meer geld er is gespendeerd door die partij op die specifieke locatie. 
 
 ```{r,fig.width=10, fig.height=8, echo = F}
 library(treemap)
@@ -337,7 +343,7 @@ if(nrow(region_dat)!=0) {
 
 #### Cities
 
-> The bigger the area the more money was spend by the party on targeting this location.
+> Hoe groter het vlak, hoe meer geld er is gespendeerd door die partij op die specifieke locatie. 
 
 ```{r,fig.width=10, fig.height=8}
 library(treemap)
@@ -399,9 +405,12 @@ if(nrow(region_dat)!=0) {
 
 :::
 
-## Geographical Exclusion
+## Uitsluiting door middel van Geografie
 
-On Meta, political parties can also **exclude** certain geographical units. The graphs below show which locations were excluded from seeing political advertisements and how much money the parties spend on these ads. 
+<!-- On Meta, political parties can also **exclude** certain geographical units. The graphs below show which locations were excluded from seeing political advertisements and how much money the parties spend on these ads.  -->
+
+Op Meta is het ook mogelijk om sommige geografische locaties uit te sluiten. Onderstaande grafieken laten zien welke locaties bepaalde politieke advertenties niet zullen zien en hoeveel euro's partijen daaraan spendeerden. Hoe groter het vlak hoe meer geld partijen spendeerden om die locaties uit te sluiten. 
+
 
 
 ::: {.panel-tabset}
@@ -416,7 +425,9 @@ On Meta, political parties can also **exclude** certain geographical units. The 
 
 #### Postal Codes
 
-The graphs below shows *postal code exclusion* that parties engaged in on Meta platforms.
+<!-- The graphs below shows *postal code exclusion* that parties engaged in on Meta platforms. -->
+
+Onderstaande grafiek laten zien welke postcodes partijen uitsluiten voor advertenties op de platforms van Meta. 
 
 
 ```{r}
