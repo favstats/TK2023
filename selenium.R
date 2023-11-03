@@ -517,6 +517,7 @@ try({
     select(party1, lab) %>%
     drop_na() %>%
     summarize(lab = paste0("<br>", 1:n(), ". ", lab, collapse = "")) %>%
+    mutate(lab = paste0(lab, "<br><br>")) %>% 
     pivot_wider(names_from = party1, values_from = lab) %>%
     mutate(party_col = "Top Spenders")
   
@@ -603,6 +604,7 @@ try({
     select(party1, lab) %>%
     drop_na() %>%
     summarize(lab = paste0("<br>", 1:n(), ". ", lab, collapse = "")) %>%
+    mutate(lab = paste0(lab, "<br><br>")) %>% 
     pivot_wider(names_from = party1, values_from = lab) %>%
     mutate(party_col = "Top Spenders")
   

@@ -359,35 +359,7 @@ eval(parse(text = paste0("gt(the_table30, rowname_col = 'party_col') %>% fmt_mar
 ```
 
 
-```{r}
-exibble |>
-  dplyr::select(num, currency) |>
-  gt() |>
-  fmt_number(
-    columns = c(num, currency),
-    decimals = 1
-  ) |>
-  tab_style(
-    style = list(
-      cell_fill(color = "lightcyan"),
-      cell_text(weight = "bold")
-      ),
-    locations = cells_body(
-      columns = num,
-      rows = num >= 5000
-    )
-  ) |>
-  tab_style(
-    style = list(
-      cell_fill(color = "#F9E3D6"),
-      cell_text(style = "italic")
-      ),
-    locations = cells_body(
-      columns = currency,
-      rows = currency < 100
-    )
-  )
-```
+
 
 
 ### `r last7days_string` (Last 7 days)
@@ -409,7 +381,8 @@ add_ribbons_code <- the_table7 %>%
   # paste(collapse = "\n") %>%
   paste(collapse = "%>%")  # Add pipe after each ribbon
 
-eval(parse(text = paste0("gt(the_table7, rowname_col = 'party_col') %>% fmt_markdown(columns = everything()) %>% cols_align(align = \"center\") %>% gtExtras::gt_theme_538() %>% ", add_ribbons_code)))
+
+eval(parse(text = paste0("gt(the_table7, rowname_col = 'party_col') %>% fmt_markdown(columns = everything()) %>% cols_align(align = 'center') %>%  cols_align(align = \"left\", columns = `Top Spenders`) %>% gtExtras::gt_theme_538() %>% tab_style(style = 'vertical-align:center', locations = cells_body(columns = `Top Spenders`)) %>% ", add_ribbons_code)))
 
 ```
 
@@ -492,7 +465,8 @@ add_ribbons_code <- ggl_all %>%
   # paste(collapse = "\n") %>%
   paste(collapse = "%>%")  # Add pipe after each ribbon
 
-eval(parse(text = paste0("gt(ggl_all, rowname_col = 'party_col') %>% fmt_markdown(columns = everything()) %>% cols_align(align = \"center\") %>% gtExtras::gt_theme_538() %>% ", add_ribbons_code)))
+
+eval(parse(text = paste0("gt(ggl_all, rowname_col = 'party_col') %>% fmt_markdown(columns = everything()) %>% cols_align(align = 'center') %>%  cols_align(align = \"left\", columns = `Top Spenders`) %>% gtExtras::gt_theme_538() %>% tab_style(style = 'vertical-align:center', locations = cells_body(columns = `Top Spenders`)) %>% ", add_ribbons_code)))
 
 # debugonce(get_table_dat)
 
@@ -513,8 +487,7 @@ add_ribbons_code <- ggl_all7 %>%
   # paste(collapse = "\n") %>%
   paste(collapse = "%>%")  # Add pipe after each ribbon
 
-eval(parse(text = paste0("gt(ggl_all7, rowname_col = 'party_col') %>% fmt_markdown(columns = everything()) %>% cols_align(align = \"center\") %>% gtExtras::gt_theme_538() %>% ", add_ribbons_code)))
-
+eval(parse(text = paste0("gt(ggl_all7, rowname_col = 'party_col') %>% fmt_markdown(columns = everything()) %>% cols_align(align = 'center') %>%  cols_align(align = \"left\", columns = `Top Spenders`) %>% gtExtras::gt_theme_538() %>% tab_style(style = 'vertical-align:center', locations = cells_body(columns = `Top Spenders`)) %>% ", add_ribbons_code)))
 ```
 
 
