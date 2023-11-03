@@ -327,7 +327,7 @@ get_table_dat <- function(x, var) {
 the_table30 <- get_table_dat(election_dat30, party) %>%
   arrange(desc(parse_number(`Total Spend`)))
 
-print(the_table30)
+# print(the_table30)
 
 # # Generate the HTML but save it to a variable instead of directly outputting
 # gt_output <- gt(the_table30, rowname_col = 'party_col') %>%
@@ -349,8 +349,7 @@ print(the_table30)
 # 
 # eval(parse(text = paste0("gt(the_table30, rowname_col = 'party_col') %>% fmt_markdown(columns = everything()) %>% cols_align(align = \"center\") %>% gtExtras::gt_theme_538() %>% ", add_ribbons_code)))
 
- gt(the_table30, rowname_col = 'party_col') %>%
-  fmt_markdown(columns = everything()) 
+ gt(the_table30, rowname_col = 'party_col') 
 
 # election_dat30$internal_id
 ```
