@@ -16,10 +16,10 @@ knitr::opts_chunk$set(
 )
 
 
-# pacman::p_load(tidyverse, highcharter)
 library(tidyverse)
 library(highcharter)
 library(gt)
+pacman::p_load(htmltools)
 
 
 
@@ -252,17 +252,8 @@ get_table_dat <- function(x, var) {
         mutate(total_spend_formatted = scales::comma(total_spend_formatted)) %>%
         mutate(n_words = str_count(page_name, " ")) %>%
         mutate(
-          lab = paste0(
-            '<a href="https://www.facebook.com/ads/library/?ad_type=political_and_issue_ads&country=NL&view_all_page_id=',
-            internal_id,
-            '" target="_blank" title="See ads for yourself" style="color: black; text-decoration: none">',
-            page_name,
-            '</a> (',
-            currency_symbol,
-            total_spend_formatted,
-            ')'
-          )
-        ) %>%
+          lab =  glue::glue('[||ppage_namep||](https://www.facebook.com/ads/library/?ad_type=political_and_issue_ads&country=NL&view_all_page_id=||pinternal_idp||) (||pcurrency_symbolp||||ptotal_spend_formattedp||)', .open = "||p", .close = "p||")
+          ) %>%
         select({
           {
             var
@@ -340,16 +331,17 @@ the_table30 <- get_table_dat(election_dat30, party) %>%
 # print(gt_output)
 # 
 # 
-# add_ribbons_code <- the_table30 %>%
-#   left_join(color_dat %>% mutate(party_col = party)) %>%
-#   mutate(ribbons_code = sprintf("add_ribbons(\"%s\", \"%s\")", party_col, colors)) %>%
-#   pull(ribbons_code) %>%
-#   # paste(collapse = "\n") %>%
-#   paste(collapse = "%>%")  # Add pipe after each ribbon
-# 
-# eval(parse(text = paste0("gt(the_table30, rowname_col = 'party_col') %>% fmt_markdown(columns = everything()) %>% cols_align(align = \"center\") %>% gtExtras::gt_theme_538() %>% ", add_ribbons_code)))
+add_ribbons_code <- the_table30 %>%
+  left_join(color_dat %>% mutate(party_col = party)) %>%
+  mutate(ribbons_code = sprintf("add_ribbons(\"%s\", \"%s\")", party_col, colors)) %>%
+  pull(ribbons_code) %>%
+  # paste(collapse = "\n") %>%
+  paste(collapse = "%>%")  # Add pipe after each ribbon
 
- gt(the_table30, rowname_col = 'party_col') 
+eval(parse(text = paste0("gt(the_table30, rowname_col = 'party_col') %>% fmt_markdown(columns = everything()) %>% cols_align(align = \"center\") %>% gtExtras::gt_theme_538() %>% ", add_ribbons_code)))
+
+ # gt(the_table30, rowname_col = 'party_col') %>%
+ #  fmt_markdown() 
 
 # election_dat30$internal_id
 ```
