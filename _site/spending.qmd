@@ -327,18 +327,28 @@ get_table_dat <- function(x, var) {
 the_table30 <- get_table_dat(election_dat30, party) %>%
   arrange(desc(parse_number(`Total Spend`)))
 
-the_table30 %>% 
-  slice(1) %>% pull(`Top Spenders`)
+# # Generate the HTML but save it to a variable instead of directly outputting
+# gt_output <- gt(the_table30, rowname_col = 'party_col') %>%
+#   fmt_markdown(columns = everything()) %>%
+#   cols_align(align = "center") %>%
+#   gtExtras::gt_theme_538() %>%
+#   eval(parse(text = paste0(add_ribbons_code)))
+# 
+# # Print the HTML code to check for errors
+# print(gt_output)
+# 
+# 
+# add_ribbons_code <- the_table30 %>%
+#   left_join(color_dat %>% mutate(party_col = party)) %>%
+#   mutate(ribbons_code = sprintf("add_ribbons(\"%s\", \"%s\")", party_col, colors)) %>%
+#   pull(ribbons_code) %>%
+#   # paste(collapse = "\n") %>%
+#   paste(collapse = "%>%")  # Add pipe after each ribbon
+# 
+# eval(parse(text = paste0("gt(the_table30, rowname_col = 'party_col') %>% fmt_markdown(columns = everything()) %>% cols_align(align = \"center\") %>% gtExtras::gt_theme_538() %>% ", add_ribbons_code)))
 
-add_ribbons_code <- the_table30 %>%
-  left_join(color_dat %>% mutate(party_col = party)) %>%
-  mutate(ribbons_code = sprintf("add_ribbons(\"%s\", \"%s\")", party_col, colors)) %>%
-  pull(ribbons_code) %>%
-  # paste(collapse = "\n") %>%
-  paste(collapse = "%>%")  # Add pipe after each ribbon
-
-eval(parse(text = paste0("gt(the_table30, rowname_col = 'party_col') %>% fmt_markdown(columns = everything()) %>% cols_align(align = \"center\") %>% gtExtras::gt_theme_538() %>% ", add_ribbons_code)))
-
+ gt(the_table30, rowname_col = 'party_col') %>%
+  fmt_markdown(columns = everything()) 
 
 # election_dat30$internal_id
 ```
