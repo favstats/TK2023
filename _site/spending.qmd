@@ -327,6 +327,8 @@ get_table_dat <- function(x, var) {
 the_table30 <- get_table_dat(election_dat30, party) %>%
   arrange(desc(parse_number(`Total Spend`)))
 
+print(the_table30)
+
 # # Generate the HTML but save it to a variable instead of directly outputting
 # gt_output <- gt(the_table30, rowname_col = 'party_col') %>%
 #   fmt_markdown(columns = everything()) %>%
