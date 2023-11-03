@@ -1,7 +1,7 @@
 
 pacman::p_load(knitr, tidyverse, knitr, openxlsx, sf)
 
-# rstudioapi::jobRunScript("retrieve_targeting_data.R")
+rstudioapi::jobRunScript("get_audiences.R")
 # rstudioapi::jobRunScript("fbadlibrary.R")
 
 # Sys.sleep(60*7)

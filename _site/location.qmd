@@ -176,95 +176,141 @@ parties_with_zips <- all_zip %>%
   count(party) %>%
   pull(party)
 
-vvd_dat <- geo %>%
-    left_join(all_zip %>%
-  filter(party == "VVD") %>%
-    dplyr::mutate(pc4_code = str_remove_all(value, ", Netherlands")))#%>%
+# vvd_dat <- geo %>%
+#     left_join(all_zip %>%
+#   filter(party == "VVD") %>%
+#     dplyr::mutate(pc4_code = str_remove_all(value, ", Netherlands")))#%>%
 
 
 ```
 
 ::: {.panel-tabset}
 
-##### VVD
 
+```{r, results='asis', echo=FALSE}
+library(ggplot2)
+library(dplyr)
+library(htmltools)
 
+# Assuming 'geo' is your spatial data and 'all_zip' contains zip codes and party information.
+# 'color_dat' should have a 'party' column and a 'color' column with one color per party.
 
-```{r}
-vvd_dat  %>%
-    ggplot()  +
-    theme_void() +
-    scale_fill_gradient2(low = "lightgrey", high = color_dat %>% filter(party=="VVD") %>% .$colors,
-            na.value = "lightgrey")   +
-      # geom_sf(color = "black") +
-    # geom_sf(aes(fill = log(total_spend)+2),
-    #         colour = "white", size = 0.9) +
-    geom_sf(aes(fill = total_spend_old),
-            colour = NA, size = 0.1) +
-    # geom_sf(data = prov, color = "black", fill = NA)  +
-  # geom_sf_label(data = prov, aes(label = name)) +
-    theme(legend.position = "bottom") +
-    guides(fill = guide_colourbar(title = "Spend (€)", barwidth = 10, barheight = 0.5))
+parties_with_zips <- all_zip %>%
+  count(party) %>% #slice(3) %>% 
+  pull(party) 
 
-```
-
-##### CDA
-
-
-
-```{r}
-
-cda_dat <- geo %>%
+# Now, loop through each party, creating a section and plotting
+for (partyz in parties_with_zips) {
+  
+  # Create the heading for the party
+  cat("\n") 
+  cat("##### ", partyz, "\n")
+  
+  # Prepare the data for plotting
+  party_data <- geo %>%
     left_join(all_zip %>%
-  filter(party == "CDA") %>%
-    dplyr::mutate(pc4_code = str_remove_all(value, ", Netherlands")))#%>%
+                filter(party == partyz) %>%
+                mutate(pc4_code = str_remove_all(value, ", Netherlands")))
+  
+  # Extract the color for the party
+  party_color <- color_dat %>%
+    filter(party == partyz) %>%
+    pull(colors) %>%
+    first()  # Make sure 'color' column has exactly one color per party
+  
+  # Print the plot
+  print(
+    ggplot(party_data) +
+      geom_sf(aes(fill = total_spend_old), colour = NA, size = 0.1) +
+      scale_fill_gradient2(low = 'lightgrey', high = party_color, na.value = 'lightgrey') +
+      theme_void() +
+      theme(legend.position = 'bottom') +
+      guides(fill = guide_colourbar(title = 'Spend (€)', barwidth = 10, barheight = 0.5))
+  )
+  
+  cat("\n")
+}
 
-cda_dat %>%
-  arrange(desc(total_spend)) %>%
-    ggplot()  +
-    theme_void() +
-    scale_fill_gradient2(low = "lightgrey", high = color_dat %>% filter(party=="CDA") %>% .$colors,
-            na.value = "lightgrey")   +
-      # geom_sf(color = "black") +
-    # geom_sf(aes(fill = log(total_spend)+2),
-    #         colour = "white", size = 0.9) +
-    geom_sf(aes(fill = total_spend_old),
-            colour = NA, size = 0.1) +
-    # geom_sf(data = prov, color = "black", fill = NA)  +
-  # geom_sf_label(data = prov, aes(label = name)) +
-    theme(legend.position = "bottom") +
-    guides(fill = guide_colourbar(title = "Spend (€)", barwidth = 10, barheight = 0.5))
 
 ```
 
-##### GroenLinks-PvdA
+<!-- ##### VVD -->
+
+<!-- ```{r} -->
+<!-- vvd_dat  %>% -->
+<!--     ggplot()  + -->
+<!--     theme_void() + -->
+<!--     scale_fill_gradient2(low = "lightgrey", high = color_dat %>% filter(party=="VVD") %>% .$colors, -->
+<!--             na.value = "lightgrey")   + -->
+<!--       # geom_sf(color = "black") + -->
+<!--     # geom_sf(aes(fill = log(total_spend)+2), -->
+<!--     #         colour = "white", size = 0.9) + -->
+<!--     geom_sf(aes(fill = total_spend_old), -->
+<!--             colour = NA, size = 0.1) + -->
+<!--     # geom_sf(data = prov, color = "black", fill = NA)  + -->
+<!--   # geom_sf_label(data = prov, aes(label = name)) + -->
+<!--     theme(legend.position = "bottom") + -->
+<!--     guides(fill = guide_colourbar(title = "Spend (€)", barwidth = 10, barheight = 0.5)) -->
+
+<!-- ``` -->
+
+<!-- ##### CDA -->
 
 
 
-```{r}
+<!-- ```{r} -->
 
-gl_dat <- geo %>%
-    left_join(all_zip %>%
-  filter(party == "GroenLinks-PvdA") %>%
-    dplyr::mutate(pc4_code = str_remove_all(value, ", Netherlands")))#%>%
+<!-- cda_dat <- geo %>% -->
+<!--     left_join(all_zip %>% -->
+<!--   filter(party == "CDA") %>% -->
+<!--     dplyr::mutate(pc4_code = str_remove_all(value, ", Netherlands")))#%>% -->
 
-gl_dat %>%
-  arrange(desc(total_spend)) %>%
-    ggplot()  +
-    theme_void() +
-    scale_fill_gradient2(low = "lightgrey", high = color_dat %>% filter(party=="GroenLinks-PvdA") %>% .$colors,
-            na.value = "lightgrey")   +
-      # geom_sf(color = "black") +
-    # geom_sf(aes(fill = log(total_spend)+2),
-    #         colour = "white", size = 0.9) +
-    geom_sf(aes(fill = total_spend_old),
-            colour = NA, size = 0.1) +
-    # geom_sf(data = prov, color = "black", fill = NA)  +
-  # geom_sf_label(data = prov, aes(label = name)) +
-    theme(legend.position = "bottom") +
-    guides(fill = guide_colourbar(title = "Spend (€)", barwidth = 10, barheight = 0.5))
+<!-- cda_dat %>% -->
+<!--   arrange(desc(total_spend)) %>% -->
+<!--     ggplot()  + -->
+<!--     theme_void() + -->
+<!--     scale_fill_gradient2(low = "lightgrey", high = color_dat %>% filter(party=="CDA") %>% .$colors, -->
+<!--             na.value = "lightgrey")   + -->
+<!--       # geom_sf(color = "black") + -->
+<!--     # geom_sf(aes(fill = log(total_spend)+2), -->
+<!--     #         colour = "white", size = 0.9) + -->
+<!--     geom_sf(aes(fill = total_spend_old), -->
+<!--             colour = NA, size = 0.1) + -->
+<!--     # geom_sf(data = prov, color = "black", fill = NA)  + -->
+<!--   # geom_sf_label(data = prov, aes(label = name)) + -->
+<!--     theme(legend.position = "bottom") + -->
+<!--     guides(fill = guide_colourbar(title = "Spend (€)", barwidth = 10, barheight = 0.5)) -->
 
-```
+<!-- ``` -->
+
+<!-- ##### GroenLinks-PvdA -->
+
+
+
+<!-- ```{r} -->
+
+<!-- gl_dat <- geo %>% -->
+<!--     left_join(all_zip %>% -->
+<!--   filter(party == "GroenLinks-PvdA") %>% -->
+<!--     dplyr::mutate(pc4_code = str_remove_all(value, ", Netherlands")))#%>% -->
+
+<!-- gl_dat %>% -->
+<!--   arrange(desc(total_spend)) %>% -->
+<!--     ggplot()  + -->
+<!--     theme_void() + -->
+<!--     scale_fill_gradient2(low = "lightgrey", high = color_dat %>% filter(party=="GroenLinks-PvdA") %>% .$colors, -->
+<!--             na.value = "lightgrey")   + -->
+<!--       # geom_sf(color = "black") + -->
+<!--     # geom_sf(aes(fill = log(total_spend)+2), -->
+<!--     #         colour = "white", size = 0.9) + -->
+<!--     geom_sf(aes(fill = total_spend_old), -->
+<!--             colour = NA, size = 0.1) + -->
+<!--     # geom_sf(data = prov, color = "black", fill = NA)  + -->
+<!--   # geom_sf_label(data = prov, aes(label = name)) + -->
+<!--     theme(legend.position = "bottom") + -->
+<!--     guides(fill = guide_colourbar(title = "Spend (€)", barwidth = 10, barheight = 0.5)) -->
+
+<!-- ``` -->
 
 
 :::
@@ -487,10 +533,10 @@ parties_with_zips <- all_zip %>%
   count(party) %>%
   pull(party)
 
-cda_dat <- geo %>%
-    left_join(all_zip %>%
-  filter(party == "CDA") %>%
-    dplyr::mutate(pc4_code = str_remove_all(value, ", Netherlands")))#%>%
+# cda_dat <- geo %>%
+#     left_join(all_zip %>%
+#   filter(party == "CDA") %>%
+#     dplyr::mutate(pc4_code = str_remove_all(value, ", Netherlands")))#%>%
 
 
 ```
@@ -498,34 +544,47 @@ cda_dat <- geo %>%
 
 ::: {.panel-tabset}
 
-##### CDA
-
 
 
 ```{r}
+parties_with_zips <- all_zip %>%
+  count(party) %>% #slice(3) %>% 
+  pull(party) 
 
-cda_dat <- geo %>%
+# Now, loop through each party, creating a section and plotting
+for (partyz in parties_with_zips) {
+  
+  # Create the heading for the party
+  cat("\n") 
+  cat("##### ", partyz, "\n")
+  
+  # Prepare the data for plotting
+  party_data <- geo %>%
     left_join(all_zip %>%
-  filter(party == "CDA") %>%
-    dplyr::mutate(pc4_code = str_remove_all(value, ", Netherlands")))#%>%
-
-cda_dat %>%
-  arrange(desc(total_spend)) %>%
-    ggplot()  +
-    theme_void() +
-    scale_fill_gradient2(low = "lightgrey", high = color_dat %>% filter(party=="CDA") %>% .$colors,
-            na.value = "lightgrey")   +
-      # geom_sf(color = "black") +
-    # geom_sf(aes(fill = log(total_spend)+2),
-    #         colour = "white", size = 0.9) +
-    geom_sf(aes(fill = total_spend_old),
-            colour = NA, size = 0.1) +
-    # geom_sf(data = prov, color = "black", fill = NA)  +
-  # geom_sf_label(data = prov, aes(label = name)) +
-    theme(legend.position = "bottom") +
-    guides(fill = guide_colourbar(title = "Spend (€)", barwidth = 10, barheight = 0.5))
-
+                filter(party == partyz) %>%
+                mutate(pc4_code = str_remove_all(value, ", Netherlands")))
+  
+  # Extract the color for the party
+  party_color <- color_dat %>%
+    filter(party == partyz) %>%
+    pull(colors) %>%
+    first()  # Make sure 'color' column has exactly one color per party
+  
+  # Print the plot
+  print(
+    ggplot(party_data) +
+      geom_sf(aes(fill = total_spend_old), colour = NA, size = 0.1) +
+      scale_fill_gradient2(low = 'lightgrey', high = party_color, na.value = 'lightgrey') +
+      theme_void() +
+      theme(legend.position = 'bottom') +
+      guides(fill = guide_colourbar(title = 'Spend (€)', barwidth = 10, barheight = 0.5))
+  )
+  
+  cat("\n")
+}
 ```
+
+
 
 :::
 

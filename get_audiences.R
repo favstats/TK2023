@@ -14,9 +14,9 @@ library(lubridate)
 
 sets <- jsonlite::fromJSON("settings.json")
 
-title_txt <- read_lines("_site/_quarto.yml")
-title_txt[which(str_detect(title_txt, "title"))] <-  glue::glue('  title: "{sets$dashboard}"')
-write_lines(title_txt, "_site/_quarto.yml")
+# title_txt <- read_lines("_site/_quarto.yml")
+# title_txt[which(str_detect(title_txt, "title"))] <-  glue::glue('  title: "{sets$dashboard}"')
+# write_lines(title_txt, "_site/_quarto.yml")
 
 if(Sys.info()[["sysname"]]=="Windows"){
   ### CHANGE ME WHEN LOCAL!
