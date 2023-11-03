@@ -1,5 +1,8 @@
 ---
 title: Spending
+html:
+  includes:
+    after-body: modifyLinks.js
 ---
 
 ```{r setup, include=FALSE}
@@ -118,6 +121,14 @@ if(the_currency == "EUR"){
   # election_dat7 %>% count(page_name, party)
 ```
 
+```{javascript}
+document.addEventListener("DOMContentLoaded", function() {
+  let tableLinks = document.querySelectorAll("table a");
+  tableLinks.forEach(function(link) {
+    link.setAttribute("target", "_blank");
+  });
+});
+```
 
 
 

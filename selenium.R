@@ -499,17 +499,20 @@ try({
     mutate(n_words = str_count(Advertiser_Name, " ")) %>%
     # mutate(lab = paste0(word(str_remove(page_name, "-"), 1,ifelse(n_words>=2, 3, 2), sep=" "), "<br>(€", total_spend_formatted, ")")) %>%
     # mutate(lab = paste0(Advertiser_Name, " (€", Spend_EUR, ")")) %>%
+    # mutate(
+    #   lab = paste0(
+    #     '<a href="https://adstransparency.google.com/advertiser/',
+    #     Advertiser_ID,
+    #     '?region=NL&topic=political" target="_blank" title="See ads for yourself" style="color: black; text-decoration: none">',
+    #     Advertiser_Name,
+    #     '</a> (€',
+    #     # currency_symbol,
+    #     Spend_EUR,
+    #     ')'
+    #   )
+    # ) %>%
     mutate(
-      lab = paste0(
-        '<a href="https://adstransparency.google.com/advertiser/',
-        Advertiser_ID,
-        '?region=NL&topic=political" target="_blank" title="See ads for yourself" style="color: black; text-decoration: none">',
-        Advertiser_Name,
-        '</a> (€',
-        # currency_symbol,
-        Spend_EUR,
-        ')'
-      )
+      lab =  glue::glue('[{Advertiser_Name}](https://adstransparency.google.com/advertiser/{Advertiser_ID}?region=NL&topic=political) (€{Spend_EUR})', .open = "{", .close = "}")
     ) %>%
     select(party1, lab) %>%
     drop_na() %>%
@@ -582,17 +585,20 @@ try({
     mutate(n_words = str_count(Advertiser_Name, " ")) %>%
     # mutate(lab = paste0(word(str_remove(page_name, "-"), 1,ifelse(n_words>=2, 3, 2), sep=" "), "<br>(€", total_spend_formatted, ")")) %>%
     # mutate(lab = paste0(Advertiser_Name, " (€", Spend_EUR, ")")) %>%
+    # mutate(
+    #   lab = paste0(
+    #     '<a href="https://adstransparency.google.com/advertiser/',
+    #     Advertiser_ID,
+    #     '?region=NL&topic=political" target="_blank" title="See ads for yourself" style="color: black; text-decoration: none">',
+    #     Advertiser_Name,
+    #     '</a> (€',
+    #     # currency_symbol,
+    #     Spend_EUR,
+    #     ')'
+    #   )
+    # ) %>%
     mutate(
-      lab = paste0(
-        '<a href="https://adstransparency.google.com/advertiser/',
-        Advertiser_ID,
-        '?region=NL&topic=political" target="_blank" title="See ads for yourself" style="color: black; text-decoration: none">',
-        Advertiser_Name,
-        '</a> (€',
-        # currency_symbol,
-        Spend_EUR,
-        ')'
-      )
+      lab =  glue::glue('[{Advertiser_Name}](https://adstransparency.google.com/advertiser/{Advertiser_ID}?region=NL&topic=political) (€{Spend_EUR})', .open = "{", .close = "}")
     ) %>%
     select(party1, lab) %>%
     drop_na() %>%

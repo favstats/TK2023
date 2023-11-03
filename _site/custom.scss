@@ -6,6 +6,7 @@ $link-color: #ed1c24;
 $link-hover-color: #000;
 $nav-tabs-link-active-color: #000;
 $nav-link-font-size: 0.9rem;
+$link-style-hover: italic; // Assuming you want to define a variable for the link style
 
 /*-- scss:rules --*/
 table {
@@ -41,3 +42,18 @@ div.sidebar-item-container .active {
 div.sidebar-item-container .sidebar-link:hover {
   color: #ed1c24;
 }
+
+
+ // for links within tables
+table a {
+  color: black !important;      // Making sure the links in the tables are black
+  text-decoration: none !important; // Removing the underline
+  display: inline-block;    // Making sure that the entire text is clickable
+  transition: 0.3s;   // Smooth transition for hover effect
+}
+
+table a:hover {
+   // text-decoration: underline !important;  // Adding underline on hover for better UX
+  font-style: $link-style-hover; // Hover state style
+}
+
