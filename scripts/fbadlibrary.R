@@ -118,7 +118,7 @@ search_fields=c("ad_creation_time",
                 "region_distribution") %>% 
   stringr::str_c(., collapse=", ")
 
-min_date <- "2023-11-01"
+min_date <- "2023-10-01"
 
 #get the data from the first 'page' of data the api provides
 page_one_response <- GET(my_link,
@@ -128,6 +128,7 @@ page_one_response <- GET(my_link,
                                       ad_type="POLITICAL_AND_ISSUE_ADS",
                                       ad_active_status="ALL",
                                       search_terms="''",
+                                      page_id="320374518118",
                                       ad_delivery_date_min = min_date,
                                       fields=search_fields,
                                       ad_reached_countries="NL"))

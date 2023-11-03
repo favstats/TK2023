@@ -15,7 +15,7 @@ website:
         text: Spending
       - sidebar:targeting
       - href: about.qmd
-        text: About
+        text: Achtergrond
     right:
       - href: https://www.groene.nl/
         text: groene.nl
