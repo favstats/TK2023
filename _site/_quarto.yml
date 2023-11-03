@@ -3,7 +3,7 @@ project:
   output-dir: ../docs
 
 website:
-  title: "Verkiezingen 2023"
+  title: "De Campagnemonitor 2023"
   favicon: https://www.groene.nl/favicon.ico
   search: false
   navbar:
