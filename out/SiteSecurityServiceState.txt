@@ -1,3 +1,0 @@
-contile.services.mozilla.com	0	19665	1730653597956,1,0
-location.services.mozilla.com	0	19665	1730653597770,1,1
-spocs.getpocket.com	0	19665	1762189597956,1,0
