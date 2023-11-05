@@ -209,12 +209,8 @@ add_ribbons3 <- function(x, adv, col) {
 ```
 
 
-<!-- This section shows *total* and *daily spending* of political parties in the run-up to the `r sets$election_title` for the latest available data. -->
-
 Dit gedeelte laat de *volledige* en *dagelijkse* uitgaven zien van politieke partijen in de aanloop naar de Tweede Kamerverkiezingen volgens de nieuwste data. 
 
-
-<!-- ## Topline Statistics -->
 
 ::: {.panel-tabset}
 
@@ -225,9 +221,6 @@ Dit gedeelte laat de *volledige* en *dagelijkse* uitgaven zien van politieke par
 ::: {.panel-tabset}
 
 ### `r last30days_string` (Last 30 days)
-
-
-<!-- In total, political parties spend `r paste0(currency_symbol, scales::comma_format()(sum30$total_spend_formatted))` and ran `r sum30$total_num_ads` ads on Meta in this period. -->
 
 In totaal gaven politieke partijen  `r paste0(currency_symbol, scales::comma_format()(sum30$total_spend_formatted))` euro uit en toonden ze `r sum30$total_num_ads` advertenties op Meta gedurende deze periode. 
 
@@ -592,8 +585,6 @@ eval(parse(text = paste0("gt(all_spending, rowname_col = 'party_col') %>% fmt_ma
 ### `r last7days_string` (Last 7 days)
 
 In total, political parties spent €`r scales::comma_format()(sum7_comb$total_spend_formatted)` and ran `r sum7_comb$total_num_ads` ads on digital platforms in this timeframe.
-
-<!-- In totaal gaven politieke partijen  `r paste0(currency_symbol, scales::comma_format()(sum7_ggl$total_spend_formatted))` euro uit en toonden ze `r sum30$total_num_ads` advertenties op Google gedurende deze periode.  -->
 
 
 

@@ -112,8 +112,6 @@ if(the_currency == "EUR"){
 
 ## Geografische focusgroepen
 
-<!-- The graphs below show various kinds of *location targeting* that parties engaged in on Meta platforms.  -->
-
 Onderstaande grafieken laten zien op welke gebieden in Nederland verschillende partijen focussen met Meta’s onlineadvertenties. 
 
 
@@ -128,8 +126,6 @@ Onderstaande grafieken laten zien op welke gebieden in Nederland verschillende p
 ::: {.panel-tabset}
 
 #### Postal Codes
-
-<!-- The graphs below shows *postal code targeting* that parties engaged in on Meta platforms. -->
 
 Onderstaande grafiek laat zien op welke postcodes politieke partijen hun advertenties op de platforms van Meta richten. 
 
@@ -339,7 +335,6 @@ if(nrow(region_dat)!=0) {
 
 ```
 
-<!-- ![](img/tregion.pdf) -->
 
 #### Cities
 
@@ -407,8 +402,6 @@ if(nrow(region_dat)!=0) {
 
 ## Uitsluiting door middel van Geografie
 
-<!-- On Meta, political parties can also **exclude** certain geographical units. The graphs below show which locations were excluded from seeing political advertisements and how much money the parties spend on these ads.  -->
-
 Op Meta is het ook mogelijk om sommige geografische locaties uit te sluiten. Onderstaande grafieken laten zien welke locaties bepaalde politieke advertenties niet zullen zien en hoeveel euro's partijen daaraan spendeerden. Hoe groter het vlak hoe meer geld partijen spendeerden om die locaties uit te sluiten. 
 
 
@@ -424,8 +417,6 @@ Op Meta is het ook mogelijk om sommige geografische locaties uit te sluiten. Ond
 
 
 #### Postal Codes
-
-<!-- The graphs below shows *postal code exclusion* that parties engaged in on Meta platforms. -->
 
 Onderstaande grafiek laten zien welke postcodes partijen uitsluiten voor advertenties op de platforms van Meta. 
 
@@ -582,7 +573,6 @@ if(nrow(region_dat)!=0) {
 
 ```
 
-<!-- ![](img/tregion.pdf) -->
 
 #### Cities
 

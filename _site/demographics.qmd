@@ -109,7 +109,6 @@ if(the_currency == "EUR"){
 
 ## Leeftijdsfocusgroepen
 
-<!-- The graphs below show targeting by age groups and how much percentage of party budgets were spent on them. -->
 
 Onderstaande grafieken laten zien hoe partijen verschillende leeftijdsgroepen als focusgroep gebruiken en hoeveel procent van het budget daaraan is uitgeven. 
 
@@ -532,8 +531,6 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 ## Taalfocusgroepen
 
-<!-- The graphs below show targeting by language and how much percentage of party budgets were spent on them. -->
-
 Onderstaande grafieken laten zien hoe partijen verschillende talen als focusgroep gebruiken en welk perentage van het budget daaraan is uitgegeven. 
 
 
@@ -710,8 +707,6 @@ tags$div(class = "container", do.call(tags$div, rows))
 :::
 
 ## Focusgroep op basis van baansector en onderwijsinstelling
-
-<!-- The graphs below show targeting by job (sectors) or school/university and how much percentage of party budgets were spent on them. Check the next section for education *levels* targeting. -->
 
 Onderstaande grafieken laten zien hoe partijen verschillende baansectoren en soorten onderwijs gebruiken als focusgroep en hoeveel procent van het budget daaraan is uitgegeven. De volgende grafiek gaat over onderwijsniveau.  
 
@@ -962,8 +957,6 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 ## Focusgroep op basis van onderwijsniveau
 
-<!-- The graphs below show targeting by education levels and how much percentage of party budgets were spent on them. -->
-
 Onderstaande grafieken laten zien hoe partijen verschillende onderwijsniveaus als focusgroep gebruiken en hoeveel procent van het budget daaraan is uitgegeven.
 
 
@@ -1184,8 +1177,6 @@ tags$div(class = "container", do.call(tags$div, rows))
 :::
 
 ## Relatiestatusfocusgroep 
-
-<!-- The graphs below show targeting by relationship status and how much percentage of party budgets were spent on them. -->
 
 Onderstaande grafieken laten zien hoe partijen relatiestatussen als focusgroep gebruiken en hoeveel procent van het budget daaraan is uitgegeven. 
 

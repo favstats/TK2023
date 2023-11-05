@@ -114,15 +114,11 @@ if(the_currency == "EUR"){
 
 ```
 
-<!-- This section shows spending per *targeting criteria* used by political parties to reach citizens in the run-up to the `r sets$election_title` for the latest available data. It only includes targeting on Meta platforms (Facebook and Instagram), which offers the most detailed targeting options to political advertisers. -->
 
 
 Deze grafieken tonen aan op welke doelgroepen politieke partijen hun advertenties richten in aanloop naar de Tweede Kamerverkiezingen van 2023 volgens de nieuwste data. Het richt zich volledig op de platformen van Meta (Facebook en Instagram) omdat die de meest gedetailleerdere doelgroepen aanbiedt voor politieke advertenties. 
 
 
-<!-- ## Spending per Targeting Criteria -->
-
-<!-- How much did campaigns spend on different targeting methods? The graphs below show spending *overall* across all parties and *by party*. -->
 
 Hoeveel euro spendeerden de campagnes van politieke partijen op de verschillende doelgroepen? Onderstaande grafieken laten het in zijn totaliteit zien maar ook per partij. 
 

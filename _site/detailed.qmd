@@ -117,8 +117,6 @@ if(the_currency == "EUR"){
 Onderstaande grafiek laat de meest *gebruikte* focusgroepen zien per partij van de gedetailleerde opties die Meta aanbiedt. De ranglijst is gebaseerd op de uitgegeven hoeveelheid euro’s. De meeste focusgroepen zijn gericht op interesses zoals ‘boeken’ of ‘politiek’.
 
 
-<!-- Here, we show the *top targeted audiences* for each party for the "detailed" targeting that Meta offers (ranked by amount of Euro spend). Most (but not all) of these audiences are “interest” audiences, i.e. the parties targeted people interested in “Books” or “Politics”. -->
-
 ::: {.panel-tabset}
 
 
@@ -347,7 +345,6 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 ## Meeste uitgesloten focusgroepen
 
-<!-- Here, we show the *top excluded audiences* for each party for the "detailed" targeting that Meta offers (ranked by amount of Euro spend). Most (but not all) of these audiences are “interest” audiences, i.e. the parties excluded people interested in “Books” or “Politics”. -->
 
 Onderstaande grafiek laat de meest *uitgesloten* focusgroepen zien per partij van de gedetailleerde opties die Meta aanbiedt. De ranglijst is gebaseerd op de uitgegeven hoeveelheid euro’s. De meeste focusgroepen zijn gericht op interesses zoals ‘boeken’ of ‘politiek’.
 
@@ -515,8 +512,6 @@ tags$div(class = "container", do.call(tags$div, rows))
 :::
 
 ## Top Contested Audiences
-
-<!-- Here, we show the *top most contested audiences*, i.e. where all parties have spent considerable amounts of money competing to reach voters with the same interests. -->
 
 Onderstaande grafieken laten de doelgroepen zien waar het meest om gestreden worden. Bijvoorbeeld de groepen waar alle partijen grote bedragen in investeren op kiezers te bereiken met dezelfde interesses. 
 
