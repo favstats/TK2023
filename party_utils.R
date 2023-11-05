@@ -61,13 +61,28 @@ election_dat7 <- readRDS("../data/election_dat7.rds") %>%
 # saveRDS(election_dat30, "../data/election_dat30.rds")
 # saveRDS(election_dat7, "../data/election_dat7.rds")
 
-fin <- (as.Date(election_dat30$ds[1])-lubridate::days(1))
-begin7 <- fin-lubridate::days(6)
-begin30 <- fin-lubridate::days(29)
+
+# Setting the system locale to Dutch for time/date formatting
+Sys.setlocale("LC_TIME", "nl_NL")
+
+# Function to create Dutch date strings with suffixes
+create_date <- function(x) {
+  the_date <- format(x, "%e %b") # %e for day of the month without leading zeros, %B for full month name in Dutch
+  # In Dutch, date suffixes are not commonly used so we can omit the 'append_date_suffix' part
+  return(trimws(the_date)) # trimws to remove any leading or trailing whitespace which might be left after %e
+}
+
+last7days_string <- paste0(create_date(begin7), " - ", create_date(fin), " ", lubridate::year(fin)) 
+last30days_string <- paste0(create_date(begin30), " - ", create_date(fin), " ", lubridate::year(fin))
+
+# # Print the Dutch date range strings
+# print(last7days_string)
+# print(last30days_string)
+# 
+# # Reset locale back to the original if necessary
+# Sys.setlocale("LC_TIME", "C")
 
 
-last7days_string <- paste0(create_date(begin7), " - ", paste(create_date(fin), lubridate::year(fin)))
-last30days_string <- paste0(create_date(begin30), " - ", paste(create_date(fin), lubridate::year(fin)))
 
 
 
