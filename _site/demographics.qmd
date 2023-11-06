@@ -42,7 +42,7 @@ Onderstaande grafieken laten zien hoe partijen verschillende leeftijdsgroepen al
 
 ::: panel-tabset
 
-### `r last30days_string` (Last 30 days)
+### `r last30days_string` (Agelopen 30 dagen)
 
 ```{r, fig.width= 10, fig.height=7, dpi = 300}
 get_targ_perc <- function(x, var) {
@@ -177,7 +177,7 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 ```
 
-### `r last7days_string` (Last 7 days)
+### `r last7days_string` (Agelopen 7 dagen)
 
 ```{r, fig.width= 10, fig.height=7, dpi = 300}
 
@@ -280,7 +280,7 @@ De onderstaande grafieken laten zien hoe partijen gender als focusgroep gebruike
 
 ::: panel-tabset
 
-### `r last30days_string` (Last 30 days)
+### `r last30days_string` (Afgelopen 30 dagen)
 
 ```{r, fig.width= 8, fig.height=5, dpi = 300}
 
@@ -367,7 +367,7 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 ```
 
-### `r last7days_string` (Last 7 days)
+### `r last7days_string` (Agelopen 7 dagen)
 
 ```{r, fig.width= 8, fig.height=5, dpi = 300}
 
@@ -460,7 +460,7 @@ De onderstaande grafieken laten zien hoe partijen verschillende talen als focusg
 > NB verschillende focusgroepen kunnen overlappen, waardoor de uitkomst niet per se 100% is
 
 ::: panel-tabset
-### `r last30days_string` (Last 30 days)
+### `r last30days_string` (Afgelopen 30 dagen)
 
 ```{r}
 
@@ -544,7 +544,7 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 ```
 
-### `r last7days_string` (Last 7 days)
+### `r last7days_string` (Afgelopen 7 dagen)
 
 ```{r}
 
@@ -637,7 +637,7 @@ De onderstaande grafieken laten zien hoe partijen verschillende baansectoren en 
 > NB verschillende focusgroepen kunnen overlappen, waardoor de uitkomst niet per se 100% is
 
 ::: panel-tabset
-### `r last30days_string` (Last 30 days)
+### `r last30days_string` (Afgelopen 30 dagen)
 
 ```{r, fig.width= 11, fig.height=8, dpi = 300}
 
@@ -776,7 +776,7 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 ```
 
-### `r last7days_string` (Last 7 days)
+### `r last7days_string` (Afgelopen 7 dagen)
 
 ```{r, fig.width= 11, fig.height=8, dpi = 300}
 
@@ -885,7 +885,7 @@ De onderstaande grafieken laten zien hoe partijen verschillende onderwijsniveaus
 
 
 ::: panel-tabset
-### `r last30days_string` (Last 30 days)
+### `r last30days_string` (Agelopen 30 dagen)
 
 ```{r, fig.width= 8, fig.height=5, dpi = 300, eval =T, results='asis'}
 
@@ -1010,7 +1010,7 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 ```
 
-### `r last7days_string` (Last 7 days)
+### `r last7days_string` (Afgelopen 7 dagen)
 
 ```{r, fig.width= 8, fig.height=5, dpi = 300, eval =T, results='asis'}
 
@@ -1107,7 +1107,7 @@ De onderstaande grafieken laten zien hoe partijen relatiestatussen als focusgroe
 > NB verschillende focusgroepen kunnen overlappen, waardoor de uitkomst niet per se 100% is
 
 ::: panel-tabset
-### `r last30days_string` (Last 30 days)
+### `r last30days_string` (Afgelopen 30 dagen)
 
 ```{r, fig.width= 8, fig.height=5, dpi = 300}
 
@@ -1236,7 +1236,7 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 ```
 
-### `r last7days_string` (Last 7 days)
+### `r last7days_string` (Afgelopen 7 dagen)
 
 ```{r, fig.width= 8, fig.height=5, dpi = 300}
 
@@ -1328,7 +1328,7 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 <!-- Explore the data yourself: -->
 
-<!-- ### `r last30days_string` (Last 30 days) -->
+<!-- ### `r last30days_string` (Afgelopen 30 dagen) -->
 
 <!-- ```{r, fig.width= 11, fig.height=8, dpi = 300} -->
 
