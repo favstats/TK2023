@@ -49,13 +49,13 @@ Hoeveel spendeerden de campagnes van politieke partijen aan de verschillende foc
 ::: {.panel-tabset}
 
 
-### `r last30days_string` (Last 30 days)
+### `r last30days_string` (Agelopen 30 dagen)
 
 ::: {.panel-tabset}
 
 
 
-#### Overall
+#### Totaal
 
 
 ```{r, fig.width=8, fig.height=5, dpi=300}
@@ -125,7 +125,7 @@ gg %>%
 ```
 
 
-#### By Party
+#### Per partij
 
 ```{r}
 col_each30 <- election_dat30 %>%
@@ -238,7 +238,7 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 :::
 
-### `r last7days_string` (Last 7 days)
+### `r last7days_string` (Agelopen 7 dagen)
 
 
 ::: {.panel-tabset}
