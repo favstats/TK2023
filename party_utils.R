@@ -76,8 +76,8 @@ create_date <- function(x) {
   return(trimws(the_date)) # trimws to remove any leading or trailing whitespace which might be left after %e
 }
 
-last7days_string <- paste0(create_date(begin7), " - ", create_date(fin), " ", lubridate::year(fin)) 
-last30days_string <- paste0(create_date(begin30), " - ", create_date(fin), " ", lubridate::year(fin))
+last7days_string <- paste0(create_date(begin7), " - ", create_date(fin), " ", lubridate::year(fin)) %>% str_replace("Oct", "Okt")
+last30days_string <- paste0(create_date(begin30), " - ", create_date(fin), " ", lubridate::year(fin)) %>% str_replace("Oct", "Okt")
 
 # # Print the Dutch date range strings
 # print(last7days_string)
