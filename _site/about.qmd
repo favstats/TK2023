@@ -38,7 +38,7 @@ Google toont via het Google Transparency Report hoeveel geld door partijen is ui
 ::: {}
 _De Groene Amsterdammer_ is het oudste opinieweekblad van Nederland, sinds 1877 onafhankelijk baken van de vrijzinnige meningsvorming op het gebied van politiek, maatschappij, cultuur en literatuur.
 
-[https://groene.nl/](https://www.groene.nl/)
+[www.groene.nl](https://www.groene.nl/)
 :::
 
 
@@ -55,7 +55,7 @@ _De Groene Amsterdammer_ is het oudste opinieweekblad van Nederland, sinds 1877 
 ::: {}
 Wilt u zien hoe politieke partijen *u* targeten? [Meld u aan](https://whotargets.me/) bij **Who Targets Me** en download de gratis browserplugin om te zien hoe partijen op Facebook uw gegevens gebruiken:
 
-[https://whotargets.me/](https://whotargets.me/)
+[whotargets.me](https://whotargets.me/)
 
 :::
 
@@ -66,7 +66,7 @@ Wilt u zien hoe politieke partijen *u* targeten? [Meld u aan](https://whotargets
 ::: {}
 Wilt u zelf targeting data ophalen uit de Meta Advertentiebibliotheek? Dit dashboard wordt aangedreven door het R package: `metatargetr`. Bekijk het hier:
 
-[https://github.com/favstats/metatargetr](https://github.com/favstats/metatargetr)
+[github.com/favstats/metatargetr](https://github.com/favstats/metatargetr)
 
 :::
 
