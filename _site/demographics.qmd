@@ -882,6 +882,8 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 De onderstaande grafieken laten zien hoe partijen verschillende onderwijsniveaus als focusgroep gebruiken en hoeveel procent van het budget daaraan werd uitgegeven
 
+> NB verschillende focusgroepen kunnen overlappen, waardoor de uitkomst niet per se 100% is
+
 
 
 ::: panel-tabset

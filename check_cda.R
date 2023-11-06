@@ -106,3 +106,7 @@ party_color <- color_dat %>%
     filter(pc4 == "9644") %>% 
     mutate(east_gron = pc4 %in% east_groninge) %>% View()
   
+  
+  
+  election_dat30 %>% filter(page_name == "D66") %>% View()
+  
