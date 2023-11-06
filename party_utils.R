@@ -61,6 +61,10 @@ election_dat7 <- readRDS("../data/election_dat7.rds") %>%
 # saveRDS(election_dat30, "../data/election_dat30.rds")
 # saveRDS(election_dat7, "../data/election_dat7.rds")
 
+fin <- (as.Date(election_dat30$ds[1])-lubridate::days(1))
+begin7 <- fin-lubridate::days(6)
+begin30 <- fin-lubridate::days(29)
+
 
 # Setting the system locale to Dutch for time/date formatting
 Sys.setlocale("LC_TIME", "nl_NL")

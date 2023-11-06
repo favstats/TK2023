@@ -23,7 +23,7 @@ library(tidyverse)
 library(highcharter)
 library(gt)
 
-pacman::p_load(knitr, tidyverse, rmarkdown, openxlsx, sf)
+pacman::p_load(knitr, tidyverse, rmarkdown, openxlsx, sf, shiny)
 
 
 source("../utils.R")
