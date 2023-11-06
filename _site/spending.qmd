@@ -116,8 +116,8 @@ add_ribbons3 <- function(x, adv, col) {
 }
 ```
 
+Hier zie je de *volledige* en *dagelijkse* uitgaven van politieke partijen in de aanloop naar de Tweede Kamerverkiezingen volgens de nieuwste data
 
-Dit gedeelte laat de *volledige* en *dagelijkse* uitgaven zien van politieke partijen in de aanloop naar de Tweede Kamerverkiezingen volgens de nieuwste data.
 
 
 ::: {.panel-tabset}
@@ -130,7 +130,8 @@ Dit gedeelte laat de *volledige* en *dagelijkse* uitgaven zien van politieke par
 
 ### `r last30days_string` (Last 30 days)
 
-In totaal gaven politieke partijen  `r paste0(currency_symbol, scales::comma_format()(sum30$total_spend_formatted))` euro uit en toonden ze `r sum30$total_num_ads` advertenties op Meta gedurende deze periode.
+In totaal gaven politieke partijen gedurende deze periode `r paste0(currency_symbol, scales::comma_format()(sum30$total_spend_formatted))` euro uit en toonden ze `r sum30$total_num_ads` advertenties op Meta
+
 
 
 
@@ -275,7 +276,7 @@ eval(parse(text = paste0("gt(the_table30, rowname_col = 'party_col') %>% fmt_mar
 
 ### `r last7days_string` (Last 7 days)
 
-In totaal gaven politieke partijen  `r paste0(currency_symbol, scales::comma_format()(sum7$total_spend_formatted))` euro uit en toonden ze `r sum30$total_num_ads` advertenties op Meta gedurende deze periode.
+In totaal gaven politieke partijen gedurende deze periode `r paste0(currency_symbol, scales::comma_format()(sum7$total_spend_formatted))` euro uit en toonden ze `r sum7$total_num_ads` advertenties op Meta
 
 
 
@@ -362,7 +363,8 @@ sum7_ggl <- ggl_all7 %>%
 ### `r last30days_string` (Last 30 days)
 
 
-In totaal gaven politieke partijen  `r paste0(currency_symbol, scales::comma_format()(sum30_ggl$total_spend_formatted))` euro uit en toonden ze `r sum30$total_num_ads` advertenties op Google gedurende deze periode.
+In totaal gaven politieke partijen gedurende deze periode `r paste0(currency_symbol, scales::comma_format()(sum30_ggl$total_spend_formatted))` euro uit en toonden ze `r sum30_ggl$total_num_ads` advertenties op Google
+
 
 ```{r}
 
@@ -385,7 +387,7 @@ eval(parse(text = paste0("gt(ggl_all, rowname_col = 'party_col') %>% fmt_markdow
 
 ### `r last7days_string` (Last 7 days)
 
-In totaal gaven politieke partijen  `r paste0(currency_symbol, scales::comma_format()(sum7_ggl$total_spend_formatted))` euro uit en toonden ze `r sum30$total_num_ads` advertenties op Google gedurende deze periode.
+In totaal gaven politieke partijen gedurende deze periode `r paste0(currency_symbol, scales::comma_format()(sum7_ggl$total_spend_formatted))` euro uit en toonden ze `r sum7_ggl$total_num_ads` advertenties op Google
 
 
 ```{r}
@@ -536,9 +538,12 @@ eval(parse(text = paste0("gt(all_spending7, rowname_col = 'party_col') %>% fmt_m
 
 
 
-## Uitgaven door de tijd heen
+## Uitgaven gedurende een periode
 
-Het is mogelijk dat de dagelijkse geschatte uitgaven niet volledig accuraat zijn omdat Google nauwelijks data opslaat van uitgaven onder de €50 euro. Voor een totale schatting van de uitgaven kijk dan naar de grafieken hierboven.
+<!-- Het is mogelijk dat de dagelijkse geschatte uitgaven niet volledig accuraat zijn omdat Google nauwelijks data opslaat van uitgaven onder de €50 euro. Voor een totale schatting van de uitgaven kijk dan naar de grafieken hierboven. -->
+
+Het kan zijn dat de schattingen van de dagelijkse uitgaven niet helemaal nauwkeurig zijn omdat Google nauwelijks data opslaat van uitgaven onder €50. Voor een totale schatting van de uitgaven, zie de grafieken hierboven 
+
 
 
 ::: {.panel-tabset}

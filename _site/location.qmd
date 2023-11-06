@@ -34,10 +34,9 @@ source("../party_utils.R")
 ```
 
 
-## Geografische focusgroepen
+## Focusgroep op basis van geografie
 
-Onderstaande grafieken laten zien op welke gebieden in Nederland verschillende partijen focussen met Meta’s onlineadvertenties.
-
+De onderstaande grafiek laat zien op welke postcodes politieke partijen zich richten met hun advertenties op de platforms van Meta
 
 
 
@@ -115,9 +114,6 @@ unlink("../data/res.geojson")
 
 ```{r, results='asis', echo=FALSE}
 
-# Assuming 'geo' is your spatial data and 'all_zip' contains zip codes and party information.
-# 'color_dat' should have a 'party' column and a 'color' column with one color per party.
-
 parties_with_zips <- all_zip %>%
   count(party) %>% #slice(3) %>%
   pull(party)
@@ -162,7 +158,7 @@ for (partyz in parties_with_zips) {
 
 #### Provinces
 
-> Hoe groter het vlak, hoe meer geld er is gespendeerd door die partij op die specifieke locatie.
+> Hoe groter het vlak, hoe meer geld er is uitgegeven door deze partij op deze specifieke locatie
 
 ```{r,fig.width=10, fig.height=8, echo = F}
 library(treemap)
@@ -262,7 +258,7 @@ if(nrow(region_dat)!=0) {
 
 #### Cities
 
-> Hoe groter het vlak, hoe meer geld er is gespendeerd door die partij op die specifieke locatie.
+> Hoe groter het vlak, hoe meer geld er is uitgegeven door deze partij op deze specifieke locatie
 
 ```{r,fig.width=10, fig.height=8}
 library(treemap)
@@ -324,10 +320,9 @@ if(nrow(region_dat)!=0) {
 
 :::
 
-## Uitsluiting door middel van Geografie
+## Uitsluiting op basis van geografie
 
-Op Meta is het ook mogelijk om sommige geografische locaties uit te sluiten. Onderstaande grafieken laten zien welke locaties bepaalde politieke advertenties niet zullen zien en hoeveel euro's partijen daaraan spendeerden. Hoe groter het vlak hoe meer geld partijen spendeerden om die locaties uit te sluiten.
-
+Op Meta is het ook mogelijk om sommige geografische locaties uit te sluiten. Onderstaande grafieken laten zien welke locaties bepaalde politieke advertenties niet zullen zien en welke bedragen partijen daaraan spendeerden. 
 
 
 ::: {.panel-tabset}
@@ -342,7 +337,7 @@ Op Meta is het ook mogelijk om sommige geografische locaties uit te sluiten. Ond
 
 #### Postal Codes
 
-Onderstaande grafiek laten zien welke postcodes partijen uitsluiten voor advertenties op de platforms van Meta.
+De onderstaande grafiek laat zien welke postcodes door partijen worden uitgesloten wanneer ze adverteren op de platforms van Meta
 
 
 ```{r}

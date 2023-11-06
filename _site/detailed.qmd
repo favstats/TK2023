@@ -35,10 +35,10 @@ source("../party_utils.R")
 ```
 
 
-## Meest gebruikte focusgroepen
+## De focusgroepen die het meest gebruikt werden
 
+Van de gedetailleerde opties die Meta aanbiedt laat de onderstaande grafiek de meest *gebruikte* focusgroepen per partij zien. De ranglijst is gebaseerd op de uitgegeven bedragen. De meeste focusgroepen zijn gericht op interesses zoals ‘boeken’ of ‘politiek’
 
-Onderstaande grafiek laat de meest *gebruikte* focusgroepen zien per partij van de gedetailleerde opties die Meta aanbiedt. De ranglijst is gebaseerd op de uitgegeven hoeveelheid euro’s. De meeste focusgroepen zijn gericht op interesses zoals ‘boeken’ of ‘politiek’.
 
 
 ::: {.panel-tabset}
@@ -267,10 +267,10 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 :::
 
-## Meeste uitgesloten focusgroepen
+## De focusgroepen die het meest uitgesloten werden
 
 
-Onderstaande grafiek laat de meest *uitgesloten* focusgroepen zien per partij van de gedetailleerde opties die Meta aanbiedt. De ranglijst is gebaseerd op de uitgegeven hoeveelheid euro’s. De meeste focusgroepen zijn gericht op interesses zoals ‘boeken’ of ‘politiek’.
+Van de gedetailleerde opties die Meta aanbiedt laat de onderstaande grafiek de meest *uitgesloten* focusgroepen per partij zien. De ranglijst is gebaseerd op de uitgeven bedragen. De meeste focusgroepen zijn gericht op interesses zoals ‘boeken’ of ‘politiek’ 
 
 
 ::: {.panel-tabset}
@@ -435,9 +435,9 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 :::
 
-## Top Contested Audiences
+## De focusgroepen waar het meest om geconcurreerd werd
 
-Onderstaande grafieken laten de doelgroepen zien waar het meest om gestreden worden. Bijvoorbeeld de groepen waar alle partijen grote bedragen in investeren op kiezers te bereiken met dezelfde interesses.
+De onderstaande grafieken laten de focusgroepen zien waar het meest om gestreden wordt. Bijvoorbeeld de groepen waarin alle partijen grote bedragen investeren om kiezers te bereiken met dezelfde interesses
 
 
 ::: {.panel-tabset}
@@ -578,7 +578,7 @@ if(length(thegraph30$x$hc_opts$series)!=0){
 
 ### `r last7days_string` (Last 7 days)
 
-```{r, fig.width  = 10, fig.height=15}
+```{r}
 
 thegraph7 <- get_contested_graph(election_dat7, minamount = 100)
 
