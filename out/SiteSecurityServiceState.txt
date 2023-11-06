@@ -1,0 +1,4 @@
+contile.services.mozilla.com	0	19667	1730802654691,1,0
+aus5.mozilla.org	0	19667	1730802684968,1,0
+location.services.mozilla.com	0	19667	1730802653863,1,1
+spocs.getpocket.com	0	19667	1762338654892,1,0
