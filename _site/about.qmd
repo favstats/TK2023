@@ -1,5 +1,6 @@
 ---
-title: " "
+title: "Achtergrond"
+lang: nl
 ---
 
 ```{r, echo = F, warning=F, message=F}
@@ -10,7 +11,7 @@ sets <- jsonlite::fromJSON("../settings.json")
 ```
 
 
-### Methode
+## Methode
 
 
 
@@ -25,7 +26,7 @@ Google toont via het Google Transparency Report hoeveel geld door partijen is ui
 
 
 
-### Meer Info
+## Meer Info
 
 
 :::: {style="display: flex; justify-content: center; align-items: center;" }

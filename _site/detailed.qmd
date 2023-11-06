@@ -1,5 +1,6 @@
 ---
 title: "Publieksgerichtheid"
+lang: nl
 format:
   html:
     toc: true
@@ -436,7 +437,7 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 ## Top Contested Audiences
 
-Onderstaande grafieken laten de doelgroepen zien waar het meest om gestreden worden. Bijvoorbeeld de groepen waar alle partijen grote bedragen in investeren op kiezers te bereiken met dezelfde interesses. 
+Onderstaande grafieken laten de doelgroepen zien waar het meest om gestreden worden. Bijvoorbeeld de groepen waar alle partijen grote bedragen in investeren op kiezers te bereiken met dezelfde interesses.
 
 
 ::: {.panel-tabset}
@@ -591,4 +592,3 @@ if(length(thegraph7$x$hc_opts$series)!=0){
 ```
 
 :::
-

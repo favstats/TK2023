@@ -1,5 +1,6 @@
 ---
 title: "Locatie"
+lang: nl
 format:
   html:
     toc: true
@@ -35,7 +36,7 @@ source("../party_utils.R")
 
 ## Geografische focusgroepen
 
-Onderstaande grafieken laten zien op welke gebieden in Nederland verschillende partijen focussen met Meta’s onlineadvertenties. 
+Onderstaande grafieken laten zien op welke gebieden in Nederland verschillende partijen focussen met Meta’s onlineadvertenties.
 
 
 
@@ -50,7 +51,7 @@ Onderstaande grafieken laten zien op welke gebieden in Nederland verschillende p
 
 #### Postal Codes
 
-Onderstaande grafiek laat zien op welke postcodes politieke partijen hun advertenties op de platforms van Meta richten. 
+Onderstaande grafiek laat zien op welke postcodes politieke partijen hun advertenties op de platforms van Meta richten.
 
 
 ```{r}
@@ -84,8 +85,8 @@ all_zip <- election_dat30 %>%
 # if(Sys.info()[["sysname"]]=="Windows"){
 #   # xxxx <- F
 # geo <- sf::st_read("../data/ignore/georef-netherlands-postcode-pc4.geojson", quiet = T)
-# 
-# 
+#
+#
 # } else{
 
   download.file("https://www.dropbox.com/scl/fi/f2zin6b3k95jxkprah3j0/georef-netherlands-postcode-pc4.geojson?rlkey=m3cbtoqbvg89wfkyb80cmu3co&dl=1", "../data/res.geojson")
@@ -100,7 +101,7 @@ unlink("../data/res.geojson")
 # parties_with_zips <- all_zip %>%
 #   count(party) %>%
 #   pull(party)
-# 
+#
 # vvd_dat <- geo %>%
 #     left_join(all_zip %>%
 #   filter(party == "VVD") %>%
@@ -118,28 +119,28 @@ unlink("../data/res.geojson")
 # 'color_dat' should have a 'party' column and a 'color' column with one color per party.
 
 parties_with_zips <- all_zip %>%
-  count(party) %>% #slice(3) %>% 
-  pull(party) 
+  count(party) %>% #slice(3) %>%
+  pull(party)
 
 # Now, loop through each party, creating a section and plotting
 for (partyz in parties_with_zips) {
-  
+
   # Create the heading for the party
-  cat("\n") 
+  cat("\n")
   cat("##### ", partyz, "\n")
-  
+
   # Prepare the data for plotting
   party_data <- geo %>%
     left_join(all_zip %>%
                 filter(party == partyz) %>%
                 mutate(pc4_code = str_remove_all(value, ", Netherlands")))
-  
+
   # Extract the color for the party
   party_color <- color_dat %>%
     filter(party == partyz) %>%
     pull(colors) %>%
     first()  # Make sure 'color' column has exactly one color per party
-  
+
   # Print the plot
   print(
     ggplot(party_data) +
@@ -149,7 +150,7 @@ for (partyz in parties_with_zips) {
       theme(legend.position = 'bottom') +
       guides(fill = guide_colourbar(title = 'Spend (€)', barwidth = 10, barheight = 0.5))
   )
-  
+
   cat("\n")
 }
 
@@ -161,7 +162,7 @@ for (partyz in parties_with_zips) {
 
 #### Provinces
 
-> Hoe groter het vlak, hoe meer geld er is gespendeerd door die partij op die specifieke locatie. 
+> Hoe groter het vlak, hoe meer geld er is gespendeerd door die partij op die specifieke locatie.
 
 ```{r,fig.width=10, fig.height=8, echo = F}
 library(treemap)
@@ -261,7 +262,7 @@ if(nrow(region_dat)!=0) {
 
 #### Cities
 
-> Hoe groter het vlak, hoe meer geld er is gespendeerd door die partij op die specifieke locatie. 
+> Hoe groter het vlak, hoe meer geld er is gespendeerd door die partij op die specifieke locatie.
 
 ```{r,fig.width=10, fig.height=8}
 library(treemap)
@@ -325,7 +326,7 @@ if(nrow(region_dat)!=0) {
 
 ## Uitsluiting door middel van Geografie
 
-Op Meta is het ook mogelijk om sommige geografische locaties uit te sluiten. Onderstaande grafieken laten zien welke locaties bepaalde politieke advertenties niet zullen zien en hoeveel euro's partijen daaraan spendeerden. Hoe groter het vlak hoe meer geld partijen spendeerden om die locaties uit te sluiten. 
+Op Meta is het ook mogelijk om sommige geografische locaties uit te sluiten. Onderstaande grafieken laten zien welke locaties bepaalde politieke advertenties niet zullen zien en hoeveel euro's partijen daaraan spendeerden. Hoe groter het vlak hoe meer geld partijen spendeerden om die locaties uit te sluiten.
 
 
 
@@ -341,7 +342,7 @@ Op Meta is het ook mogelijk om sommige geografische locaties uit te sluiten. Ond
 
 #### Postal Codes
 
-Onderstaande grafiek laten zien welke postcodes partijen uitsluiten voor advertenties op de platforms van Meta. 
+Onderstaande grafiek laten zien welke postcodes partijen uitsluiten voor advertenties op de platforms van Meta.
 
 
 ```{r}
@@ -376,7 +377,7 @@ all_zip <- election_dat30 %>%
 # parties_with_zips <- all_zip %>%
 #   count(party) %>%
 #   pull(party)
-# 
+#
 # cda_dat <- geo %>%
 #     left_join(all_zip %>%
 #   filter(party == "CDA") %>%
@@ -395,28 +396,28 @@ all_zip <- election_dat30 %>%
 # 'color_dat' should have a 'party' column and a 'color' column with one color per party.
 
 parties_with_zips <- all_zip %>%
-  count(party) %>% #slice(3) %>% 
-  pull(party) 
+  count(party) %>% #slice(3) %>%
+  pull(party)
 
 # Now, loop through each party, creating a section and plotting
 for (partyz in parties_with_zips) {
-  
+
   # Create the heading for the party
-  cat("\n") 
+  cat("\n")
   cat("##### ", partyz, "\n")
-  
+
   # Prepare the data for plotting
   party_data <- geo %>%
     left_join(all_zip %>%
                 filter(party == partyz) %>%
                 mutate(pc4_code = str_remove_all(value, ", Netherlands")))
-  
+
   # Extract the color for the party
   party_color <- color_dat %>%
     filter(party == partyz) %>%
     pull(colors) %>%
     first()  # Make sure 'color' column has exactly one color per party
-  
+
   # Print the plot
   print(
     ggplot(party_data) +
@@ -426,7 +427,7 @@ for (partyz in parties_with_zips) {
       theme(legend.position = 'bottom') +
       guides(fill = guide_colourbar(title = 'Spend (€)', barwidth = 10, barheight = 0.5))
   )
-  
+
   cat("\n")
 }
 

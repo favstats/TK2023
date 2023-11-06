@@ -1,5 +1,6 @@
 ---
 title: "Uitgaven per Focusgroep"
+lang: nl
 format:
   html:
     toc: true
@@ -37,13 +38,13 @@ source("../party_utils.R")
 
 
 
-Deze grafieken tonen aan op welke doelgroepen politieke partijen hun advertenties richten in aanloop naar de Tweede Kamerverkiezingen van 2023 volgens de nieuwste data. Het richt zich volledig op de platformen van Meta (Facebook en Instagram) omdat die de meest gedetailleerdere doelgroepen aanbiedt voor politieke advertenties. 
+Deze grafieken tonen aan op welke doelgroepen politieke partijen hun advertenties richten in aanloop naar de Tweede Kamerverkiezingen van 2023 volgens de nieuwste data. Het richt zich volledig op de platformen van Meta (Facebook en Instagram) omdat die de meest gedetailleerdere doelgroepen aanbiedt voor politieke advertenties.
 
 
 
-Hoeveel euro spendeerden de campagnes van politieke partijen op de verschillende doelgroepen? Onderstaande grafieken laten het in zijn totaliteit zien maar ook per partij. 
+Hoeveel euro spendeerden de campagnes van politieke partijen op de verschillende doelgroepen? Onderstaande grafieken laten het in zijn totaliteit zien maar ook per partij.
 
-> Opmerking: Verschillende doelgroepen kunnen overlappen waardoor het niet uitkomt op 100%. 
+> Opmerking: Verschillende doelgroepen kunnen overlappen waardoor het niet uitkomt op 100%.
 
 ::: {.panel-tabset}
 

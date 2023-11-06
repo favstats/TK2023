@@ -1,5 +1,6 @@
 ---
 title: "Demografie"
+lang: nl
 format:
   html:
     toc: true
@@ -34,10 +35,10 @@ source("../party_utils.R")
 ## Leeftijdsfocusgroepen
 
 
-Onderstaande grafieken laten zien hoe partijen verschillende leeftijdsgroepen als focusgroep gebruiken en hoeveel procent van het budget daaraan is uitgeven. 
+Onderstaande grafieken laten zien hoe partijen verschillende leeftijdsgroepen als focusgroep gebruiken en hoeveel procent van het budget daaraan is uitgeven.
 
 
-> Opmerking: Verschillende doelgroepen kunnen overlappen waardoor het niet uitkomt op 100%. 
+> Opmerking: Verschillende doelgroepen kunnen overlappen waardoor het niet uitkomt op 100%.
 
 ::: panel-tabset
 
@@ -273,11 +274,11 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 ## Genderfocusgroepen
 
-Onderstaande grafieken laten zien hoe partijen gender als focusgroep gebruiken en welk percentage van het budget daaraan is uitgegeven. 
+Onderstaande grafieken laten zien hoe partijen gender als focusgroep gebruiken en welk percentage van het budget daaraan is uitgegeven.
 
 <!-- The graphs below show targeting by gender and how much percentage of party budgets were spent on them. -->
 
-> Opmerking: Verschillende doelgroepen kunnen overlappen waardoor het niet uitkomt op 100%. 
+> Opmerking: Verschillende doelgroepen kunnen overlappen waardoor het niet uitkomt op 100%.
 
 ::: panel-tabset
 
@@ -455,10 +456,10 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 ## Taalfocusgroepen
 
-Onderstaande grafieken laten zien hoe partijen verschillende talen als focusgroep gebruiken en welk perentage van het budget daaraan is uitgegeven. 
+Onderstaande grafieken laten zien hoe partijen verschillende talen als focusgroep gebruiken en welk perentage van het budget daaraan is uitgegeven.
 
 
-> Opmerking: Verschillende doelgroepen kunnen overlappen waardoor het niet uitkomt op 100%. 
+> Opmerking: Verschillende doelgroepen kunnen overlappen waardoor het niet uitkomt op 100%.
 
 ::: panel-tabset
 ### `r last30days_string` (Last 30 days)
@@ -632,10 +633,10 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 ## Focusgroep op basis van baansector en onderwijsinstelling
 
-Onderstaande grafieken laten zien hoe partijen verschillende baansectoren en soorten onderwijs gebruiken als focusgroep en hoeveel procent van het budget daaraan is uitgegeven. De volgende grafiek gaat over onderwijsniveau.  
+Onderstaande grafieken laten zien hoe partijen verschillende baansectoren en soorten onderwijs gebruiken als focusgroep en hoeveel procent van het budget daaraan is uitgegeven. De volgende grafiek gaat over onderwijsniveau.
 
 
-> Opmerking: Verschillende doelgroepen kunnen overlappen waardoor het niet uitkomt op 100%. 
+> Opmerking: Verschillende doelgroepen kunnen overlappen waardoor het niet uitkomt op 100%.
 
 ::: panel-tabset
 ### `r last30days_string` (Last 30 days)
@@ -1100,12 +1101,12 @@ tags$div(class = "container", do.call(tags$div, rows))
 ```
 :::
 
-## Relatiestatusfocusgroep 
+## Relatiestatusfocusgroep
 
-Onderstaande grafieken laten zien hoe partijen relatiestatussen als focusgroep gebruiken en hoeveel procent van het budget daaraan is uitgegeven. 
+Onderstaande grafieken laten zien hoe partijen relatiestatussen als focusgroep gebruiken en hoeveel procent van het budget daaraan is uitgegeven.
 
 
-> Opmerking: Verschillende doelgroepen kunnen overlappen waardoor het niet uitkomt op 100%. 
+> Opmerking: Verschillende doelgroepen kunnen overlappen waardoor het niet uitkomt op 100%.
 
 ::: panel-tabset
 ### `r last30days_string` (Last 30 days)

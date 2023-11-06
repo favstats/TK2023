@@ -1,5 +1,6 @@
 ---
 title: "Blog"
+lang: nl
 listing:
   contents: posts
   type: grid
