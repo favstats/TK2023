@@ -133,7 +133,7 @@ contested_dat7 <- interest_targeting7 %>%
 ```
 
 
-### `r last30days_string` (Last 30 days)
+### `r last30days_string` (Afgelopen 30 dagen)
 
 
 
@@ -232,7 +232,7 @@ tags$div(class = "container", do.call(tags$div, rows))
 ```
 
 
-### `r last7days_string` (Last 7 days)
+### `r last7days_string` (Agelopen 7 dagen)
 
 
 
@@ -270,7 +270,7 @@ tags$div(class = "container", do.call(tags$div, rows))
 ## De focusgroepen die het meest uitgesloten werden
 
 
-Van de gedetailleerde opties die Meta aanbiedt laat de onderstaande grafiek de meest *uitgesloten* focusgroepen per partij zien. De ranglijst is gebaseerd op de uitgeven bedragen. De meeste focusgroepen zijn gericht op interesses zoals ‘boeken’ of ‘politiek’ 
+Van de gedetailleerde opties die Meta aanbiedt laat de onderstaande grafiek de meest *uitgesloten* focusgroepen per partij zien. De ranglijst is gebaseerd op de uitgeven bedragen. De meeste focusgroepen zijn gericht op interesses zoals ‘boeken’ of ‘politiek’
 
 
 ::: {.panel-tabset}
@@ -351,7 +351,7 @@ excluded_dat7 <- interest_excluding7 %>%
 ```
 
 
-### `r last30days_string` (Last 30 days)
+### `r last30days_string` (Afgelopen 30 dagen)
 
 
 ```{r echo=FALSE, results='asis'}
@@ -392,7 +392,7 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 
 
-### `r last7days_string` (Last 7 days)
+### `r last7days_string` (Agelopen 7 dagen)
 
 
 ```{r echo=FALSE, results='asis'}
@@ -563,7 +563,7 @@ contested_dat <- contested_dat %>%
 ```
 
 
-### `r last30days_string` (Last 30 days)
+### `r last30days_string` (Agelopen 30 dagen)
 
 ```{r}
 thegraph30 <- get_contested_graph(election_dat30, minamount = 100)
@@ -576,7 +576,7 @@ if(length(thegraph30$x$hc_opts$series)!=0){
 ```
 
 
-### `r last7days_string` (Last 7 days)
+### `r last7days_string` (Afgelopen 7 dagen)
 
 ```{r}
 
