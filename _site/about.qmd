@@ -14,7 +14,7 @@ sets <- jsonlite::fromJSON("../settings.json")
 
 
 
-De Campagnemonitor is een samenwerking tussen [De Groene Amsterdammer](https://www.groene.nl/) en [Who Targets Me](https://whotargets.me/), een wereldwijde database van politieke advertenties op sociale media. Samen met UvA-onderzoeker [Fabio Votta](https://favstats.eu) volgen we politieke advertenties in aanloop naar de Nederlandse parlementsverkiezingen van 2023. Dat doen we om beter te begrijpen hoe campagnes verschillende targetingmethoden gebruiken die beschikbaar zijn gesteld door Meta en Google. 
+De Campagnemonitor is een samenwerking tussen [_De Groene Amsterdammer_](https://www.groene.nl/) en [Who Targets Me](https://whotargets.me/), een wereldwijde database van politieke advertenties op sociale media. Samen met UvA-onderzoeker [Fabio Votta](https://favstats.eu) volgen we politieke advertenties in aanloop naar de Nederlandse parlementsverkiezingen van 2023. Dat doen we om beter te begrijpen hoe campagnes verschillende targetingmethoden gebruiken die beschikbaar zijn gesteld door Meta en Google.
 
 Voor dit onderzoek hebben we gegevens uit de [Meta Ad Library](https://www.facebook.com/ads/library/) en het [Google Transparency Report](https://transparencyreport.google.com/political-ads/region/NL) gebruikt. Op het dashboard laten we zien hoe er de afgelopen week en de afgelopen maand is getarget op persoonlijke kenmerken zoals leeftijd, locatie, levensstijl of overtuigingen
 
@@ -36,9 +36,9 @@ Google toont via het Google Transparency Report hoeveel geld door partijen is ui
 :::
 
 ::: {}
-De Groene Amsterdammer is het oudste opinieweekblad van Nederland, sinds 1877 onafhankelijk baken van de vrijzinnige meningsvorming op het gebied van politiek, maatschappij, cultuur en literatuur.
+_De Groene Amsterdammer_ is het oudste opinieweekblad van Nederland, sinds 1877 onafhankelijk baken van de vrijzinnige meningsvorming op het gebied van politiek, maatschappij, cultuur en literatuur.
 
-[https://groene.nl/](https://groene.nl/)
+[https://groene.nl/](https://www.groene.nl/)
 :::
 
 
@@ -71,4 +71,3 @@ Wilt u zelf targeting data ophalen uit de Meta Advertentiebibliotheek? Dit dashb
 :::
 
 ::::
-
