@@ -270,7 +270,7 @@ eval(parse(text = paste0("gt(the_table30, rowname_col = 'party_col') %>% fmt_mar
 
 
 
-### `r last7days_string` (Agelopen 7 dagen)
+### `r last7days_string` (Afgelopen 7 dagen)
 
 In totaal gaven politieke partijen gedurende deze periode `r paste0(currency_symbol, scales::comma_format()(sum7$total_spend_formatted))` euro uit en toonden ze `r sum7$total_num_ads` advertenties op Meta
 
