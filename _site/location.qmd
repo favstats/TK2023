@@ -43,12 +43,12 @@ De onderstaande grafiek laat zien op welke postcodes politieke partijen zich ric
 ::: {.panel-tabset}
 
 
-### `r last30days_string` (Last 30 days)
+### `r last30days_string` (Agelopen 30 dagen)
 
 
 ::: {.panel-tabset}
 
-#### Postal Codes
+#### Postcodes
 
 Onderstaande grafiek laat zien op welke postcodes politieke partijen hun advertenties op de platforms van Meta richten.
 
@@ -156,7 +156,7 @@ for (partyz in parties_with_zips) {
 
 :::
 
-#### Provinces
+#### Provincies
 
 > Hoe groter het vlak, hoe meer geld er is uitgegeven door deze partij op deze specifieke locatie
 
@@ -256,7 +256,7 @@ if(nrow(region_dat)!=0) {
 ```
 
 
-#### Cities
+#### Steden
 
 > Hoe groter het vlak, hoe meer geld er is uitgegeven door deze partij op deze specifieke locatie
 
@@ -322,20 +322,20 @@ if(nrow(region_dat)!=0) {
 
 ## Uitsluiting op basis van geografie
 
-Op Meta is het ook mogelijk om sommige geografische locaties uit te sluiten. Onderstaande grafieken laten zien welke locaties bepaalde politieke advertenties niet zullen zien en welke bedragen partijen daaraan spendeerden. 
+Op Meta is het ook mogelijk om sommige geografische locaties uit te sluiten. Onderstaande grafieken laten zien welke locaties bepaalde politieke advertenties niet zullen zien en welke bedragen partijen daaraan spendeerden.
 
 
 ::: {.panel-tabset}
 
 
-### `r last30days_string` (Last 30 days)
+### `r last30days_string` (Agelopen 30 dagen)
 
 
 ::: {.panel-tabset}
 
 
 
-#### Postal Codes
+#### Postcodes
 
 De onderstaande grafiek laat zien welke postcodes door partijen worden uitgesloten wanneer ze adverteren op de platforms van Meta
 
@@ -432,7 +432,7 @@ for (partyz in parties_with_zips) {
 :::
 
 
-#### Provinces
+#### Provincies
 
 > The bigger the area the more money was spend on ads excluding this location.
 
@@ -493,7 +493,7 @@ if(nrow(region_dat)!=0) {
 ```
 
 
-#### Cities
+#### Steden
 
 > The bigger the area the more money was spend on ads excluding this location.
 

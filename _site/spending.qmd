@@ -1,10 +1,6 @@
 ---
 title: Uitgaven
 lang: nl
-format:
-  html:
-    toc: true
-    toc-location: right
 ---
 
 ```{r setup, include=FALSE}
@@ -128,7 +124,7 @@ Hier zie je de *volledige* en *dagelijkse* uitgaven van politieke partijen in de
 
 ::: {.panel-tabset}
 
-### `r last30days_string` (Last 30 days)
+### `r last30days_string` (Afgelopen 30 dagen)
 
 In totaal gaven politieke partijen gedurende deze periode `r paste0(currency_symbol, scales::comma_format()(sum30$total_spend_formatted))` euro uit en toonden ze `r sum30$total_num_ads` advertenties op Meta
 
@@ -274,7 +270,7 @@ eval(parse(text = paste0("gt(the_table30, rowname_col = 'party_col') %>% fmt_mar
 
 
 
-### `r last7days_string` (Last 7 days)
+### `r last7days_string` (Agelopen 7 dagen)
 
 In totaal gaven politieke partijen gedurende deze periode `r paste0(currency_symbol, scales::comma_format()(sum7$total_spend_formatted))` euro uit en toonden ze `r sum7$total_num_ads` advertenties op Meta
 
@@ -406,7 +402,7 @@ eval(parse(text = paste0("gt(ggl_all7, rowname_col = 'party_col') %>% fmt_markdo
 
 :::
 
-## `r fontawesome::fa("bolt", fill = "lightblue")` Combined
+## `r fontawesome::fa("bolt", fill = "lightblue")` Gecombineerd
 
 
 
@@ -542,7 +538,7 @@ eval(parse(text = paste0("gt(all_spending7, rowname_col = 'party_col') %>% fmt_m
 
 <!-- Het is mogelijk dat de dagelijkse geschatte uitgaven niet volledig accuraat zijn omdat Google nauwelijks data opslaat van uitgaven onder de €50 euro. Voor een totale schatting van de uitgaven kijk dan naar de grafieken hierboven. -->
 
-Het kan zijn dat de schattingen van de dagelijkse uitgaven niet helemaal nauwkeurig zijn omdat Google nauwelijks data opslaat van uitgaven onder €50. Voor een totale schatting van de uitgaven, zie de grafieken hierboven 
+Het kan zijn dat de schattingen van de dagelijkse uitgaven niet helemaal nauwkeurig zijn omdat Google nauwelijks data opslaat van uitgaven onder €50. Voor een totale schatting van de uitgaven, zie de grafieken hierboven
 
 
 
@@ -556,7 +552,7 @@ Het kan zijn dat de schattingen van de dagelijkse uitgaven niet helemaal nauwkeu
 ::: {.panel-tabset}
 
 
-### Cumulative
+### Cumulatief
 
 ```{r}
 add_them <-  readRDS("../data/add_them.rds")
@@ -692,7 +688,7 @@ hc_data_cumfb %>%
 
 
 
-### Daily
+### Dagelijks
 
 
 
@@ -750,7 +746,7 @@ hc_data_dafb %>%
 
 
 
-### Cumulative
+### Cumulatief
 
 ```{r, out.width="100%"}
 
@@ -815,7 +811,7 @@ hc_data_cumggl  %>%
 ```
 
 
-### Daily
+### Dagelijks
 
 ```{r, out.width="100%"}
 
@@ -882,7 +878,7 @@ hc_data_daggl %>%
 
 
 
-## `r fontawesome::fa("bolt", fill = "lightblue")` Combined
+## `r fontawesome::fa("bolt", fill = "lightblue")` Gecombineerd
 
 
 ::: {.panel-tabset}
