@@ -125,12 +125,12 @@ charts <- age_targeting %>%
            hcaes(x = age_groups, y = perc),
            color = the_color) %>%
       hc_plotOptions(bar = list(horizontal = TRUE, stacking = "normal")) %>%
-      hc_yAxis(title = list(text = "% Party Budget spent on targeting method"), max = 100, min = 0) %>%
+      hc_yAxis(title = list(text = "% party budget spent on targeting method"), max = 100, min = 0) %>%
       hc_xAxis(title = "", labels = list(style = list(fontSize = "10px"))) %>%
       hc_add_theme(hc_theme_google()) %>%
       highcharter::hc_tooltip(
         pointFormat = paste0(
-          "<b>{point.age_groups}</b><br>% of Total Budget Spent: {point.y:.1f}%<br>Spend a total of ",
+          "<b>{point.age_groups}</b><br>% of total budget spent: {point.y:.1f}%<br>a total of ",
           currency_symbol,
           "{point.spend_perlab} on this age group"
         ),
@@ -222,12 +222,12 @@ charts <- age_targeting7 %>%
            hcaes(x = age_groups, y = perc),
            color = the_color) %>%
       hc_plotOptions(bar = list(horizontal = TRUE, stacking = "normal")) %>%
-      hc_yAxis(title = list(text = "% Party Budget spent on targeting method"), max = 100, min = 0) %>%
+      hc_yAxis(title = list(text = "% party budget spent on targeting method"), max = 100, min = 0) %>%
       hc_xAxis(title = "", labels = list(style = list(fontSize = "10px"))) %>%
       hc_add_theme(hc_theme_google()) %>%
       highcharter::hc_tooltip(
         pointFormat = paste0(
-          "<b>{point.age_groups}</b><br>% of Total Budget Spent: {point.y:.1f}%<br>Spend a total of ",
+          "<b>{point.age_groups}</b><br>% of total budget spent: {point.y:.1f}%<br>a total of ",
           currency_symbol,
           "{point.spend_perlab} on this age group"
         ),
@@ -310,7 +310,7 @@ charts <- gender_targeting %>%
     the_color <- color_dat$colors[color_dat$party == .x$party[1]]
     hchart(.x, type = "bar", hcaes(x = value, y = perc), color = the_color) %>%
       hc_plotOptions(bar = list(horizontal = TRUE, stacking = "normal")) %>%
-      hc_yAxis(title = list(text = "% Party Budget spent on targeting method"),
+      hc_yAxis(title = list(text = "% party budget spent on targeting method"),
         max = max_x) %>%   # Set the maximum x-axis value) %>%
       hc_xAxis(
         title = "",
@@ -318,7 +318,7 @@ charts <- gender_targeting %>%
       ) %>%
       hc_add_theme(hc_theme_google()) %>%
       highcharter::hc_tooltip(
-        pointFormat = paste0("<b>{point.value}</b><br>% of Total Budget Spent: {point.y:.1f}%<br>Spend a total of ", currency_symbol, "{point.spend_perlab} on this gender"),
+        pointFormat = paste0("<b>{point.value}</b><br>% of total budget spent: {point.y:.1f}%<br>a total of ", currency_symbol, "{point.spend_perlab} on this gender"),
         headerFormat = ""
       ) %>%
       hc_title(text = unique(.x$party), align = "left", style = list(fontWeight = "bold")) %>%
@@ -394,7 +394,7 @@ charts <- gender_targeting %>%
     the_color <- color_dat$colors[color_dat$party == .x$party[1]]
     hchart(.x, type = "bar", hcaes(x = value, y = perc), color = the_color) %>%
       hc_plotOptions(bar = list(horizontal = TRUE, stacking = "normal")) %>%
-      hc_yAxis(title = list(text = "% Party Budget spent on targeting method"),
+      hc_yAxis(title = list(text = "% party budget spent on targeting method"),
         max = max_x) %>%   # Set the maximum x-axis value) %>%
       hc_xAxis(
         title = "",
@@ -402,7 +402,7 @@ charts <- gender_targeting %>%
       ) %>%
       hc_add_theme(hc_theme_google()) %>%
       highcharter::hc_tooltip(
-        pointFormat = paste0("<b>{point.value}</b><br>% of Total Budget Spent: {point.y:.1f}%<br>Spend a total of ", currency_symbol, "{point.spend_perlab} on this gender"),
+        pointFormat = paste0("<b>{point.value}</b><br>% of total budget spent: {point.y:.1f}%<br>a total of ", currency_symbol, "{point.spend_perlab} on this gender"),
         headerFormat = ""
       ) %>%
       hc_title(text = unique(.x$party), align = "left", style = list(fontWeight = "bold")) %>%
@@ -489,7 +489,7 @@ charts <- lang_targeting %>%
     the_color <- color_dat$colors[color_dat$party == .x$party[1]]
     hchart(.x, type = "bar", hcaes(x = value, y = perc), color = the_color) %>%
       hc_plotOptions(bar = list(horizontal = TRUE, stacking = "normal")) %>%
-      hc_yAxis(title = list(text = "% Party Budget spent on targeting method"),
+      hc_yAxis(title = list(text = "% party budget spent on targeting method"),
         max = max_x) %>%   # Set the maximum x-axis value) %>%
       hc_xAxis(
         title = "",
@@ -497,7 +497,7 @@ charts <- lang_targeting %>%
       ) %>%
       hc_add_theme(hc_theme_google()) %>%
       highcharter::hc_tooltip(
-        pointFormat = paste0("<b>{point.value}</b><br>% of Total Budget Spent: {point.y:.1f}%<br>Spend a total of ", currency_symbol, "{point.spend_perlab} on this language"),
+        pointFormat = paste0("<b>{point.value}</b><br>% of total budget spent: {point.y:.1f}%<br>a total of ", currency_symbol, "{point.spend_perlab} on this language"),
         headerFormat = ""
       ) %>%
       hc_title(text = unique(.x$party), align = "left", style = list(fontWeight = "bold")) %>%
@@ -573,7 +573,7 @@ charts <- lang_targeting %>%
     the_color <- color_dat$colors[color_dat$party == .x$party[1]]
     hchart(.x, type = "bar", hcaes(x = value, y = perc), color = the_color) %>%
       hc_plotOptions(bar = list(horizontal = TRUE, stacking = "normal")) %>%
-      hc_yAxis(title = list(text = "% Party Budget spent on targeting method"),
+      hc_yAxis(title = list(text = "% party budget spent on targeting method"),
         max = max_x) %>%   # Set the maximum x-axis value) %>%
       hc_xAxis(
         title = "",
@@ -581,7 +581,7 @@ charts <- lang_targeting %>%
       ) %>%
       hc_add_theme(hc_theme_google()) %>%
       highcharter::hc_tooltip(
-        pointFormat = paste0("<b>{point.value}</b><br>% of Total Budget Spent: {point.y:.1f}%<br>Spend a total of ", currency_symbol, "{point.spend_perlab} on this language"),
+        pointFormat = paste0("<b>{point.value}</b><br>% of total budget spent: {point.y:.1f}%<br>a total of ", currency_symbol, "{point.spend_perlab} on this language"),
         headerFormat = ""
       ) %>%
       hc_title(text = unique(.x$party), align = "left", style = list(fontWeight = "bold")) %>%
@@ -708,7 +708,7 @@ charts <- job_targeting %>%
     the_color <- color_dat$colors[color_dat$party == .x$party[1]]
     hchart(.x, type = "bar", hcaes(x = value, y = perc), color = the_color) %>%
       hc_plotOptions(bar = list(horizontal = TRUE, stacking = "normal")) %>%
-      hc_yAxis(title = list(text = "% Party Budget spent on targeting method"),
+      hc_yAxis(title = list(text = "% party budget spent on targeting method"),
         max = max_x) %>%   # Set the maximum x-axis value) %>%
       hc_xAxis(
         title = "",
@@ -716,7 +716,7 @@ charts <- job_targeting %>%
       ) %>%
       hc_add_theme(hc_theme_google()) %>%
       highcharter::hc_tooltip(
-        pointFormat = paste0("<b>{point.value}</b><br>% of Total Budget Spent: {point.y:.1f}%<br>Spend a total of ", currency_symbol, "{point.spend_perlab} on this job (sector)"),
+        pointFormat = paste0("<b>{point.value}</b><br>% of total budget spent: {point.y:.1f}%<br>a total of ", currency_symbol, "{point.spend_perlab} on this job/education (sector)"),
         headerFormat = ""
       ) %>%
       hc_title(text = unique(.x$party), align = "left", style = list(fontWeight = "bold")) %>%
@@ -811,7 +811,7 @@ charts <- job_targeting %>%
     the_color <- color_dat$colors[color_dat$party == .x$party[1]]
     hchart(.x, type = "bar", hcaes(x = value, y = perc), color = the_color) %>%
       hc_plotOptions(bar = list(horizontal = TRUE, stacking = "normal")) %>%
-      hc_yAxis(title = list(text = "% Party Budget spent on targeting method"),
+      hc_yAxis(title = list(text = "% party budget spent on targeting method"),
         max = max_x) %>%   # Set the maximum x-axis value) %>%
       hc_xAxis(
         title = "",
@@ -819,7 +819,7 @@ charts <- job_targeting %>%
       ) %>%
       hc_add_theme(hc_theme_google()) %>%
       highcharter::hc_tooltip(
-        pointFormat = paste0("<b>{point.value}</b><br>% of Total Budget Spent: {point.y:.1f}%<br>Spend a total of ", currency_symbol, "{point.spend_perlab} on this job (sector)"),
+        pointFormat = paste0("<b>{point.value}</b><br>% of total budget spent: {point.y:.1f}%<br>a total of ", currency_symbol, "{point.spend_perlab} on this job (sector)"),
         headerFormat = ""
       ) %>%
       hc_title(text = unique(.x$party), align = "left", style = list(fontWeight = "bold")) %>%
@@ -956,7 +956,7 @@ charts <- educ_targeting %>%
     the_color <- color_dat$colors[color_dat$party == .x$party[1]]
     hchart(.x, type = "bar", hcaes(x = value, y = perc), color = the_color) %>%
       hc_plotOptions(bar = list(horizontal = TRUE, stacking = "normal")) %>%
-      hc_yAxis(title = list(text = "% Party Budget spent on targeting method"),
+      hc_yAxis(title = list(text = "% party budget spent on targeting method"),
         max = max_x) %>%   # Set the maximum x-axis value) %>%
       hc_xAxis(
         title = "",
@@ -964,7 +964,7 @@ charts <- educ_targeting %>%
       ) %>%
       hc_add_theme(hc_theme_google()) %>%
       highcharter::hc_tooltip(
-        pointFormat = paste0("<b>{point.value}</b><br>% of Total Budget Spent: {point.y:.1f}%<br>Spend a total of ", currency_symbol, "{point.spend_perlab} on this education level"),
+        pointFormat = paste0("<b>{point.value}</b><br>% of total budget spent: {point.y:.1f}%<br>a total of ", currency_symbol, "{point.spend_perlab} on this education level"),
         headerFormat = ""
       ) %>%
       hc_title(text = unique(.x$party), align = "left", style = list(fontWeight = "bold")) %>%
@@ -1043,7 +1043,7 @@ charts <- educ_targeting %>%
     the_color <- color_dat$colors[color_dat$party == .x$party[1]]
     hchart(.x, type = "bar", hcaes(x = value, y = perc), color = the_color) %>%
       hc_plotOptions(bar = list(horizontal = TRUE, stacking = "normal")) %>%
-      hc_yAxis(title = list(text = "% Party Budget spent on targeting method"),
+      hc_yAxis(title = list(text = "% party budget spent on targeting method"),
         max = max_x) %>%   # Set the maximum x-axis value) %>%
       hc_xAxis(
         title = "",
@@ -1051,7 +1051,7 @@ charts <- educ_targeting %>%
       ) %>%
       hc_add_theme(hc_theme_google()) %>%
       highcharter::hc_tooltip(
-        pointFormat = paste0("<b>{point.value}</b><br>% of Total Budget Spent: {point.y:.1f}%<br>Spend a total of ", currency_symbol, "{point.spend_perlab} on this education level"),
+        pointFormat = paste0("<b>{point.value}</b><br>% of total budget spent: {point.y:.1f}%<br>a total of ", currency_symbol, "{point.spend_perlab} on this education level"),
         headerFormat = ""
       ) %>%
       hc_title(text = unique(.x$party), align = "left", style = list(fontWeight = "bold")) %>%
@@ -1180,7 +1180,7 @@ charts <- relationship_targeting %>%
     the_color <- color_dat$colors[color_dat$party == .x$party[1]]
     hchart(.x, type = "bar", hcaes(x = value, y = perc), color = the_color) %>%
       hc_plotOptions(bar = list(horizontal = TRUE, stacking = "normal")) %>%
-      hc_yAxis(title = list(text = "% Party Budget spent on targeting method"),
+      hc_yAxis(title = list(text = "% party budget spent on targeting method"),
         max = max_x) %>%   # Set the maximum x-axis value) %>%
       hc_xAxis(
         title = "",
@@ -1188,7 +1188,7 @@ charts <- relationship_targeting %>%
       ) %>%
       hc_add_theme(hc_theme_google()) %>%
       highcharter::hc_tooltip(
-        pointFormat = paste0("<b>{point.value}</b><br>% of Total Budget Spent: {point.y:.1f}%<br>Spend a total of ", currency_symbol, "{point.spend_perlab} on this relationship status"),
+        pointFormat = paste0("<b>{point.value}</b><br>% of total budget spent: {point.y:.1f}%<br>a total of ", currency_symbol, "{point.spend_perlab} on this relationship status"),
         headerFormat = ""
       ) %>%
       hc_title(text = unique(.x$party), align = "left", style = list(fontWeight = "bold")) %>%
@@ -1268,7 +1268,7 @@ charts <- relationship_targeting %>%
     the_color <- color_dat$colors[color_dat$party == .x$party[1]]
     hchart(.x, type = "bar", hcaes(x = value, y = perc), color = the_color) %>%
       hc_plotOptions(bar = list(horizontal = TRUE, stacking = "normal")) %>%
-      hc_yAxis(title = list(text = "% Party Budget spent on targeting method"),
+      hc_yAxis(title = list(text = "% party budget spent on targeting method"),
         max = max_x) %>%   # Set the maximum x-axis value) %>%
       hc_xAxis(
         title = "",
@@ -1276,7 +1276,7 @@ charts <- relationship_targeting %>%
       ) %>%
       hc_add_theme(hc_theme_google()) %>%
       highcharter::hc_tooltip(
-        pointFormat = paste0("<b>{point.value}</b><br>% of Total Budget Spent: {point.y:.1f}%<br>Spend a total of ", currency_symbol, "{point.spend_perlab} on this relationship status"),
+        pointFormat = paste0("<b>{point.value}</b><br>% of total budget spent: {point.y:.1f}%<br>a total of ", currency_symbol, "{point.spend_perlab} on this relationship status"),
         headerFormat = ""
       ) %>%
       hc_title(text = unique(.x$party), align = "left", style = list(fontWeight = "bold")) %>%

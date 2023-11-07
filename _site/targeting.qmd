@@ -104,10 +104,10 @@ gg %>%
   highcharter::hchart(type = "bar", hcaes(x = target, y = perc)) %>%
   highcharter::hc_plotOptions(bar = list(color = "darkgrey")) %>%
   highcharter::hc_xAxis(labels = list(style = list(fontSize = "10px"))) %>%
-  highcharter::hc_yAxis(title = list(text = "Budget spent on targeting method (% of Total spend)")) %>%
+  highcharter::hc_yAxis(title = list(text = "Budget spent on targeting method (% of total spend)")) %>%
   highcharter::hc_add_theme(hc_theme_google()) %>%
  highcharter::hc_tooltip(
-    pointFormat = paste0("<b>{point.target}</b><br>% of Total Budget Spent: {point.y:.1f}%<br>Spend a total of ", currency_symbol, "{point.spend_perlab} on this method."),
+    pointFormat = paste0("<b>{point.target}</b><br>% of total budget spent: {point.y:.1f}%<br>a total of ", currency_symbol, "{point.spend_perlab} on this method."),
     headerFormat = ""
   ) %>%
   highcharter::hc_credits(
@@ -188,7 +188,7 @@ plot_geography <- function(x) {
             hc_xAxis(title = "", labels = list(style = list(fontSize = "10px"))) %>%
             hc_add_theme(hc_theme_google()) %>%
            highcharter::hc_tooltip(
-              pointFormat = paste0("<b>{point.target}</b><br>% of Total Budget Spent: {point.y:.1f}%<br>Spend a total of ", currency_symbol,           "{point.spend_perlab} on this method."),
+              pointFormat = paste0("<b>{point.target}</b><br>% of total budget spent: {point.y:.1f}%<br>a total of ", currency_symbol,           "{point.spend_perlab} on this method."),
               headerFormat = ""
             ) %>%
             hc_title(text = unique(.x$party), align = "left", style = list(fontWeight = "bold")) %>%
@@ -290,10 +290,10 @@ gg %>%
   highcharter::hchart(type = "bar", hcaes(x = target, y = perc)) %>%
   highcharter::hc_plotOptions(bar = list(color = "darkgrey")) %>%
   highcharter::hc_xAxis(labels = list(style = list(fontSize = "10px"))) %>%
-  highcharter::hc_yAxis(title = list(text = "Budget spent on targeting method (% of Total spend)")) %>%
+  highcharter::hc_yAxis(title = list(text = "Budget spent on targeting method (% of total spend)")) %>%
   highcharter::hc_add_theme(hc_theme_google()) %>%
  highcharter::hc_tooltip(
-    pointFormat = paste0("<b>{point.target}</b><br>% of Total Budget Spent: {point.y:.1f}%<br>Spend a total of ", currency_symbol, "{point.spend_perlab} on this method."),
+    pointFormat = paste0("<b>{point.target}</b><br>% of total budget spent: {point.y:.1f}%<br>a total of ", currency_symbol, "{point.spend_perlab} on this method."),
     headerFormat = ""
   ) %>%
   highcharter::hc_credits(

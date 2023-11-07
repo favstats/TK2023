@@ -440,52 +440,52 @@ the_daaaat <-
     # filter(date=="2023-10-25")
 # 
 
-# wtm_advertisers <- read_csv("data/nl_advertisers_13_20_Oct_2023 (1).csv") #%>% View()
-# 
-# the14 <- the_daaaat %>%
-# filter(date=="2023-10-15") %>%
-# left_join(election_dat30 %>%
-#             distinct(internal_id, party) %>%
-#             select(page_id = internal_id, party)) %>%
-# group_by(party, date) %>%
-# summarize(amount_spent_eur = sum(amount_spent_eur)) %>%
-# ungroup() %>%
-# drop_na()
-# 
-# add_them <- wtm_advertisers  %>%
-#   mutate(page_id = as.character(advertiser_id)) %>%
-#   filter(date_produced %in% as.Date(c("2023-10-16", "2023-10-17", "2023-10-18")))  %>%
-#   # mutate(spend = ifelse(spend<100, 100, spend))  %>%
-#   left_join(election_dat30 %>%
-#               distinct(internal_id, party) %>%
-#               select(page_id = internal_id, party)) %>%
-#   group_by(party, date_produced) %>%
-#   summarize(spend = sum(spend)) %>%
-#   ungroup() %>%
-#   left_join(the14 %>% select(party, tillthen = amount_spent_eur)) %>%
-#   mutate(amount_spent_eur = ifelse(date_produced==as.Date("2023-10-16"), spend+tillthen, spend)) %>%
-#   mutate(amount_spent_eur = ifelse(is.na(amount_spent_eur), spend, amount_spent_eur)) %>%
-#   group_by(party) %>%
-#   arrange(date_produced) %>%
-#   mutate(amount_spent_eur = cumsum(amount_spent_eur)) %>%
-#   ungroup() %>%
-#   filter(party != "SGP") %>%
-#   bind_rows(
-#     the14 %>%
-#       # mutate(spend = 0) %>%
-#       select(-date) %>%
-#       expand_grid(date_produced = as.Date(c("2023-10-16", "2023-10-17", "2023-10-18")))
-#   ) %>%
-#   distinct(party, date_produced, .keep_all = T)  %>%
-#   mutate(spend = amount_spent_eur) %>%
-#   select(-tillthen, -amount_spent_eur) %>% drop_na()
+wtm_advertisers <- read_csv("data/nl_advertisers_13_20_Oct_2023 (1).csv") #%>% View()
+
+the14 <- the_daaaat %>%
+filter(date=="2023-10-15") %>%
+left_join(election_dat30 %>%
+            distinct(internal_id, party) %>%
+            select(page_id = internal_id, party)) %>%
+group_by(party, date) %>%
+summarize(amount_spent_eur = sum(amount_spent_eur)) %>%
+ungroup() %>%
+drop_na()
+
+add_them <- wtm_advertisers  %>%
+  mutate(page_id = as.character(advertiser_id)) %>%
+  filter(date_produced %in% as.Date(c("2023-10-16", "2023-10-17", "2023-10-18")))  %>%
+  # mutate(spend = ifelse(spend<100, 100, spend))  %>%
+  left_join(election_dat30 %>%
+              distinct(internal_id, party) %>%
+              select(page_id = internal_id, party)) %>%
+  group_by(party, date_produced) %>%
+  summarize(spend = sum(spend)) %>%
+  ungroup() %>%
+  left_join(the14 %>% select(party, tillthen = amount_spent_eur)) %>%
+  mutate(amount_spent_eur = ifelse(date_produced==as.Date("2023-10-16"), spend+tillthen, spend)) %>%
+  mutate(amount_spent_eur = ifelse(is.na(amount_spent_eur), spend, amount_spent_eur)) %>%
+  group_by(party) %>%
+  arrange(date_produced) %>%
+  mutate(amount_spent_eur = cumsum(amount_spent_eur)) %>%
+  ungroup() %>%
+  filter(party != "SGP") %>%
+  bind_rows(
+    the14 %>%
+      # mutate(spend = 0) %>%
+      select(-date) %>%
+      expand_grid(date_produced = as.Date(c("2023-10-16", "2023-10-17", "2023-10-18")))
+  ) %>%
+  distinct(party, date_produced, .keep_all = T)  %>%
+  mutate(spend = amount_spent_eur) %>%
+  select(-tillthen, -amount_spent_eur) %>% drop_na()
 # 
 #   # filter(page_id == "115027651906533") %>% View()
 #   # left_join(the_daaaat %>% distinct(page_id, .keep_all = T) %>% select(page_id, page_name))
 # #   # arrange()
 #   # count(page_id, sort = T)
 # #
-# saveRDS(add_them, file = "data/add_them.rds")
+saveRDS(add_them, file = "data/add_them.rds")
 # the_daaaat  %>%
 #   # left_join(election_dat30 %>%
 #   #             distinct(internal_id, party) %>% 

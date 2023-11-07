@@ -169,7 +169,7 @@ generate_plots <- function(data, exclusion = F) {
              color = the_color) %>%
         hc_plotOptions(bar = list(horizontal = TRUE, stacking = "normal")) %>%
         hc_yAxis(
-          title = list(text = paste0("% Party Budget spent on ", wooord2, " audience")),
+          title = list(text = paste0("% party budget spent on ", wooord2, " audience")),
           max = max(.x$perc)#,
           # min = 0
         ) %>%
@@ -177,7 +177,7 @@ generate_plots <- function(data, exclusion = F) {
         hc_add_theme(hc_theme_google()) %>%
         highcharter::hc_tooltip(
           pointFormat = paste0(
-            "<b>{point.value}</b><br>% of Total Budget Spent: {point.y:.1f}%<br>Spend a total of ",
+            "<b>{point.value}</b><br>% of total budget spent: {point.y:.1f}%<br>a total of ",
             currency_symbol,
             "{point.spend_perlab} ", wooord, " this audience."
           ),
@@ -532,7 +532,7 @@ contested_dat <- contested_dat %>%
     hc_yAxis(title = list(text = "% of budget spent on targeting method"), labels = list(format = "{value}%"), max = 100, min = 0) %>%
             # hc_add_theme(hc_theme_google()) %>%
   highcharter::hc_tooltip(
-    pointFormat = paste0("<b>{point.party}</b><br>..makes up {point.y:.1f}% of total budget spent on {point.value}. <br>..spend a total of ", currency_symbol, "{point.total_spend:.0f} on this audience.<br><br>Total Expenditure on audience is ", currency_symbol, "{point.total_spenderino:.0f}."),
+    pointFormat = paste0("<b>{point.party}</b><br>..makes up {point.y:.1f}% of total budget spent on {point.value}. <br>..a total of ", currency_symbol, "{point.total_spend:.0f} on this audience.<br><br>Total Expenditure on audience is ", currency_symbol, "{point.total_spenderino:.0f}."),
     headerFormat = ""
   ) %>%
     hc_legend(enabled = TRUE, verticalAlign = "bottom", layout = "horizontal") %>%
@@ -548,7 +548,7 @@ contested_dat <- contested_dat %>%
 }
 
 
-      # hc_yAxis(title = list(text = "% Party Budget spent on targeting method"), max = 100, min = 0) %>%
+      # hc_yAxis(title = list(text = "% party budget spent on targeting method"), max = 100, min = 0) %>%
 
 # election_dat30 %>%
 #   # count(detailed_type)
