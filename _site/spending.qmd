@@ -1,6 +1,5 @@
 ---
 title: Uitgaven
-lang: nl
 ---
 
 ```{r setup, include=FALSE}
