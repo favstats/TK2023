@@ -43,7 +43,7 @@ De onderstaande grafiek laat zien op welke postcodes politieke partijen zich ric
 ::: {.panel-tabset}
 
 
-### `r last30days_string` (Afgelopen 30 dagen)
+### `r last30days_string`
 
 
 ::: {.panel-tabset}
@@ -328,7 +328,7 @@ Op Meta is het ook mogelijk om sommige geografische locaties uit te sluiten. Ond
 ::: {.panel-tabset}
 
 
-### `r last30days_string` (Afgelopen 30 dagen)
+### `r last30days_string`
 
 
 ::: {.panel-tabset}

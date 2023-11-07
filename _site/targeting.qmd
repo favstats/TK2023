@@ -49,7 +49,7 @@ Hoeveel spendeerden de campagnes van politieke partijen aan de verschillende foc
 ::: {.panel-tabset}
 
 
-### `r last30days_string` (Afgelopen 30 dagen)
+### `r last30days_string`
 
 ::: {.panel-tabset}
 
@@ -238,7 +238,7 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 :::
 
-### `r last7days_string` (Afgelopen 7 dagen)
+### `r last7days_string`
 
 
 ::: {.panel-tabset}
