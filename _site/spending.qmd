@@ -18,14 +18,7 @@ knitr::opts_chunk$set(
 )
 
 
-# pacman::p_load(htmltools, tidyverse, highcharter, gt, tibble)
-library(dplyr)
-library(stringr)
-library(highcharter)
-library(tibble)
-library(gt)
-library(htmltools)
-
+pacman::p_load(htmltools, tidyverse, highcharter, gt, gtExtras)
 
 options(scipen = 999)
 # print(getwd())
