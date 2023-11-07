@@ -55,3 +55,10 @@ div.sidebar-item-container .sidebar-link:hover {
 .gt_table a:hover {
   text-decoration: underline;
 }
+
+.quarto-title-block div.description {
+  max-width: 72ch;
+  margin-bottom: 40px;
+  font-size: 21px;
+  font-weight: 500;
+}
