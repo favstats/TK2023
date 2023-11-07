@@ -5,6 +5,7 @@ project:
 website:
   title: "De Campagnemonitor 2023"
   favicon: https://www.groene.nl/favicon.ico
+  image: https://www.groene.nl/uploads/image/file/000/038/924/Groene_verkiezingen_24x18_42cm.jpg
   search: false
   navbar:
     logo: https://www.groene.nl/512.png
