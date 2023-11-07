@@ -2,7 +2,7 @@
 title: "CDA sluit online Groningers uit"
 description-meta: "Het CDA sluit in haar onlinecampagne kiezers uit in Oost-Groningen, waarvan een groot deel op de aardgasbel woont. Dat blijkt uit advertentiegegevens van Meta, het moederbedrijf van Facebook en Instagram."
 author: "Eva Hofman en Coen van de Ven"
-date: "7/11/2023"
+date: "11/7/2023"
 image: "targeting-cda-groningen.png"
 lang: nl
 ---
