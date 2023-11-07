@@ -38,13 +38,13 @@ source("../party_utils.R")
 
 
 
-Deze grafieken laten zien op welke focusgroepen politieke partijen hun advertenties richten in aanloop naar de Tweede Kamerverkiezingen van 2023 volgens de nieuwste data. De focus ligt op de platformen van Meta (Facebook en Instagram) omdat deze de meest gedetailleerdere focusgroepen aanbieden voor politieke advertenties
+Deze grafieken laten zien op welke focusgroepen politieke partijen hun advertenties richten in aanloop naar de Tweede Kamerverkiezingen van 2023 volgens de nieuwste data. De focus ligt op de platformen van Meta (Facebook en Instagram) omdat deze de meest gedetailleerdere focusgroepen aanbieden voor politieke advertenties.
 
 
 
-Hoeveel spendeerden de campagnes van politieke partijen aan de verschillende focusgroepen? Onderstaande grafieken tonen zowel het totaal als de uitgaven per partij
+Hoeveel spendeerden de campagnes van politieke partijen aan de verschillende focusgroepen? Onderstaande grafieken tonen zowel het totaal als de uitgaven per partij.
 
-> NB verschillende focusgroepen kunnen overlappen, waardoor de uitkomst niet per se 100% is
+> NB verschillende focusgroepen kunnen overlappen, waardoor de uitkomst niet per se 100% is.
 
 ::: {.panel-tabset}
 
@@ -244,7 +244,7 @@ tags$div(class = "container", do.call(tags$div, rows))
 ::: {.panel-tabset}
 
 
-#### Overall
+#### Totaal
 
 
 ```{r, fig.width=8, fig.height=5, dpi=300}
@@ -306,7 +306,7 @@ gg %>%
 ```
 
 
-#### By Party
+#### Per partij
 
 ```{r, fig.width=12, fig.height=9, dpi=300}
 

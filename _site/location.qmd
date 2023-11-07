@@ -36,7 +36,7 @@ source("../party_utils.R")
 
 ## Focusgroep op basis van geografie
 
-De onderstaande grafiek laat zien op welke postcodes politieke partijen zich richten met hun advertenties op de platforms van Meta
+De onderstaande grafiek laat zien op welke postcodes politieke partijen zich richten met hun advertenties op de platforms van Meta.
 
 
 
@@ -158,7 +158,7 @@ for (partyz in parties_with_zips) {
 
 #### Provincies
 
-> Hoe groter het vlak, hoe meer geld er is uitgegeven door deze partij op deze specifieke locatie
+> Hoe groter het vlak, hoe meer geld er is uitgegeven door deze partij op deze specifieke locatie.
 
 ```{r,fig.width=10, fig.height=8, echo = F}
 library(treemap)
@@ -258,7 +258,7 @@ if(nrow(region_dat)!=0) {
 
 #### Steden
 
-> Hoe groter het vlak, hoe meer geld er is uitgegeven door deze partij op deze specifieke locatie
+> Hoe groter het vlak, hoe meer geld er is uitgegeven door deze partij op deze specifieke locatie.
 
 ```{r,fig.width=10, fig.height=8}
 library(treemap)
@@ -337,7 +337,7 @@ Op Meta is het ook mogelijk om sommige geografische locaties uit te sluiten. Ond
 
 #### Postcodes
 
-De onderstaande grafiek laat zien welke postcodes door partijen worden uitgesloten wanneer ze adverteren op de platforms van Meta
+De onderstaande grafiek laat zien welke postcodes door partijen worden uitgesloten wanneer ze adverteren op de platforms van Meta.
 
 
 ```{r}
@@ -434,7 +434,7 @@ for (partyz in parties_with_zips) {
 
 #### Provincies
 
-> The bigger the area the more money was spend on ads excluding this location.
+> Hoe groter het vlak, hoe meer geld er is uitgegeven door deze partij op deze specifieke locatie.
 
 ```{r,fig.width=10, fig.height=8, echo = F}
 library(treemap)
@@ -495,7 +495,7 @@ if(nrow(region_dat)!=0) {
 
 #### Steden
 
-> The bigger the area the more money was spend on ads excluding this location.
+> Hoe groter het vlak, hoe meer geld er is uitgegeven door deze partij op deze specifieke locatie.
 
 ```{r,fig.width=10, fig.height=8}
 library(treemap)

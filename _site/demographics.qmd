@@ -38,7 +38,7 @@ source("../party_utils.R")
 Onderstaande grafieken laten zien hoe partijen verschillende leeftijdsgroepen als focusgroep gebruiken en hoeveel procent van het budget daaraan is uitgeven.
 
 
-> NB verschillende focusgroepen kunnen overlappen, waardoor de uitkomst niet per se 100% is
+> NB verschillende focusgroepen kunnen overlappen, waardoor de uitkomst niet per se 100% is.
 
 ::: panel-tabset
 
@@ -274,9 +274,9 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 ## Focusgroep op basis van gender
 
-De onderstaande grafieken laten zien hoe partijen gender als focusgroep gebruiken en welk percentage van het budget daaraan werd uitgegeven
+De onderstaande grafieken laten zien hoe partijen gender als focusgroep gebruiken en welk percentage van het budget daaraan werd uitgegeven.
 
-> NB verschillende focusgroepen kunnen overlappen, waardoor de uitkomst niet per se 100% is
+> NB verschillende focusgroepen kunnen overlappen, waardoor de uitkomst niet per se 100% is.
 
 ::: panel-tabset
 
@@ -454,10 +454,10 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 ## Focusgroep op basis van taal
 
-De onderstaande grafieken laten zien hoe partijen verschillende talen als focusgroep gebruiken en welk perentage van het budget daaraan werd uitgegeven
+De onderstaande grafieken laten zien hoe partijen verschillende talen als focusgroep gebruiken en welk perentage van het budget daaraan werd uitgegeven.
 
 
-> NB verschillende focusgroepen kunnen overlappen, waardoor de uitkomst niet per se 100% is
+> NB verschillende focusgroepen kunnen overlappen, waardoor de uitkomst niet per se 100% is.
 
 ::: panel-tabset
 ### `r last30days_string`
@@ -631,10 +631,10 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 ## Focusgroep op basis van baansector en soort onderwijs
 
-De onderstaande grafieken laten zien hoe partijen verschillende baansectoren en soorten onderwijs gebruiken als focusgroep en hoeveel procent van het budget daaraan werd uitgegeven. De volgende grafiek gaat over het onderwijsniveau
+De onderstaande grafieken laten zien hoe partijen verschillende baansectoren en soorten onderwijs gebruiken als focusgroep en hoeveel procent van het budget daaraan werd uitgegeven. De volgende grafiek gaat over het onderwijsniveau.
 
 
-> NB verschillende focusgroepen kunnen overlappen, waardoor de uitkomst niet per se 100% is
+> NB verschillende focusgroepen kunnen overlappen, waardoor de uitkomst niet per se 100% is.
 
 ::: panel-tabset
 ### `r last30days_string`
@@ -880,9 +880,9 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 ## Focusgroep op basis van onderwijsniveau
 
-De onderstaande grafieken laten zien hoe partijen verschillende onderwijsniveaus als focusgroep gebruiken en hoeveel procent van het budget daaraan werd uitgegeven
+De onderstaande grafieken laten zien hoe partijen verschillende onderwijsniveaus als focusgroep gebruiken en hoeveel procent van het budget daaraan werd uitgegeven.
 
-> NB verschillende focusgroepen kunnen overlappen, waardoor de uitkomst niet per se 100% is
+> NB verschillende focusgroepen kunnen overlappen, waardoor de uitkomst niet per se 100% is.
 
 
 
@@ -1103,10 +1103,10 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 ## Focusgroep op basis van relatiestatus
 
-De onderstaande grafieken laten zien hoe partijen relatiestatussen als focusgroep gebruiken en hoeveel procent van het budget daaraan werd uitgegeven
+De onderstaande grafieken laten zien hoe partijen relatiestatussen als focusgroep gebruiken en hoeveel procent van het budget daaraan werd uitgegeven.
 
 
-> NB verschillende focusgroepen kunnen overlappen, waardoor de uitkomst niet per se 100% is
+> NB verschillende focusgroepen kunnen overlappen, waardoor de uitkomst niet per se 100% is.
 
 ::: panel-tabset
 ### `r last30days_string`

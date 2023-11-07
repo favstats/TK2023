@@ -37,7 +37,7 @@ source("../party_utils.R")
 
 ## De focusgroepen die het meest gebruikt werden
 
-Van de gedetailleerde opties die Meta aanbiedt laat de onderstaande grafiek de meest *gebruikte* focusgroepen per partij zien. De ranglijst is gebaseerd op de uitgegeven bedragen. De meeste focusgroepen zijn gericht op interesses zoals ‘boeken’ of ‘politiek’
+Van de gedetailleerde opties die Meta aanbiedt laat de onderstaande grafiek de meest *gebruikte* focusgroepen per partij zien. De ranglijst is gebaseerd op de uitgegeven bedragen. De meeste focusgroepen zijn gericht op interesses zoals ‘boeken’ of ‘politiek’.
 
 
 
@@ -270,7 +270,7 @@ tags$div(class = "container", do.call(tags$div, rows))
 ## De focusgroepen die het meest uitgesloten werden
 
 
-Van de gedetailleerde opties die Meta aanbiedt laat de onderstaande grafiek de meest *uitgesloten* focusgroepen per partij zien. De ranglijst is gebaseerd op de uitgeven bedragen. De meeste focusgroepen zijn gericht op interesses zoals ‘boeken’ of ‘politiek’
+Van de gedetailleerde opties die Meta aanbiedt laat de onderstaande grafiek de meest *uitgesloten* focusgroepen per partij zien. De ranglijst is gebaseerd op de uitgeven bedragen. De meeste focusgroepen zijn gericht op interesses zoals ‘boeken’ of ‘politiek’.
 
 
 ::: {.panel-tabset}
@@ -437,7 +437,7 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 ## De focusgroepen waar het meest om geconcurreerd werd
 
-De onderstaande grafieken laten de focusgroepen zien waar het meest om gestreden wordt. Bijvoorbeeld de groepen waarin alle partijen grote bedragen investeren om kiezers te bereiken met dezelfde interesses
+De onderstaande grafieken laten de focusgroepen zien waar het meest om gestreden wordt. Bijvoorbeeld de groepen waarin alle partijen grote bedragen investeren om kiezers te bereiken met dezelfde interesses.
 
 
 ::: {.panel-tabset}
