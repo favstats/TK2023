@@ -62,9 +62,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: [{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: [],
+      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -212,7 +212,31 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
 <div class="list grid quarto-listing-cols-3">
-
+<div class="g-col-1" data-index="0" data-listing-date-sort="1691712000000" data-listing-file-modified-sort="1699356802809" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<a href="./posts/cda-sluit-online-groningers-uit.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="./posts/targeting-cda-groningen.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+CDA sluit online Groningers uit
+</h5>
+<div class="card-text listing-description">
+Het CDA sluit in haar onlinecampagne kiezers uit in Oost-Groningen, waarvan een groot deel op de aardgasbel woont. Dat blijkt uit advertentiegegevens van Meta, het…
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Eva Hofman en Coen van de Ven
+</div>
+<div class="listing-date">
+11 aug. 2023
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
 </div>
 <div class="listing-no-matching d-none">
 Geen overeenkomsten
