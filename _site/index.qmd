@@ -4,7 +4,7 @@ description: "Hoe jagen politieke partijen op jouw stem, wat willen ze juist nie
 lang: nl
 listing:
   contents: posts
-  type: grid
+  type: default
   sort: "date desc"
   categories: false
 ---
