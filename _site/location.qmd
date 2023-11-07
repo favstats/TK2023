@@ -1,6 +1,6 @@
 ---
 title: "Locatie"
-description: "Hoe jagen politieke partijen op jouw stem, wat willen ze juist niet dat je ziet en hoeveel geld geven ze daaraan uit? In aanloop naar de Tweede Kamerverkiezingen monitoren we politieke microtargeting."
+description-meta: "Hoe jagen politieke partijen op jouw stem, wat willen ze juist niet dat je ziet en hoeveel geld geven ze daaraan uit? In aanloop naar de Tweede Kamerverkiezingen monitoren we politieke microtargeting."
 lang: nl
 format:
   html:
