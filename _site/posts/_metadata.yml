@@ -1,5 +1,3 @@
 # options specified here will apply to all posts in this folder
 output-dir: ../../docs/posts
-freeze: auto
 title-block-banner: false
-
