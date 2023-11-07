@@ -7,4 +7,5 @@ listing:
   type: default
   sort: "date desc"
   categories: false
+page-layout: full  
 ---
