@@ -121,7 +121,7 @@ if(the_currency == "EUR"){
 
 
 
-```{r echo=FALSE, results='asis', eval = F}
+```{r echo=FALSE, results='asis', eval = T}
 
 shiny::HTML(glue::glue('
 <style>
@@ -160,7 +160,7 @@ shiny::HTML(glue::glue('
   <div id="text">
     <img src="wtm_logo_2020.png" alt="Logo" style="width:150px;height:150px;">
     <h2>Welcome to the >>>sets$welcome<<<</h2>
-    <h2>NOTE: THE DASHBOARD MOVED! It has been adopted by the <a href="https://groene.github.io/TK2023/spending.html" target="_blank">De Groene Amsterdammer (click here)</a>!</h2>
+    <h3>NOTE: THE DASHBOARD MOVED! It has been adopted by the <a href="https://groene.github.io/TK2023/spending.html" target="_blank">De Groene Amsterdammer (click here)</a>!</h2>
     <p>This dashboard aggregates data from the <a href="https://www.facebook.com/ads/library/" target="_blank">Meta Ad Library</a> to show how citizens are targeted during the >>>sets$election_title<<<.</p>
     <p>If you want to know more about Who Targets Me and our work on ad transparency, visit us on <a href="https://www.whotargets.me/" target="_blank">whotargets.me</a>!</p>  </div>
 </div>
