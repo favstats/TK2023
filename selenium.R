@@ -256,7 +256,8 @@ timelines <-
            by = "day")
 
 #
-daily_spending_old <- readRDS("data/ggl_daily_spending.rds")
+daily_spending_old <- readRDS("data/ggl_daily_spending.rds") #%>% 
+  # filter(!(date  %in% lubridate::ymd(c("2023-11-07", "2023-11-08"))))
 
 
 daily_spending <-
@@ -388,7 +389,8 @@ retrieve_spend_custom <-
 ggl_sel_sp_old <- readRDS("data/ggl_sel_sp.rds")
 ggl_sel_sp7_old <- readRDS("data/ggl_sel_sp7.rds")
 
-if (!all(dates$begin30 == ggl_sel_sp_old$from)) {
+# if (T) {
+# if(!all(dates$begin30 == ggl_sel_sp_old$from)){
   ggl_sel_sp <- unique(ggl_spend$Advertiser_ID) %>%
     # .[1:3] %>%
     map_dfr_progress( ~ {
@@ -415,9 +417,9 @@ if (!all(dates$begin30 == ggl_sel_sp_old$from)) {
   
   
   saveRDS(ggl_sel_sp, file = "data/ggl_sel_sp.rds")
-}
+# }
   
-  if (!all(dates$begin7 == ggl_sel_sp7_old$from)) {
+  # if (!all(dates$begin7 == ggl_sel_sp7_old$from)) {
   ggl_sel_sp7 <- unique(ggl_spend$Advertiser_ID) %>%
     # .[22] %>%
     map_dfr_progress( ~ {
@@ -441,7 +443,7 @@ if (!all(dates$begin30 == ggl_sel_sp_old$from)) {
           file = "data/ggl_sel_sp7.rds")
   
   
-}
+# }
 
 unlink("data/ggl", recursive = T, force = T)
 # file.remove("data/ggl/google-political-ads-creative-stats.csv")

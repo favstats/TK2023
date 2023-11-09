@@ -549,12 +549,9 @@ Het kan zijn dat de schattingen van de dagelijkse uitgaven niet helemaal nauwkeu
 
 ### Cumulatief
 
-```{r}
+```{r, eval = F}
 add_them <-  readRDS("../data/add_them.rds")
-```
 
-
-```{r, out.width="100%"}
 more_data <- #the_daaaat %>%
   readr::read_rds("../lifelong/NL.rds")  %>%
     mutate(date_produced = lubridate::ymd(date)) %>%
@@ -598,10 +595,7 @@ hc_data_cum_raw <-  more_data %>%
 
 # saveRDS(hc_data, "../data/hc_data.rds")
 
-color_order <- hc_data_cum_raw %>%
-  distinct(party, .keep_all = T) %>%
-  arrange(party) %>%
-  pull(colors)
+
 
 # more_data %>%
   # mutate(date_produced = lubridate::ymd(date)) %>%
@@ -632,11 +626,19 @@ color_order <- hc_data_cum_raw %>%
 #   filter(party == "VVD") %>% #View()
 #   arrange(date_produced) %>%
 #   filter(date_produced %in% as.Date(c("2023-10-13", "2023-10-14", "2023-10-15", "2023-10-16", "2023-10-17", "2023-10-18", "2023-10-19")))
+saveRDS(hc_data_cum_raw, "../data/hc_data_cum_raw.rds")
+
+
 ```
 
 ```{r}
-# more_data %>%
-#   arrange(desc(date))
+hc_data_cum_raw <- readRDS("../data/hc_data_cum_raw.rds")
+
+
+color_order <- hc_data_cum_raw %>%
+  distinct(party, .keep_all = T) %>%
+  arrange(party) %>%
+  pull(colors)
 ```
 
 

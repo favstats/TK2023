@@ -20,7 +20,7 @@ sets <- jsonlite::fromJSON("settings.json")
 
 if(Sys.info()[["sysname"]]=="Windows"){
   ### CHANGE ME WHEN LOCAL!
-  tf <- "7"
+  tf <- "30"
 }
 
 jb <- get_targeting("7860876103", timeframe = glue::glue("LAST_90_DAYS"))
@@ -250,9 +250,9 @@ all_dat <- all_dat %>%
   )) %>% 
   # mutate(party = ifelse(party %in% c("GroenLinks", "PvdA"), "GroenLinks-PvdA")) %>% 
   # filter(page_name != "Wybren van Haga") %>% 
-  bind_rows(tibble(page_id = c("103936679460429", "115141108346129", "1816979431914302", "137011549489828"),
-            page_name = c("Nieuw Sociaal Contract", "Nieuw Sociaal Contract", "Pieter Omtzigt", "GroenLinks-PvdA"),
-            party = c("NSC", "NSC", "NSC", "GroenLinks-PvdA"))) %>% 
+  bind_rows(tibble(page_id = c("103936679460429", "115141108346129", "1816979431914302", "137011549489828", "492150400807824"),
+            page_name = c("Nieuw Sociaal Contract", "Nieuw Sociaal Contract", "Pieter Omtzigt", "GroenLinks-PvdA", "Frans Timmermans"),
+            party = c("NSC", "NSC", "NSC", "GroenLinks-PvdA", "GroenLinks-PvdA"))) %>% 
   distinct(page_id, .keep_all = T) %>% 
   filter(party != "And") %>% 
   mutate(party = ifelse(party %in% c("V", "Volt"), "Volt Nederland", party))  %>% 
@@ -267,6 +267,7 @@ all_dat <- all_dat %>%
 
 saveRDS(all_dat, "data/all_dat.rds")
 
+# all_dat %>% filter(page_id == "492150400807824")
 
 scraper <- function(.x, time = tf) {
   

@@ -65,6 +65,11 @@ fin <- (as.Date(election_dat30$ds[1])-lubridate::days(1))
 begin7 <- fin-lubridate::days(6)
 begin30 <- fin-lubridate::days(29)
 
+tibble(fin,
+       begin7,
+       begin30) %>% 
+  write_csv("../data/dates.csv")
+
 
 # Setting the system locale to Dutch for time/date formatting
 Sys.setlocale("LC_TIME", "nl_NL")

@@ -125,12 +125,25 @@ for (partyz in parties_with_zips) {
   # Create the heading for the party
   cat("\n")
   cat("##### ", partyz, "\n")
+  
+  zip_party <- all_zip %>%
+  filter(party == partyz) %>%
+  mutate(pc4_code = str_remove_all(value, ", Netherlands"))
+
+  only_one <- F
+  if(length(unique(zip_party$total_spend_old)) == 1) {
+    zip_party$total_spend_old[sample(1:length(zip_party$total_spend_old), 1)] <-
+      zip_party$total_spend_old[1] - 1
+    
+    only_one <- T
+    barwidth_num <- 1
+  } else {
+    barwidth_num <- 10
+  }
 
   # Prepare the data for plotting
   party_data <- geo %>%
-    left_join(all_zip %>%
-                filter(party == partyz) %>%
-                mutate(pc4_code = str_remove_all(value, ", Netherlands")))
+    left_join(zip_party)
 
   # Extract the color for the party
   party_color <- color_dat %>%
@@ -138,15 +151,29 @@ for (partyz in parties_with_zips) {
     pull(colors) %>%
     first()  # Make sure 'color' column has exactly one color per party
 
-  # Print the plot
+  if(!only_one){
   print(
     ggplot(party_data) +
       geom_sf(aes(fill = total_spend_old), colour = NA, size = 0.1) +
       scale_fill_gradient2(low = 'lightgrey', high = party_color, na.value = 'lightgrey') +
       theme_void() +
       theme(legend.position = 'bottom') +
-      guides(fill = guide_colourbar(title = 'Spend (€)', barwidth = 10, barheight = 0.5))
-  )
+      guides(fill = guide_colourbar(title = 'Spend (€)', barwidth = barwidth_num, barheight = 0.5))
+  )    
+  } else {
+  print(
+    ggplot(party_data) +
+      geom_sf(aes(fill = total_spend_old), colour = NA, size = 0.1) +
+      scale_fill_gradient2(low = 'lightgrey', high = party_color, na.value = 'lightgrey', 
+                         breaks = zip_party$total_spend_old[1], 
+                         labels =  round(zip_party$total_spend_old[1])) +
+      theme_void() +
+      theme(legend.position = 'bottom') +
+      guides(fill = guide_colourbar(title = 'Spend (€)', barwidth = barwidth_num, barheight = 0.5))
+  )        
+  }
+  # Print the plot
+
 
   cat("\n")
 }

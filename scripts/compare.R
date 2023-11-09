@@ -4,12 +4,14 @@
 # setwd("C:/Users/fabio/Dropbox/postdoc/bs/TK2023")
 elex2021reps <- readRDS("data/elex2021reps.rds")
 
+# source("party_utils.R")
+
 dat2021 <- elex2021reps  %>%
   janitor::clean_names() %>% 
   mutate(page_id = as.character(page_id)) %>% 
   left_join(election_dat30 %>%
-              distinct(page_id, party) %>% 
-              select(page_id, party)) %>% 
+              distinct(internal_id, party) %>% 
+              select(page_id = internal_id, party)) %>% 
   drop_na(party) %>% 
   mutate(amount_spent_eur = readr::parse_number(amount_spent_eur)) %>% 
   mutate(Date = lubridate::ymd(date))  %>% 
@@ -25,16 +27,17 @@ dat2021 <- elex2021reps  %>%
   mutate(days_until = as.numeric(lubridate::ymd("2021-03-15")-Date)) 
   
 
-more_data <- readr::read_rds("lifelong/NL.rds")  %>%
+more_data <- #the_daaaat %>%
+  readr::read_rds("lifelong/NL.rds")  %>%
   mutate(date_produced = lubridate::ymd(date)) %>%
-  drop_na(date_produced) %>% 
+  drop_na(date_produced) %>%
   janitor::clean_names()%>% #rename(advertiser_id = page_id) %>%
   mutate(spend = readr::parse_number(as.character(amount_spent_eur))) %>%
   # mutate(spend = ifelse(spend == 100, 50, spend)) %>%
   # distinct(page_id, .keep_all = T) %>%
-  filter(str_detect(page_name, "Global Space Conference on Climate Change|de Alliantie|PvdA - GroenLinks", negate = T)) %>%
-  mutate(page_id = as.character(page_id)) %>% 
-  # filter(cntry == "NL") %>% 
+  filter(str_detect(page_name, "Global Space Conference on Climate Change|de Alliantie", negate = T)) %>%
+  mutate(page_id = as.character(page_id)) %>%
+  # filter(cntry == "NL") %>%
   filter(date_produced >= lubridate::as_date("2023-08-01"))
 
 
@@ -42,41 +45,39 @@ more_data <- readr::read_rds("lifelong/NL.rds")  %>%
 hc_data_cum_raw <-  more_data %>%
   # mutate(advertiser_id = as.character(advertiser_id)) %>%
   left_join(election_dat30 %>%
-              distinct(page_id, party) %>% 
-              select(page_id, party)) %>% 
+              distinct(internal_id, party) %>%
+              select(page_id = internal_id, party)) %>%
   drop_na(party) %>%
   group_by(date_produced) %>%
   summarize(spend  = sum(spend)) %>%
-  # ungroup() %>%
+  ungroup() %>%
   # spread(key = party, value = spend, fill = 0) %>%
   # arrange(date_produced) %>%
   # mutate(across(starts_with("50PLUS"):(last_col()), ~cumsum(.), .names = "cumulative_{.col}")) %>%
   # select(date_produced, starts_with("cumulative")) %>%
   # rename_with(~str_remove(., "cumulative_"), starts_with("cumulative")) %>%
   # pivot_longer(-date_produced, names_to = "party", values_to = "spend")  %>%
+  ##### THIS NEEDS TO CHANGE FOR OTHER COUNTRIES
+  bind_rows(add_them %>%
+              group_by(date_produced) %>%
+              summarize(spend  = sum(spend)) %>%
+              ungroup() ) #%>%
+  ##### THIS NEEDS TO CHANGE FOR OTHER COUNTRIES
   # group_by(party) %>%
-  mutate(total_spend = max(spend))# %>%
+  # mutate(total_spend = max(spend)) %>%
   # ungroup()  %>%
   # left_join(color_dat) %>%
   # mutate(party = as.factor(party)) %>%
   # mutate(party = fct_reorder(party, total_spend))
 
-# saveRDS(hc_data, "../data/hc_data.rds")
-# 
-# color_order <- hc_data_cum_raw %>%
-#   distinct(party, .keep_all = T) %>%
-#   arrange(party) %>%
-#   pull(colors)
-# 
-# # more_data %>% 
-
 
 hc_data_cumfb <- hc_data_cum_raw %>%
   mutate(Date = date_produced) %>%
   # group_by(party) %>%  # Assuming you have a 'party' column
-  arrange(Date) %>% 
-  mutate(`Daily Spend` = spend - first(spend)) #%>%
-  # ungroup() 
+  arrange(Date) %>%
+  mutate(`Daily Spend` = spend - first(spend)) %>%
+  ungroup()
+
 
 
 the_dat <- hc_data_cumfb %>% mutate(election = "2023") %>%  
@@ -85,10 +86,10 @@ the_dat <- hc_data_cumfb %>% mutate(election = "2023") %>%
 
 current_one <- the_dat %>% 
   filter(election == "2023") %>% 
-  filter(days_until==min(days_until)) %>% pull(days_until)
+  filter(days_until==min(days_until)) %>% pull(days_until) %>% .[1] %>% magrittr::add(1)
 
 the_dat %>% 
-  filter(days_until ==current_one) %>% 
+  filter(days_until == current_one) %>% 
   select(election, `Daily Spend`) %>% 
   pivot_wider(names_from = election, values_from = `Daily Spend`) %>% 
   janitor::clean_names() %>% 
