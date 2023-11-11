@@ -27,8 +27,9 @@ jb <- get_targeting("7860876103", timeframe = glue::glue("LAST_90_DAYS"))
 
 new_ds <- jb %>% arrange(ds) %>% slice(1) %>% pull(ds)
 new_ds <- "2023-01-01"
+latest_ds <- "2023-01-02"
 
-# latest_elex <- readRDS(paste0("data/election_dat", tf, ".rds"))
+latest_elex <- readRDS(paste0("data/election_dat", tf, ".rds"))
 # 
 # latest_ds <- latest_elex %>% arrange(ds) %>% slice(1) %>% pull(ds)
 
