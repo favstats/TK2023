@@ -20,17 +20,17 @@ sets <- jsonlite::fromJSON("settings.json")
 
 if(Sys.info()[["sysname"]]=="Windows"){
   ### CHANGE ME WHEN LOCAL!
-  tf <- "7"
+  tf <- "30"
 }
 
 jb <- get_targeting("7860876103", timeframe = glue::glue("LAST_90_DAYS"))
 
 new_ds <- jb %>% arrange(ds) %>% slice(1) %>% pull(ds)
-# new_ds <- "2023-01-01"
+new_ds <- "2023-01-01"
 
-latest_elex <- readRDS(paste0("data/election_dat", tf, ".rds"))
-
-latest_ds <- latest_elex %>% arrange(ds) %>% slice(1) %>% pull(ds)
+# latest_elex <- readRDS(paste0("data/election_dat", tf, ".rds"))
+# 
+# latest_ds <- latest_elex %>% arrange(ds) %>% slice(1) %>% pull(ds)
 
 
 
