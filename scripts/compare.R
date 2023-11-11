@@ -3,6 +3,7 @@
 
 # setwd("C:/Users/fabio/Dropbox/postdoc/bs/TK2023")
 elex2021reps <- readRDS("data/elex2021reps.rds")
+add_them <- readRDS("data/add_them.rds")
 
 # source("party_utils.R")
 
@@ -18,6 +19,7 @@ dat2021 <- elex2021reps  %>%
   mutate(days_until = as.numeric(lubridate::ymd("2021-03-15")-Date)) %>% 
   # pull(days_until) %>% sort(decreasing = T)
   filter(days_until <= 112) %>% 
+  filter(days_until >= 0) %>% 
   group_by(date) %>% 
   summarize(amount_spent_eur = sum(amount_spent_eur)) %>% 
   ungroup() %>% 
@@ -95,6 +97,12 @@ the_dat %>%
   janitor::clean_names() %>% 
   mutate(diff = x2021-x2023)
 
+
+comparison <- the_dat %>% select(Date, cumulative_spend = `Daily Spend`, days_until, election) %>%
+  filter(days_until <= 112) 
+
+write_csv(comparison, "data/comparison.csv")
+
 the_dat %>% 
   ggplot(aes(days_until, `Daily Spend`, color = election)) +
   geom_line(size = 2.4) +
@@ -104,3 +112,4 @@ the_dat %>%
   labs(y = "Cumulative Spent/n", x = "Days Until Election Day")  +
   scale_color_grey() +
   theme(legend.position = "top")
+

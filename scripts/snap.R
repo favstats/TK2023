@@ -5,7 +5,7 @@ download.file("https://storage.googleapis.com/ad-manager-political-ads-dump/poli
               destfile = "data/PoliticalAds.zip")
 
 
-unzip("data/PoliticalAds.zip",exdir = "data," overwrite = T)
+unzip("data/PoliticalAds.zip",exdir = "data", overwrite = T)
 
 padsunraw <-read_csv("data/PoliticalAds.csv") %>% janitor::clean_names()
 
