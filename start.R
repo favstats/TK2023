@@ -13,3 +13,9 @@ write_lines(nrow(all_dat), file = "n_advertisers.txt")
 dir("_site", full.names = T) %>% keep(~str_detect(.x, "qmd")) %>% walk(quarto::quarto_render)
 
 knitr::knit("README.Rmd")
+
+
+
+unlink("node_modules", recursive = T, force = T)
+unlink("out", recursive = T, force = T)
+
