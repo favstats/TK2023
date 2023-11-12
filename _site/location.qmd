@@ -584,3 +584,236 @@ if(nrow(region_dat)!=0) {
 :::
 
 :::
+
+
+
+```{r, eval = F}
+partyz <- "CDA"
+  # Create the heading for the party
+  cat("\n")
+  cat("##### ", partyz, "\n")
+  
+  zip_party <- all_zip %>%
+  filter(party == partyz) %>%
+  mutate(pc4_code = str_remove_all(value, ", Netherlands")) %>%
+    select(pc4, pc4_code, total_spend_old) 
+
+
+  # Prepare the data for plotting
+  party_data <- geo %>%
+    right_join(zip_party) %>% 
+    right_join(cbs %>%
+    janitor::clean_names())
+
+  party_data %>% nrow()
+```
+
+```{r, eval = F}
+party_data %>% filter(pc4 == "3311")
+```
+
+```{r, eval = F}
+all_zip_excl <- election_dat30 %>%
+    filter(type == "location") %>%
+    filter(location_type == "zips") %>%
+    mutate(total_spend_formatted = total_spend_pct*total_spend_formatted) %>%
+    filter(is_exclusion) %>%
+  group_by(internal_id, total_spend_pct, party) %>%
+  mutate(n_together = n()) %>%
+    # select(page_id, value, num_ads, total_spend_formatted, n_together)
+  mutate(total_spend_formatted_old = total_spend_formatted) %>%
+  mutate(total_spend_formatted = total_spend_formatted/n_together) %>%
+  select(party, internal_id, value, n_together, total_spend_formatted, total_spend_formatted_old) %>%
+  ungroup() %>%
+  arrange(value) %>%
+    group_by(value, party) %>%
+    summarize(total_spend = sum(total_spend_formatted),
+              total_spend_old = sum(total_spend_formatted_old)) %>%
+    ungroup() %>%
+    # filter(party == "VVD")  %>%
+    dplyr::mutate(pc4 = str_remove_all(value, ", Netherlands") %>% as.numeric) %>%
+    left_join(cbs %>%
+    janitor::clean_names())
+
+partyz <- "CDA"
+  # Create the heading for the party
+  cat("\n")
+  cat("##### ", partyz, "\n")
+  
+  zip_party_excl <- all_zip_excl %>%
+  filter(party == partyz) %>%
+  mutate(pc4_code = str_remove_all(value, ", Netherlands")) %>%
+    select(pc4, pc4_code, total_spend_old) 
+
+
+  # Prepare the data for plotting
+  party_data_excl <- geo %>%
+    right_join(zip_party_excl) %>% 
+    right_join(cbs %>%
+    janitor::clean_names())
+  
+  party_data_excl %>% 
+  mutate(total_spend_old = ifelse(is.na(total_spend_old), 0, total_spend_old)) %>% 
+  # filter(total_spend_old == 0)
+  filter(p_nw_mig_a >= 0) %>% #nrow
+  # pull(total_spend_old) %>% table()
+    mutate(spend_bin = ifelse(total_spend_old > 0, "Excluded Postcodes", "Not Excluded")) %>% 
+  ggplot(aes(spend_bin, p_nw_mig_a)) +
+    geom_boxplot() +
+  ggpubr::stat_compare_means() +
+  EnvStats::stat_median_iqr_text() +
+  # EnvStats::stat_mean_sd_text() +
+  EnvStats::stat_n_text()
+
+```
+
+```{r, fig.width=10, fig.height=5, eval = F}
+library(ggplot2)
+library(ggpubr)
+library(EnvStats)
+library(dplyr)
+
+# Assuming party_data and party_data_excl are already defined
+
+# Improve your graph with some customizations
+enhanced_plot <- party_data %>%
+  mutate(total_spend_old = ifelse(is.na(total_spend_old), 0, total_spend_old)) %>%
+  filter(p_nw_mig_a >= 0) %>%
+  mutate(spend_bin = ifelse(total_spend_old > 0, "Targeted Postcodes", "Not Targeted")) %>%
+  bind_rows(
+    party_data_excl %>%
+    mutate(total_spend_old = ifelse(is.na(total_spend_old), 0, total_spend_old)) %>%
+    filter(p_nw_mig_a >= 0) %>%
+    mutate(spend_bin = ifelse(total_spend_old > 0, "Excluded Postcodes", "Not Excluded")) %>%
+    filter(spend_bin == "Excluded Postcodes")
+  ) %>%
+  ggplot(aes(spend_bin, p_nw_mig_a, fill = spend_bin)) +
+    geom_violin(adjust = 2.5) +
+    geom_boxplot(width = 0.2, outlier.shape = NA, fill = "white") + # Remove outliers to reduce clutter
+    scale_fill_brewer(palette = "Pastel1") + # Aesthetically pleasing color palette
+    stat_compare_means() +
+    stat_mean_sd_text() +
+    stat_n_text() +
+    labs(y = "% Non-Western Migration Background", x = "Postcodes", title = "Postcodes targeted/ignored/excluded by CDA\n") +
+    theme_minimal() +
+    theme(
+      text = element_text(size = 12), # Adjust text size
+      legend.position = "none", # Adjust legend position
+      axis.title.x = element_text(face = "bold"), # Bold X axis title
+      axis.title.y = element_text(face = "bold") # Bold Y axis title
+    )
+
+# Print the enhanced plot
+print(enhanced_plot)
+
+
+```
+
+```{r, fig.width=10, fig.height=5, eval = F}
+partyz <- "D66"
+  # Create the heading for the party
+  cat("\n")
+  cat("##### ", partyz, "\n")
+  
+  zip_party <- all_zip %>%
+  filter(party == partyz) %>%
+  mutate(pc4_code = str_remove_all(value, ", Netherlands")) %>%
+    select(pc4, pc4_code, total_spend_old) 
+
+
+  # Prepare the data for plotting
+  party_data <- geo %>%
+    right_join(zip_party) %>% 
+    right_join(cbs %>%
+    janitor::clean_names())
+  
+party_data %>% 
+  mutate(total_spend_old = ifelse(is.na(total_spend_old), 0, total_spend_old)) %>% 
+  # filter(total_spend_old == 0)
+  filter(p_nw_mig_a >= 0) %>% #nrow
+  # pull(total_spend_old) %>% table()
+    mutate(spend_bin = ifelse(total_spend_old > 0, "Targeted Postcodes", "Not Targeted")) %>% 
+  # bind_rows( party_data_excl %>% 
+  mutate(total_spend_old = ifelse(is.na(total_spend_old), 0, total_spend_old)) %>% 
+  # filter(total_spend_old == 0)
+  filter(p_nw_mig_a >= 0) %>% #nrow
+  # pull(total_spend_old) %>% table()
+    # mutate(spend_bin = ifelse(total_spend_old > 0, "Excluded Postcodes", "Not Excluded")) %>% filter(spend_bin == "Excluded Postcodes")) %>% 
+  ggplot(aes(spend_bin, p_nw_mig_a, fill = spend_bin)) +
+    geom_violin(adjust = 2.5) +
+    geom_boxplot(width = 0.2, outlier.shape = NA, fill = "white") + # Remove outliers to reduce clutter
+    scale_fill_brewer(palette = "Pastel1") + # Aesthetically pleasing color palette
+    stat_compare_means() +
+    stat_mean_sd_text() +
+    stat_n_text() +
+    labs(y = "% Non-Western Migration Background", x = "Postcodes", title = "Postcodes targeted/ignored/excluded by D66\n") +
+    theme_minimal() +
+    theme(
+      text = element_text(size = 12), # Adjust text size
+      legend.position = "none", # Adjust legend position
+      axis.title.x = element_text(face = "bold"), # Bold X axis title
+      axis.title.y = element_text(face = "bold") # Bold Y axis title
+    )
+```
+
+
+```{r, fig.width=10, fig.height=5, eval = F}
+partyz <- "GroenLinks-PvdA"
+  # Create the heading for the party
+  cat("\n")
+  cat("##### ", partyz, "\n")
+  
+  zip_party <- all_zip %>%
+  filter(party == partyz) %>%
+  mutate(pc4_code = str_remove_all(value, ", Netherlands")) %>%
+    select(pc4, pc4_code, total_spend_old) 
+
+
+  # Prepare the data for plotting
+  party_data <- geo %>%
+    right_join(zip_party) %>% 
+    right_join(cbs %>%
+    janitor::clean_names())
+  
+party_data %>% 
+  mutate(total_spend_old = ifelse(is.na(total_spend_old), 0, total_spend_old)) %>% 
+  # filter(total_spend_old == 0)
+  filter(p_nw_mig_a >= 0) %>% #nrow
+  # pull(total_spend_old) %>% table()
+    mutate(spend_bin = ifelse(total_spend_old > 0, "Targeted Postcodes", "Not Targeted")) %>% 
+  # bind_rows( party_data_excl %>% 
+  mutate(total_spend_old = ifelse(is.na(total_spend_old), 0, total_spend_old)) %>% 
+  # filter(total_spend_old == 0)
+  filter(p_nw_mig_a >= 0) %>% #nrow
+  # pull(total_spend_old) %>% table()
+    # mutate(spend_bin = ifelse(total_spend_old > 0, "Excluded Postcodes", "Not Excluded")) %>% filter(spend_bin == "Excluded Postcodes")) %>% 
+  ggplot(aes(spend_bin, p_nw_mig_a, fill = spend_bin)) +
+    geom_violin(adjust = 2.5) +
+    geom_boxplot(width = 0.2, outlier.shape = NA, fill = "white") + # Remove outliers to reduce clutter
+    scale_fill_brewer(palette = "Pastel1") + # Aesthetically pleasing color palette
+    stat_compare_means() +
+    stat_mean_sd_text() +
+    stat_n_text() +
+    labs(y = "% Non-Western Migration Background", x = "Postcodes", title = "Postcodes targeted/ignored/excluded by GroenLinks-PvdA\n") +
+    theme_minimal() +
+    theme(
+      text = element_text(size = 12), # Adjust text size
+      legend.position = "none", # Adjust legend position
+      axis.title.x = element_text(face = "bold"), # Bold X axis title
+      axis.title.y = element_text(face = "bold") # Bold Y axis title
+    )
+```
+
+```{r, eval = F}
+
+  party_data_excl %>% 
+  mutate(total_spend_old = ifelse(is.na(total_spend_old), 0, total_spend_old)) %>% 
+  # filter(total_spend_old == 0)
+  filter(p_nw_mig_a >= 0) %>% #nrow
+  # pull(total_spend_old) %>% table()
+    mutate(spend_bin = ifelse(total_spend_old > 0, "Excluded Postcodes", "Not Excluded")) %>% 
+  select(pc4_code, pc4)
+
+
+```
+

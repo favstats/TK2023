@@ -77,7 +77,10 @@ last_updated_time <- as.character(Sys.time())
 
 cat("\n\nFB Data: Getting it\n\n")  
 
-
+elex30 <- readRDS("data/election_dat30.rds") %>% 
+  filter(is.na(no_data)) %>% 
+  distinct(page_id, page_name, party)%>% 
+  distinct(page_id, .keep_all = T)
 # get_fb_ads <- function() {
 
 # readRenviron(".Renviron")
@@ -118,52 +121,85 @@ search_fields=c("ad_creation_time",
                 "region_distribution") %>% 
   stringr::str_c(., collapse=", ")
 
-min_date <- "2023-10-01"
+min_date <- "2023-08-01"
 
-#get the data from the first 'page' of data the api provides
-page_one_response <- GET(my_link,
-                         path = "/ads_archive",
-                         query = list(access_token = token,
-                                      limit=100,
-                                      ad_type="POLITICAL_AND_ISSUE_ADS",
-                                      ad_active_status="ALL",
-                                      search_terms="''",
-                                      page_id="320374518118",
-                                      ad_delivery_date_min = min_date,
-                                      fields=search_fields,
-                                      ad_reached_countries="NL"))
-page_one_content<- content(page_one_response)
-
-x <- tibble(data=page_one_content$data)
-df_imp <- x %>% 
-  unnest_wider(data) 
-
-#get the link refering to the next page
-next_link <- page_one_content$paging$`next`
-
-page <- 1
-
-#iterate over all pages until there is no further page
-while(length(next_link)>0) {
-  try({
-    print(page)
+get_em <- function(pgid, pgname) {
+  
+  # print(pgid)
+  
+  print(paste0(pgid, ": ", pgname))
+  #get the data from the first 'page' of data the api provides
+  page_one_response <- GET(my_link,
+                           path = "/ads_archive",
+                           query = list(access_token = token,
+                                        limit=100,
+                                        ad_type="POLITICAL_AND_ISSUE_ADS",
+                                        ad_active_status="ALL",
+                                        search_terms="''",
+                                        search_page_ids=pgid,
+                                        # ad_delivery_date_min = min_date,
+                                        fields=search_fields,
+                                        ad_reached_countries="NL"))
+  # print(page_one_response)
+  page_one_content<<- content(page_one_response)
+  
+  x <- tibble(data=page_one_content$data)
+  df_imp <- x %>% 
+    unnest_wider(data) 
+  
+  #get the link refering to the next page
+  next_link <- page_one_content$paging$`next`
+  
+  page <- 1
+  
+  #iterate over all pages until there is no further page
+  while(length(next_link)>0) {
+    # try({
     
-    next_response <- GET(next_link)
-    next_content<- content(next_response)
+    # Sys.sleep(5)
+      
+      next_response <- GET(next_link)
+      next_content<- content(next_response)
+      
+      # print(next_content$data)
+      
+      if(!is.null(next_content$data)){
+        y <- tibble(data=next_content$data)
+        df_next <- y %>% 
+          unnest_wider(data) 
+        
+        print(nrow(df_next))
+        
+        df_imp <- bind_rows(df_imp, df_next)  
+        
+        next_link <- next_content$paging$`next`
+        
+        page <- page + 1       
+      } else {
+        next_link <- NULL
+      }
+      
     
-    y <- tibble(data=next_content$data)
-    df_next <- y %>% 
-      unnest_wider(data) 
+    # })
+    # while(T) {
     
-    df_imp <- bind_rows(df_imp, df_next)  
-    
-    next_link <- next_content$paging$`next`
-    
-    page <- page + 1    
-  })
-  # while(T) {
-
+  }
+  
+  return(df_imp)
+  
 }
+
+df_imp2 <- elex30%>% 
+  filter(page_id == "320374518118") %>% 
+  # slice(92) %>% 
+  # pull(page_id) %>% 
+  # .[1] %>% 
+  split(1:nrow(.)) %>% 
+  map_dfr_progress(~get_em(.x$page_id, .x$page_name))
+
+
+df_imp %>% 
+  filter(page_id == "320374518118") %>% View()
 
 # df_imp2 <- df_imp
 # saveRDS(df_imp2, "data/df_imp2.rds")
