@@ -201,6 +201,46 @@ df_imp2 <- elex30%>%
 df_imp %>% 
   filter(page_id == "320374518118") %>% View()
 
+options(scipen = 999)
+
+fb_dat %>% #View()
+  select(id, advertiser_name, advertiser_id, impressions, spend, eu_total_reach, ad_delivery_start_time, ad_delivery_stop_time) %>% 
+  mutate(start = lubridate::ymd(ad_delivery_start_time)) %>% 
+  filter(start >= lubridate::ymd("2023-08-01")) %>% 
+  unnest_wider(impressions) %>% 
+  rename(imp_lower = lower_bound)%>% 
+  rename(imp_upper = upper_bound) %>% 
+unnest_wider(spend) %>% 
+  rename(spend_lower = lower_bound)%>% 
+  rename(spend_upper = upper_bound) %>% 
+  glimpse() %>% 
+  mutate(spend_lower = ifelse(spend_lower==0,1, spend_lower)) %>% 
+  # filter(eu_total_reach!=1) %>%
+  mutate(price = as.numeric(spend_lower)/as.numeric(eu_total_reach)*1000) %>% View()
+  add_count(advertiser_name) %>% 
+  filter(n > 10) %>% 
+  filter(price <= 100) %>% 
+  mutate(advertiser_name = fct_reorder(advertiser_name, price)) %>% 
+  ggplot(aes(advertiser_name, price)) +
+  # geom_histograCm() +
+  geom_boxplot() +
+  stat_summary(fun.y=mean, geom="point", shape=20, size=3, color="red", fill="red") +
+  
+  # scale_y_log10() +
+  coord_flip() +
+  EnvStats::stat_n_text() +
+  stat_summary(
+    fun=median, 
+    geom="label", 
+    aes(label=round(..y.., 1)), 
+    vjust=1, 
+    hjust=-0.3,  # Adjust this value to move text left or right
+    color="black"
+  )
+  # EnvStats::stat_median_iqr_text()
+
+ggsave("img/pay.png", width = 14, height = 10)
+
 # df_imp2 <- df_imp
 # saveRDS(df_imp2, "data/df_imp2.rds")
 # dutch_parties <- c("VVD", "D66", "FvD", "SP", "GroenLinks", "Volt Nederland", "PvdA", "CDA", "PvdD", "ChristenUnie", "SGP", "DENK", "50PLUS")
