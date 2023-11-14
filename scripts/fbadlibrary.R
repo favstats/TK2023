@@ -216,10 +216,10 @@ unnest_wider(spend) %>%
   glimpse() %>% 
   mutate(spend_lower = ifelse(spend_lower==0,1, spend_lower)) %>% 
   # filter(eu_total_reach!=1) %>%
-  mutate(price = as.numeric(spend_lower)/as.numeric(eu_total_reach)*1000) %>% View()
+  mutate(price = as.numeric(spend_lower)/as.numeric(eu_total_reach)*1000) %>% #View()
   add_count(advertiser_name) %>% 
   filter(n > 10) %>% 
-  filter(price <= 100) %>% 
+  # filter(price <= 100) %>% 
   mutate(advertiser_name = fct_reorder(advertiser_name, price)) %>% 
   ggplot(aes(advertiser_name, price)) +
   # geom_histograCm() +
