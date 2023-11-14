@@ -1,0 +1,18 @@
+---
+title: "Denk microtarget op Turkse profielen"
+description-meta: "Denk doet tijdens de online campagne aan etnisch profileren. De partij richt haar pijlen online op Turkse kiezers en scheert daarbij langs de randen van de Europese privacywetgeving."
+author: "Eva Hofman, Joris Veerbeek, Coen van de Ven en Fabio Votta"
+date: "11/14/2023"
+image: "denkgrafiek.jpeg"
+lang: nl
+---
+
+![](denkgrafiek.jpeg)
+
+Denk doet tijdens de online campagne aan etnisch profileren. De partij richt haar pijlen online op Turkse kiezers en scheert daarbij langs de randen van de Europese privacywetgeving. De partij gaf tot afgelopen week ruim vijftienduizend euro aan de online campagne, onder meer om te zorgen dat campagnemateriaal terechtkomt bij mensen met abonnementen bij Turkse telecomproviders, die geïnteresseerd zijn in Turkse cinema, een Turkse comedian en een Turkse conservatieve zanger die populair is onder gastarbeiders in Europa.
+
+Meta, het moederbedrijf van Facebook en Instagram, verzamelt zeer gedetailleerde informatie over haar gebruikers en zet die in om gericht (politieke) advertenties te kunnen vertonen. Volgens regels van de Europese Unie mogen politieke partijen zich met hun campagnes niet richten op een aantal zeer persoonlijke kenmerken, zoals medische gegevens en etnische achtergrond, maar ook religieuze overtuiging. Targeten op interessegebieden mag wel.
+
+Denk doet impliciet aan zeer gerichte microtargeting door deze interessecategorieën aan te vinken. Volgens Lotje Beek, beleidsadviseur bij digitale burgerrechtenorganisatie Bits of Freedom, is dat strikt genomen niet verboden, maar ze spreekt wel van een ‘sluwe manier om de regels te omzeilen’.
+
+Begin vorig jaar nam het Europees Parlement regels aan om online politieke microtargeting aan banden te leggen, die volgend jaar ingaan. Die regels zijn ook onderschreven door Nederlandse partijen, maar worden nu door diezelfde partijen met voeten getreden.
