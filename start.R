@@ -1,5 +1,5 @@
 
-pacman::p_load(knitr, tidyverse, openxlsx, sf)
+pacman::p_load(knitr, tidyverse, openxlsx, sf, rmarkdown)
 
 # rstudioapi::jobRunScript("retrieve_targeting_data.R")
 # rstudioapi::jobRunScript("fbadlibrary.R")
@@ -14,7 +14,9 @@ dir("_site", full.names = T) %>% keep(~str_detect(.x, "qmd")) %>% walk(quarto::q
 
 knitr::knit("README.Rmd")
 
+rmarkdown::render("logs/overview.Rmd")
 
+file.copy(from = "logs/overview.html", to = "docs/overview.html", overwrite = T)
 
 unlink("node_modules", recursive = T, force = T)
 unlink("out", recursive = T, force = T)
