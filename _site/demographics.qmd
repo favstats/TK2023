@@ -1327,20 +1327,3 @@ tags$div(class = "container", do.call(tags$div, rows))
 ```
 :::
 
-<!-- ## Detailed Data -->
-
-<!-- Explore the data yourself: -->
-
-<!-- ### `r last30days_string` -->
-
-<!-- ```{r, fig.width= 11, fig.height=8, dpi = 300} -->
-
-<!-- election_dat30 %>%  -->
-
-<!--   mutate(spend_perc = round(total_spend_pct*100,2)) %>%  -->
-
-<!--   select(page_id = internal_id, page_name, party, targeting = value, is_exclusion, num_ads, spend_total = total_spend_formatted, spend_perc, location_type, detailed_type, custom_audience_type) %>%  -->
-
-<!--   DT::datatable() -->
-
-<!-- ``` -->
