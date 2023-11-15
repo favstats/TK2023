@@ -102,7 +102,9 @@ the_currency <- election_dat30 %>%
 
 if(the_currency == "EUR"){
   currency_symbol <- "€"
+} else if(the_currency=="INR"){
+  currency_symbol <- "₹"
 } else {
-  currency_symbol <- "CURRENCY"
+  currency_symbol <- the_currency
 }
 

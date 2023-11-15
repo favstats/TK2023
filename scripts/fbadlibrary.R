@@ -203,6 +203,36 @@ df_imp %>%
 
 options(scipen = 999)
 
+
+fb_dat <- readRDS("data/fb_dat.rds")
+
+library(metatargetr)
+
+
+# end <-  %>% 
+#   map_dfr_progress(get_ad_snapshots, mediadir  = "media")
+hash_table <- read_csv("media/hash_table.csv")
+
+already_theres <- hash_table  %>% 
+  distinct(ad_id) %>% 
+  pull(ad_id) %>% 
+  str_remove_all("adid_|_[:digit:]|_[:digit:][:digit:]")
+
+theids <- fb_dat %>% 
+  distinct(id) %>% 
+  pull(id) %>% 
+  setdiff(already_theres)
+
+# already_theres %>% setdiff("698466622222397")
+
+for (jj in seq_along(theids)) {
+  print(glue::glue("{jj} out of {length(theids)} ({round(jj/length(theids)*100, 2)}%)"))
+  get_ad_snapshots(theids[jj], download = T, hashing = T, mediadir = "media")
+}
+
+
+
+
 fb_dat %>% #View()
   select(id, advertiser_name, advertiser_id, impressions, spend, eu_total_reach, ad_delivery_start_time, ad_delivery_stop_time) %>% 
   mutate(start = lubridate::ymd(ad_delivery_start_time)) %>% 

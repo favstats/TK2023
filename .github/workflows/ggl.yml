@@ -50,6 +50,7 @@ jobs:
             any::glue
             any::vroom
             any::prettydoc
+            any::DT
       - name: Apt-get needed things
         run: |
           sudo apt-get install --no-install-recommends -y \
