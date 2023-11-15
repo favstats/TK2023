@@ -34,7 +34,8 @@ Imports:
 		cli,
 		digest,
 		glue,
-		vroom
+		vroom,
+		prettydoc
 Depends:
     R (>= 3.0.0)
 RoxygenNote: 5.0.1

@@ -57,6 +57,7 @@ jobs:
             any::pacman
             any::openxlsx
             any::sf
+            any::prettydoc
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - name: "Install Packages"
         run: |
