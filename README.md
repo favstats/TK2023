@@ -12,7 +12,7 @@ output: github_document
 |Data           |Latest     |
 |:--------------|:----------|
 |30 Days Window |2023-11-14 |
-|7 Days Window  |2023-11-13 |
+|7 Days Window  |2023-11-14 |
 |Report         |2023-11-13 |
 
 ## Google
