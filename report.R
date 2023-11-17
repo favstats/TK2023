@@ -444,9 +444,8 @@ wtm_advertisers <- read_csv("data/nl_advertisers_13_20_Oct_2023 (1).csv") #%>% V
 
 the14 <- the_daaaat %>%
 filter(date=="2023-10-15") %>%
-left_join(election_dat30 %>%
-            distinct(internal_id, party) %>%
-            select(page_id = internal_id, party)) %>%
+  left_join(readRDS("data/all_dat.rds") %>%
+              distinct(page_id, party)) %>% 
 group_by(party, date) %>%
 summarize(amount_spent_eur = sum(amount_spent_eur)) %>%
 ungroup() %>%
@@ -456,9 +455,8 @@ add_them <- wtm_advertisers  %>%
   mutate(page_id = as.character(advertiser_id)) %>%
   filter(date_produced %in% as.Date(c("2023-10-16", "2023-10-17", "2023-10-18")))  %>%
   # mutate(spend = ifelse(spend<100, 100, spend))  %>%
-  left_join(election_dat30 %>%
-              distinct(internal_id, party) %>%
-              select(page_id = internal_id, party)) %>%
+  left_join(readRDS("data/all_dat.rds") %>%
+              distinct(page_id, party)) %>% 
   group_by(party, date_produced) %>%
   summarize(spend = sum(spend)) %>%
   ungroup() %>%

@@ -569,9 +569,8 @@ more_data <- #the_daaaat %>%
 # me_advertisers <- read_csv("../data/wtm-advertisers-gr-2023-05-20T08_49_00.571Z.csv")
 hc_data_cum_raw <-  more_data %>%
   # mutate(advertiser_id = as.character(advertiser_id)) %>%
-    left_join(election_dat30 %>%
-                distinct(internal_id, party) %>%
-                  select(page_id = internal_id, party)) %>%
+  left_join(readRDS("../data/all_dat.rds") %>%
+              distinct(page_id, party)) %>% 
     drop_na(party) %>%
     group_by(date_produced, party) %>%
     summarize(spend  = sum(spend)) %>%
@@ -632,7 +631,8 @@ saveRDS(hc_data_cum_raw, "../data/hc_data_cum_raw.rds")
 ```
 
 ```{r}
-hc_data_cum_raw <- readRDS("../data/hc_data_cum_raw.rds")
+hc_data_cum_raw <- readRDS("../data/hc_data_cum_raw.rds") %>% 
+  drop_na(colors)
 
 
 color_order <- hc_data_cum_raw %>%
@@ -679,6 +679,14 @@ hc_data_cumfb %>%
     }")
   )
 
+# hc_data_cum_raw %>%
+#   mutate(Date = date_produced) %>% 
+#   filter(date_produced %in% as.Date(c("2023-10-14", "2023-10-15", "2023-10-16", "2023-10-17", "2023-10-18"))) %>%
+#   filter(party == "CDA") %>% 
+#   group_by(party) %>%  # Assuming you have a 'party' column
+#   arrange(Date) %>%
+#   mutate(`Daily Spend` = spend - first(spend)) %>%
+#   ungroup()
 
 
 ```

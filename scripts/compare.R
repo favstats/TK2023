@@ -10,9 +10,8 @@ add_them <- readRDS("data/add_them.rds")
 dat2021 <- elex2021reps  %>%
   janitor::clean_names() %>% 
   mutate(page_id = as.character(page_id)) %>% 
-  left_join(election_dat30 %>%
-              distinct(internal_id, party) %>% 
-              select(page_id = internal_id, party)) %>% 
+  left_join(readRDS("data/all_dat.rds") %>%
+              distinct(page_id, party)) %>%
   drop_na(party) %>% 
   mutate(amount_spent_eur = readr::parse_number(amount_spent_eur)) %>% 
   mutate(Date = lubridate::ymd(date))  %>% 
@@ -46,9 +45,8 @@ more_data <- #the_daaaat %>%
 # me_advertisers <- read_csv("../data/wtm-advertisers-gr-2023-05-20T08_49_00.571Z.csv")
 hc_data_cum_raw <-  more_data %>%
   # mutate(advertiser_id = as.character(advertiser_id)) %>%
-  left_join(election_dat30 %>%
-              distinct(internal_id, party) %>%
-              select(page_id = internal_id, party)) %>%
+  left_join(readRDS("data/all_dat.rds") %>%
+              distinct(page_id, party)) %>% 
   drop_na(party) %>%
   group_by(date_produced) %>%
   summarize(spend  = sum(spend)) %>%
@@ -236,8 +234,19 @@ the_dat %>%
   # geom_col(position = position_dodge()) +
   theme_minimal() +
   scale_y_continuous(labels = scales::number_format()) +
-  labs(y = "Cumulative Spent/n", x = "Days Until Election Day")  +
+  labs(y = "Spent 8 Days Before Election Day", x = "")  +
   # scale_color_grey() +
   theme(legend.position = "top") +
-  coord_flip()
+  coord_flip() +
+  ggthemes::scale_color_fivethirtyeight()
+
+
+the_dat %>%
+  filter(election == "2023")  %>% select(days_until, party, spend2023 = `Daily Spend`) %>% 
+  left_join(the_dat %>%
+              filter(election == "2021") %>% select(days_until, party, spend2021 = `Daily Spend`)) %>% 
+  select(-days_until) %>% 
+  mutate(spend2021 = ifelse(is.na(spend2021), 0, spend2021)) %>% 
+  mutate(diff = spend2021-spend2023) %>% 
+  arrange(desc(diff))
 
