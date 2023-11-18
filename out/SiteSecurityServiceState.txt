@@ -1,0 +1,4 @@
+contile.services.mozilla.com	0	19679	1731823494948,1,0
+location.services.mozilla.com	0	19679	1731823494864,1,1
+spocs.getpocket.com	0	19679	1763359495025,1,0
+scone-pa.clients6.google.com^partitionKey=%28https%2Cgoogle.com%29	0	19679	1711173898147,1,1
