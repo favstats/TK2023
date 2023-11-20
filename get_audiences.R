@@ -20,7 +20,7 @@ sets <- jsonlite::fromJSON("settings.json")
 
 if(Sys.info()[["sysname"]]=="Windows"){
   ### CHANGE ME WHEN LOCAL!
-  tf <- "30"
+  tf <- "7"
 }
 
 jb <- get_targeting("7860876103", timeframe = glue::glue("LAST_90_DAYS"))
@@ -33,8 +33,8 @@ jb <- get_targeting("7860876103", timeframe = glue::glue("LAST_90_DAYS"))
 new_ds <- jb %>% arrange(ds) %>% slice(1) %>% pull(ds)
 # new_ds <- "2023-01-01"
 
-# latest_elex <- readRDS(paste0("data/election_dat", tf, ".rds"))
-latest_elex <- readRDS(paste0("historic/2023-11-15/30.rds")) %>% filter(is.na(no_data)) %>% mutate(page_id = as.character(page_id))
+latest_elex <- readRDS(paste0("data/election_dat", tf, ".rds"))
+# latest_elex <- readRDS(paste0("historic/2023-11-15/30.rds")) %>% filter(is.na(no_data)) %>% mutate(page_id = as.character(page_id))
 
 
 latest_ds <- latest_elex %>% arrange(ds) %>% slice(1) %>% pull(ds)
@@ -209,7 +209,8 @@ groenams <- read_csv("data/TK2023 Labelling - labelling.csv", col_types = "c") %
   mutate(party = ifelse(page_id == "969158383214898", "BVNL", party)) %>% 
   select(page_id, page_name, party)  %>% 
   filter(!is.na(party)) %>% 
-  filter(party != "UPP")
+  filter(party != "UPP") %>% 
+  mutate(page_id = as.character(as.numeric(page_id)))
 
 # groenams %>%
 #   count(party, sort = T) %>% View()
@@ -301,7 +302,7 @@ scraper <- function(.x, time = tf) {
       mutate(tstamp = tstamp)
   }
   
-  print(nrow(fin))
+  # print(nrow(fin))
   # })
   return(fin)
   
@@ -317,21 +318,30 @@ scraper <- possibly(scraper, otherwise = NULL, quiet = F)
 # da7 <- readRDS("data/election_dat7.rds")
 
 
+# debugonce(scraper)
+# 
+# enddat <- all_dat %>% 
+#   mutate(page_id = as.factor(page_id)) %>% 
+#   mutate(page_id = fct_relevel(page_id, unique(latest_elex$page_id))) %>% 
+#   arrange(page_id) %>%
+#   mutate(page_id = as.character(page_id)) %>% 
+#   # mutate(page_id = as.numeric(page_id)) %>% 
+#   filter(!(page_id %in% latest_elex$page_id)) 
 
-
+# all_dat %>% View()
 
 if(new_ds == latest_ds){
   print(glue::glue("New DS: {new_ds}: Old DS: {latest_ds}"))
   
   ### save seperately
   enddat <- all_dat %>% 
-    mutate(page_id = as.factor(page_id)) %>% 
-    mutate(page_id = fct_relevel(page_id, unique(latest_elex$page_id))) %>% 
+    # mutate(page_id = as.factor(page_id)) %>% 
+    # mutate(page_id = fct_relevel(page_id, unique(latest_elex$page_id))) %>% 
     arrange(page_id) %>%
-    mutate(page_id = as.character(page_id)) %>% 
+    # mutate(page_id = as.character(page_id)) %>% 
     # mutate(page_id = as.numeric(page_id)) %>% 
-    # slice(1:150) %>% 
     filter(!(page_id %in% latest_elex$page_id)) %>% 
+    slice(1) %>%
     split(1:nrow(.)) %>%
     map_dfr_progress(scraper) 
   
@@ -356,13 +366,21 @@ if(new_ds == latest_ds){
 
   } else {
   
+    if(!dir.exists("targeting")){
+      dir.create(paste0("targeting/", tf), recursive = T)
+      
+      # write_lines("_", paste0("targeting/", tf, "/", "_"))      
+    }
+
+    
   ### save seperately
   election_dat <- all_dat %>% 
-    mutate(page_id = as.factor(page_id)) %>% 
-    mutate(page_id = fct_relevel(page_id, unique(latest_elex$page_id))) %>% 
+    # mutate(page_id = as.factor(page_id)) %>% 
+    # mutate(page_id = fct_relevel(page_id, unique(latest_elex$page_id))) %>% 
     arrange(page_id) %>%
-    mutate(page_id = as.character(page_id)) %>% 
+    # mutate(page_id = as.character(page_id)) %>% 
     # mutate(page_id = as.numeric(page_id)) %>%     # slice(1:50) %>%
+    # slice(1:10) %>% 
     split(1:nrow(.)) %>%
     map_dfr_progress(scraper)  %>%
     mutate_at(vars(contains("total_spend_formatted")), ~parse_number(as.character(.x))) %>% 
