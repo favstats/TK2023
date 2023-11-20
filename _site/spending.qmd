@@ -632,7 +632,8 @@ saveRDS(hc_data_cum_raw, "../data/hc_data_cum_raw.rds")
 
 ```{r}
 hc_data_cum_raw <- readRDS("../data/hc_data_cum_raw.rds") %>% 
-  drop_na(colors)
+  drop_na(colors) %>% 
+  filter(party != "Alliantie")
 
 
 color_order <- hc_data_cum_raw %>%
