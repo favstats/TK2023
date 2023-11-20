@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r, fig.width=5, fig.height=2, dpi = 900}
 library(tidyverse)
 
-election_dat30 <- readRDS("data/election_dat30.rds")
+election_dat30 <- readRDS("../data/election_dat30.rds")
 
 cbs<- openxlsx::read.xlsx("data/cbs_pc4_2020_v2.xlsx")
 
@@ -105,7 +105,7 @@ scale_color_parties <- function(...){
 
 
 
-) 
+# ) 
 
 all_zip %>% 
   filter(party == "VVD") %>%
@@ -429,7 +429,7 @@ MOST_SPENT <- vvd_dat %>%
   ungroup 
 
 
-wcities <- read_csv("data/worldcities.csv") %>% 
+wcities <- read_csv("../data/worldcities.csv") %>% 
   filter(country == "Netherlands")
 
 bigcities <-wcities %>% #count(capital)
@@ -485,6 +485,117 @@ MOST_SPENT %>%
 # theme(plot.background = element_rect(fill = "darkgrey"))
 
 
+```
+
+```{r, message=F, warning=F, cache=F, fig.width=15, fig.height=15, dpi = 900}
+
+pparty <- all_zip %>%
+  mutate(pc4_code = str_remove_all(value, ", Netherlands")) %>%
+    select(pc4, pc4_code, total_spend_old, party)  %>% 
+    right_join(cbs %>%
+    janitor::clean_names()) %>% 
+  count(pc4_code)
+
+
+geo %>% left_join(pparty) %>% 
+  # add_count(n) %>%
+  ggplot()  +
+  theme_void() +
+  # geom_sf(color = "black") +
+  # geom_sf(aes(fill = log(total_spend)+2),
+  #         colour = "white", size = 0.9) +
+  geom_sf(aes(fill = n),
+          colour = NA,
+          size = 0.00000001) +
+  # geom_sf(colour = "white", fill = NA, alpha = 0.001,
+  #         size = 0.00000001) +
+  # geom_sf(data = prov, color = "black", fill = NA)  +
+  # geom_sf_label(data = prov, aes(label = name)) +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_colourbar(title = "Number of Parties Targeting Postcode", barwidth = 10, barheight = 0.5)) +
+  scale_fill_viridis_c()
+  # scale_fill_parties() +
+  # scale_alpha(range = c(0.5, 1)) +
+  # geom_point(
+  #   data = withgeo ,
+  #   aes(geometry = geometry),
+  #   color = "black",
+  #   stat = "sf_coordinates", size = 3
+  # )  +
+  # ggrepel::geom_text_repel(
+  #   max.overlaps = 1,
+  #   label.size = NA,
+  #   data = withgeo ,
+  #   aes(geometry = geometry, label = gem_name),
+  #   color = "black",
+  #   stat = "sf_coordinates",
+  #   size = 9,  face = "bold", seed = 2323
+  # ) 
+
+
+# MOST_SPENT <- vvd_dat %>% 
+#   select(pc4_code, party, total_spend_old) %>% 
+#   bind_rows(cda_dat %>% select(pc4_code, party, total_spend_old, gem_name)) %>% 
+#   bind_rows(gl_dat %>% select(pc4_code, party, total_spend_old, gem_name)) %>% 
+#   group_by(pc4_code) %>% 
+#   arrange(desc(total_spend_old)) %>% 
+#   slice(1) %>% 
+#   ungroup 
+
+```
+```{r}
+cbs %>%
+    janitor::clean_names()%>% 
+  mutate(pc4 = as.character(pc4)) %>% 
+  left_join(pparty %>% 
+  mutate(pc4 = pc4_code) ) %>% 
+  filter(inwoner >0) %>% 
+  ggplot(aes(inwoner, n)) +
+  geom_jitter() +
+  stat_cor() +
+  geom_smooth(method = "lm") +
+  scale_x_log10()
+
+```
+
+```{r}
+cbs %>%
+    janitor::clean_names() %>% 
+  mutate(pc4 = as.character(pc4)) %>% 
+  left_join(pparty %>% 
+  mutate(pc4 = pc4_code) ) %>% 
+  filter(inw_1524 >0) %>% 
+  ggplot(aes(inw_1524/inwoner, n)) +
+  geom_jitter() +
+  stat_cor() +
+  geom_smooth(method = "lm")# +
+
+
+cbs %>%
+    janitor::clean_names() %>% 
+  mutate(pc4 = as.character(pc4)) %>% 
+  left_join(pparty %>% 
+  mutate(pc4 = pc4_code)) %>% 
+  filter(inw_65pl >0) %>% 
+  ggplot(aes(inw_65pl/inwoner, n)) +
+  geom_jitter() +
+  stat_cor() +
+  geom_smooth(method = "lm")# +
+```
+
+```{r}
+cbs %>%
+    janitor::clean_names() %>% 
+  mutate(pc4 = as.character(pc4)) %>% 
+  left_join(pparty %>% 
+  mutate(pc4 = pc4_code)) %>% 
+  filter(p_nw_mig_a >=0) %>%
+  ggplot(aes(p_nw_mig_a, n)) +
+  # filter(p_nl_achtg >=0) %>% 
+  # ggplot(aes(p_nl_achtg, n)) +
+  geom_jitter() +
+  stat_cor() +
+  geom_smooth(method = "lm")# +
 ```
 
 

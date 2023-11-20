@@ -47,4 +47,22 @@ finpads <- pads %>%
 
 saveRDS()
 
+
+
+padsunraw %>% filter(country_code == "netherlands") %>% 
+  mutate(start_date = lubridate::ymd_hms(start_date)) %>% 
+  filter(start_date >= as.Date("2023-08-01")) %>% #View()
+  mutate(start_date = as.Date(start_date)) %>% #View()
+  # filter(str_detect(organization_name, "partij|D66"))
+  mutate(party = case_when(
+    organization_name == "Volkspartij voor Vrijheid en Democratie" ~ "VVD",
+    organization_name == "D66" ~ "D66",
+  )) %>% 
+  drop_na(party) %>%
+  mutate(price_per_thousand = spend/impressions*1000) %>% 
+  ggplot(aes(party, price_per_thousand)) +
+  geom_boxplot() +
+  EnvStats::stat_median_iqr_text() +
+  ggpubr::stat_compare_means()
+
   # mutate()

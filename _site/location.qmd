@@ -588,6 +588,39 @@ if(nrow(region_dat)!=0) {
 
 
 ```{r, eval = F}
+all_zip %>% 
+  count(value, sort = T)
+  count(total_spend_old, sort = T)
+  
+  
+  
+    party_data <- all_zip %>%
+  mutate(pc4_code = str_remove_all(value, ", Netherlands")) %>%
+    select(pc4, pc4_code, total_spend_old, party)  %>% 
+    right_join(cbs %>%
+    janitor::clean_names())
+    
+    
+as_tibble(party_data) %>% add_count(pc4) %>% arrange(n) %>% filter(n == 1)
+
+
+party_data$pc4 %>% setdiff(cbs$PC4, .)
+
+party_data %>% filter(pc4 == "1045") %>% select(party)
+
+party_data %>% 
+  filter(is.na(total_spend_old))
+
+
+as_tibble(party_data) %>% 
+  count(pc4) %>% 
+  count(n) %>% 
+  ggplot(aes(as.character(n), nn)) +
+  geom_col()
+```
+
+
+```{r, eval = F}
 partyz <- "CDA"
   # Create the heading for the party
   cat("\n")
