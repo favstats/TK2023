@@ -256,8 +256,9 @@ timelines <-
            by = "day")
 
 #
-daily_spending_old <- readRDS("data/ggl_daily_spending.rds") %>% 
-  filter(!(date  %in% lubridate::ymd(c("2023-11-15", "2023-11-16",  "2023-11-17",  "2023-11-18")))) #%>%
+daily_spending_old <- readRDS("data/ggl_daily_spending.rds")  %>% 
+  filter(!(date  %in% lubridate::ymd(c("2023-11-16",  "2023-11-17")))) 
+  # filter(!(date  %in% lubridate::ymd(c("2023-11-15", "2023-11-16",  "2023-11-17",  "2023-11-18")))) #%>%
   # filter(!(date  %in% lubridate::ymd(c("2023-11-18"))))
 
 
