@@ -494,6 +494,8 @@ pparty <- all_zip %>%
     select(pc4, pc4_code, total_spend_old, party)  %>% 
     right_join(cbs %>%
     janitor::clean_names()) %>% 
+  filter(party!="GroenLinks-PvdA") %>% 
+  filter(party!="Ja21") %>% 
   count(pc4_code)
 
 
@@ -542,19 +544,141 @@ geo %>% left_join(pparty) %>%
 #   slice(1) %>% 
 #   ungroup 
 
+
+
+   filter(is.na(party))
 ```
+
+
+```{r}
+ all_zip %>%
+  mutate(pc4_code = str_remove_all(value, ", Netherlands")) %>%
+    select(pc4, pc4_code, total_spend_old, party)  %>% 
+  filter(party!="GroenLinks-PvdA") %>% 
+  filter(party!="Ja21") %>% 
+    right_join(cbs %>%
+    janitor::clean_names()) %>% 
+   mutate(ignored = ifelse(!is.na(party), F, T)) %>% #View()
+   distinct(pc4, .keep_all = T) %>% 
+  filter(inwoner>= 0) %>% 
+   ggplot(aes(ignored, inwoner)) +
+   geom_boxplot() +
+   scale_y_log10() 
+
+
+
+ all_zip %>%
+  mutate(pc4_code = str_remove_all(value, ", Netherlands")) %>%
+    select(pc4, pc4_code, total_spend_old, party)  %>% 
+  filter(party!="GroenLinks-PvdA") %>% 
+  filter(party!="Ja21") %>% 
+    right_join(cbs %>%
+    janitor::clean_names()) %>% 
+   mutate(ignored = ifelse(is.na(party), T, F)) %>% #View()
+   distinct(pc4, .keep_all = T) %>% 
+  # filter(inwoner>= 0) %>% 
+  filter(p_nw_mig_a >=0) %>%
+   ggplot(aes(ignored, p_nw_mig_a)) +
+   geom_boxplot() +
+   EnvStats::stat_mean_sd_text() +
+   ggpubr::stat_compare_means() +
+   theme_minimal() +
+   labs(y = "% Non-Western migration background") +
+   EnvStats::stat_n_text() 
+ 
+ 
+ 
+ 
+ all_zip %>%
+  mutate(pc4_code = str_remove_all(value, ", Netherlands")) %>%
+    select(pc4, pc4_code, total_spend_old, party)  %>% 
+  filter(party!="GroenLinks-PvdA") %>% 
+  filter(party!="Ja21") %>% 
+    right_join(cbs %>%
+    janitor::clean_names()) %>% 
+   mutate(ignored = ifelse(is.na(party), T, F)) %>% #View()
+   distinct(pc4, .keep_all = T) %>% 
+  # filter(inwoner>= 0) %>% 
+  filter(inw_65pl >=0) %>% 
+   ggplot(aes(ignored, inw_65pl/inwoner*100)) +
+   geom_boxplot() +
+   EnvStats::stat_mean_sd_text() +
+   ggpubr::stat_compare_means() +
+   theme_minimal() +
+   labs(y = "% 65+ Year Old") +
+   EnvStats::stat_n_text() 
+ 
+ 
+ 
+  all_zip %>%
+  mutate(pc4_code = str_remove_all(value, ", Netherlands")) %>%
+    select(pc4, pc4_code, total_spend_old, party)  %>% 
+  filter(party!="GroenLinks-PvdA") %>% 
+  filter(party!="Ja21") %>% 
+    right_join(cbs %>%
+    janitor::clean_names()) %>% 
+   mutate(ignored = ifelse(is.na(party), T, F)) %>% #View()
+   distinct(pc4, .keep_all = T) %>% 
+  # filter(inwoner>= 0) %>%     
+    filter(uitkminaow >= 0) %>% 
+
+    mutate(uitkminaow = (uitkminaow/inwoner*100)) %>%
+   ggplot(aes(ignored, uitkminaow)) +
+   geom_boxplot() +
+   EnvStats::stat_mean_sd_text() +
+   ggpubr::stat_compare_means() +
+   theme_minimal() +
+   labs(y = "% of people that receive social benefits") +
+   EnvStats::stat_n_text() 
+```
+
+```{r}
+ all_zip %>%
+  mutate(pc4_code = str_remove_all(value, ", Netherlands")) %>%
+    select(pc4, pc4_code, total_spend_old, party)  %>% 
+  filter(party!="GroenLinks-PvdA") %>% 
+  filter(party!="Ja21") %>% 
+    right_join(cbs %>%
+    janitor::clean_names()) %>% 
+   mutate(ignored = ifelse(!is.na(party), F, T)) %>% 
+  filter(ignored) %>% 
+  arrange(desc(inwoner)) %>% 
+  select(-pc4_code, -total_spend_old) #%>% 
+  # openxlsx::write.xlsx("../data/ignored.xlsx")
+```
+
+
 ```{r}
 cbs %>%
     janitor::clean_names()%>% 
   mutate(pc4 = as.character(pc4)) %>% 
   left_join(pparty %>% 
   mutate(pc4 = pc4_code) ) %>% 
-  filter(inwoner >0) %>% 
+  filter(inwoner >= 0) %>% 
   ggplot(aes(inwoner, n)) +
-  geom_jitter() +
+  geom_jitter(height = 0.6) +
   stat_cor() +
   geom_smooth(method = "lm") +
-  scale_x_log10()
+  scale_x_log10() +
+  labs(y = "Number of Parties Targeting Postcode") +
+  scale_y_continuous(labels = 1:7, breaks = 1:7) +
+  theme_minimal()
+
+
+cbs %>%
+    janitor::clean_names()%>% 
+  mutate(pc4 = as.character(pc4)) %>% 
+  left_join(pparty %>% 
+  mutate(pc4 = pc4_code) ) %>% 
+  filter(wozwoning >= 0) %>% 
+  ggplot(aes(wozwoning, n)) +
+  geom_jitter(height = 0.5) +
+  stat_cor() +
+  geom_smooth(method = "lm") +
+  # scale_x_log10() +
+  labs(y = "Number of Parties Targeting Postcode") +
+  scale_y_continuous(labels = 1:7, breaks = 1:7) +
+  theme_minimal()
 
 ```
 
