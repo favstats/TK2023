@@ -1,5 +1,8 @@
 name: "Google Reports"
 on:
+  push:
+    branches:
+      - main
   schedule:
     - cron: '0 5,6,17,18 * * *'
       
