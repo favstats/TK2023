@@ -28,7 +28,9 @@ jb <- get_targeting("7860876103", timeframe = glue::glue("LAST_90_DAYS"))
 new_ds <- jb %>% arrange(ds) %>% slice(1) %>% pull(ds)
 # new_ds <- "2023-01-01"
 
-latest_elex <- readRDS(paste0("data/election_dat", tf, ".rds"))
+# latest_elex <- readRDS(paste0("data/election_dat", tf, ".rds"))
+latest_elex <- readRDS(paste0("historic/2023-11-15/30.rds"))
+
 
 latest_ds <- latest_elex %>% arrange(ds) %>% slice(1) %>% pull(ds)
 
@@ -291,7 +293,7 @@ scraper <- function(.x, time = tf) {
       mutate(tstamp = tstamp)
   }
   
-  # print(nrow(fin))
+  print(nrow(fin))
   # })
   return(fin)
   
