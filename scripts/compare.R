@@ -313,5 +313,5 @@ the_dat %>%
   select(-days_until) %>% 
   mutate(spend2021 = ifelse(is.na(spend2021), 0, spend2021)) %>% 
   mutate(diff = spend2023-spend2021) %>% 
-  arrange(desc(diff))
+  arrange(desc(diff)) %>% View()
 
