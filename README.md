@@ -20,6 +20,6 @@ output: github_document
 
 |Data           |Latest     |
 |:--------------|:----------|
-|30 Days Window |2023-11-14 |
-|7 Days Window  |2023-11-14 |
-|Report         |2023-11-19 |
+|30 Days Window |2023-11-15 |
+|7 Days Window  |2023-11-15 |
+|Report         |2023-11-20 |
