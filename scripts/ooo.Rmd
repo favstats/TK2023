@@ -636,7 +636,8 @@ geo %>% left_join(pparty) %>%
  all_zip %>%
   mutate(pc4_code = str_remove_all(value, ", Netherlands")) %>%
     select(pc4, pc4_code, total_spend_old, party)  %>% 
-  filter(party!="GroenLinks-PvdA") %>% 
+  filter(party!="GroenLinks-PvdA") %>%
+  # filter(party!="BVNL") %>% 
   filter(party!="Ja21") %>% 
     right_join(cbs %>%
     janitor::clean_names()) %>% 
@@ -645,6 +646,51 @@ geo %>% left_join(pparty) %>%
   arrange(desc(inwoner)) %>% 
   select(-pc4_code, -total_spend_old) #%>% 
   # openxlsx::write.xlsx("../data/ignored.xlsx")
+
+
+targeted_top <- all_zip %>%
+  mutate(pc4_code = str_remove_all(value, ", Netherlands")) %>%
+    select(pc4, pc4_code, total_spend_old, party)  %>% 
+  # filter(party!="GroenLinks-PvdA") %>%
+  # filter(party!="BVNL") %>% 
+  filter(party!="Ja21") %>% 
+    right_join(cbs %>%
+    janitor::clean_names()) %>% 
+   mutate(ignored = ifelse(!is.na(party), F, T)) %>% 
+  filter(!ignored) %>% 
+   add_count(pc4) %>% 
+   filter(n == max(n)) %>% 
+  arrange(desc(inwoner)) %>% 
+  select(-pc4_code, -total_spend_old) %>% 
+   select(-party) %>% 
+   distinct(pc4, .keep_all = T)
+
+
+all_zip %>% 
+  group_by(pc4) %>% 
+  summarize(total_spend_old = sum(total_spend_old),
+            total_spend = sum(total_spend)) %>% 
+  right_join(targeted_top) %>% 
+  arrange(desc(total_spend_old)) %>% 
+  mutate(price_per_thousand = total_spend/inwoner*1000) %>% 
+  select(pc4, total_spend_old, price_per_thousand, everything())%>% 
+  arrange(desc(price_per_thousand)) %>% 
+  ggplot(aes(price_per_thousand, uitkminaow/inwoner)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+
+
+all_zip %>% 
+  group_by(pc4) %>% 
+  summarize(total_spend_old = sum(total_spend_old),
+            total_spend = sum(total_spend)) %>% 
+  ungroup() %>% 
+  right_join(targeted_top) %>% 
+  arrange(desc(total_spend_old)) %>% 
+  mutate(price_per_thousand = total_spend/inwoner*1000) %>% 
+  select(pc4, total_spend_old, price_per_thousand, everything())%>% 
+  arrange(desc(inwoner)) %>% 
+  openxlsx::write.xlsx("../data/targeted.xlsx")
 ```
 
 

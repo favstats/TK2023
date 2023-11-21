@@ -23,7 +23,11 @@ if(Sys.info()[["sysname"]]=="Windows"){
   tf <- "7"
 }
 
-jb <- get_targeting("7860876103", timeframe = glue::glue("LAST_90_DAYS"))
+# jb <- get_targeting("7860876103", timeframe = glue::glue("LAST_90_DAYS"))
+jb <- get_targeting("121264564551002", timeframe = glue::glue("LAST_90_DAYS"))
+
+
+
 
 # jb <- get_targeting(latest_elex$page_id[10], timeframe = glue::glue("LAST_90_DAYS"))
 
