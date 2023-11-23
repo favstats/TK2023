@@ -22,4 +22,4 @@ output: github_document
 |:--------------|:----------|
 |30 Days Window |2023-11-19 |
 |7 Days Window  |2023-11-19 |
-|Report         |2023-11-21 |
+|Report         |2023-11-22 |
