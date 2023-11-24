@@ -407,6 +407,16 @@ gl_dat <- geo %>%
     filter(party == "GroenLinks-PvdA") %>%
     dplyr::mutate(pc4_code = str_remove_all(value, ", Netherlands")))
 
+d66_dat <- geo %>%
+    left_join(all_zip %>%
+    filter(party == "D66") %>%
+    dplyr::mutate(pc4_code = str_remove_all(value, ", Netherlands")))
+
+d66_dat <- geo %>%
+    left_join(all_zip %>%
+    filter(party == "D66") %>%
+    dplyr::mutate(pc4_code = str_remove_all(value, ", Netherlands")))
+
 # saveRDS(vvd_dat, file = "data/vvd_dat.rds")
 
 # all_zip %>% 
@@ -420,9 +430,14 @@ gl_dat <- geo %>%
 
 
 MOST_SPENT <- vvd_dat %>% 
-  select(pc4_code, party, total_spend_old) %>% 
-  bind_rows(cda_dat %>% select(pc4_code, party, total_spend_old, gem_name)) %>% 
-  bind_rows(gl_dat %>% select(pc4_code, party, total_spend_old, gem_name)) %>% 
+  select(pc4_code, party, total_spend_old = total_spend) %>% 
+  bind_rows(cda_dat %>% select(pc4_code, party, total_spend_old = total_spend, gem_name)) %>% 
+  bind_rows(gl_dat %>% select(pc4_code, party, total_spend_old = total_spend, gem_name)) %>% 
+  bind_rows(d66_dat %>% select(pc4_code, party, total_spend_old = total_spend, gem_name)) %>% 
+  # bind_rows(cda_dat %>% select(pc4_code, party, total_spend_old, gem_name)) %>% 
+  # bind_rows(gl_dat %>% select(pc4_code, party, total_spend_old, gem_name)) %>% 
+  # bind_rows(d66_dat %>% select(pc4_code, party, total_spend_old, gem_name)) %>% 
+  select(pc4_code, party, total_spend_old, gem_name) %>% 
   group_by(pc4_code) %>% 
   arrange(desc(total_spend_old)) %>% 
   slice(1) %>% 
