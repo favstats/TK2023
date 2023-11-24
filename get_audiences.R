@@ -20,7 +20,7 @@ sets <- jsonlite::fromJSON("settings.json")
 
 if(Sys.info()[["sysname"]]=="Windows"){
   ### CHANGE ME WHEN LOCAL!
-  tf <- "7"
+  tf <- "30"
 }
 
 # jb <- get_targeting("7860876103", timeframe = glue::glue("LAST_90_DAYS"))

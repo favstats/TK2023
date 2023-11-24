@@ -38,7 +38,7 @@ all_zip <- election_dat30 %>%
     filter(location_type == "zips") %>% 
     mutate(total_spend_formatted = total_spend_pct*total_spend_formatted) %>% 
     filter(!is_exclusion) %>% 
-  group_by(page_id, total_spend_pct, party) %>%
+  group_by(page_id, total_spend_pct, num_ads, party) %>%
   mutate(n_together = n()) %>%
     # select(page_id, value, num_ads, total_spend_formatted, n_together) 
   mutate(total_spend_formatted_old = total_spend_formatted) %>% 
@@ -412,11 +412,6 @@ d66_dat <- geo %>%
     filter(party == "D66") %>%
     dplyr::mutate(pc4_code = str_remove_all(value, ", Netherlands")))
 
-d66_dat <- geo %>%
-    left_join(all_zip %>%
-    filter(party == "D66") %>%
-    dplyr::mutate(pc4_code = str_remove_all(value, ", Netherlands")))
-
 # saveRDS(vvd_dat, file = "data/vvd_dat.rds")
 
 # all_zip %>% 
@@ -430,13 +425,14 @@ d66_dat <- geo %>%
 
 
 MOST_SPENT <- vvd_dat %>% 
-  select(pc4_code, party, total_spend_old = total_spend) %>% 
-  bind_rows(cda_dat %>% select(pc4_code, party, total_spend_old = total_spend, gem_name)) %>% 
-  bind_rows(gl_dat %>% select(pc4_code, party, total_spend_old = total_spend, gem_name)) %>% 
-  bind_rows(d66_dat %>% select(pc4_code, party, total_spend_old = total_spend, gem_name)) %>% 
-  # bind_rows(cda_dat %>% select(pc4_code, party, total_spend_old, gem_name)) %>% 
-  # bind_rows(gl_dat %>% select(pc4_code, party, total_spend_old, gem_name)) %>% 
-  # bind_rows(d66_dat %>% select(pc4_code, party, total_spend_old, gem_name)) %>% 
+  # select(pc4_code, party, total_spend_old) %>%
+  select(pc4_code, party, total_spend_old = total_spend) %>%
+  bind_rows(cda_dat %>% select(pc4_code, party, total_spend_old = total_spend, gem_name)) %>%
+  bind_rows(gl_dat %>% select(pc4_code, party, total_spend_old = total_spend, gem_name)) %>%
+  bind_rows(d66_dat %>% select(pc4_code, party, total_spend_old = total_spend, gem_name)) %>%
+  # bind_rows(cda_dat %>% select(pc4_code, party, total_spend_old, gem_name)) %>%
+  # bind_rows(gl_dat %>% select(pc4_code, party, total_spend_old, gem_name)) %>%
+  # bind_rows(d66_dat %>% select(pc4_code, party, total_spend_old, gem_name)) %>%
   select(pc4_code, party, total_spend_old, gem_name) %>% 
   group_by(pc4_code) %>% 
   arrange(desc(total_spend_old)) %>% 
@@ -462,7 +458,8 @@ MOST_SPENT %>%
   # geom_sf(color = "black") +
   # geom_sf(aes(fill = log(total_spend)+2),
   #         colour = "white", size = 0.9) +
-  geom_sf(aes(fill = party, alpha = total_spend_old),
+  # geom_sf(aes(fill = party, alpha = total_spend_old),
+  geom_sf(aes(fill = party),
           colour = NA,
           size = 0.00000001) +
   # geom_sf(colour = "white", fill = NA, alpha = 0.001,
@@ -486,7 +483,9 @@ MOST_SPENT %>%
     aes(geometry = geometry, label = gem_name),
     color = "black",
     stat = "sf_coordinates",
-    size = 9,  face = "bold", seed = 2323
+    size = 9,  face = "bold", seed = 2323,
+                bg.color = "white",
+                bg.r = .1
   )  #+
   # ggrepel::geom_text_repel(
   #   max.overlaps = 1,
@@ -801,6 +800,9 @@ cda_dat <- geo %>%
     left_join(party_zip)
 
 # saveRDS(cda_dat, file = "data/cda_dat.rds")
+
+election_dat30 %>% 
+  filter(str_detect(value, "1781")) %>% View()
 ```
 
 
