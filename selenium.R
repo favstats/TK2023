@@ -466,7 +466,7 @@ try({
     # mutate(Date_Range_Start = lubridate::ymd(Date_Range_Start)) %>%
     # filter(Date_Range_Start >= as.Date("2023-02-05")) %>%
     group_by(party1) %>%
-    summarize(total_num_ads = sum(as.numeric(num_ads))) %>%
+    summarize(total_num_ads = sum(parse_number(num_ads))) %>%
     # count(party1, name = "total_num_ads") %>%
     mutate(total_num_ads = scales::comma(total_num_ads)) %>%
     pivot_wider(names_from = party1, values_from = total_num_ads) %>%
@@ -553,7 +553,7 @@ try({
     # mutate(Date_Range_Start = lubridate::ymd(Date_Range_Start)) %>%
     # filter(Date_Range_Start >= as.Date("2023-02-05")) %>%
     group_by(party1) %>%
-    summarize(total_num_ads = sum(as.numeric(num_ads))) %>%
+    summarize(total_num_ads = sum(parse_number(num_ads))) %>%
     # count(party1, name = "total_num_ads") %>%
     mutate(total_num_ads = scales::comma(total_num_ads)) %>%
     pivot_wider(names_from = party1, values_from = total_num_ads) %>%

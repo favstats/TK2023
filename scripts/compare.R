@@ -166,16 +166,17 @@ write_csv(comparison, "data/comparison.csv")
 
 the_dat %>% 
   ggplot(aes(days_until, `Daily Spend`, color = election)) +
-  geom_ribbon(aes(ymin = lo_spend, ymax= hi_spend), fill = NA) +
+  geom_ribbon(aes(ymin = lo_spend, ymax= hi_spend), fill = NA, linetype = "dashed") +
   geom_line(size = 2.4) +
   scale_x_reverse() +
   theme_minimal() +
   scale_y_continuous(labels = scales::number_format()) +
-  labs(y = "Cumulative Spent/n", x = "Days Until Election Day")  +
-  scale_color_grey() +
-  theme(legend.position = "top") 
+  labs(y = "Cumulative Spent on Meta Platforms\n", x = "Days Until Election Day")  +
+  ggthemes::scale_color_colorblind("Dutch Election") +
+  theme(legend.position = "bottom", plot.title = element_text(hjust = 0.5, size = 15)) +
+  labs(caption = "Source: Meta Ad Library Report. Note: Data for 2021 comes with boundaries because daily data below 100 Euro needs to be estimated.", title = "Dutch parties spend considerably less in 2023 election compared to 2021")
 
-
+ggsave("img/spending.png", width = 10, height = 6, dpi = 900, bg = "white")
 
 # ----------------------------------------
 
@@ -290,6 +291,7 @@ the_dat <- hc_data_cumfb %>% mutate(election = "2023") %>%
 # write_csv(comparison, "data/comparison.csv")
 
 the_dat %>% 
+  filter(!(party %in% c("GO", "Alliantie", "Politiek Op Maat", "Nieuwe Democratie", "Piratenpartij"))) %>% 
   mutate(party = fct_reorder(party, `Daily Spend`)) %>% 
   ggplot(aes(party, `Daily Spend`, color = election, fill = election, group = party)) +
   # geom_segment(aes(xend = )) +
@@ -299,7 +301,7 @@ the_dat %>%
   # geom_col(position = position_dodge()) +
   theme_minimal() +
   scale_y_continuous(labels = scales::number_format()) +
-  labs(y = "Spent 8 Days Before Election Day", x = "")  +
+  labs(y = "Meta Spending 112 to 4 Days Before Election Day", x = "")  +
   # scale_color_grey() +
   theme(legend.position = "top") +
   coord_flip() +

@@ -14,7 +14,7 @@ library(tidyverse)
 
 election_dat30 <- readRDS("../data/election_dat30.rds")
 
-cbs<- openxlsx::read.xlsx("data/cbs_pc4_2020_v2.xlsx")
+cbs<- openxlsx::read.xlsx("../data/cbs_pc4_2020_v2.xlsx")
 
 all_zip <- election_dat30 %>% 
     filter(type == "location") %>% 
@@ -402,9 +402,9 @@ cda_dat <- geo %>%
     filter(party == "CDA") %>% 
     dplyr::mutate(pc4_code = str_remove_all(value, ", Netherlands")))
 
-gl_dat <- geo %>% 
-    left_join(all_zip %>% 
-    filter(party == "GroenLinks-PvdA") %>% 
+gl_dat <- geo %>%
+    left_join(all_zip %>%
+    filter(party == "GroenLinks-PvdA") %>%
     dplyr::mutate(pc4_code = str_remove_all(value, ", Netherlands")))
 
 # saveRDS(vvd_dat, file = "data/vvd_dat.rds")

@@ -457,6 +457,70 @@ for (partyz in parties_with_zips) {
 
 ```
 
+```{r, message=F, warning=F, cache=F, fig.width=15, fig.height=15, dpi = 900, eval = F}
+
+
+
+# Create the heading for the party
+  cat("\n")
+  cat("##### ", partyz, "\n")
+
+  # Prepare the data for plotting
+  party_data <- geo %>%
+    left_join(all_zip %>%
+                filter(party == partyz) %>%
+                mutate(pc4_code = str_remove_all(value, ", Netherlands")))
+
+  withgeo <- party_data %>% 
+    left_join(bigcities %>% 
+  rename(gem_name = city)) %>% 
+  distinct(gem_name, .keep_all = T) %>% 
+  filter(population >= 200000)
+  
+  # # Extract the color for the party
+  # party_color <- color_dat %>%
+  #   filter(party == partyz) %>%
+  #   pull(colors) %>%
+  #   first()  # Make sure 'color' column has exactly one color per party
+
+  # Print the plot
+  # print(
+    ggplot(party_data) +
+      geom_sf(aes(fill = total_spend_old), colour = NA, size = 0.1) +
+      scale_fill_gradient2(low = 'lightgrey', high = party_color, na.value = 'lightgrey') +
+      theme_void() +
+      theme(legend.position = 'bottom') +
+      guides(fill = guide_colourbar(title = 'Spent on ads excluding postcodes (€)', barwidth = 10, barheight = 0.5)) +
+  # ) +
+  geom_point(
+    data = withgeo ,
+    aes(geometry = geometry),
+    color = "black",
+    stat = "sf_coordinates", size = 3
+  )  +
+  # ggrepel::geom_label_repel(
+  #   max.overlaps = 1,
+  #   label.size = NA,
+  #   data = withgeo ,
+  #   aes(geometry = geometry, label = gem_name),
+  #   color = "white",
+  #   stat = "sf_coordinates",
+  #   size = 9,  face = "bold", seed = 2323
+  # ) +
+  ggrepel::geom_text_repel(
+    max.overlaps = 1,
+    label.size = NA,
+    data = withgeo ,
+    aes(geometry = geometry, label = gem_name),
+    color = "black",
+    stat = "sf_coordinates",
+    size = 9, seed = 2323,
+                bg.color = "white",
+                bg.r = .15
+  ) 
+```
+
+
 :::
 
 

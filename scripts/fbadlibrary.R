@@ -132,7 +132,7 @@ get_em <- function(pgid, pgname) {
   page_one_response <- GET(my_link,
                            path = "/ads_archive",
                            query = list(access_token = token,
-                                        limit=100,
+                                        limit=50,
                                         ad_type="POLITICAL_AND_ISSUE_ADS",
                                         ad_active_status="ALL",
                                         search_terms="''",
@@ -189,14 +189,19 @@ get_em <- function(pgid, pgname) {
   
 }
 
-df_imp2 <- elex30%>% 
-  filter(page_id == "320374518118") %>% 
+get_em <- possibly(get_em, otherwise = NULL, quiet = F)
+
+debugonce(get_em)
+
+df_imp <- elex30 %>% 
+  filter(page_id == "137011549489828") %>%
   # slice(92) %>% 
   # pull(page_id) %>% 
   # .[1] %>% 
   split(1:nrow(.)) %>% 
   map_dfr_progress(~get_em(.x$page_id, .x$page_name))
 
+saveRDS(df_imp2, "data/df_impday.rds")
 
 df_imp %>% 
   filter(page_id == "320374518118") %>% View()
@@ -271,6 +276,29 @@ unnest_wider(spend) %>%
 
 ggsave("img/pay.png", width = 14, height = 10)
 
+
+fb_dat %>% #View()
+  select(id, advertiser_name, advertiser_id, impressions, spend, eu_total_reach, ad_delivery_start_time, ad_delivery_stop_time) %>% 
+  mutate(start = lubridate::ymd(ad_delivery_start_time)) %>% 
+  filter(start >= lubridate::ymd("2023-08-01")) %>% 
+  unnest_wider(impressions) %>% 
+  rename(imp_lower = lower_bound)%>% 
+  rename(imp_upper = upper_bound) %>% 
+  unnest_wider(spend) %>% 
+  rename(spend_lower = lower_bound)%>% 
+  rename(spend_upper = upper_bound) %>% 
+  glimpse() %>% 
+  mutate(spend_lower = ifelse(spend_lower==0,1, spend_lower)) %>% 
+  # filter(eu_total_reach!=1) %>%
+  mutate(eu_total_reach = as.numeric(eu_total_reach)) %>% 
+  mutate(imp_lower = as.numeric(imp_lower)) %>% 
+  mutate(price = as.numeric(spend_lower)/as.numeric(eu_total_reach)*1000) %>% #View()
+  add_count(advertiser_name) %>% 
+  filter(n > 10) %>% 
+  filter(spend_lower > 1) %>% 
+  arrange(desc(price)) %>% 
+  mutate(diff = imp_lower-eu_total_reach) %>% View()
+
 # df_imp2 <- df_imp
 # saveRDS(df_imp2, "data/df_imp2.rds")
 # dutch_parties <- c("VVD", "D66", "FvD", "SP", "GroenLinks", "Volt Nederland", "PvdA", "CDA", "PvdD", "ChristenUnie", "SGP", "DENK", "50PLUS")
@@ -291,11 +319,12 @@ cat("\n\nFB Data: Merge data\n\n")
 
 
 fb_dat <- df_imp %>% 
+  bind_rows(df_imp2) %>% 
   rename(advertiser_name = page_name) %>% 
   rename(advertiser_id = page_id) %>% 
-  bind_rows(fb_dat %>% select(-party)) %>%
-  distinct(id, .keep_all = T) %>%
-  left_join(wtm_data %>% select(-advertiser_name)) #%>% 
+  bind_rows(fb_dat) %>%
+  distinct(id, .keep_all = T) #%>%
+  # left_join(wtm_data %>% select(-advertiser_name)) #%>% 
   # mutate(advertiser_name = case_when(
   #   advertiser_name == 'Partij voor de Dieren' ~ "PvdD",
   #   advertiser_name == 'Partij van de Arbeid (PvdA)' ~ "PvdA",

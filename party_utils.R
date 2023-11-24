@@ -42,6 +42,19 @@ scale_color_parties <- function(...){
   )
 }
 
+# election_dat30 <- read_rds("https://github.com/groene/TK2023/raw/main/historic/2023-11-17/30.rds") %>%
+#   # left_join(all_dat) %>%
+#   rename(internal_id = page_id) %>%
+#   filter(party != "And")  %>%
+#   filter(is.na(no_data)) %>%
+#   mutate(party = ifelse(party %in% c("GroenLinks", "PvdA"), "GroenLinks-PvdA", party))
+# 
+# election_dat7 <- read_rds("https://github.com/groene/TK2023/raw/main/historic/2023-11-17/7.rds") %>%
+#   # left_join(all_dat) %>%
+#   rename(internal_id = page_id) %>%
+#   filter(party != "And")  %>%
+#   filter(is.na(no_data)) %>%
+#   mutate(party = ifelse(party %in% c("GroenLinks", "PvdA"), "GroenLinks-PvdA", party))
 
 election_dat30 <- readRDS("../data/election_dat30.rds") %>%
   # left_join(all_dat) %>%
