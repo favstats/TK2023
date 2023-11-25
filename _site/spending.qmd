@@ -303,7 +303,8 @@ eval(parse(text = paste0("gt(the_table7, rowname_col = 'party_col') %>% fmt_mark
 
 
 ```{r, fig.width=12, fig.height=8, dpi=300}
-ggl_daily <- readRDS("../data/ggl_daily_spending.rds")
+ggl_daily <- readRDS("../data/ggl_daily_spending.rds") %>% 
+  filter(date <= as.Date("2023-11-22"))
 ggl_spend <- readRDS("../data/ggl_spend.rds")
 
 
@@ -337,13 +338,13 @@ sum30_ggl <- ggl_all %>%
     mutate(total_spend_formatted = parse_number(`Total Spend`)) %>%
     # distinct(internal_id, .keep_all = T) %>%
     summarize(total_spend_formatted = sum(total_spend_formatted),
-              total_num_ads = sum(as.numeric(`Number of Ads`)))
+              total_num_ads = sum(parse_number(`Number of Ads`)))
 
 sum7_ggl <- ggl_all7 %>%
     mutate(total_spend_formatted = parse_number(`Total Spend`)) %>%
     # distinct(internal_id, .keep_all = T) %>%
     summarize(total_spend_formatted = sum(total_spend_formatted),
-              total_num_ads = sum(as.numeric(`Number of Ads`)))
+              total_num_ads = sum(parse_number(`Number of Ads`)))
 
 ```
 
