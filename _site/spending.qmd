@@ -404,8 +404,8 @@ eval(parse(text = paste0("gt(ggl_all7, rowname_col = 'party_col') %>% fmt_markdo
 
 
 ```{r, fig.width=12, fig.height=8, dpi=300}
-ggl_daily <- readRDS("../data/ggl_daily_spending.rds")
-ggl_spend <- readRDS("../data/ggl_spend.rds")
+# ggl_daily <- readRDS("../data/ggl_daily_spending.rds")
+# ggl_spend <- readRDS("../data/ggl_spend.rds")
 
 
 

@@ -122,7 +122,7 @@ parties_with_zips <- all_zip %>%
 # Now, loop through each party, creating a section and plotting
 for (partyz in parties_with_zips) {
 
-  partyz <- "CDA"
+  # partyz <- "CDA"
   
   # Create the heading for the party
   cat("\n")
