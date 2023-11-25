@@ -11,15 +11,15 @@ output: github_document
 
 |Data           |Latest     |
 |:--------------|:----------|
-|30 Days Window |2023-11-20 |
-|7 Days Window  |2023-11-20 |
-|Report         |2023-11-19 |
+|30 Days Window |2023-11-22 |
+|7 Days Window  |2023-11-22 |
+|Report         |2023-11-22 |
 
 ## Google
 
 
 |Data           |Latest     |
 |:--------------|:----------|
-|30 Days Window |2023-11-19 |
-|7 Days Window  |2023-11-19 |
-|Report         |2023-11-22 |
+|30 Days Window |2023-11-21 |
+|7 Days Window  |2023-11-21 |
+|Report         |2023-11-24 |
