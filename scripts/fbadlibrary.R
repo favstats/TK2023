@@ -243,6 +243,7 @@ fb_dat %>% #View()
   left_join(elex30 %>% select(advertiser_id = page_id, party)) %>% 
    mutate(start = lubridate::ymd(ad_delivery_start_time)) %>% 
   filter(start >= lubridate::ymd("2023-08-01")) %>% 
+  filter(start <= lubridate::ymd("2023-11-22")) %>% 
   unnest_wider(impressions) %>% 
   rename(imp_lower = lower_bound)%>% 
   rename(imp_upper = upper_bound) %>% 
@@ -252,13 +253,15 @@ unnest_wider(spend) %>%
   glimpse() %>% 
   mutate(spend_lower = ifelse(spend_lower==0,1, spend_lower)) %>% 
   # filter(eu_total_reach!=1) %>%
-  mutate(price = as.numeric(spend_lower)/as.numeric(eu_total_reach)*1000) %>% #View()
+  mutate(price = as.numeric(spend_lower)/as.numeric(imp_lower)*1000) %>% #View()
   add_count(advertiser_name) %>% 
-  # filter(n > 10) %>% 
+  filter(n > 20) %>%
   # filter(price <= 100) %>% 
   mutate(party = fct_reorder(party, price)) %>% 
-  drop_na(party) %>% 
-  ggplot(aes(party, price)) +
+  mutate(advertiser_name = fct_reorder(advertiser_name, price)) %>% 
+  # drop_na(party) %>% 
+  # ggplot(aes(party, price)) +
+  ggplot(aes(advertiser_name, price)) +
   # geom_histograCm() +
   geom_boxplot() +
   stat_summary(fun.y=mean, geom="point", shape=20, size=3, color="red", fill="red") +
@@ -274,10 +277,11 @@ unnest_wider(spend) %>%
     hjust=-0.3,  # Adjust this value to move text left or right
     color="black"
   ) +
-  ylim(0, 100)
+  ylim(0, 100) +
+  theme_minimal()
   # EnvStats::stat_median_iqr_text()
 
-ggsave("img/pay.png", width = 14, height = 10)
+ggsave("img/pay.png", width = 14, height = 10, dpi = 900, bg = "white")
 
 
 fb_dat %>% #View()

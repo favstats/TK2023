@@ -301,7 +301,7 @@ the_dat %>%
   # geom_col(position = position_dodge()) +
   theme_minimal() +
   scale_y_continuous(labels = scales::number_format()) +
-  labs(y = "Meta Spending 112 to 4 Days Before Election Day", x = "")  +
+  labs(y = "Meta Spending From 112 Days to Election Day", x = "")  +
   # scale_color_grey() +
   theme(legend.position = "top") +
   coord_flip() +
