@@ -191,10 +191,10 @@ get_em <- function(pgid, pgname) {
 
 get_em <- possibly(get_em, otherwise = NULL, quiet = F)
 
-debugonce(get_em)
+# debugonce(get_em)
 
 df_imp <- elex30 %>% 
-  filter(page_id == "137011549489828") %>%
+  # filter(page_id == "137011549489828") %>%
   # slice(92) %>% 
   # pull(page_id) %>% 
   # .[1] %>% 
@@ -240,7 +240,8 @@ for (jj in seq_along(theids)) {
 
 fb_dat %>% #View()
   select(id, advertiser_name, advertiser_id, impressions, spend, eu_total_reach, ad_delivery_start_time, ad_delivery_stop_time) %>% 
-  mutate(start = lubridate::ymd(ad_delivery_start_time)) %>% 
+  left_join(elex30 %>% select(advertiser_id = page_id, party)) %>% 
+   mutate(start = lubridate::ymd(ad_delivery_start_time)) %>% 
   filter(start >= lubridate::ymd("2023-08-01")) %>% 
   unnest_wider(impressions) %>% 
   rename(imp_lower = lower_bound)%>% 
@@ -253,10 +254,11 @@ unnest_wider(spend) %>%
   # filter(eu_total_reach!=1) %>%
   mutate(price = as.numeric(spend_lower)/as.numeric(eu_total_reach)*1000) %>% #View()
   add_count(advertiser_name) %>% 
-  filter(n > 10) %>% 
+  # filter(n > 10) %>% 
   # filter(price <= 100) %>% 
-  mutate(advertiser_name = fct_reorder(advertiser_name, price)) %>% 
-  ggplot(aes(advertiser_name, price)) +
+  mutate(party = fct_reorder(party, price)) %>% 
+  drop_na(party) %>% 
+  ggplot(aes(party, price)) +
   # geom_histograCm() +
   geom_boxplot() +
   stat_summary(fun.y=mean, geom="point", shape=20, size=3, color="red", fill="red") +
@@ -271,10 +273,93 @@ unnest_wider(spend) %>%
     vjust=1, 
     hjust=-0.3,  # Adjust this value to move text left or right
     color="black"
-  )
+  ) +
+  ylim(0, 100)
   # EnvStats::stat_median_iqr_text()
 
 ggsave("img/pay.png", width = 14, height = 10)
+
+
+fb_dat %>% #View()
+  select(id, advertiser_name, advertiser_id, impressions, spend, eu_total_reach, ad_delivery_start_time, ad_delivery_stop_time) %>% 
+  left_join(elex30 %>% select(advertiser_id = page_id, party)) %>% 
+  mutate(start = lubridate::ymd(ad_delivery_start_time)) %>% 
+  filter(start >= lubridate::ymd("2023-08-01")) %>% 
+  unnest_wider(impressions) %>% 
+  rename(imp_lower = lower_bound)%>% 
+  rename(imp_upper = upper_bound) %>% 
+  unnest_wider(spend) %>% 
+  rename(spend_lower = lower_bound)%>% 
+  rename(spend_upper = upper_bound) %>% 
+  glimpse() %>% 
+  mutate(spend_lower = ifelse(spend_lower==0,1, spend_lower)) %>% 
+  filter(eu_total_reach!=1) %>%
+  mutate(price = as.numeric(spend_lower)/as.numeric(eu_total_reach)*1000) %>% #View()
+  add_count(advertiser_name) %>% 
+  # filter(n > 10) %>% 
+  # filter(price <= 100) %>% 
+  mutate(party = fct_reorder(party, eu_total_reach)) %>% 
+  drop_na(party) %>% 
+  ggplot(aes(party, eu_total_reach)) +
+  # geom_histograCm() +
+  geom_boxplot() +
+  stat_summary(fun.y=mean, geom="point", shape=20, size=3, color="red", fill="red") +
+  
+  # scale_y_log10() +
+  coord_flip() +
+  EnvStats::stat_n_text() +
+  stat_summary(
+    fun=median, 
+    geom="label", 
+    aes(label=round(..y.., 1)), 
+    vjust=1, 
+    hjust=-0.3,  # Adjust this value to move text left or right
+    color="black"
+  ) 
+
+
+fb_dat %>% #View()
+  # select(estimated_audience_size)
+  select(id, advertiser_name, advertiser_id, estimated_audience_size, impressions, spend, eu_total_reach, ad_delivery_start_time, ad_delivery_stop_time) %>% 
+  left_join(elex30 %>% select(advertiser_id = page_id, party)) %>% 
+  mutate(start = lubridate::ymd(ad_delivery_start_time)) %>% 
+  filter(start >= lubridate::ymd("2023-08-01")) %>% 
+  unnest_wider(impressions) %>% 
+  rename(imp_lower = lower_bound)%>% 
+  rename(imp_upper = upper_bound) %>% 
+  unnest_wider(spend) %>% 
+  rename(spend_lower = lower_bound)%>% 
+  rename(spend_upper = upper_bound) %>% 
+  unnest_wider(estimated_audience_size) %>% 
+  rename(ausize_lower = lower_bound)%>% 
+  rename(ausize_upper = upper_bound) %>% 
+  glimpse() %>% 
+  mutate(spend_lower = ifelse(spend_lower==0,1, spend_lower)) %>% 
+  # filter(eu_total_reach!=1) %>%
+  mutate(price = as.numeric(spend_lower)/as.numeric(eu_total_reach)*1000) %>% #View()
+  mutate(ausize_lower = as.numeric(ausize_lower)) %>% 
+  add_count(advertiser_name) %>% 
+  # filter(n > 10) %>% 
+  # filter(price <= 100) %>% 
+  mutate(ausize_lower = as.factor(ausize_lower) %>% as.numeric) %>% 
+  mutate(party = fct_reorder(party, ausize_lower)) %>% 
+  drop_na(party) %>% 
+  ggplot(aes(party, ausize_lower)) +
+  # geom_histograCm() +
+  geom_boxplot() +
+  stat_summary(fun.y=mean, geom="point", shape=20, size=3, color="red", fill="red") +
+  
+  # scale_y_log10() +
+  coord_flip() +
+  EnvStats::stat_n_text() +
+  stat_summary(
+    fun=median, 
+    geom="label", 
+    aes(label=round(..y.., 1)), 
+    vjust=1, 
+    hjust=-0.3,  # Adjust this value to move text left or right
+    color="black"
+  ) 
 
 
 fb_dat %>% #View()
@@ -319,7 +404,7 @@ cat("\n\nFB Data: Merge data\n\n")
 
 
 fb_dat <- df_imp %>% 
-  bind_rows(df_imp2) %>% 
+  # bind_rows(df_imp2) %>% 
   rename(advertiser_name = page_name) %>% 
   rename(advertiser_id = page_id) %>% 
   bind_rows(fb_dat) %>%

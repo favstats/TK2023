@@ -22,6 +22,9 @@ jobs:
           quarto --version
       - name: Setup - Checkout repo
         uses: actions/checkout@v3
+      - name: Apt-get update things
+        run: |
+          sudo apt-get update 
       - name: Apt-get needed things
         run: |
           sudo apt-get install --no-install-recommends -y \
