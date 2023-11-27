@@ -10,7 +10,7 @@ options(python_init = TRUE)
 
 
 ##TODO: change this if you want to defunct it
-defunct <- T
+defunct <- F
 
 pacman::p_load(
   vroom,
@@ -174,131 +174,130 @@ print("sooo22")
 
 
 
-retrieve_spend_daily <- function(id, the_date, cntry = "NL") {
-  # id <- "AR18091944865565769729"
-  url <-
-    glue::glue(
-      "https://adstransparency.google.com/advertiser/{id}?political&region={cntry}&start-date={the_date}&end-date={the_date}&topic=political&hl=en"
-    )
-  
-  page_df %>%
-    goto(url)
-  
-  Sys.sleep(3)
-  
-  
-  
-  root3 <- "/html/body/div[3]"
-  root5 <- "/html/body/div[5]"
-  ending <-
-    "/root/advertiser-page/political-tabs/div/material-tab-strip/div/tab-button[2]/material-ripple"
-  
-  page_df <- page_df %>% get_by_label("Insights")
-  
-  page_df %>% press("Enter") %>% click()
-  
-  root <- root3
-  
-  Sys.sleep(3)
-  
-  pp <- page_df %>% playwrightr::get_content()
-  
-  ending_eur <-
-    "/root/advertiser-page/insights-grid/div/div/overview/widget/div[3]/div[1]/div"
-  ending_ads <-
-    "/root/advertiser-page/insights-grid/div/div/overview/widget/div[3]/div[3]/div"
-  
-  print("retrieve numbers")
-  # try({
-  eur_amount <- pp %>%
-    html_elements(xpath = paste0(root, ending_eur)) %>%
-    html_text()
-  
-  if (length(eur_amount) == 0) {
-    message("empty")
-    root <- root5
-    
-    eur_amount <- pp %>%
-      html_elements(xpath = paste0(root, ending_eur)) %>%
-      html_text()
-    
-    
-  }
-  # })
-  num_ads <- pp %>%
-    html_elements(xpath = paste0(root, ending_ads)) %>%
-    html_text()
-  
-  # })
-  
-  fin <-
-    tibble(advertiser_id = id,
-           eur_amount,
-           num_ads,
-           date = the_date)
-  
-  print(fin)
-  
-  saveRDS(fin %>% bind_rows(readRDS("data/ggl_daily_spending.rds")) %>% distinct(), file = "data/ggl_daily_spending.rds")
-  
-  return(fin)
-  
-}
-
-# debugonce(retrieve_spend_daily)
-retrieve_spend_daily <-
-  possibly(retrieve_spend_daily, otherwise = NULL, quiet = F)
-
-# daily_spending <- readRDS("data/daily_spending.rds")
-# Apr 17, 2023 - May 16, 2023
-# 13 February 2023
-timelines <-
-  seq.Date(as.Date("2023-10-01"),
-           lubridate::today() - lubridate::days(1),
-           by = "day")
-
-#
-daily_spending_old <- readRDS("data/ggl_daily_spending.rds") # %>% 
-  # filter(!(date  %in% lubridate::ymd(c("2023-11-16",  "2023-11-17")))) 
-  # filter(!(date  %in% lubridate::ymd(c("2023-11-15", "2023-11-16",  "2023-11-17",  "2023-11-18")))) #%>%
-  # filter(!(date  %in% lubridate::ymd(c("2023-11-18"))))
-
-
-daily_spending <-
-  expand_grid(unique(ggl_spend$Advertiser_ID), timelines) %>%
-  set_names(c("advertiser_id", "timelines")) %>%
-  anti_join(daily_spending_old %>% select(advertiser_id, timelines = date)) %>%
-  # slice(1) %>%
-  split(1:nrow(.)) %>%
-  map_dfr_progress( ~ {
-    retrieve_spend_daily(.x$advertiser_id, .x$timelines)
-  })
-
-# missings <- expand_grid(unique(ggl_spend$Advertiser_ID), timelines) %>%
+# retrieve_spend_daily <- function(id, the_date, cntry = "NL") {
+#   # id <- "AR18091944865565769729"
+#   url <-
+#     glue::glue(
+#       "https://adstransparency.google.com/advertiser/{id}?political&region={cntry}&start-date={the_date}&end-date={the_date}&topic=political&hl=en"
+#     )
+#   
+#   page_df %>%
+#     goto(url)
+#   
+#   Sys.sleep(3)
+#   
+#   
+#   
+#   root3 <- "/html/body/div[3]"
+#   root5 <- "/html/body/div[5]"
+#   ending <-
+#     "/root/advertiser-page/political-tabs/div/material-tab-strip/div/tab-button[2]/material-ripple"
+#   
+#   page_df <- page_df %>% get_by_label("Insights")
+#   
+#   page_df %>% press("Enter") %>% click()
+#   
+#   root <- root3
+#   
+#   Sys.sleep(3)
+#   
+#   pp <- page_df %>% playwrightr::get_content()
+#   
+#   ending_eur <-
+#     "/root/advertiser-page/insights-grid/div/div/overview/widget/div[3]/div[1]/div"
+#   ending_ads <-
+#     "/root/advertiser-page/insights-grid/div/div/overview/widget/div[3]/div[3]/div"
+#   
+#   print("retrieve numbers")
+#   # try({
+#   eur_amount <- pp %>%
+#     html_elements(xpath = paste0(root, ending_eur)) %>%
+#     html_text()
+#   
+#   if (length(eur_amount) == 0) {
+#     message("empty")
+#     root <- root5
+#     
+#     eur_amount <- pp %>%
+#       html_elements(xpath = paste0(root, ending_eur)) %>%
+#       html_text()
+#     
+#     
+#   }
+#   # })
+#   num_ads <- pp %>%
+#     html_elements(xpath = paste0(root, ending_ads)) %>%
+#     html_text()
+#   
+#   # })
+#   
+#   fin <-
+#     tibble(advertiser_id = id,
+#            eur_amount,
+#            num_ads,
+#            date = the_date)
+#   
+#   print(fin)
+#   
+#   saveRDS(fin %>% bind_rows(readRDS("data/ggl_daily_spending.rds")) %>% distinct(), file = "data/ggl_daily_spending.rds")
+#   
+#   return(fin)
+#   
+# }
+# 
+# # debugonce(retrieve_spend_daily)
+# retrieve_spend_daily <-
+#   possibly(retrieve_spend_daily, otherwise = NULL, quiet = F)
+# 
+# # daily_spending <- readRDS("data/daily_spending.rds")
+# # Apr 17, 2023 - May 16, 2023
+# # 13 February 2023
+# timelines <-
+#   seq.Date(as.Date("2023-10-01"),
+#            lubridate::today() - lubridate::days(1),
+#            by = "day")
+# 
+# #
+# daily_spending_old <- readRDS("data/ggl_daily_spending.rds") # %>% 
+#   # filter(!(date  %in% lubridate::ymd(c("2023-11-16",  "2023-11-17")))) 
+#   # filter(!(date  %in% lubridate::ymd(c("2023-11-15", "2023-11-16",  "2023-11-17",  "2023-11-18")))) #%>%
+#   # filter(!(date  %in% lubridate::ymd(c("2023-11-18"))))
+# 
+# 
+# daily_spending <-
+#   expand_grid(unique(ggl_spend$Advertiser_ID), timelines) %>%
 #   set_names(c("advertiser_id", "timelines")) %>%
-#   anti_join(daily_spending %>% rename(timelines = date))  %>%
+#   anti_join(daily_spending_old %>% select(advertiser_id, timelines = date)) %>%
+#   # slice(1) %>%
 #   split(1:nrow(.)) %>%
-#   map_dfr_progress(~{retrieve_spend_daily(.x$advertiser_id, .x$timelines)})
-#
+#   map_dfr_progress( ~ {
+#     retrieve_spend_daily(.x$advertiser_id, .x$timelines)
+#   })
+# 
+# # missings <- expand_grid(unique(ggl_spend$Advertiser_ID), timelines) %>%
+# #   set_names(c("advertiser_id", "timelines")) %>%
+# #   anti_join(daily_spending %>% rename(timelines = date))  %>%
+# #   split(1:nrow(.)) %>%
+# #   map_dfr_progress(~{retrieve_spend_daily(.x$advertiser_id, .x$timelines)})
+# #
+# 
+# saveRDS(daily_spending %>% bind_rows(daily_spending_old) %>% distinct(),
+#         file = "data/ggl_daily_spending.rds")
+# 
 
-saveRDS(daily_spending %>% bind_rows(daily_spending_old) %>% distinct(),
-        file = "data/ggl_daily_spending.rds")
-
-
-# dates <- read_csv("data/dates.csv")
-library(tidyverse)
-latest_hist <- dir("historic") %>% sort %>% .[length(.)]
-
-election_dat30 <- readRDS(paste0("historic/", latest_hist,  "/30.rds")) %>% 
-  filter(is.na(no_data))
-
-fin <- (as.Date(election_dat30$ds[1])-lubridate::days(1))
-begin7 <- fin-lubridate::days(6)
-begin30 <- fin-lubridate::days(29)
-
-dates <- tibble(fin,
-       begin7,
-       begin30) 
+dates <- read_csv("data/dates.csv")
+# latest_hist <- dir("historic") %>% sort %>% .[length(.)]
+# 
+# election_dat30 <- readRDS(paste0("historic/", latest_hist,  "/30.rds")) %>% 
+#   filter(is.na(no_data))
+# 
+# fin <- (as.Date(election_dat30$ds[1])-lubridate::days(1))
+# begin7 <- fin-lubridate::days(6)
+# begin30 <- fin-lubridate::days(29)
+# 
+# dates <- tibble(fin,
+#        begin7,
+#        begin30) 
 
 
 
@@ -435,8 +434,8 @@ ggl_sel_sp7_old <- readRDS("data/ggl_sel_sp7.rds")
     distinct(advertiser_id, .keep_all = T)
 
 
-  # saveRDS(ggl_sel_sp, file = "data/ggl_sel_sp.rds")
-  saveRDS(ggl_sel_sp, file = paste0("historic/", latest_hist, "/ggl30.rds"))
+  saveRDS(ggl_sel_sp, file = "data/ggl_sel_sp.rds")
+  # saveRDS(ggl_sel_sp, file = paste0("historic/", latest_hist, "/ggl30.rds"))
   
 # }
 
@@ -459,14 +458,14 @@ ggl_sel_sp7_old <- readRDS("data/ggl_sel_sp7.rds")
     })
 
 
-  # saveRDS(ggl_sel_sp7 %>% bind_rows(misss) %>%
-  #           distinct(advertiser_id, .keep_all = T),
-  #         file = "data/ggl_sel_sp7.rds")
-  
-  
   saveRDS(ggl_sel_sp7 %>% bind_rows(misss) %>%
             distinct(advertiser_id, .keep_all = T),
-          file = paste0("historic/", latest_hist, "/ggl7.rds"))
+          file = "data/ggl_sel_sp7.rds")
+  
+  
+  # saveRDS(ggl_sel_sp7 %>% bind_rows(misss) %>%
+  #           distinct(advertiser_id, .keep_all = T),
+  #         file = paste0("historic/", latest_hist, "/ggl7.rds"))
   
   # latest_hist
 
