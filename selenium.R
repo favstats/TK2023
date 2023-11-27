@@ -10,7 +10,7 @@ options(python_init = TRUE)
 
 
 ##TODO: change this if you want to defunct it
-defunct <- F
+defunct <- T
 
 pacman::p_load(
   vroom,
@@ -285,19 +285,19 @@ print("sooo22")
 #         file = "data/ggl_daily_spending.rds")
 # 
 
-dates <- read_csv("data/dates.csv")
-# latest_hist <- dir("historic") %>% sort %>% .[length(.)]
-# 
-# election_dat30 <- readRDS(paste0("historic/", latest_hist,  "/30.rds")) %>% 
-#   filter(is.na(no_data))
-# 
-# fin <- (as.Date(election_dat30$ds[1])-lubridate::days(1))
-# begin7 <- fin-lubridate::days(6)
-# begin30 <- fin-lubridate::days(29)
-# 
-# dates <- tibble(fin,
-#        begin7,
-#        begin30) 
+# dates <- read_csv("data/dates.csv")
+latest_hist <- dir("historic") %>% sort %>% .[length(.)]
+
+election_dat30 <- readRDS(paste0("historic/", latest_hist,  "/30.rds")) %>%
+  filter(is.na(no_data))
+
+fin <- (as.Date(election_dat30$ds[1])-lubridate::days(1))
+begin7 <- fin-lubridate::days(6)
+begin30 <- fin-lubridate::days(29)
+
+dates <- tibble(fin,
+       begin7,
+       begin30)
 
 
 
@@ -434,8 +434,8 @@ ggl_sel_sp7_old <- readRDS("data/ggl_sel_sp7.rds")
     distinct(advertiser_id, .keep_all = T)
 
 
-  saveRDS(ggl_sel_sp, file = "data/ggl_sel_sp.rds")
-  # saveRDS(ggl_sel_sp, file = paste0("historic/", latest_hist, "/ggl30.rds"))
+  # saveRDS(ggl_sel_sp, file = "data/ggl_sel_sp.rds")
+  saveRDS(ggl_sel_sp, file = paste0("historic/", latest_hist, "/ggl30.rds"))
   
 # }
 
@@ -458,14 +458,14 @@ ggl_sel_sp7_old <- readRDS("data/ggl_sel_sp7.rds")
     })
 
 
-  saveRDS(ggl_sel_sp7 %>% bind_rows(misss) %>%
-            distinct(advertiser_id, .keep_all = T),
-          file = "data/ggl_sel_sp7.rds")
-  
-  
   # saveRDS(ggl_sel_sp7 %>% bind_rows(misss) %>%
   #           distinct(advertiser_id, .keep_all = T),
-  #         file = paste0("historic/", latest_hist, "/ggl7.rds"))
+  #         file = "data/ggl_sel_sp7.rds")
+  
+  
+  saveRDS(ggl_sel_sp7 %>% bind_rows(misss) %>%
+            distinct(advertiser_id, .keep_all = T),
+          file = paste0("historic/", latest_hist, "/ggl7.rds"))
   
   # latest_hist
 
