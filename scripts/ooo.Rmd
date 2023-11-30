@@ -107,10 +107,10 @@ scale_color_parties <- function(...){
 
 # ) 
 
-all_zip %>% 
-  filter(party == "VVD") %>%
-  arrange(total_spend)
-  count(value, sort =  T)
+# all_zip %>% 
+#   filter(party == "VVD") %>%
+#   arrange(total_spend)
+#   count(value, sort =  T)
 ```
 
 ```{r, fig.width=8, fig.height=6, dpi = 900, eval = F}
@@ -500,6 +500,184 @@ MOST_SPENT %>%
 
 
 ```
+
+```{r, message=F, warning=F, cache=F, fig.width=15, fig.height=15, dpi = 900}
+
+total_by_all <- election_dat30 %>% 
+  distinct(internal_id, .keep_all = T) %>% 
+  group_by(party) %>% 
+  summarize(total_spend_formatted = sum(total_spend_formatted)) %>% 
+  arrange(desc(total_spend_formatted))
+
+
+geo %>%
+    left_join(all_zip %>% 
+                filter(!(party %in% c("BBB", "Ja21", "Libertaire Partij"))) %>% 
+  group_by(pc4, party) %>% 
+  summarize(total_spend = sum(total_spend_old)) %>% 
+  arrange(desc(total_spend)) %>% 
+  left_join(total_by_all) %>% 
+  mutate(perc = total_spend/total_spend_formatted) %>% 
+  ungroup() %>% 
+  group_by(pc4) %>% 
+  summarize(total_spend = mean(perc*100)) %>% 
+  arrange(desc(total_spend))  %>% 
+    dplyr::mutate(pc4_code = as.character(pc4))) %>%
+  ggplot()  +
+  theme_void() +
+  # geom_sf(color = "black") +
+  # geom_sf(aes(fill = log(total_spend)+2),
+  #         colour = "white", size = 0.9) +
+  # geom_sf(aes(fill = party, alpha = total_spend_old),
+  geom_sf(aes(fill = total_spend),
+          colour = NA,
+          size = 0.00000001) +
+  # geom_sf(colour = "white", fill = NA, alpha = 0.001,
+  #         size = 0.00000001) +
+  # geom_sf(data = prov, color = "black", fill = NA)  +
+  # geom_sf_label(data = prov, aes(label = name)) +
+  theme(legend.position = "bottom") +
+  scale_fill_viridis_c() #+
+  # scale_alpha(range = c(0.5, 1))
+  
+
+geo %>%
+    left_join(all_zip %>% 
+                filter(!(party %in% c("BBB", "Ja21", "Libertaire Partij", "GroenLinks-PvdA"))) %>% 
+    dplyr::mutate(pc4_code = as.character(pc4)) %>% 
+  group_by(pc4_code) %>% 
+  summarize(total_spend = median(total_spend_old)) %>% 
+  arrange(desc(total_spend))) %>% 
+  # left_join(total_by_all) %>% 
+  # mutate(perc = total_spend/total_spend_formatted) %>% 
+  # ungroup() %>% 
+  # group_by(pc4) %>% 
+  # summarize(total_spend = mean(perc*100)) %>% 
+  # arrange(desc(total_spend))  %>% 
+    # dplyr::mutate(pc4_code = as.character(pc4))) %>%
+  ggplot()  +
+  theme_void() +
+  # geom_sf(color = "black") +
+  # geom_sf(aes(fill = log(total_spend)+2),
+  #         colour = "white", size = 0.9) +
+  # geom_sf(aes(fill = party, alpha = total_spend_old),
+  geom_sf(aes(fill = total_spend),
+          colour = NA,
+          size = 0.00000001) +
+  # geom_sf(colour = "white", fill = NA, alpha = 0.001,
+  #         size = 0.00000001) +
+  # geom_sf(data = prov, color = "black", fill = NA)  +
+  # geom_sf_label(data = prov, aes(label = name)) +
+  theme(legend.position = "bottom") +
+  scale_fill_viridis_c() +
+  guides(fill = guide_colourbar(title = "Median Spend (€)", barwidth = 10, barheight = 0.5))
+
+
+
+geo %>%
+    left_join(all_zip %>% 
+                filter(!(party %in% c("BBB", "Ja21", "Libertaire Partij"))) %>% 
+    dplyr::mutate(pc4_code = as.character(pc4)) %>% 
+  group_by(pc4_code) %>% 
+  summarize(total_spend = sum(total_spend),
+            inwoner = inwoner[1]) %>% 
+  arrange(desc(total_spend))) %>% 
+  # left_join(total_by_all) %>% 
+  # mutate(perc = total_spend/total_spend_formatted) %>% 
+  # ungroup() %>% 
+  # group_by(pc4) %>% 
+  # summarize(total_spend = mean(perc*100)) %>% 
+  # arrange(desc(total_spend))  %>% 
+    # dplyr::mutate(pc4_code = as.character(pc4))) %>%
+  mutate(total_spend = total_spend/inwoner*1000) %>% 
+  # mutate(total_spend = ifelse(total_spend >= 10000, 10000, total_spend)) %>% 
+  mutate(total_spend = ifelse(total_spend >= 250, 250, total_spend)) %>% 
+  ggplot()  +
+  theme_void() +
+  # geom_sf(color = "black") +
+  # geom_sf(aes(fill = log(total_spend)+2),
+  #         colour = "white", size = 0.9) +
+  # geom_sf(aes(fill = party, alpha = total_spend_old),
+  geom_sf(aes(fill = total_spend, alpha = total_spend),
+          colour = NA,
+          size = 0.00000001) +
+  scale_alpha(range = c(0.5, 1)) +
+  # geom_sf(colour = "white", fill = NA, alpha = 0.001,
+  #         size = 0.00000001) +
+  # geom_sf(data = prov, color = "black", fill = NA)  +
+  # geom_sf_label(data = prov, aes(label = name)) +
+  theme(legend.position = "bottom") +
+  scale_fill_viridis_c() +
+  guides(fill = guide_colourbar(title = "Median Spend (€)", barwidth = 10, barheight = 0.5))
+
+
+# 
+# all_zip %>% 
+#                 filter(!(party %in% c("BBB", "Ja21", "Libertaire Partij"))) %>% 
+#     dplyr::mutate(pc4_code = as.character(pc4)) %>% 
+#   group_by(pc4_code) %>% 
+#   summarize(total_spend = median(total_spend_old),
+#             inwoner = inwoner[1]) %>% 
+#   arrange(desc(total_spend))
+
+
+geo %>%
+    left_join(all_zip %>% 
+                filter(!(party %in% c("BBB", "Ja21", "Libertaire Partij"))) %>%
+    dplyr::mutate(pc4_code = as.character(pc4)) %>% 
+  group_by(pc4_code) %>% 
+  summarize(total_spend = sum(total_spend)) %>% 
+  arrange(desc(total_spend))) %>% 
+  # left_join(total_by_all) %>% 
+  # mutate(perc = total_spend/total_spend_formatted) %>% 
+  # ungroup() %>% 
+  # group_by(pc4) %>% 
+  # summarize(total_spend = mean(perc*100)) %>% 
+  # arrange(desc(total_spend))  %>% 
+    # dplyr::mutate(pc4_code = as.character(pc4))) %>%
+  mutate(total_spend = ifelse(total_spend >= 500, 500, total_spend)) %>% 
+  ggplot()  +
+  theme_void() +
+  # geom_sf(color = "black") +
+  # geom_sf(aes(fill = log(total_spend)+2),
+  #         colour = "white", size = 0.9) +
+  # geom_sf(aes(fill = party, alpha = total_spend_old),
+  geom_sf(aes(fill = total_spend),
+          colour = NA,
+          size = 0.00000001) +
+  # geom_sf(colour = "white", fill = NA, alpha = 0.001,
+  #         size = 0.00000001) +
+  # geom_sf(data = prov, color = "black", fill = NA)  +
+  # geom_sf_label(data = prov, aes(label = name)) +
+  theme(legend.position = "bottom") +
+  scale_fill_viridis_c() +
+  guides(fill = guide_colourbar(title = "Median Spend (€)", barwidth = 10, barheight = 0.5))
+```
+
+```{r}
+# well actually you just need this code:
+
+all_zip %>%
+  filter(!(party %in% c("BBB", "Ja21", "Libertaire Partij"))) %>%
+  group_by(pc4) %>%
+  summarize(
+    total_spend = sum(total_spend),
+    median_spend = median(total_spend_old),
+    inwoner = inwoner[1]
+  ) %>%
+  ungroup() %>%
+  ## spending per inhabitants
+  mutate(total_spending_per_inhabitants = total_spend / inwoner * 1000) %>%
+  ## get rid of outliers
+  mutate(
+    total_spending_per_inhabitants = ifelse(
+      total_spending_per_inhabitants >= 250,
+      250,
+      total_spending_per_inhabitants
+    )
+  ) 
+```
+
 
 ```{r, message=F, warning=F, cache=F, fig.width=15, fig.height=15, dpi = 900}
 

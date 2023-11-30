@@ -317,3 +317,27 @@ the_dat %>%
   mutate(diff = spend2023-spend2021) %>% 
   arrange(desc(diff)) %>% View()
 
+
+
+
+spend2021 <- elex2021reps  %>%
+  janitor::clean_names() %>% 
+  mutate(page_id = as.character(page_id)) %>% 
+  left_join(readRDS("data/all_dat.rds") %>%
+              distinct(page_id, party)) %>%
+  drop_na(party) %>% 
+  mutate(amount_spent_eur = readr::parse_number(amount_spent_eur)) %>% 
+  mutate(amount_spent_eur = ifelse(amount_spent_eur==100, 50, amount_spent_eur)) %>% 
+  mutate(Date = lubridate::ymd(date))  %>% 
+  mutate(days_until = as.numeric(lubridate::ymd("2021-03-17")-Date)) %>% 
+  # pull(days_until) %>% sort(decreasing = T)
+  filter(days_until <= 30) %>% 
+  filter(days_until >= 0) %>% 
+  group_by(party) %>% 
+  summarize(amount_spent_eur = sum(amount_spent_eur)) %>% 
+  ungroup()
+  # group_by(party) %>% 
+  # arrange(date) %>% 
+  # mutate(`Daily Spend` = cumsum(amount_spent_eur))    %>% 
+  mutate(Date = lubridate::ymd(date))  %>% 
+  mutate(days_until = as.numeric(lubridate::ymd("2021-03-17")-Date)) 
