@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="nl" xml:lang="nl"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -48,6 +48,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "meer overeenkomst in dit document",
     "search-more-matches-text": "meer overeenkomsten in dit document",
     "search-clear-button-title": "Wissen",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Annuleren",
     "search-submit-button-title": "Verzenden",
     "search-label": "Zoeken"
@@ -108,15 +109,42 @@ ul.task-list li input[type="checkbox"] {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 </head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
     <img src="https://www.groene.nl/512.png" alt="" class="navbar-logo">
     </a>
@@ -124,61 +152,61 @@ ul.task-list li input[type="checkbox"] {
     <span class="navbar-title">De Campagnemonitor 2023</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Schakel tussen navigatie" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Schakel navigatie" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
- <span class="menu-text">Blog</span></a>
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
+<span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./spending.html" rel="" target="">
- <span class="menu-text">Uitgaven</span></a>
+    <a class="nav-link" href="./spending.html"> 
+<span class="menu-text">Uitgaven</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-focuspunten" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-focuspunten" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Focuspunten</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-focuspunten">    
         <li>
-    <a class="dropdown-item" href="./targeting.html" rel="" target="">
+    <a class="dropdown-item" href="./targeting.html">
  <span class="dropdown-text">Uitgaven per Focusgroep</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./detailed.html" rel="" target="">
+    <a class="dropdown-item" href="./detailed.html">
  <span class="dropdown-text">Publieksgerichtheid</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./location.html" rel="" target="">
+    <a class="dropdown-item" href="./location.html">
  <span class="dropdown-text">Locatie</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./demographics.html" rel="" target="">
+    <a class="dropdown-item" href="./demographics.html">
  <span class="dropdown-text">Demografie</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
- <span class="menu-text">Achtergrond</span></a>
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">Achtergrond</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="https://www.groene.nl/" rel="" target="">
- <span class="menu-text">groene.nl</span></a>
+    <a class="nav-link" href="https://www.groene.nl/"> 
+<span class="menu-text">groene.nl</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/groene/TK2023" rel="" target=""><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/groene/TK2023"> <i class="bi bi-github" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -202,7 +230,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page">
 
     
   
@@ -210,7 +238,9 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
+
 </header>
+
 
 
 
@@ -218,27 +248,27 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1700438400000" data-listing-file-modified-sort="1706105207821" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1700438400000" data-listing-file-modified-sort="1706137537702" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="258">
 <div class="thumbnail">
-<p><a href="./posts/d66-spendeert-in-een-klap-tienduizenden-euros.html"> <img src="./posts/ANP-484253054.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/d66-spendeert-in-een-klap-tienduizenden-euros.html" class="no-external"></a></p><a href="./posts/d66-spendeert-in-een-klap-tienduizenden-euros.html" class="no-external">
+<p><img src="./posts/ANP-484253054.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/d66-spendeert-in-een-klap-tienduizenden-euros.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/d66-spendeert-in-een-klap-tienduizenden-euros.html">
 <h3 class="no-anchor listing-title">
-D66 spendeert in een klap tienduizenden euro’s aan campagne door ‘menselijke fout’
+<a href="./posts/d66-spendeert-in-een-klap-tienduizenden-euros.html" class="no-external">D66 spendeert in een klap tienduizenden euro’s aan campagne door ‘menselijke fout’</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/d66-spendeert-in-een-klap-tienduizenden-euros.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-De ruim 41.000 euro die D66 aan advertenties op Facebook en Instagram uitgaf op zaterdag 2 november was…
+<a href="./posts/d66-spendeert-in-een-klap-tienduizenden-euros.html" class="no-external">De ruim 41.000 euro die D66 aan advertenties op Facebook en Instagram uitgaf op zaterdag 2 november was een menselijke fout, bevestigt een campagnemedewerker van D66. ‘Die…</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/d66-spendeert-in-een-klap-tienduizenden-euros.html">
+<a href="./posts/d66-spendeert-in-een-klap-tienduizenden-euros.html" class="no-external">
 <div class="listing-date">
-20 nov. 2023
+20 nov 2023
 </div>
 <div class="listing-author">
 Mats Cooper en Fabio Votta
@@ -246,27 +276,27 @@ Mats Cooper en Fabio Votta
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1700179200000" data-listing-file-modified-sort="1706105207821" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1700179200000" data-listing-file-modified-sort="1706137537706" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="162">
 <div class="thumbnail">
-<p><a href="./posts/nsc-doet-online-niets.html"> <img src="./posts/ANP-484001383.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/nsc-doet-online-niets.html" class="no-external"></a></p><a href="./posts/nsc-doet-online-niets.html" class="no-external">
+<p><img src="./posts/ANP-484001383.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/nsc-doet-online-niets.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/nsc-doet-online-niets.html">
 <h3 class="no-anchor listing-title">
-NSC doet online niets
+<a href="./posts/nsc-doet-online-niets.html" class="no-external">NSC doet online niets</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/nsc-doet-online-niets.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-Het is deze campagne vaak genoeg opgemerkt: alles draait om Pieter Omtzigt, voor…
+<a href="./posts/nsc-doet-online-niets.html" class="no-external">Het is deze campagne vaak genoeg opgemerkt: alles draait om Pieter Omtzigt, voor aandacht hoeft hij niets te doen. Online klopt dat in ieder geval. Nieuw Sociaal Contract is…</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/nsc-doet-online-niets.html">
+<a href="./posts/nsc-doet-online-niets.html" class="no-external">
 <div class="listing-date">
-17 nov. 2023
+17 nov 2023
 </div>
 <div class="listing-author">
 Eva Hofman, Joris Veerbeek, Coen van de Ven en Fabio Votta
@@ -274,27 +304,27 @@ Eva Hofman, Joris Veerbeek, Coen van de Ven en Fabio Votta
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1700006400000" data-listing-file-modified-sort="1706105207825" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1700006400000" data-listing-file-modified-sort="1706137537706" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="305">
 <div class="thumbnail">
-<p><a href="./posts/verenigd-links-geeft-het-meeste-geld-aan-sociale-mediabedrijven.html"> <img src="./posts/ANP-483865666.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/verenigd-links-geeft-het-meeste-geld-aan-sociale-mediabedrijven.html" class="no-external"></a></p><a href="./posts/verenigd-links-geeft-het-meeste-geld-aan-sociale-mediabedrijven.html" class="no-external">
+<p><img src="./posts/ANP-483865666.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/verenigd-links-geeft-het-meeste-geld-aan-sociale-mediabedrijven.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/verenigd-links-geeft-het-meeste-geld-aan-sociale-mediabedrijven.html">
 <h3 class="no-anchor listing-title">
-Verenigd Links geeft het meeste geld aan sociale mediabedrijven
+<a href="./posts/verenigd-links-geeft-het-meeste-geld-aan-sociale-mediabedrijven.html" class="no-external">Verenigd Links geeft het meeste geld aan sociale mediabedrijven</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/verenigd-links-geeft-het-meeste-geld-aan-sociale-mediabedrijven.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-GroenLinks-PvdA trekt vlak voor de verkiezingen een eindsprintje. Begin deze maand had die partij al een…
+<a href="./posts/verenigd-links-geeft-het-meeste-geld-aan-sociale-mediabedrijven.html" class="no-external">GroenLinks-PvdA trekt vlak voor de verkiezingen een eindsprintje. Begin deze maand had die partij al een aanzienlijk bedrag van bijna twee ton uitgegeven aan Meta en Google…</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/verenigd-links-geeft-het-meeste-geld-aan-sociale-mediabedrijven.html">
+<a href="./posts/verenigd-links-geeft-het-meeste-geld-aan-sociale-mediabedrijven.html" class="no-external">
 <div class="listing-date">
-15 nov. 2023
+15 nov 2023
 </div>
 <div class="listing-author">
 Eva Hofman, Joris Veerbeek, Coen van de Ven en Fabio Votta
@@ -302,27 +332,27 @@ Eva Hofman, Joris Veerbeek, Coen van de Ven en Fabio Votta
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1699920000000" data-listing-file-modified-sort="1706105207821" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1699920000000" data-listing-file-modified-sort="1706137537702" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="215">
 <div class="thumbnail">
-<p><a href="./posts/denk-microtarget-op-turkse profielen.html"> <img src="./posts/denkgrafiek.jpeg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/denk-microtarget-op-turkse profielen.html" class="no-external"></a></p><a href="./posts/denk-microtarget-op-turkse profielen.html" class="no-external">
+<p><img src="./posts/denkgrafiek.jpeg" class="thumbnail-image"></p>
+</a><p><a href="./posts/denk-microtarget-op-turkse profielen.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/denk-microtarget-op-turkse profielen.html">
 <h3 class="no-anchor listing-title">
-Denk microtarget op Turkse profielen
+<a href="./posts/denk-microtarget-op-turkse profielen.html" class="no-external">Denk microtarget op Turkse profielen</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/denk-microtarget-op-turkse profielen.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-Denk doet tijdens de online campagne aan etnisch profileren. De partij richt haar pijlen online op Turkse kiezers en scheert daarbij langs de randen van de Europese…
+<a href="./posts/denk-microtarget-op-turkse profielen.html" class="no-external">Denk doet tijdens de online campagne aan etnisch profileren. De partij richt haar pijlen online op Turkse kiezers en scheert daarbij langs de randen van de Europese…</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/denk-microtarget-op-turkse profielen.html">
+<a href="./posts/denk-microtarget-op-turkse profielen.html" class="no-external">
 <div class="listing-date">
-14 nov. 2023
+14 nov 2023
 </div>
 <div class="listing-author">
 Eva Hofman, Joris Veerbeek, Coen van de Ven en Fabio Votta
@@ -330,27 +360,27 @@ Eva Hofman, Joris Veerbeek, Coen van de Ven en Fabio Votta
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1699920000000" data-listing-file-modified-sort="1706105207821" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1699920000000" data-listing-file-modified-sort="1706137537706" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="281">
 <div class="thumbnail">
-<p><a href="./posts/meta-laat-sgp-veertig-keer-meer-betalen-dan-de-vvd.html"> <img src="./posts/ANP-482073105.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/meta-laat-sgp-veertig-keer-meer-betalen-dan-de-vvd.html" class="no-external"></a></p><a href="./posts/meta-laat-sgp-veertig-keer-meer-betalen-dan-de-vvd.html" class="no-external">
+<p><img src="./posts/ANP-482073105.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/meta-laat-sgp-veertig-keer-meer-betalen-dan-de-vvd.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/meta-laat-sgp-veertig-keer-meer-betalen-dan-de-vvd.html">
 <h3 class="no-anchor listing-title">
-Meta laat SGP veertig keer meer betalen dan de VVD
+<a href="./posts/meta-laat-sgp-veertig-keer-meer-betalen-dan-de-vvd.html" class="no-external">Meta laat SGP veertig keer meer betalen dan de VVD</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/meta-laat-sgp-veertig-keer-meer-betalen-dan-de-vvd.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-Meta discrimineert enorm in de prijs die het rekent voor politieke advertenties, volgens eigen cijfers. Dat onderzocht…
+<a href="./posts/meta-laat-sgp-veertig-keer-meer-betalen-dan-de-vvd.html" class="no-external">Meta discrimineert enorm in de prijs die het rekent voor politieke advertenties, volgens eigen cijfers. Dat onderzocht UvA-wetenschapper Fabio Votta. Het platform maakt…</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/meta-laat-sgp-veertig-keer-meer-betalen-dan-de-vvd.html">
+<a href="./posts/meta-laat-sgp-veertig-keer-meer-betalen-dan-de-vvd.html" class="no-external">
 <div class="listing-date">
-14 nov. 2023
+14 nov 2023
 </div>
 <div class="listing-author">
 Eva Hofman, Joris Veerbeek, Coen van de Ven en Fabio Votta
@@ -358,27 +388,27 @@ Eva Hofman, Joris Veerbeek, Coen van de Ven en Fabio Votta
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1699833600000" data-listing-file-modified-sort="1706105207821" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1699833600000" data-listing-file-modified-sort="1706137537702" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="224">
 <div class="thumbnail">
-<p><a href="./posts/christenunie-mikt-op-dominees-en-bijbelstudies.html"> <img src="./posts/christenunie.png" class="thumbnail-image"> </a></p>
+<p><a href="./posts/christenunie-mikt-op-dominees-en-bijbelstudies.html" class="no-external"></a></p><a href="./posts/christenunie-mikt-op-dominees-en-bijbelstudies.html" class="no-external">
+<p><img src="./posts/christenunie.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/christenunie-mikt-op-dominees-en-bijbelstudies.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/christenunie-mikt-op-dominees-en-bijbelstudies.html">
 <h3 class="no-anchor listing-title">
-ChristenUnie mikt op ‘dominees’ en ‘bijbelstudies’
+<a href="./posts/christenunie-mikt-op-dominees-en-bijbelstudies.html" class="no-external">ChristenUnie mikt op ‘dominees’ en ‘bijbelstudies’</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/christenunie-mikt-op-dominees-en-bijbelstudies.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-De ChristenUnie richt online haar pijlen op profielen van christelijke kiezers en zoekt daarbij de randen op van Europese privacyregels. De partij betaalde het moederbedrijf…
+<a href="./posts/christenunie-mikt-op-dominees-en-bijbelstudies.html" class="no-external">De ChristenUnie richt online haar pijlen op profielen van christelijke kiezers en zoekt daarbij de randen op van Europese privacyregels. De partij betaalde het moederbedrijf…</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/christenunie-mikt-op-dominees-en-bijbelstudies.html">
+<a href="./posts/christenunie-mikt-op-dominees-en-bijbelstudies.html" class="no-external">
 <div class="listing-date">
-13 nov. 2023
+13 nov 2023
 </div>
 <div class="listing-author">
 Eva Hofman, Joris Veerbeek, Coen van de Ven en Fabio Votta
@@ -386,27 +416,27 @@ Eva Hofman, Joris Veerbeek, Coen van de Ven en Fabio Votta
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1699315200000" data-listing-file-modified-sort="1706105207821" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1699315200000" data-listing-file-modified-sort="1706137537702" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="232">
 <div class="thumbnail">
-<p><a href="./posts/cda-sluit-online-groningers-uit.html"> <img src="./posts/targeting-cda-groningen.png" class="thumbnail-image"> </a></p>
+<p><a href="./posts/cda-sluit-online-groningers-uit.html" class="no-external"></a></p><a href="./posts/cda-sluit-online-groningers-uit.html" class="no-external">
+<p><img src="./posts/targeting-cda-groningen.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/cda-sluit-online-groningers-uit.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/cda-sluit-online-groningers-uit.html">
 <h3 class="no-anchor listing-title">
-CDA sluit online Groningers uit
+<a href="./posts/cda-sluit-online-groningers-uit.html" class="no-external">CDA sluit online Groningers uit</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/cda-sluit-online-groningers-uit.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-Het CDA sluit in haar onlinecampagne kiezers uit in Oost-Groningen, waarvan een groot deel op de aardgasbel woont. Dat blijkt uit advertentiegegevens van Meta, het…
+<a href="./posts/cda-sluit-online-groningers-uit.html" class="no-external">Het CDA sluit in haar onlinecampagne kiezers uit in Oost-Groningen, waarvan een groot deel op de aardgasbel woont. Dat blijkt uit advertentiegegevens van Meta, het…</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/cda-sluit-online-groningers-uit.html">
+<a href="./posts/cda-sluit-online-groningers-uit.html" class="no-external">
 <div class="listing-date">
-7 nov. 2023
+7 nov 2023
 </div>
 <div class="listing-author">
 Eva Hofman, Joris Veerbeek, Coen van de Ven en Fabio Votta
@@ -498,10 +528,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -511,8 +540,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -525,6 +563,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -568,6 +725,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -593,6 +751,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -653,6 +837,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 
