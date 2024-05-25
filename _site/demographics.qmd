@@ -453,6 +453,9 @@ tags$div(class = "container", do.call(tags$div, rows))
 ```
 :::
 
+<br>
+<br>
+
 ## Focusgroep op basis van taal
 
 De onderstaande grafieken laten zien hoe partijen verschillende talen als focusgroep gebruiken en welk perentage van het budget daaraan werd uitgegeven.
@@ -879,6 +882,9 @@ tags$div(class = "container", do.call(tags$div, rows))
 ```
 :::
 
+<br>
+<br>
+
 ## Focusgroep op basis van onderwijsniveau
 
 De onderstaande grafieken laten zien hoe partijen verschillende onderwijsniveaus als focusgroep gebruiken en hoeveel procent van het budget daaraan werd uitgegeven.
@@ -1101,6 +1107,8 @@ tags$div(class = "container", do.call(tags$div, rows))
 
 ```
 :::
+
+<br>
 
 ## Focusgroep op basis van relatiestatus
 
